@@ -119,7 +119,7 @@ app.event('message', async body => {
       await sendMessage('C011YTBQ205', 'New user <@' + body.event.user + '> joined! Here\'s why they joined the Hack Club community:\n\n' + lastUserMessage, 10)
       await sendMessage(body.event.channel, `Our community is on a platform called Slack. Slack is organized into "channels", where each channel includes discussion about its own topic. I just invited you to your first channel, <#C0122U8G28M>. Click on <#C0122U8G28M> in your sidebar to join the channel, and introduce yourself to the community.`)
       await timeout(3000)
-      await sendThumbsUpMessage(body.event.channel, "When you're ready, click the thumbs up button on this message to continue the tutorial.", 'introduced')
+      await sendThumbsUpMessage(body.event.channel, "When you're ready, click the 👍 on this message to continue the tutorial.", 'introduced')
       
       // add user to #welcome
       await app.client.conversations.invite({
@@ -172,7 +172,7 @@ app.action('introduced', async ({ ack, body }) => {
   await sendMessage(body.channel.id, `Our favorite recurring community event is called #hack-night. Hack Night is a biweekly call where we all get together and hang out, chat, build things, and have fun! Hack Night happens on Saturdays at 8:30pm eastern and Wednesdays at 3:30pm eastern. Feel free to join #hack-night—we'd love to see you there!`, 7000)
   await sendMessage(body.channel.id, `We also have a community-wide currency called gp! Type /market to see what you can do with it.`)
   await sendMessage(body.channel.id, `Almost done! One last thing: please make sure to read our <${`https://hackclub.com/conduct`}|code of conduct>. All community members are expected to follow the code of conduct.`, 5000)
-  await sendThumbsUpMessage(body.channel.id, `Once you've read the code of conduct, click the thumbs up to continue with the tutorial.`, `coc_acknowledge`)
+  await sendThumbsUpMessage(body.channel.id, `Once you've read the code of conduct, click the 👍 to continue with the tutorial.`, `coc_acknowledge`)
   //finishTutorial(body.channel.id, body.user.id)
 });
 
@@ -187,7 +187,7 @@ app.action('hs_no', async ({ ack, body }) => {
   ack();
   //console.log(body)
   await updateInteractiveMessage(body.message.ts, body.channel.id, 'Just a heads-up: Hack Club is a community of high schoolers, not a community of professional developers. You will likely still find a home here if you are in college, but if you\'re older than that, you may find yourself lost here.')
-  await sendThumbsUpMessage(body.channel.id, 'If you\'re aware of and are okay with this, click the thumbs up below.', 'hs_acknowledge')
+  await sendThumbsUpMessage(body.channel.id, 'If you\'re aware of and are okay with this, click the 👍 below.', 'hs_acknowledge')
 });
 
 app.action('hs_acknowledge', async ({ ack, body }) => {
@@ -342,7 +342,8 @@ async function sendMessage(channel, text, delay, ts) {
     token: process.env.SLACK_BOT_TOKEN,
     channel: channel,
     text: text,
-    thread_ts: null || ts
+    thread_ts: null || ts,
+    unfurl_links: false
   })
   return msg
 }
