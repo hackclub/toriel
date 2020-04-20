@@ -227,7 +227,7 @@ async function sendMessage(channel, text, delay, ts, unfurl) {
     channel: channel,
     text: text,
     thread_ts: null || ts,
-    unfurl_links: unfurl ? true : unfurl
+    unfurl_links: unfurl ? unfurl : false
   })
   return msg
 }
