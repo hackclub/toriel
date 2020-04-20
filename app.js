@@ -1,4 +1,3 @@
-require('dotenv').config()
 const { App } = require("@slack/bolt")
 const AirtablePlus = require('airtable-plus')
 const friendlyWords = require('friendly-words')
@@ -82,6 +81,7 @@ app.event('message', async body => {
       await sendMessage(body.event.channel, `Ah, very interesting! Well, anyway, let me show you around the Slack.`)
       
       await sendMessage('C011YTBQ205', 'New user <@' + body.event.user + '> joined! Here\'s why they joined the Hack Club community:\n\n' + lastUserMessage, 10)
+      await sendMessage(body.event.channel, `Our community is on a platform called Slack. Slack is organized into "channels", where each channel includes discussion about its own topic. I just invited you to your first channel, <#C0122U8G28M>. Click on <#C0122U8G28M> in your sidebar to join the channel, and introduce yourself to the community.`)
       await timeout(3000)
       await app.client.chat.postMessage({
         token: process.env.SLACK_BOT_TOKEN,
@@ -91,7 +91,7 @@ app.event('message', async body => {
             "type": "section",
             "text": {
               "type": "mrkdwn",
-              "text": "Our community is on a platform called Slack. Slack is organized into \"channels\", where each channel includes discussion about its own topic. Let's join your first channel, <#C0122U8G28M>. Click on <#C0122U8G28M> in your sidebar to join the channel, and introduce yourself to the community. Once you're ready, click the thumbs up button on this message to continue the tutorial."
+              "text": "When you're ready, click the thumbs up button on this message to continue the tutorial."
             }
           },
           {
@@ -307,12 +307,15 @@ async function getLastBotMessage(channel) {
   return botHistory[0].text
 }
 
-function generateIslandName() {
+async function generateIslandName() {
   const words = friendlyWords.predicates
   const word1 = words[Math.floor(Math.random() * 1455)]
   const word2 = words[Math.floor(Math.random() * 1455)]
   const channel = `${word1}-${word2}-tutorial-island`
   const pretty = `${capitalizeFirstLetter(word1)} ${capitalizeFirstLetter(word2)} Tutorial Island`
+  
+  const taken = await checkIslandNameTaken(channel)
+  if (taken) return generateIslandName()
   
   return {
     channel: channel,
@@ -347,6 +350,14 @@ async function getUserRecord(userId) {
     maxRecords: 1
   }))[0]
   return record
+}
+
+async function checkIslandNameTaken(islandName) {
+  let record = (await islandTable.read({
+    filterByFormula: `{Island Channel Name} = '${islandName}'`,
+    maxRecords: 1
+  }))[0]
+  return record !== undefined
 }
 
 function capitalizeFirstLetter(str) {
