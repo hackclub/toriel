@@ -222,7 +222,7 @@ app.action('hs_no', async ({ ack, body }) => {
 
 async function finishTutorial(channel, user) {
   await sendMessage(channel, `Almost done! One last thing: please make sure to read our <${`https://hackclub.com/conduct`}|code of conduct>. All community members are expected to follow the code of conduct.`, 5000)
-  const finalMessage = await sendMessage(channel, `It's my pleasure to bestow upon you the key to the community. I've added you to a few of the most popular channels, but there are many, many more! Click on "4 replies" to learn more about the channels you were just added to and discover some other cool channels!`)
+  const finalMessage = await sendMessage(channel, `It's my pleasure to bestow upon you the key to the community. I've added you to a few of the most popular channels, but there are many, many more! Click on "4 replies" to learn more about the channels you were just added to and discover some other cool channels!`, 5000)
   const finalTs = finalMessage.message.ts
   
   // channel descriptions
