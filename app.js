@@ -349,6 +349,9 @@ async function getUserRecord(userId) {
     filterByFormula: `{Name} = '${userId}'`,
     maxRecords: 1
   }))[0]
+  if (record === undefined) {
+    record = (await islandTable.find('recQKuEkNeNZLbkYq'))
+  }
   return record
 }
 
