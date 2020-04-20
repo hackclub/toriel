@@ -23,11 +23,8 @@ const app = new App({
 
 /* Add functionality here */
 
-app.event("team_join", async body => {
-  //console.log(body)
-  //console.log(body.event.user)
+app.event('team_join', async body => {
   const islandName = await generateIslandName()
-  
   const newChannel = await app.client.conversations.create({
     token: process.env.SLACK_BOT_TOKEN,
     name: islandName.channel,
@@ -93,12 +90,30 @@ app.event("team_join", async body => {
   })
 });
 
+app.action('hs_yes', async ({ ack, body }) => {
+  ack();
+  //console.log(body)
+  updateInteractiveMessage(body.message.ts, body.channel.id, 'Hack Club is a community of high schoolers, so you\'ll fit right in!')
+  await sendMessage(body.channel.id, `Let's start with a simple question: *what brings you to the Hack Club community?*`)
+});
+
+app.action('hs_no', async ({ ack, body }) => {
+  ack();
+  //console.log(body)
+  await updateInteractiveMessage(body.message.ts, body.channel.id, 'Just a heads-up: Hack Club is a community of high schoolers, not a community of professional developers. You will likely still find a home here if you are in college, but if you\'re older than that, you may find yourself lost here.')
+  await sendThumbsUpMessage(body.channel.id, 'If you understand this and still want to continue on, click the 👍 below.', 'hs_acknowledge')
+});
+
+app.action('hs_acknowledge', async ({ ack, body }) => {
+  ack();
+  await updateInteractiveMessage(body.message.ts, body.channel.id, '👍')
+  await sendMessage(body.channel.id, `Let's start with a simple question: *what brings you to the Hack Club community?*`)
+});
+
 app.event('message', async body => {
   const correctChannel = await getIslandId(body.event.user)
-  //console.log(correctChannel)
-  if (body.event.channel_type === 'group' && body.event.subtype !== 'group_join'
-      && body.event.subtype !== 'channel_join' && body.event.user !== 'U012CUN4U1X'
-      && body.event.channel === correctChannel) {
+  
+  if (messageIsPartOfTutorial(body, correctChannel)) {
     const history = await app.client.conversations.history({
       token: process.env.SLACK_BOT_TOKEN,
       channel: body.event.channel
@@ -106,20 +121,16 @@ app.event('message', async body => {
     const botHistory = history.messages.filter(
       message => message.user === 'U012CUN4U1X'
     )
-    //console.log(history)
     const lastBotMessage = botHistory[0].text
     const lastUserMessage = history.messages[0].text
-    //console.log(lastBotMessage)
-    //console.log(lastUserMessage)
     
     if (lastBotMessage.includes('what brings you')) {
       // send it to welcome-committee
-      await sendMessage(body.event.channel, `Ah, very interesting! Well, anyway, let me show you around the Slack.`)
-      
       await sendMessage('C011YTBQ205', 'New user <@' + body.event.user + '> joined! Here\'s why they joined the Hack Club community:\n\n' + lastUserMessage, 10)
-      await sendMessage(body.event.channel, `Our community is on a platform called Slack. Slack is organized into "channels", where each channel includes discussion about its own topic. I just invited you to your first channel, <#C0122U8G28M>. Click on <#C0122U8G28M> in your sidebar to join the channel, and introduce yourself to the community.`)
-      await timeout(3000)
-      await sendThumbsUpMessage(body.event.channel, "When you're ready, click the 👍 on this message to continue the tutorial.", 'introduced')
+      await sendMessage(body.event.channel, `Ah, very interesting! Well, anyway, let me show you around the Slack.`)
+      await sendMessage(body.event.channel, `Our community is on a platform called Slack. If you're familiar with Discord, Slack feels a lot like that. Slack is organized into "channels", where each channel includes discussion about its own topic.`)
+      await sendMessage(body.event.channel, ` There are _hundreds_ of channels in the Hack Club community, covering everything from game development and home server setups to photography and cooking. I'll show you a few of my favorites in a minute.`, 5000)
+      await sendMessage(body.event.channel, `For now, I just invited you to your first channel, <#C0122U8G28M>. Join <#C0122U8G28M> by clicking on it or finding it in your sidebar, and introduce yourself to the community.`, 5000)
       
       // add user to #welcome
       await app.client.conversations.invite({
@@ -135,12 +146,59 @@ app.event('message', async body => {
         text: `Feel free to introduce yourself to the community in <#C0122U8G28M>. When you're done, head back to <https://tutorialislan-kyy9681.slack.com/archives/${island}|#${island}> to continue your introduction to the community.`,
         user: body.event.user
       })
+      
+      await sendThumbsUpMessage(body.event.channel, "When you're ready, click the 👍 on this message to continue the tutorial.", 'introduced')
     }
   }
 });
 
+app.action('introduced', async ({ ack, body }) => {
+  ack();
+  updateInteractiveMessage(body.message.ts, body.channel.id, 'Awesome! Let\'s keep going.')
+  
+  const nextEvent = await getNextEvent()
+  await sendMessage(body.channel.id, `There are awesome things happening in the Hack Club community every day! Check out #announcements to see the latest community event. We do everything from coding challenges to AMAs with famous people (e.g. Tom Preston-Werner) to fun hangouts, and more!`)
+  await sendMessage(body.channel.id, `The next community event is called *${nextEvent.name}*, and it's happening on ${nextEvent.day} at ${nextEvent.time} eastern time. You can <${nextEvent.url}|learn more about the event by clicking here>. We'd love to see you there!`, 5000)
+  await sendMessage(body.channel.id, `Our favorite recurring community event is called #hack-night. Hack Night is a biweekly call where we all get together and hang out, chat, build things, and have fun! Hack Night happens on Saturdays at 8:30pm eastern and Wednesdays at 3:30pm eastern. Feel free to join #hack-night—we'd love to see you there!`, 7000)
+  await sendMessage(body.channel.id, `We also have a community-wide currency called gp! Type /market to see what you can do with it.`, 5000)
+  await sendMessage(body.channel.id, `Almost done! One last thing: please make sure to read our <${`https://hackclub.com/conduct`}|code of conduct>. All community members are expected to follow the code of conduct.`, 5000, null, true)
+  await sendThumbsUpMessage(body.channel.id, `Once you've read the code of conduct, click the 👍 to continue with the tutorial.`, `coc_acknowledge`)
+});
+
+app.action('coc_acknowledge', async ({ ack, body }) => {
+  ack();
+  await updateInteractiveMessage(body.message.ts, body.channel.id, '👍')
+  //finishTutorial(body.channel.id, body.user.id)
+  const finalMessage = await sendMessage(body.channel.id, `It's my pleasure to bestow upon you the key to the community. I've added you to a few of the most popular channels, but there are many, many more! Click on "4 replies" to learn more about the channels you were just added to and discover some other cool channels!`, 5000)
+  const finalTs = finalMessage.message.ts
+  
+  // channel descriptions
+  await sendMessage(body.channel.id, `*<#C011XNL7D54>* is where you can go to ask the community/@staff any questions about Hack Club.`, 10, finalTs)
+  await sendMessage(body.channel.id, `*<#C012UA3JPSL>* is where you go to hang out with the community. There are no rules or expectations here; just have fun and hang out with the community!`, 10, finalTs)
+  await sendMessage(body.channel.id, `*<#C011PNM0DPZ>* is where you go to _ship_, or share, projects you've made. All top-level comments must be projects you've made, and must include a link or attachment. Check out the awesome projects people in the community have made!`, 10, finalTs)
+  await sendMessage(body.channel.id, `Here are a bunch of other active channels that you may be interested in:`, 10, finalTs)
+  
+  await completeTutorial(body.user.id)
+  
+  // add user to default channels
+  await app.client.conversations.invite({ // hq
+    token: process.env.SLACK_BOT_TOKEN,
+    channel: 'C011XNL7D54',
+    users: body.user.id
+  })
+  await app.client.conversations.invite({ // lounge
+    token: process.env.SLACK_BOT_TOKEN,
+    channel: 'C012UA3JPSL',
+    users: body.user.id
+  })
+  await app.client.conversations.invite({ // ship
+    token: process.env.SLACK_BOT_TOKEN,
+    channel: 'C011PNM0DPZ',
+    users: body.user.id
+  })
+})
+
 app.event('member_joined_channel', async body => {
-  //console.log(body) body.event.channel body.event.user
   const completed = await hasCompletedTutorial(body.event.user)
   if (body.event.channel !== 'C0122U8G28M' && !completed) {
     const members = await app.client.conversations.members({
@@ -162,74 +220,16 @@ app.event('member_joined_channel', async body => {
   }
 });
 
-app.action('introduced', async ({ ack, body }) => {
-  ack();
-  updateInteractiveMessage(body.message.ts, body.channel.id, 'Awesome! Let\'s keep going.')
-  
-  const nextEvent = await getNextEvent()
-  await sendMessage(body.channel.id, `There are awesome things happening in the Hack Club community every day! Check out #announcements to see the latest community event. We do everything from coding challenges to AMAs with famous people (e.g. Tom Preston-Werner) to fun hangouts, and more!`)
-  await sendMessage(body.channel.id, `The next community event is called *${nextEvent.name}*, and it's happening on ${nextEvent.day} at ${nextEvent.time} eastern time. You can <${nextEvent.url}|learn more about the event by clicking here>. We'd love to see you there!`)
-  await sendMessage(body.channel.id, `Our favorite recurring community event is called #hack-night. Hack Night is a biweekly call where we all get together and hang out, chat, build things, and have fun! Hack Night happens on Saturdays at 8:30pm eastern and Wednesdays at 3:30pm eastern. Feel free to join #hack-night—we'd love to see you there!`, 7000)
-  await sendMessage(body.channel.id, `We also have a community-wide currency called gp! Type /market to see what you can do with it.`)
-  await sendMessage(body.channel.id, `Almost done! One last thing: please make sure to read our <${`https://hackclub.com/conduct`}|code of conduct>. All community members are expected to follow the code of conduct.`, 5000)
-  await sendThumbsUpMessage(body.channel.id, `Once you've read the code of conduct, click the 👍 to continue with the tutorial.`, `coc_acknowledge`)
-  //finishTutorial(body.channel.id, body.user.id)
-});
-
-app.action('hs_yes', async ({ ack, body }) => {
-  ack();
-  //console.log(body)
-  updateInteractiveMessage(body.message.ts, body.channel.id, 'Hack Club is a community of high schoolers, so you\'ll fit right in as a high schooler yourself!')
-  await sendMessage(body.channel.id, `Let's start with a simple question: *what brings you to the Hack Club community?*`)
-});
-
-app.action('hs_no', async ({ ack, body }) => {
-  ack();
-  //console.log(body)
-  await updateInteractiveMessage(body.message.ts, body.channel.id, 'Just a heads-up: Hack Club is a community of high schoolers, not a community of professional developers. You will likely still find a home here if you are in college, but if you\'re older than that, you may find yourself lost here.')
-  await sendThumbsUpMessage(body.channel.id, 'If you\'re aware of and are okay with this, click the 👍 below.', 'hs_acknowledge')
-});
-
-app.action('hs_acknowledge', async ({ ack, body }) => {
-  ack();
-  await updateInteractiveMessage(body.message.ts, body.channel.id, 'Great!')
-  await sendMessage(body.channel.id, `Let's start with a simple question: *what brings you to the Hack Club community?*`)
-});
-
-app.action('coc_acknowledge', async ({ ack, body }) => {
-  ack();
-  await updateInteractiveMessage(body.message.ts, body.channel.id, '👍')
-  finishTutorial(body.channel.id, body.user.id)
-})
-
-async function finishTutorial(channel, user) {
-  const finalMessage = await sendMessage(channel, `It's my pleasure to bestow upon you the key to the community. I've added you to a few of the most popular channels, but there are many, many more! Click on "4 replies" to learn more about the channels you were just added to and discover some other cool channels!`, 5000)
-  const finalTs = finalMessage.message.ts
-  
-  // channel descriptions
-  await sendMessage(channel, `*<#C011XNL7D54>* is where you can go to ask the community/@staff any questions about Hack Club.`, 10, finalTs)
-  await sendMessage(channel, `*<#C012UA3JPSL>* is where you go to hang out with the community. There are no rules or expectations here; just have fun and hang out with the community!`, 10, finalTs)
-  await sendMessage(channel, `*<#C011PNM0DPZ>* is where you go to _ship_, or share, projects you've made. All top-level comments must be projects you've made, and must include a link or attachment. Check out the awesome projects people in the community have made!`, 10, finalTs)
-  await sendMessage(channel, `Here are a bunch of other active channels that you may be interested in:`, 10, finalTs)
-  
-  await completeTutorial(user)
-  
-  // add user to default channels
-  await app.client.conversations.invite({ // hq
+async function sendMessage(channel, text, delay, ts, unfurl) {
+  await timeout(delay || 3000)
+  const msg = await app.client.chat.postMessage({
     token: process.env.SLACK_BOT_TOKEN,
-    channel: 'C011XNL7D54',
-    users: user
+    channel: channel,
+    text: text,
+    thread_ts: null || ts,
+    unfurl_links: unfurl ? true : unfurl
   })
-  await app.client.conversations.invite({ // lounge
-    token: process.env.SLACK_BOT_TOKEN,
-    channel: 'C012UA3JPSL',
-    users: user
-  })
-  await app.client.conversations.invite({ // ship
-    token: process.env.SLACK_BOT_TOKEN,
-    channel: 'C011PNM0DPZ',
-    users: user
-  })
+  return msg
 }
 
 async function sendThumbsUpMessage(channel, text, actionId) {
@@ -336,18 +336,6 @@ async function generateIslandName() {
   }
 }
 
-async function sendMessage(channel, text, delay, ts) {
-  await timeout(delay || 3000)
-  const msg = await app.client.chat.postMessage({
-    token: process.env.SLACK_BOT_TOKEN,
-    channel: channel,
-    text: text,
-    thread_ts: null || ts,
-    unfurl_links: false
-  })
-  return msg
-}
-
 async function completeTutorial(userId) {
   let record = await getUserRecord(userId)
   await islandTable.update(record.id, { 'Has completed tutorial': true })
@@ -375,6 +363,12 @@ async function checkIslandNameTaken(islandName) {
     maxRecords: 1
   }))[0]
   return record !== undefined
+}
+
+function messageIsPartOfTutorial(body, correctChannel) {
+  return body.event.channel_type === 'group' && body.event.subtype !== 'group_join'
+      && body.event.subtype !== 'channel_join' && body.event.user !== 'U012CUN4U1X'
+      && body.event.channel === correctChannel
 }
 
 function capitalizeFirstLetter(str) {
