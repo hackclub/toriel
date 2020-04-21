@@ -253,7 +253,7 @@ async function startTutorial(user, restart) {
   
   if (restart) {
 		let record = await getUserRecord(user)
-		if (record.id === 'recQKuEkNeNZLbkYq') {
+		if (record.id === 'recCUc7MSKBIswTcF') {
 			await islandTable.create({
 				'Name': user,
 				'Island Channel ID': channelId,
@@ -435,7 +435,7 @@ async function getUserRecord(userId) {
 		console.log(record)
 		return record
 	} catch {
-		let record = await islandTable.find('recQKuEkNeNZLbkYq')
+		let record = await islandTable.find('recCUc7MSKBIswTcF')
 		console.log(record)
 		return record
 	}
