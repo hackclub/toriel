@@ -424,13 +424,7 @@ async function getUserRecord(userId) {
 		maxRecords: 1
 	}))[0]
 	if (typeof record === 'undefined') {
-		//record = (await islandTable.find('recQKuEkNeNZLbkYq'))
-		record = await islandTable.create({
-			'Name': userId,
-			'Island Channel ID': '',
-			'Island Channel Name': '',
-			'Has completed tutorial': false
-		})
+		record = (await islandTable.find('recQKuEkNeNZLbkYq'))
 	}
 	return record
 }
