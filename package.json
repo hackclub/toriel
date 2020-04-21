@@ -4,7 +4,8 @@
   "description": "Hack Club's gatekeeper bot. Welcomes new members to the community and keeps bad people out of the commuinty",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
   "author": "MatthewStanciu",
   "license": "MIT",
