@@ -132,7 +132,7 @@ app.event('message', async body => {
     
     if (lastBotMessage.includes('What brings you')) {
       // send it to welcome-committee
-      await sendMessage('GLFAEL1SL', 'New user <@' + body.event.user + '> joined! Here\'s why they joined the Hack Club community:\n\n' + lastUserMessage, 10)
+      await sendMessage('GLFAEL1SL', 'New user <@' + body.event.user + '> joined! Here\'s why they joined the Hack Club community:\n\n' + lastUserMessage + '\n\nReact to this message to take ownership on reaching out.', 10)
       
       await sendMessage(body.event.channel, `Ah, very interesting! Well, let me show you around the community.`)
       await sendMessage(body.event.channel, `You're currently on Slack, the platform our community uses. If you're familiar with Discord, you'll find that Slack feels similar.`)
