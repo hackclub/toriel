@@ -26,10 +26,10 @@ const app = new App({
 app.command('/restart', async ({ command, ack, say }) => {
   await ack();
   
-  //await restartKick('C0C78SG9L', command.user_id) //hq
-  //await restartKick('C0266FRGV', command.user_id) //lounge
-  //await restartKick('C0M8PUPU6', command.user_id) //ship
-  //await restartKick('C0EA9S0A0', command.user_id) //code
+  await restartKick('C0C78SG9L', command.user_id) //hq
+  await restartKick('C0266FRGV', command.user_id) //lounge
+  await restartKick('C0M8PUPU6', command.user_id) //ship
+  await restartKick('C0EA9S0A0', command.user_id) //code
   startTutorial(command.user_id, true)
 });
 
