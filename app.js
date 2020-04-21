@@ -427,17 +427,18 @@ async function hasCompletedTutorial(userId) {
 }
 
 async function getUserRecord(userId) {
-	let record
 	try {
-		record = (await islandTable.read({
+		let record = (await islandTable.read({
 			filterByFormula: `{Name} = '${userId}'`,
 			maxRecords: 1
 		}))[0]
+		console.log(record)
+		return record
 	} catch {
-		record = await islandTable.find('recQKuEkNeNZLbkYq')
+		let record = await islandTable.find('recQKuEkNeNZLbkYq')
+		console.log(record)
+		return record
 	}
-	console.log(record)
-	return record
 }
 
 async function checkIslandNameTaken(islandName) {
