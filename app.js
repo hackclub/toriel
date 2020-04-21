@@ -436,6 +436,7 @@ async function getUserRecord(userId) {
 	} catch {
 		record = await islandTable.find('recQKuEkNeNZLbkYq')
 	}
+	console.log(record)
 	return record
 }
 
