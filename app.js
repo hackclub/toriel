@@ -252,7 +252,15 @@ async function startTutorial(user, restart) {
   .catch (err => console.log(err.data.errors))
   
   if (restart) {
-    let record = await getUserRecord(user)
+		let record = await getUserRecord(user)
+		if (record.id === 'recQKuEkNeNZLbkYq') {
+			await islandTable.create({
+				'Name': user,
+				'Island Channel ID': channelId,
+				'Island Channel Name': islandName.channel,
+				'Has completed tutorial': false
+			})
+		}
     await islandTable.update(record.id, {
       'Island Channel ID': channelId,
       'Island Channel Name': islandName.channel,
