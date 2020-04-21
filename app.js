@@ -254,7 +254,7 @@ async function startTutorial(user, restart) {
   if (restart) {
 		let record = await getUserRecord(user)
 		if (typeof record === 'undefined') {
-			await islandTable.create({
+			record = await islandTable.create({
 				'Name': user,
 				'Island Channel ID': channelId,
 				'Island Channel Name': islandName.channel,
@@ -432,7 +432,6 @@ async function getUserRecord(userId) {
 			filterByFormula: `{Name} = '${userId}'`,
 			maxRecords: 1
 		}))[0]
-		console.log(record)
 		return record
 	} catch {}
 }
