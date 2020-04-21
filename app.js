@@ -427,12 +427,14 @@ async function hasCompletedTutorial(userId) {
 }
 
 async function getUserRecord(userId) {
-	let record = (await islandTable.read({
-		filterByFormula: `{Name} = '${userId}'`,
-		maxRecords: 1
-	}))[0]
-	if (typeof record === 'undefined') {
-		record = (await islandTable.find('recQKuEkNeNZLbkYq'))
+	let record
+	try {
+		record = (await islandTable.read({
+			filterByFormula: `{Name} = '${userId}'`,
+			maxRecords: 1
+		}))[0]
+	} catch {
+		record = await islandTable.find('recQKuEkNeNZLbkYq')
 	}
 	return record
 }
