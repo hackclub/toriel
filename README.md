@@ -1,4 +1,3 @@
-# clippy
 ![An image containing the first few messages Clippy sends when someone joins the Slack](preview.png)
 
 Clippy is a friendly bot that welcomes new members to the Hack Club Slack with a 1-minute interactive introduction to the community.
