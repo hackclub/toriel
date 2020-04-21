@@ -252,15 +252,15 @@ async function startTutorial(user, restart) {
   .catch (err => console.log(err.data.errors))
   
   if (restart) {
-		let record = await getUserRecord(user)
-		if (typeof record === 'undefined') {
-			record = await islandTable.create({
-				'Name': user,
-				'Island Channel ID': channelId,
-				'Island Channel Name': islandName.channel,
-				'Has completed tutorial': false
-			})
-		}
+    let record = await getUserRecord(user)
+    if (typeof record === 'undefined') {
+      record = await islandTable.create({
+        'Name': user,
+        'Island Channel ID': channelId,
+        'Island Channel Name': islandName.channel,
+        'Has completed tutorial': false
+      })
+    }
     await islandTable.update(record.id, {
       'Island Channel ID': channelId,
       'Island Channel Name': islandName.channel,
@@ -268,11 +268,11 @@ async function startTutorial(user, restart) {
     })
   } else {
       await islandTable.create({
-				'Name': user,
-				'Island Channel ID': channelId,
-				'Island Channel Name': islandName.channel,
-				'Has completed tutorial': false
-			})
+        'Name': user,
+        'Island Channel ID': channelId,
+        'Island Channel Name': islandName.channel,
+        'Has completed tutorial': false
+      })
   }
   
   await app.client.chat.postMessage({
@@ -427,13 +427,13 @@ async function hasCompletedTutorial(userId) {
 }
 
 async function getUserRecord(userId) {
-	try {
-		let record = (await islandTable.read({
-			filterByFormula: `{Name} = '${userId}'`,
-			maxRecords: 1
-		}))[0]
-		return record
-	} catch {}
+  try {
+    let record = (await islandTable.read({
+      filterByFormula: `{Name} = '${userId}'`,
+      maxRecords: 1
+    }))[0]
+    return record
+  } catch {}
 }
 
 async function checkIslandNameTaken(islandName) {
