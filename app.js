@@ -6,7 +6,7 @@ const slugger = new GithubSlugger()
 
 const islandTable = new AirtablePlus({
   apiKey: process.env.AIRTABLE_API_KEY,
-  baseID: 'appcstNeqDROujKE7',
+  baseID: 'appYGt7P3MtotTotg',
   tableName: 'Tutorial Island'
 })
 
@@ -26,17 +26,17 @@ const app = new App({
 app.command('/restart', async ({ command, ack, say }) => {
   await ack();
   
-  await restartKick('C011XNL7D54', command.user_id)
-  await restartKick('C012UA3JPSL', command.user_id)
-  await restartKick('C011PNM0DPZ', command.user_id)
-  await restartKick('C0122U8G28M', command.user_id)
-  await restartKick('C011S1GB65V', command.user_id)
+  await restartKick('C0C78SG9L', command.user_id) //hq
+  await restartKick('C0266FRGV', command.user_id) //lounge
+  await restartKick('C0M8PUPU6', command.user_id) //ship
+  await restartKick('C0EA9S0A0', command.user_id) //code
+  await restartKick('C75M7C0SY', command.user_id) //welcome
   // command.channel_id command.user_id command.text
    startTutorial(command.user_id, true)
 });
 
 app.event('team_join', async body => {
-  startTutorial(body.event.user.id)
+  await startTutorial(body.event.user.id)
 });
 
 app.action('intro_progress', async ({ ack, body }) => {
@@ -108,6 +108,15 @@ app.action('hs_acknowledge', async ({ ack, body }) => {
 });
 
 app.event('message', async body => {
+  if (body.message.subtype === 'channel_join' &&
+      body.message.text === `<@${body.message.user}> has joined the channel`) {
+    await app.client.chat.delete({
+      token: process.env.SLACK_OAUTH_TOKEN,
+      channel: body.message.channel,
+      ts: body.message.event_ts
+    })
+  }
+  
   const correctChannel = await getIslandId(body.event.user)
   
   if (messageIsPartOfTutorial(body, correctChannel)) {
@@ -116,32 +125,32 @@ app.event('message', async body => {
       channel: body.event.channel
     })
     const botHistory = history.messages.filter(
-      message => message.user === 'U012CUN4U1X'
+      message => message.user === process.env.BOT_USER_ID
     )
     const lastBotMessage = botHistory[0].text
     const lastUserMessage = history.messages[0].text
     
     if (lastBotMessage.includes('What brings you')) {
       // send it to welcome-committee
-      await sendMessage('C011YTBQ205', 'New user <@' + body.event.user + '> joined! Here\'s why they joined the Hack Club community:\n\n' + lastUserMessage, 10)
+      await sendMessage('GLFAEL1SL', 'New user <@' + body.event.user + '> joined! Here\'s why they joined the Hack Club community:\n\n' + lastUserMessage, 10)
       
       await sendMessage(body.event.channel, `Ah, very interesting! Well, let me show you around the community.`)
       await sendMessage(body.event.channel, `You're currently on Slack, the platform our community uses. If you're familiar with Discord, you'll find that Slack feels similar.`)
       await sendMessage(body.event.channel, `Slack is organized into "channels", and each channel includes discussion about its own topic. We have _hundreds_ of channels, covering everything from game development and web design to photography and cooking. I'll show you a few of my favorites in a minute.`, 5000)
-      await sendMessage(body.event.channel, `I just invited you to your first channel, <#C0122U8G28M>. Join by clicking on it in your sidebar, and introduce yourself to the community.`, 5000)
+      await sendMessage(body.event.channel, `I just invited you to your first channel, <#C75M7C0SY>. Join by clicking on it in your sidebar, and introduce yourself to the community.`, 5000)
       
       // add user to #welcome
-      await app.client.conversations.invite({
+      /*await app.client.conversations.invite({
         token: process.env.SLACK_BOT_TOKEN,
-        channel: 'C0122U8G28M',
+        channel: 'C75M7C0SY',
         users: body.event.user
-      })
+      })*/
       const island = await getIslandName(body.event.user)
       await app.client.chat.postEphemeral({
         token: process.env.SLACK_BOT_TOKEN,
         attachments: [],
-        channel: 'C0122U8G28M',
-        text: `Feel free to introduce yourself to the community in <#C0122U8G28M>. When you're done, head back to <https://tutorialislan-kyy9681.slack.com/archives/${island}|#${island}> to continue your introduction to the community.`,
+        channel: 'C75M7C0SY',
+        text: `<@${body.event.user}> Feel free to introduce yourself to the community in <#C75M7C0SY>. When you're done, head back to <https://hackclub.slack.com/archives/${island}|#${island}> to continue your introduction to the community.`,
         user: body.event.user
       })
       
@@ -155,9 +164,9 @@ app.action('introduced', async ({ ack, body }) => {
   updateInteractiveMessage(body.message.ts, body.channel.id, 'Awesome! Let\'s keep going.')
   
   const nextEvent = await getNextEvent()
-  await sendMessage(body.channel.id, `There are awesome things happening in the Hack Club community every day! Check out <#C012Q4FF0L8> to see the latest community event. We do everything from coding challenges to AMAs with famous people (e.g. Tom Preston-Werner) to fun hangouts, and more!`)
+  await sendMessage(body.channel.id, `There are awesome things happening in the Hack Club community every day! Check out <#C0266FRGT> to see the latest community event. We do everything from coding challenges to AMAs with famous people (e.g. Tom Preston-Werner) to fun hangouts, and more!`)
   //await sendMessage(body.channel.id, `The next community event is called *${nextEvent.name}*, and it's happening on ${nextEvent.day} at ${nextEvent.time} eastern time. You can <${nextEvent.url}|learn more about the event by clicking here>. We'd love to see you there!`, 5000)
-  await sendMessage(body.channel.id, `Our favorite recurring community event is called #hack-night. Hack Night is a biweekly call where we all get together and hang out, build things, and have fun! Hack Night happens on Saturdays at 8:30pm eastern and Wednesdays at 3:30pm eastern. We'd love to see you at the next one!`, 7000)
+  await sendMessage(body.channel.id, `Our favorite recurring community event is called <#C0JDWKJVA>. Hack Night is a biweekly call where we all get together and hang out, build things, and have fun! Hack Night happens on Saturdays at 8:30pm eastern and Wednesdays at 3:30pm eastern. We'd love to see you at the next one!`, 7000)
   await sendMessage(body.channel.id, `We also have a community-wide currency called gp! Type /market to see what you can do with it.`, 5000)
   await sendMessage(body.channel.id, `One last thing: please make sure to read our <${`https://hackclub.com/conduct`}|code of conduct>. All community members are expected to follow the code of conduct.`, 5000, null, true)
   await sendThumbsUpMessage(body.channel.id, `Once you've read the code of conduct, click the 👍 to continue with the tutorial.`, `coc_acknowledge`)
@@ -168,38 +177,39 @@ app.action('coc_acknowledge', async ({ ack, body }) => {
   await updateInteractiveMessage(body.message.ts, body.channel.id, '👍')
   //finishTutorial(body.channel.id, body.user.id)
   await sendMessage(body.channel.id, `That's all from me! I hope I've been able to help you get acquainted with the Hack Club community.`)
-  const finalMessage = await sendMessage(body.channel.id, `I've added you to a few of the most popular channels, but there are many, many more! Click on "5 replies" to learn more about the channels you were just added to and discover some other cool channels...`, 5000)
+  const finalMessage = await sendMessage(body.channel.id, `I've added you to a few of the most popular channels, but there are many, many more! Click on "6 replies" to learn more about the channels you were just added to and discover some other cool channels...`, 5000)
   const finalTs = finalMessage.message.ts
   
   // channel descriptions
-  await sendMessage(body.channel.id, `*<#C011XNL7D54>* is where people ask the community/@staff any questions about Hack Club.`, 10, finalTs)
-  await sendMessage(body.channel.id, `*<#C012UA3JPSL>* is where people go to hang out with the community. There are no expectations here; just have fun and hang out with the community :)`, 10, finalTs)
-  await sendMessage(body.channel.id, `*<#C011PNM0DPZ>* is where people go to _ship_, or share, projects they've made. All posts in that are not part of a thread must be projects you've made, and must include a link or attachment. Check out the awesome projects people in the community have made!`, 10, finalTs)
-  await sendMessage(body.channel.id, `*<#C011S1GB65V>* is where people go to ask technical questions about code. If you're stuck on a problem or need some guidance, this is the place to go.`, 10, finalTs)
+  await sendMessage(body.channel.id, `*<#C0C78SG9L>* is where people ask the community/@staff any questions about Hack Club.`, 10, finalTs)
+  await sendMessage(body.channel.id, `*<#C0266FRGV>* is where people go to hang out with the community. There are no expectations here; just have fun and hang out with the community :)`, 10, finalTs)
+  await sendMessage(body.channel.id, `*<#C0M8PUPU6>* is where people go to _ship_, or share, projects they've made. All posts in that are not part of a thread must be projects you've made, and must include a link or attachment. Check out the awesome projects people in the community have made!`, 10, finalTs)
+  await sendMessage(body.channel.id, `*<#C0EA9S0A0>* is where people go to ask technical questions about code. If you're stuck on a problem or need some guidance, this is the place to go.`, 10, finalTs)
   await sendMessage(body.channel.id, `Here are a bunch of other active channels that you may be interested in:`, 10, finalTs)
+  await sendMessage(body.channel.id, `<#C0JDWKJVA> <#C0NP503L7> <#C6LHL48G2> <#C0DCUUH7E> <#CA3UH038Q> <#C90686D0T> <#CCW6Q86UF> <#C1C3K2RQV> <#CCW8U2LBC> <#CDLBHGUQN> <#CDJV1CXC2> <#C14D3AQTT> <#CBX54ACPJ> <#CC78UKWAC> <#C8P6DHA3W> <#C010SJJH1PT> <#CDJMS683D> <#CDN99BE9L>`, 10, finalTs)
   
   await completeTutorial(body.user.id)
   
   // add user to default channels
-  await inviteUserToChannel(body.user.id, 'C011XNL7D54') //hq
-  await inviteUserToChannel(body.user.id, 'C012UA3JPSL') //lounge
-  await inviteUserToChannel(body.user.id, 'C011PNM0DPZ') //ship
-  await inviteUserToChannel(body.user.id, 'C011S1GB65V') //code
+  await inviteUserToChannel(body.user.id, 'C0C78SG9L') //hq
+  await inviteUserToChannel(body.user.id, 'C0266FRGV') //lounge
+  await inviteUserToChannel(body.user.id, 'C0M8PUPU6') //ship
+  await inviteUserToChannel(body.user.id, 'C0EA9S0A0') //code
   
   await sendMessage(body.channel.id, `Your next steps: start talking to the community! Pick a few channels that you like from the thread above and start talking. We're excited to meet you :partyparrot:`)
   await sendMessage(body.channel.id, `I also highly recommend setting a profile picture. It makes you look a lot more like a real person :)`)
-  await sendMessage(body.channel.id, `I'm going to head out now—if you have any questions about Hack Club or Slack that I didn't answer, please ask in <#C011XNL7D54> or send a Direct Message to <@U0120F9NAGK>.`)
+  await sendMessage(body.channel.id, `I'm going to head out now—if you have any questions about Hack Club or Slack that I didn't answer, please ask in <#C0C78SG9L> or send a Direct Message to <@U4QAK9SRW>.`)
   await sendMessage(body.channel.id, `Toodles! :wave:`)
 })
 
 app.event('member_joined_channel', async body => {
   const completed = await hasCompletedTutorial(body.event.user)
-  if (body.event.channel !== 'C0122U8G28M' && !completed) {
+  if (body.event.channel !== 'C75M7C0SY' && !completed) {
     const members = await app.client.conversations.members({
       token: process.env.SLACK_BOT_TOKEN,
       channel: body.event.channel
     })
-    if (!(members.members.includes('U012CUN4U1X'))) { // user who owns the oauth, in this case @matthew
+    if (!(members.members.includes('U4QAK9SRW'))) { // user who owns the oauth, in this case @matthew
       await app.client.conversations.join({
         token: process.env.SLACK_OAUTH_TOKEN,
         channel: body.event.channel
@@ -340,7 +350,7 @@ async function updateInteractiveMessage(ts, channel, message) {
 }
 
 function inviteUserToChannel(user, channel) {
-  app.client.conversations.invite({ // hq
+  app.client.conversations.invite({
     token: process.env.SLACK_BOT_TOKEN,
     channel: channel,
     users: user
@@ -349,7 +359,7 @@ function inviteUserToChannel(user, channel) {
 
 async function getIslandId(userId) {
   let record = await getUserRecord(userId)
-  if (record === undefined) return null
+  if (typeof record === 'undefined') return null
   return record.fields['Island Channel ID']
 }
 async function getIslandName(userId) {
@@ -406,18 +416,21 @@ async function completeTutorial(userId) {
 
 async function hasCompletedTutorial(userId) {
   let record = await getUserRecord(userId)
+  if (typeof record === 'undefined') return true
   return record.fields['Has completed tutorial']
 }
 
 async function getUserRecord(userId) {
-  let record = (await islandTable.read({
-    filterByFormula: `{Name} = '${userId}'`,
-    maxRecords: 1
-  }))[0]
-  if (record === undefined) {
-    record = (await islandTable.find('recQKuEkNeNZLbkYq'))
-  }
-  return record
+  try {
+    let record = (await islandTable.read({
+      filterByFormula: `{Name} = '${userId}'`,
+      maxRecords: 1
+    }))[0]
+    if (typeof record === 'undefined') {
+      record = (await islandTable.find('recQKuEkNeNZLbkYq'))
+    }
+    return record  
+  } catch {}
 }
 
 async function checkIslandNameTaken(islandName) {
