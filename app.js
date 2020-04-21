@@ -30,9 +30,7 @@ app.command('/restart', async ({ command, ack, say }) => {
   await restartKick('C0266FRGV', command.user_id) //lounge
   await restartKick('C0M8PUPU6', command.user_id) //ship
   await restartKick('C0EA9S0A0', command.user_id) //code
-  await restartKick('C75M7C0SY', command.user_id) //welcome
-  // command.channel_id command.user_id command.text
-   startTutorial(command.user_id, true)
+  startTutorial(command.user_id, true)
 });
 
 app.event('team_join', async body => {
@@ -262,11 +260,11 @@ async function startTutorial(user, restart) {
     })
   } else {
       await islandTable.create({
-      'Name': user,
-      'Island Channel ID': channelId,
-      'Island Channel Name': islandName.channel,
-      'Has completed tutorial': false
-    })
+				'Name': user,
+				'Island Channel ID': channelId,
+				'Island Channel Name': islandName.channel,
+				'Has completed tutorial': false
+			})
   }
   
   await app.client.chat.postMessage({
@@ -421,16 +419,20 @@ async function hasCompletedTutorial(userId) {
 }
 
 async function getUserRecord(userId) {
-  try {
-    let record = (await islandTable.read({
-      filterByFormula: `{Name} = '${userId}'`,
-      maxRecords: 1
-    }))[0]
-    if (typeof record === 'undefined') {
-      record = (await islandTable.find('recQKuEkNeNZLbkYq'))
-    }
-    return record  
-  } catch {}
+	let record = (await islandTable.read({
+		filterByFormula: `{Name} = '${userId}'`,
+		maxRecords: 1
+	}))[0]
+	if (typeof record === 'undefined') {
+		//record = (await islandTable.find('recQKuEkNeNZLbkYq'))
+		record = await islandTable.create({
+			'Name': user,
+			'Island Channel ID': '',
+			'Island Channel Name': '',
+			'Has completed tutorial': false
+		})
+	}
+	return record
 }
 
 async function checkIslandNameTaken(islandName) {
