@@ -328,7 +328,7 @@ async function sendSingleBlockMessage(channel, text, blockText, actionId) {
             "type": "button",
             "text": {
               "type": "plain_text",
-              "text": "👍",
+              "text": blockText,
               "emoji": true
             },
             "style": "primary",
