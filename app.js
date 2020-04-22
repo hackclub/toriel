@@ -134,20 +134,8 @@ app.event('message', async body => {
       
       // add user to #welcome
       await inviteUserToChannel(body.event.user, 'C75M7C0SY')
-      /*await app.client.conversations.invite({
-        token: process.env.SLACK_BOT_TOKEN,
-        channel: 'C75M7C0SY',
-        users: body.event.user
-      })*/
       const island = await getIslandName(body.event.user)
       await sendEphemeralMessage('C75M7C0SY', `<@${body.event.user}> Feel free to introduce yourself to the community in <#C75M7C0SY>. When you're done, head back to <https://hackclub.slack.com/archives/${island}|#${island}> to continue your introduction to the community.`, body.event.user)
-      /*await app.client.chat.postEphemeral({
-        token: process.env.SLACK_BOT_TOKEN,
-        attachments: [],
-        channel: 'C75M7C0SY',
-        text: `<@${body.event.user}> Feel free to introduce yourself to the community in <#C75M7C0SY>. When you're done, head back to <https://hackclub.slack.com/archives/${island}|#${island}> to continue your introduction to the community.`,
-        user: body.event.user
-      })*/
       
       await sendSingleBlockMessage(body.event.channel, "When you're ready, click the 👍 on this message to continue the tutorial.", '👍', 'introduced')
     }
