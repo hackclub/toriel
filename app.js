@@ -197,6 +197,27 @@ app.action('coc_acknowledge', async ({ ack, body }) => {
   await sendSingleBlockMessage(body.channel.id, `(Btw, if you want to leave + archive this channel, click here)`, 'Leave channel', 'leave_channel')
 })
 
+app.action('leave_channel', async ({ ack, body }) => {
+  ack();
+  await updateInteractiveMessage(body.message.ts, body.channel.id, `(Btw, if you want to leave + archive this channel, click here)`)
+  await sendSingleBlockMessage(body.channel.id, `Are you sure? You won't be able to come back to this channel.`, `Yes, I'm sure`, 'leave_confirm')
+})
+app.action('leave_confirm', async ({ ack, body }) => {
+  ack();
+  await updateInteractiveMessage(body.message.ts, body.channel.id, `Okay! Bye :wave:`)
+
+  // invite matthew to the private channel & archive it
+  await app.client.conversations.invite({
+    token: process.env.SLACK_BOT_TOKEN,
+    channel: body.channel.id,
+    users: `U4QAK9SRW`
+  })
+  await app.client.conversations.archive({
+    token: process.env.SLACK_OAUTH_TOKEN,
+    channel: body.channel.id
+  })
+})
+
 app.event('member_joined_channel', async body => {
   const completed = await hasCompletedTutorial(body.event.user)
   if (body.event.channel !== 'C75M7C0SY' && !completed) {
