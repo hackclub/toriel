@@ -138,6 +138,7 @@ app.event('message', async body => {
       await sendMessage(body.event.channel, `I just invited you to your first channel, <#C75M7C0SY>. Join by clicking on it in your sidebar, and introduce yourself to the community.`, 5000)
       
       // add user to #welcome
+      await inviteUserToChannel(body.event.user, 'C75M7C0SY')
       /*await app.client.conversations.invite({
         token: process.env.SLACK_BOT_TOKEN,
         channel: 'C75M7C0SY',
@@ -355,12 +356,18 @@ async function updateInteractiveMessage(ts, channel, message) {
     });
 }
 
-function inviteUserToChannel(user, channel) {
-  app.client.conversations.invite({
+async function inviteUserToChannel(user, channel) {
+  const channelMembers = await app.client.conversations.members({
     token: process.env.SLACK_BOT_TOKEN,
-    channel: channel,
-    users: user
+    channel: channel
   })
+  if (!channelMembers.members.includes(user)) {
+    await app.client.conversations.invite({
+      token: process.env.SLACK_BOT_TOKEN,
+      channel: channel,
+      users: user
+    })
+  }
 }
 
 async function getIslandId(userId) {
