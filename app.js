@@ -357,13 +357,11 @@ async function updateInteractiveMessage(ts, channel, message) {
 }
 
 async function inviteUserToChannel(user, channel) {
-  console.log('yeeeee haw')
-  const invite = await app.client.conversations.invite({
+  await app.client.conversations.invite({
     token: process.env.SLACK_BOT_TOKEN,
     channel: channel,
     users: user
-  })
-  console.log(invite)
+  }).catch(err => console.log(err))
 }
 
 async function getIslandId(userId) {
