@@ -283,33 +283,6 @@ async function startTutorial(user, restart) {
   }
 
   await sendSingleBlockMessage(channelId, `Hi, I'm Clippy! I'm the Hack Club assistant and my job is to get you on the Slack. Do you need assistance?`, `What the heck? Who are you?`, `intro_progress`)
-  
-  /*await app.client.chat.postMessage({
-    token: process.env.SLACK_BOT_TOKEN,
-    channel: channelId,
-    "blocks": [
-      {
-        "type": "section",
-        "text": {
-          "type": "mrkdwn",
-          "text": "Hi, I'm Clippy! I'm the Hack Club assistant and my job is to get you on the Slack. Do you need assistance?"
-        }
-      },
-      {
-        "type": "actions",
-        "elements": [
-          {
-            "type": "button",
-            "text": {
-              "type": "plain_text",
-              "text": "What the heck? Who are you?"
-            },
-            "action_id": "intro_progress"
-          }
-        ]
-      }
-    ]
-  })*/
 }
 
 async function sendSingleBlockMessage(channel, text, blockText, actionId) {
