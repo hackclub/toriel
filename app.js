@@ -407,7 +407,7 @@ async function sendGP(user, channel, amount) {
     await sendMessage(channel, `(Looks like you completed this tutorial before, so I won't give you the gp this time)`, 1000)
   }
   else {
-    axios.post('https://bankerapi.glitch.me', {
+    axios.post('https://bankerapi.glitch.me/give', {
       'token': process.env.BANKER_TOKEN,
       'send_id': user,
       'give_id': process.env.BOT_USER_ID,
