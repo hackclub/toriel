@@ -361,7 +361,11 @@ async function inviteUserToChannel(user, channel) {
     token: process.env.SLACK_BOT_TOKEN,
     channel: channel
   })
+  console.log(channelMembers)
+  console.log(channelMembers.members)
+  console.log(user)
   if (!channelMembers.members.includes(user)) {
+    console.log('yeeeee haw')
     await app.client.conversations.invite({
       token: process.env.SLACK_BOT_TOKEN,
       channel: channel,
