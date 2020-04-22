@@ -305,8 +305,8 @@ async function startTutorial(user, restart) {
         ]
       }
     ]
-  })
-}*/
+  })*/
+}
 
 async function sendSingleBlockMessage(channel, text, blockText, actionId) {
   await timeout(3000)
