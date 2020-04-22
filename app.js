@@ -3,6 +3,7 @@ const AirtablePlus = require('airtable-plus')
 const friendlyWords = require('friendly-words')
 const GithubSlugger = require('github-slugger')
 const slugger = new GithubSlugger()
+const axios = require('axios')
 
 const islandTable = new AirtablePlus({
   apiKey: process.env.AIRTABLE_API_KEY,
@@ -150,7 +151,12 @@ app.action('introduced', async ({ ack, body }) => {
   await sendMessage(body.channel.id, `There are awesome things happening in the Hack Club community every day! Check out <#C0266FRGT> to see the latest community event. We do everything from coding challenges to AMAs with famous people (e.g. Tom Preston-Werner) to fun hangouts, and more!`)
   //await sendMessage(body.channel.id, `The next community event is called *${nextEvent.name}*, and it's happening on ${nextEvent.day} at ${nextEvent.time} eastern time. You can <${nextEvent.url}|learn more about the event by clicking here>. We'd love to see you there!`, 5000)
   await sendMessage(body.channel.id, `Our favorite recurring community event is called <#C0JDWKJVA>. Hack Night is a biweekly call where we all get together and hang out, build things, and have fun! Hack Night happens on Saturdays at 8:30pm eastern and Wednesdays at 3:30pm eastern. We'd love to see you at the next one!`, 7000)
-  await sendMessage(body.channel.id, `We also have a community-wide currency called gp! Type /market to see what you can do with it.`, 5000)
+  await sendMessage(body.channel.id, `We also have a community-wide currency called gp! Right now, you can only use it for <#CSHEL6LP5>, <#CN9LWFDQF>, and <#CL4DMMCLQ>—but stay tuned for more super exciting uses!`, 5000)
+
+  await sendMessage(body.channel.id, `Let me start you off with some gp.`)
+  await sendGP(body.user.id, body.channel.id, 20)
+  await sendMessage(body.channel.id, `You can check your balance at anytime by typing `/balance``)
+
   await sendMessage(body.channel.id, `One last thing: please make sure to read our <${`https://hackclub.com/conduct`}|code of conduct>. All community members are expected to follow the code of conduct.`, 5000, null, true)
   await sendSingleBlockMessage(body.channel.id, `Once you've read the code of conduct, click the 👍 to continue with the tutorial.`, '👍', `coc_acknowledge`)
 });
@@ -174,7 +180,7 @@ app.action('coc_acknowledge', async ({ ack, body }) => {
   await sendMessage(body.channel.id, shipDesc, 10, finalTs)
   await sendMessage(body.channel.id, codeDesc, 10, finalTs)
   await sendMessage(body.channel.id, `Here are a bunch of other active channels that you may be interested in:`, 10, finalTs)
-  await sendMessage(body.channel.id, `<#C0JDWKJVA> <#C0NP503L7> <#C6LHL48G2> <#C0DCUUH7E> <#CA3UH038Q> <#C90686D0T> <#CCW6Q86UF> <#C1C3K2RQV> <#CCW8U2LBC> <#CDLBHGUQN> <#CDJV1CXC2> <#C14D3AQTT> <#CBX54ACPJ> <#CC78UKWAC> <#C8P6DHA3W> <#C010SJJH1PT> <#CDJMS683D> <#CDN99BE9L>`, 10, finalTs)
+  await sendMessage(body.channel.id, `<#C0JDWKJVA> <#C0NP503L7> <#C6LHL48G2> <#C0DCUUH7E> <#CA3UH038Q> <#C90686D0T> <#CCW6Q86UF> <#C1C3K2RQV> <#CCW8U2LBC> <#CDLBHGUQN> <#CDJV1CXC2> <#C14D3AQTT> <#CBX54ACPJ> <#CC78UKWAC> <#C8P6DHA3W> <#C010SJJH1PT> <#CDJMS683D> <#CDN99BE9L> <#CSHEL6LP5>`, 10, finalTs)
   
   await completeTutorial(body.user.id)
   
@@ -292,7 +298,7 @@ async function startTutorial(user, restart) {
     await islandTable.update(record.id, {
       'Island Channel ID': channelId,
       'Island Channel Name': islandName.channel,
-      'Has completed tutorial': false
+      'Has completed tutorial': true
     })
   } else {
       await islandTable.create({
@@ -394,15 +400,21 @@ async function getNextEvent() {
   }
 }
 
-async function getLastBotMessage(channel) {
-  const history = await app.client.conversations.history({
-    token: process.env.SLACK_BOT_TOKEN,
-    channel: channel
-  })
-  const botHistory = history.messages.filter(
-    message => message.user === "U012CUN4U1X"
-  )
-  return botHistory[0].text
+async function sendGP(user, channel, amount) {
+  const completed = await hasCompletedTutorial(user)
+  if (completed) {
+    console.log(`${user} has completed this tutorial before, so I won't give them the gp.`)
+    await sendMessage(channel, `(Looks like you completed this tutorial before, so I won't give you the gp this time)`, 1000)
+  }
+  else {
+    axios.post('https://bankerapi.glitch.me', {
+      'token': process.env.BANKER_TOKEN,
+      'send_id': user,
+      'give_id': process.env.BOT_USER_ID,
+      'gp': amount,
+      'reason': 'Starting you off!'
+    })
+  }
 }
 
 async function generateIslandName() {
