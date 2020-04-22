@@ -361,7 +361,11 @@ async function inviteUserToChannel(user, channel) {
     token: process.env.SLACK_BOT_TOKEN,
     channel: channel,
     users: user
-  }).catch(err => console.log(err))
+  }).catch(err => {
+    if (err.data.error === 'already_in_channel') {
+      console.log(`${user} is already in ${channel}—skipping this step...`)
+    }
+  })
 }
 
 async function getIslandId(userId) {
