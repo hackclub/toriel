@@ -306,8 +306,8 @@ async function startTutorial(user, restart) {
   await sendSingleBlockMessage(channelId, `Hi, I'm Clippy! I'm the Hack Club assistant and my job is to get you on the Slack. Do you need assistance?`, `What the heck? Who are you?`, `intro_progress`, 10)
 }
 
-async function sendSingleBlockMessage(channel, text, blockText, actionId, timeout) {
-  await timeout(timeout || 3000)
+async function sendSingleBlockMessage(channel, text, blockText, actionId, delay) {
+  await timeout(delay || 3000)
   await app.client.chat.postMessage({
     token: process.env.SLACK_BOT_TOKEN,
     channel: channel,
