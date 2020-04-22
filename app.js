@@ -331,7 +331,6 @@ async function sendSingleBlockMessage(channel, text, blockText, actionId) {
               "text": blockText,
               "emoji": true
             },
-            "style": "primary",
             "action_id": actionId
           }
         ]
