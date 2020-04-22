@@ -410,11 +410,12 @@ async function sendGP(user, channel, amount) {
     axios.post('https://bankerapi.glitch.me/give', {
       'token': process.env.BANKER_TOKEN,
       'send_id': user,
-      'give_id': process.env.BOT_USER_ID,
+      'bot_id': process.env.BOT_USER_ID,
       'gp': amount,
       'reason': 'Starting you off!'
     })
     .then(response => console.log(response))
+    .catch(err => console.log(err))
   }
 }
 
