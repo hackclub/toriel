@@ -25,11 +25,6 @@ const app = new App({
 
 app.command('/restart', async ({ command, ack, say }) => {
   await ack();
-  
-  await restartKick('C0C78SG9L', command.user_id) //hq
-  await restartKick('C0266FRGV', command.user_id) //lounge
-  await restartKick('C0M8PUPU6', command.user_id) //ship
-  await restartKick('C0EA9S0A0', command.user_id) //code
   startTutorial(command.user_id, true)
 });
 
@@ -199,7 +194,7 @@ app.action('coc_acknowledge', async ({ ack, body }) => {
   await sendMessage(body.channel.id, `I also highly recommend setting a profile picture. It makes you look a lot more like a real person :)`)
   await sendMessage(body.channel.id, `I'm going to head out now—if you have any questions about Hack Club or Slack that I didn't answer, please ask in <#C0C78SG9L> or send a Direct Message to <@U4QAK9SRW>.`)
   await sendMessage(body.channel.id, `Toodles! :wave:`)
-  await timeout(5000)
+  await timeout(3000)
   await sendSingleBlockMessage(body.channel.id, `(Btw, if you want to leave + archive this channel, click here)`, 'Leave channel', 'leave_channel')
 })
 
@@ -456,20 +451,6 @@ function messageIsPartOfTutorial(body, correctChannel) {
   return body.event.channel_type === 'group' && body.event.subtype !== 'group_join'
       && body.event.subtype !== 'channel_join' && body.event.user !== 'U012CUN4U1X'
       && body.event.channel === correctChannel
-}
-
-async function restartKick(channel, user) {
-  const members = await app.client.conversations.members({
-    token: process.env.SLACK_BOT_TOKEN,
-    channel: channel
-  })
-  if (members.members.includes(user)) {
-    await app.client.conversations.kick({
-      token: process.env.SLACK_OAUTH_TOKEN,
-      channel: channel,
-      user: user
-    })
-  }
 }
 
 function capitalizeFirstLetter(str) {
