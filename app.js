@@ -200,7 +200,7 @@ app.action('coc_acknowledge', async ({ ack, body }) => {
 app.action('leave_channel', async ({ ack, body }) => {
   ack();
   await updateInteractiveMessage(body.message.ts, body.channel.id, `(Btw, if you want to leave + archive this channel, click here)`)
-  await sendSingleBlockMessage(body.channel.id, `Are you sure? You won't be able to come back to this channel.`, `Yes, I'm sure`, 'leave_confirm')
+  await sendSingleBlockMessage(body.channel.id, `Are you sure? You won't be able to come back to this channel.`, `Yes, I'm sure`, 'leave_confirm', 10)
 })
 app.action('leave_confirm', async ({ ack, body }) => {
   ack();
@@ -303,11 +303,11 @@ async function startTutorial(user, restart) {
       })
   }
 
-  await sendSingleBlockMessage(channelId, `Hi, I'm Clippy! I'm the Hack Club assistant and my job is to get you on the Slack. Do you need assistance?`, `What the heck? Who are you?`, `intro_progress`)
+  await sendSingleBlockMessage(channelId, `Hi, I'm Clippy! I'm the Hack Club assistant and my job is to get you on the Slack. Do you need assistance?`, `What the heck? Who are you?`, `intro_progress`, 10)
 }
 
-async function sendSingleBlockMessage(channel, text, blockText, actionId) {
-  await timeout(3000)
+async function sendSingleBlockMessage(channel, text, blockText, actionId, timeout) {
+  await timeout(timeout || 3000)
   await app.client.chat.postMessage({
     token: process.env.SLACK_BOT_TOKEN,
     channel: channel,
