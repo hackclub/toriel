@@ -155,7 +155,7 @@ app.action('introduced', async ({ ack, body }) => {
 
   await sendMessage(body.channel.id, `Let me start you off with some gp.`)
   await sendGP(body.user.id, body.channel.id, 20)
-  await sendMessage(body.channel.id, `You can check your balance at anytime by typing `/balance``)
+  await sendMessage(body.channel.id, `You can check your balance at anytime by typing \`/balance\``)
 
   await sendMessage(body.channel.id, `One last thing: please make sure to read our <${`https://hackclub.com/conduct`}|code of conduct>. All community members are expected to follow the code of conduct.`, 5000, null, true)
   await sendSingleBlockMessage(body.channel.id, `Once you've read the code of conduct, click the 👍 to continue with the tutorial.`, '👍', `coc_acknowledge`)
@@ -414,6 +414,7 @@ async function sendGP(user, channel, amount) {
       'gp': amount,
       'reason': 'Starting you off!'
     })
+    .then(response => console.log(response))
   }
 }
 
