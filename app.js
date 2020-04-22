@@ -140,13 +140,14 @@ app.event('message', async body => {
         users: body.event.user
       })*/
       const island = await getIslandName(body.event.user)
-      await app.client.chat.postEphemeral({
+      await sendEphemeralMessage('C75M7C0SY', `<@${body.event.user}> Feel free to introduce yourself to the community in <#C75M7C0SY>. When you're done, head back to <https://hackclub.slack.com/archives/${island}|#${island}> to continue your introduction to the community.`, body.event.user)
+      /*await app.client.chat.postEphemeral({
         token: process.env.SLACK_BOT_TOKEN,
         attachments: [],
         channel: 'C75M7C0SY',
         text: `<@${body.event.user}> Feel free to introduce yourself to the community in <#C75M7C0SY>. When you're done, head back to <https://hackclub.slack.com/archives/${island}|#${island}> to continue your introduction to the community.`,
         user: body.event.user
-      })
+      })*/
       
       await sendSingleBlockMessage(body.event.channel, "When you're ready, click the 👍 on this message to continue the tutorial.", '👍', 'introduced')
     }
@@ -173,12 +174,17 @@ app.action('coc_acknowledge', async ({ ack, body }) => {
   await sendMessage(body.channel.id, `That's all from me! I hope I've been able to help you get acquainted with the Hack Club community.`)
   const finalMessage = await sendMessage(body.channel.id, `I've added you to a few of the most popular channels, but there are many, many more! Click on "6 replies" to learn more about the channels you were just added to and discover some other cool channels...`, 5000)
   const finalTs = finalMessage.message.ts
+
+  const hqDesc = `*<#C0C78SG9L>* is where people ask the community/@staff any questions about Hack Club.`
+  const loungeDesc = `*<#C0266FRGV>* is where people go to hang out with the community. There are no expectations here; just have fun and hang out with the community :)`
+  const shipDesc = `*<#C0M8PUPU6>* is where people go to _ship_, or share, projects they've made. All posts in that are not part of a thread must be projects you've made, and must include a link or attachment. Check out the awesome projects people in the community have made!`
+  const codeDesc = `*<#C0EA9S0A0>* is where people go to ask technical questions about code. If you're stuck on a problem or need some guidance, this is the place to go. `
   
   // channel descriptions
-  await sendMessage(body.channel.id, `*<#C0C78SG9L>* is where people ask the community/@staff any questions about Hack Club.`, 10, finalTs)
-  await sendMessage(body.channel.id, `*<#C0266FRGV>* is where people go to hang out with the community. There are no expectations here; just have fun and hang out with the community :)`, 10, finalTs)
-  await sendMessage(body.channel.id, `*<#C0M8PUPU6>* is where people go to _ship_, or share, projects they've made. All posts in that are not part of a thread must be projects you've made, and must include a link or attachment. Check out the awesome projects people in the community have made!`, 10, finalTs)
-  await sendMessage(body.channel.id, `*<#C0EA9S0A0>* is where people go to ask technical questions about code. If you're stuck on a problem or need some guidance, this is the place to go.`, 10, finalTs)
+  await sendMessage(body.channel.id, hqDesc, 10, finalTs)
+  await sendMessage(body.channel.id, loungeDesc, 10, finalTs)
+  await sendMessage(body.channel.id, shipDesc, 10, finalTs)
+  await sendMessage(body.channel.id, codeDesc, 10, finalTs)
   await sendMessage(body.channel.id, `Here are a bunch of other active channels that you may be interested in:`, 10, finalTs)
   await sendMessage(body.channel.id, `<#C0JDWKJVA> <#C0NP503L7> <#C6LHL48G2> <#C0DCUUH7E> <#CA3UH038Q> <#C90686D0T> <#CCW6Q86UF> <#C1C3K2RQV> <#CCW8U2LBC> <#CDLBHGUQN> <#CDJV1CXC2> <#C14D3AQTT> <#CBX54ACPJ> <#CC78UKWAC> <#C8P6DHA3W> <#C010SJJH1PT> <#CDJMS683D> <#CDN99BE9L>`, 10, finalTs)
   
@@ -189,6 +195,11 @@ app.action('coc_acknowledge', async ({ ack, body }) => {
   await inviteUserToChannel(body.user.id, 'C0266FRGV') //lounge
   await inviteUserToChannel(body.user.id, 'C0M8PUPU6') //ship
   await inviteUserToChannel(body.user.id, 'C0EA9S0A0') //code
+
+  await sendEphemeralMessage('C0C78SG9L', hqDesc, body.user.id)
+  await sendEphemeralMessage('C0266FRGV', loungeDesc, body.user.id)
+  await sendEphemeralMessage('C0M8PUPU6', shipDesc, body.user.id)
+  await sendEphemeralMessage('C0EA9S0A0', codeDesc, body.user.id)
   
   await sendMessage(body.channel.id, `Your next steps: start talking to the community! Pick a few channels that you like from the thread above and start talking. We're excited to meet you :partyparrot:`)
   await sendMessage(body.channel.id, `I also highly recommend setting a profile picture. It makes you look a lot more like a real person :)`)
@@ -230,6 +241,16 @@ async function sendMessage(channel, text, delay, ts, unfurl) {
     unfurl_links: unfurl ? unfurl : false
   })
   return msg
+}
+
+async function sendEphemeralMessage(channel, text, user) {
+  await app.client.chat.postEphemeral({
+    token: process.env.SLACK_BOT_TOKEN,
+    attachments: [],
+    channel: channel,
+    text: text,
+    user: user
+  })
 }
 
 async function startTutorial(user, restart) {
