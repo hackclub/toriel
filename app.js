@@ -435,8 +435,8 @@ async function generateIslandName() {
   const words = friendlyWords.predicates
   const word1 = words[Math.floor(Math.random() * 1455)]
   const word2 = words[Math.floor(Math.random() * 1455)]
-  const channel = `${word1}-${word2}-island`
-  const pretty = `${capitalizeFirstLetter(word1)} ${capitalizeFirstLetter(word2)} Tutorial Island`
+  const channel = `${word1}-${word2}-tutorial`
+  const pretty = `${capitalizeFirstLetter(word1)} ${capitalizeFirstLetter(word2)} Tutorial`
 
   const taken = await checkIslandNameTaken(channel)
   if (taken) return generateIslandName()
