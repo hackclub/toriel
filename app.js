@@ -36,12 +36,12 @@ app.event('team_join', async body => {
 app.action('intro_progress', async ({ ack, body }) => {
   ack();
   updateInteractiveMessage(body.message.ts, body.channel.id, `Hi, I'm Clippy! I'm the Hack Club assistant and my job is to get you on the Slack. Do you need assistance?`)
-  
+
   await sendMessage(body.channel.id, '...', 1000)
   await sendMessage(body.channel.id, '...', 1000)
   await sendMessage(body.channel.id, `I'll take that as a yes! I'm happy to assist you in joining Hack Club today.`, 1000)
   await sendMessage(body.channel.id, `Just a few quick questions to get you started.`)
-  
+
   await timeout(3000)
   await app.client.chat.postMessage({
     token: process.env.SLACK_BOT_TOKEN,
@@ -103,16 +103,16 @@ app.action('hs_acknowledge', async ({ ack, body }) => {
 
 app.event('message', async body => {
   if (body.message.subtype === 'channel_join' &&
-      body.message.text === `<@${body.message.user}> has joined the channel`) {
+    body.message.text === `<@${body.message.user}> has joined the channel`) {
     await app.client.chat.delete({
       token: process.env.SLACK_OAUTH_TOKEN,
       channel: body.message.channel,
       ts: body.message.event_ts
     })
   }
-  
+
   const correctChannel = await getIslandId(body.event.user)
-  
+
   if (messageIsPartOfTutorial(body, correctChannel)) {
     const history = await app.client.conversations.history({
       token: process.env.SLACK_BOT_TOKEN,
@@ -123,21 +123,21 @@ app.event('message', async body => {
     )
     const lastBotMessage = botHistory[0].text
     const lastUserMessage = history.messages[0].text
-    
+
     if (lastBotMessage.includes('What brings you')) {
       // send it to welcome-committee
       await sendMessage('GLFAEL1SL', 'New user <@' + body.event.user + '> joined! Here\'s why they joined the Hack Club community:\n\n' + lastUserMessage + '\n\nReact to this message to take ownership on reaching out.', 10)
-      
+
       await sendMessage(body.event.channel, `Ah, very interesting! Well, let me show you around the community.`)
       await sendMessage(body.event.channel, `You're currently on Slack, the platform our community uses. If you're familiar with Discord, you'll find that Slack feels similar.`)
       await sendMessage(body.event.channel, `Slack is organized into "channels", and each channel includes discussion about its own topic. We have _hundreds_ of channels, covering everything from game development and web design to photography and cooking. I'll show you a few of my favorites in a minute.`, 5000)
       await sendMessage(body.event.channel, `I just invited you to your first channel, <#C75M7C0SY>. Join by clicking on it in your sidebar, and introduce yourself to the community.`, 5000)
-      
+
       // add user to #welcome
       await inviteUserToChannel(body.event.user, 'C75M7C0SY')
       const island = await getIslandName(body.event.user)
       await sendEphemeralMessage('C75M7C0SY', `<@${body.event.user}> Feel free to introduce yourself to the community in <#C75M7C0SY>. When you're done, head back to <https://hackclub.slack.com/archives/${island}|#${island}> to continue your introduction to the community.`, body.event.user)
-      
+
       await sendSingleBlockMessage(body.event.channel, "When you're ready, click the 👍 on this message to continue the tutorial.", '👍', 'introduced')
     }
   }
@@ -146,7 +146,7 @@ app.event('message', async body => {
 app.action('introduced', async ({ ack, body }) => {
   ack();
   updateInteractiveMessage(body.message.ts, body.channel.id, 'Awesome! Let\'s keep going.')
-  
+
   const nextEvent = await getNextEvent()
   await sendMessage(body.channel.id, `There are awesome things happening in the Hack Club community every day! Check out <#C0266FRGT> to see the latest community event. We do everything from coding challenges to AMAs with famous people (e.g. Tom Preston-Werner) to fun hangouts, and more!`)
   await sendMessage(body.channel.id, `The next community event is called *${nextEvent.name}*, and it's happening on ${nextEvent.day} at ${nextEvent.time} eastern time. You can <${nextEvent.url}|learn more about the event by clicking here>. We'd love to see you there!`, 5000)
@@ -173,7 +173,7 @@ app.action('coc_acknowledge', async ({ ack, body }) => {
   const loungeDesc = `*<#C0266FRGV>* is where people go to hang out with the community. There are no expectations here; just have fun and hang out with the community :)`
   const shipDesc = `*<#C0M8PUPU6>* is where people go to _ship_, or share, projects they've made. All posts in that are not part of a thread must be projects you've made, and must include a link or attachment. Check out the awesome projects people in the community have made!`
   const codeDesc = `*<#C0EA9S0A0>* is where people go to ask technical questions about code. If you're stuck on a problem or need some guidance, this is the place to go. `
-  
+
   // channel descriptions
   await sendMessage(body.channel.id, hqDesc, 10, finalTs)
   await sendMessage(body.channel.id, loungeDesc, 10, finalTs)
@@ -181,9 +181,9 @@ app.action('coc_acknowledge', async ({ ack, body }) => {
   await sendMessage(body.channel.id, codeDesc, 10, finalTs)
   await sendMessage(body.channel.id, `Here are a bunch of other active channels that you may be interested in:`, 10, finalTs)
   await sendMessage(body.channel.id, `<#C0JDWKJVA> <#C0NP503L7> <#C6LHL48G2> <#C0DCUUH7E> <#CA3UH038Q> <#C90686D0T> <#CCW6Q86UF> <#C1C3K2RQV> <#CCW8U2LBC> <#CDLBHGUQN> <#CDJV1CXC2> <#C14D3AQTT> <#CBX54ACPJ> <#CC78UKWAC> <#C8P6DHA3W> <#C010SJJH1PT> <#CDJMS683D> <#CDN99BE9L> <#CSHEL6LP5>`, 10, finalTs)
-  
+
   await completeTutorial(body.user.id)
-  
+
   // add user to default channels
   await inviteUserToChannel(body.user.id, 'C0C78SG9L') //hq
   await inviteUserToChannel(body.user.id, 'C0266FRGV') //lounge
@@ -194,7 +194,7 @@ app.action('coc_acknowledge', async ({ ack, body }) => {
   await sendEphemeralMessage('C0266FRGV', loungeDesc, body.user.id)
   await sendEphemeralMessage('C0M8PUPU6', shipDesc, body.user.id)
   await sendEphemeralMessage('C0EA9S0A0', codeDesc, body.user.id)
-  
+
   await sendMessage(body.channel.id, `Your next steps: start talking to the community! Pick a few channels that you like from the thread above and start talking. We're excited to meet you :partyparrot:`)
   await sendMessage(body.channel.id, `I also highly recommend setting a profile picture. It makes you look a lot more like a real person :)`)
   await sendMessage(body.channel.id, `I'm going to head out now—if you have any questions about Hack Club or Slack that I didn't answer, please ask in <#C0C78SG9L> or send a Direct Message to <@U4QAK9SRW>.`)
@@ -277,14 +277,20 @@ async function startTutorial(user, restart) {
     user_ids: process.env.BOT_USER_ID
   })
   const channelId = newChannel.channel.id
-  
+
+  await app.client.conversations.setTopic({
+    token: process.env.SLACK_OAUTH_TOKEN,
+    channel: channelId,
+    topic: `Make sure to complete this required tutorial before continuing on to Hack Club. Welcome to the community! :wave:`
+  })
+
   await app.client.conversations.invite({
     token: process.env.SLACK_BOT_TOKEN,
     channel: channelId,
     users: user
   })
-  .catch (err => console.log(err.data.errors))
-  
+    .catch(err => console.log(err.data.errors))
+
   if (restart) {
     let record = await getUserRecord(user)
     if (typeof record === 'undefined') {
@@ -301,12 +307,12 @@ async function startTutorial(user, restart) {
       'Has completed tutorial': true
     })
   } else {
-      await islandTable.create({
-        'Name': user,
-        'Island Channel ID': channelId,
-        'Island Channel Name': islandName.channel,
-        'Has completed tutorial': false
-      })
+    await islandTable.create({
+      'Name': user,
+      'Island Channel ID': channelId,
+      'Island Channel Name': islandName.channel,
+      'Has completed tutorial': false
+    })
   }
 
   await sendSingleBlockMessage(channelId, `Hi, I'm Clippy! I'm the Hack Club assistant and my job is to get you on the Slack. Do you need assistance?`, `What the heck? Who are you?`, `intro_progress`, 10)
@@ -345,22 +351,22 @@ async function sendSingleBlockMessage(channel, text, blockText, actionId, delay)
 
 async function updateInteractiveMessage(ts, channel, message) {
   const result = await app.client.chat.update({
-      token: process.env.SLACK_BOT_TOKEN,
-      // ts of message to update
-      ts: ts,
-      // Channel of message
-      channel: channel,
-      blocks: [
-        {
-          type: 'section',
-          text: {
-            type: 'mrkdwn',
-            text: message
-          }
+    token: process.env.SLACK_BOT_TOKEN,
+    // ts of message to update
+    ts: ts,
+    // Channel of message
+    channel: channel,
+    blocks: [
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: message
         }
-      ],
-      text: 'Message from Test App'
-    });
+      }
+    ],
+    text: 'Message from Test App'
+  });
 }
 
 async function inviteUserToChannel(user, channel) {
@@ -391,7 +397,7 @@ async function getNextEvent() {
     maxRecords: 1
   }))[0]
   const eventUrl = `https://events.hackclub.com/${slugger.slug(record.fields['Title'])}`
-  
+
   return {
     name: record.fields['Title'],
     day: record.fields['Date (formatted)'],
@@ -414,8 +420,8 @@ async function sendGP(user, channel, amount) {
       'gp': amount,
       'reason': 'Starting you off!'
     })
-    .then(response => console.log(response))
-    .catch(err => console.log(err))
+      .then(response => console.log(response))
+      .catch(err => console.log(err))
   }
 }
 
@@ -425,10 +431,10 @@ async function generateIslandName() {
   const word2 = words[Math.floor(Math.random() * 1455)]
   const channel = `${word1}-${word2}-island`
   const pretty = `${capitalizeFirstLetter(word1)} ${capitalizeFirstLetter(word2)} Tutorial Island`
-  
+
   const taken = await checkIslandNameTaken(channel)
   if (taken) return generateIslandName()
-  
+
   return {
     channel: channel,
     pretty: pretty
@@ -453,7 +459,7 @@ async function getUserRecord(userId) {
       maxRecords: 1
     }))[0]
     return record
-  } catch {}
+  } catch { }
 }
 
 async function checkIslandNameTaken(islandName) {
@@ -466,8 +472,8 @@ async function checkIslandNameTaken(islandName) {
 
 function messageIsPartOfTutorial(body, correctChannel) {
   return body.event.channel_type === 'group' && body.event.subtype !== 'group_join'
-      && body.event.subtype !== 'channel_join' && body.event.user !== 'U012CUN4U1X'
-      && body.event.channel === correctChannel
+    && body.event.subtype !== 'channel_join' && body.event.user !== 'U012CUN4U1X'
+    && body.event.channel === correctChannel
 }
 
 function capitalizeFirstLetter(str) {
