@@ -279,18 +279,23 @@ async function startTutorial(user, restart) {
   const channelId = newChannel.channel.id
   console.log(`New tutorial channel created: ${channelId}`)
 
-  await app.client.conversations.setTopic({
-    token: process.env.SLACK_OAUTH_TOKEN,
-    channel: channelId,
-    topic: `Make sure to complete this required tutorial before continuing on to Hack Club. Welcome to the community! :wave:`
-  })
-
   await app.client.conversations.invite({
     token: process.env.SLACK_BOT_TOKEN,
     channel: channelId,
     users: user
   })
     .catch(err => console.log(err.data.errors))
+  await app.client.conversations.invite({
+    token: process.env.SLACK_BOT_TOKEN,
+    channel: channelId,
+    users: 'U012FPRJEVB'
+  })
+
+  await app.client.conversations.setTopic({
+    token: process.env.SLACK_OAUTH_TOKEN,
+    channel: channelId,
+    topic: `Make sure to complete this required tutorial before continuing on to Hack Club. Welcome to the community! :wave:`
+  })
 
   if (restart) {
     let record = await getUserRecord(user)
