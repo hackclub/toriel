@@ -277,6 +277,7 @@ async function startTutorial(user, restart) {
     user_ids: process.env.BOT_USER_ID
   })
   const channelId = newChannel.channel.id
+  console.log(`New tutorial channel created: ${channelId}`)
 
   await app.client.conversations.setTopic({
     token: process.env.SLACK_OAUTH_TOKEN,
