@@ -88,7 +88,7 @@ app.action('intro_progress', async ({ ack, body }) => {
 app.action('hs_yes', async ({ ack, body }) => {
   ack();
   updateInteractiveMessage(body.message.ts, body.channel.id, 'Hack Club is a community of high schoolers, so you\'ll fit right in!')
-  await sendMessage(body.channel.id, `What brings you to the Hack Club community?`)
+  await sendMessage(body.channel.id, `What brings you to the Hack Club community? (Type your answer in the chat)`)
 });
 
 app.action('hs_no', async ({ ack, body }) => {
