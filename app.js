@@ -330,7 +330,7 @@ async function startTutorial(user, restart) {
   await timeout(10000)
   let pushedButton = await hasPushedButton(user)
   if (!pushedButton) {
-    await sendMessage(channelId, `(Psst—this is an intro to the Hack Club Community that every new member must complete. You can't join any channels until you complete it. To get started, push the button that says "What the heck? Who are you?")`, 10)
+    await sendMessage(channelId, `(<@${user}> Psst—this is an intro to the Hack Club community that every new member must complete. You can't join any channels until you complete it. To get started, push the button that says "What the heck? Who are you?")`, 10)
   }
 }
 
