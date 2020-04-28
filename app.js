@@ -329,7 +329,6 @@ async function startTutorial(user, restart) {
   await sendSingleBlockMessage(channelId, `Hi, I'm Clippy! I'm the Hack Club assistant and my job is to get you on the Slack. Do you need assistance?`, `What the heck? Who are you?`, `intro_progress`, 10)
   await timeout(10000)
   let pushedButton = await hasPushedButton(user)
-  console.log(pushedButton)
   if (!pushedButton) {
     await sendMessage(channelId, `(Psst—this is an intro to the Hack Club Community that every new member must complete. You can't join any channels until you complete it. To get started, push the button that says "What the heck? Who are you?")`, 10)
   }
