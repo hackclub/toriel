@@ -306,20 +306,23 @@ async function startTutorial(user, restart) {
         'Name': user,
         'Island Channel ID': channelId,
         'Island Channel Name': islandName.channel,
-        'Has completed tutorial': false
+        'Has completed tutorial': false,
+        'Pushed first button': false
       })
     }
     await islandTable.update(record.id, {
       'Island Channel ID': channelId,
       'Island Channel Name': islandName.channel,
-      'Has completed tutorial': true
+      'Has completed tutorial': true,
+      'Pushed first button': false
     })
   } else {
     await islandTable.create({
       'Name': user,
       'Island Channel ID': channelId,
       'Island Channel Name': islandName.channel,
-      'Has completed tutorial': false
+      'Has completed tutorial': false,
+      'Pushed first button': false
     })
   }
 
@@ -327,7 +330,7 @@ async function startTutorial(user, restart) {
   await timeout(10000)
   let pushedButton = await hasPushedButton(user)
   console.log(pushedButton)
-  if (!pushedButton(user)) {
+  if (!pushedButton) {
     await sendMessage(channelId, `(Psst—this is an intro to the Hack Club Community that every new member must complete. You can't join any channels until you complete it. To get started, push the button that says "What the heck? Who are you?")`, 10)
   }
 }
