@@ -296,7 +296,7 @@ async function startTutorial(user, restart) {
   await app.client.conversations.setTopic({
     token: process.env.SLACK_OAUTH_TOKEN,
     channel: channelId,
-    topic: `Unlock the Hack Club community by completing this tutorial. Welcome to the community! :wave:`
+    topic: `Welcome to Hack Club! :wave: Unlock the community by completing this tutorial.`
   })
 
   if (restart) {
@@ -330,7 +330,7 @@ async function startTutorial(user, restart) {
   await timeout(10000)
   let pushedButton = await hasPushedButton(user)
   if (!pushedButton) {
-    await sendMessage(channelId, `(<@${user}> Psst—this is an intro to Hack Club that every new member completes. Unlock the Hack Club community by completing it. To get started, push the button that says "What the heck? Who are you?")`, 10)
+    await sendMessage(channelId, `(<@${user}> Psst—this is an intro to Hack Club that every new member completes. Unlock the community by completing it. To get started, push the button that says "What the heck? Who are you?")`, 10)
   }
 }
 
