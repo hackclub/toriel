@@ -37,6 +37,8 @@ app.action('intro_progress', async ({ ack, body }) => {
   ack();
   updateInteractiveMessage(body.message.ts, body.channel.id, `Hi, I'm Clippy! I'm the Hack Club assistant and my job is to get you on the Slack. Do you need assistance?`)
 
+  updatePushedButton(body.user.id)
+
   await sendMessage(body.channel.id, '...', 1000)
   await sendMessage(body.channel.id, '...', 1000)
   await sendMessage(body.channel.id, `I'll take that as a yes! I'm happy to assist you in joining Hack Club today.`, 1000)
@@ -322,6 +324,10 @@ async function startTutorial(user, restart) {
   }
 
   await sendSingleBlockMessage(channelId, `Hi, I'm Clippy! I'm the Hack Club assistant and my job is to get you on the Slack. Do you need assistance?`, `What the heck? Who are you?`, `intro_progress`, 10)
+  await timeout(10000)
+  if (!hasPushedButton(user)) {
+    await sendMessage(channelId, `(Psst—this is an intro to the Hack Club Community that every new member must complete. You can't join any channels until you complete it. To get started, push the button that says "What the heck? Who are you?")`, 10)
+  }
 }
 
 async function sendSingleBlockMessage(channel, text, blockText, actionId, delay) {
@@ -385,6 +391,20 @@ async function inviteUserToChannel(user, channel) {
       console.log(`${user} is already in ${channel}—skipping this step...`)
     }
   })
+}
+
+async function updatePushedButton(userId) {
+  let record = await getUserRecord(userId)
+  let recId = record.id
+
+  islandTable.update(recId, {
+    'Pushed first button': true
+  })
+}
+
+async function hasPushedButton(userId) {
+  let record = await getUserRecord(userId)
+  return record.fields['Pushed first button']
 }
 
 async function getIslandId(userId) {
