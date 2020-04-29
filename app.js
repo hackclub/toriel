@@ -100,7 +100,7 @@ app.action('hs_no', async ({ ack, body }) => {
 app.action('hs_acknowledge', async ({ ack, body }) => {
   ack();
   await updateInteractiveMessage(body.message.ts, body.channel.id, '👍')
-  await sendMessage(body.channel.id, `What brings you to the Hack Club community?`)
+  await sendMessage(body.channel.id, `What brings you (type your answer in the chat)`)
 });
 
 app.event('message', async body => {
