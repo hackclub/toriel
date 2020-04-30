@@ -291,12 +291,6 @@ app.action('leave_confirm', async ({ ack, body }) => {
   ack();
   await updateInteractiveMessage(body.message.ts, body.channel.id, `Okay! Bye :wave:`)
 
-  // invite matthew to the private channel & archive it
-  await app.client.conversations.invite({
-    token: process.env.SLACK_BOT_TOKEN,
-    channel: body.channel.id,
-    users: `U4QAK9SRW`
-  })
   await app.client.conversations.archive({
     token: process.env.SLACK_OAUTH_TOKEN,
     channel: body.channel.id
