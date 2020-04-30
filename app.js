@@ -24,6 +24,13 @@ const app = new App({
 
 /* Add functionality here */
 
+const app = new App({
+  signingSecret: process.env.SLACK_SIGNING_SECRET,
+  token: process.env.SLACK_BOT_TOKEN
+});
+
+/* Add functionality here */
+
 app.command('/restart', async ({ command, ack, say }) => {
   await ack();
   startTutorial(command.user_id, true)
@@ -35,15 +42,84 @@ app.event('team_join', async body => {
 
 app.action('intro_progress', async ({ ack, body }) => {
   ack();
-  updateInteractiveMessage(body.message.ts, body.channel.id, `Hi, I'm Clippy! I'm the Hack Club assistant and my job is to get you on the Slack. Do you need assistance?`)
+  updateInteractiveMessage(body.message.ts, body.channel.id, `Hi, I'm Clippy! My job is to get you on the Slack. Do you need assistance?`)
 
   updatePushedButton(body.user.id)
-
   await sendMessage(body.channel.id, '...', 1000)
   await sendMessage(body.channel.id, '...', 1000)
-  await sendMessage(body.channel.id, `I'll take that as a yes! I'm happy to assist you in joining Hack Club today.`, 1000)
-  await sendMessage(body.channel.id, `Just a few quick questions to get you started.`)
+  await sendMessage(body.channel.id, `Excellent! I'm happy to assist you in joining Hack Club today.`, 1000)
+  await sendMessage(body.channel.id, `A few quick questions:`)
 
+  await timeout(3000)
+  await app.client.chat.postMessage({
+    token: process.env.SLACK_BOT_TOKEN,
+    channel: body.channel.id,
+    blocks: [
+      {
+        "type": "section",
+        "text": {
+          "type": "mrkdwn",
+          "text": `What are your pronouns? (how you want to be referred to by others)`
+        }
+      },
+      {
+        "type": "actions",
+        "elements": [
+          {
+            "type": "button",
+            "text": {
+              "type": "plain_text",
+              "emoji": true,
+              "text": "She/her/hers"
+            },
+            "style": "primary",
+            "action_id": "she"
+          },
+          {
+            "type": "button",
+            "text": {
+              "type": "plain_text",
+              "emoji": true,
+              "text": "He/him/his"
+            },
+            "style": "primary",
+            "action_id": "he"
+          },
+          {
+            "type": "button",
+            "text": {
+              "type": "plain_text",
+              "emoji": true,
+              "text": "They/them/theirs"
+            },
+            "style": "primary",
+            "action_id": "they"
+          },
+          {
+            "type": "button",
+            "text": {
+              "type": "plain_text",
+              "emoji": true,
+              "text": "Something else!"
+            },
+            "style": "primary",
+            "action_id": "something_else"
+          }
+        ]
+      }
+    ]
+  })
+  
+  
+  
+});
+
+app.action('she', async ({ ack, body }) => {
+  ack();
+  pronouns = "She/her/hers"
+  pronoun_1 = "She"
+  updateInteractiveMessage(body.message.ts, body.channel.id, `Awesome! Taken note of. Every profile here has a custom field for pronouns, I recommend you add yours there to let others know! <${`https://slack.com/intl/en-sg/help/articles/204092246-Edit-your-profile`}|Here is a quick tutorial.>`)
+  console.log(pronouns)
   await timeout(3000)
   await app.client.chat.postMessage({
     token: process.env.SLACK_BOT_TOKEN,
@@ -85,6 +161,111 @@ app.action('intro_progress', async ({ ack, body }) => {
   })
 });
 
+app.action('he', async ({ ack, body }) => {
+  ack();
+  pronouns = "He/him/his"
+  pronoun_1 = "He"
+  updateInteractiveMessage(body.message.ts, body.channel.id, `Awesome! Taken note of. Every profile here has a custom field for pronouns, I recommend you add yours there to let others know! <${`https://slack.com/intl/en-sg/help/articles/204092246-Edit-your-profile`}|Here is a quick tutorial.>`)
+  console.log(pronouns)
+  await timeout(3000)
+  await app.client.chat.postMessage({
+    token: process.env.SLACK_BOT_TOKEN,
+    channel: body.channel.id,
+    blocks: [
+      {
+        "type": "section",
+        "text": {
+          "type": "mrkdwn",
+          "text": `Are you currently a high school student? (it's OK if you're not)`
+        }
+      },
+      {
+        "type": "actions",
+        "elements": [
+          {
+            "type": "button",
+            "text": {
+              "type": "plain_text",
+              "emoji": true,
+              "text": "Yes"
+            },
+            "style": "primary",
+            "action_id": "hs_yes"
+          },
+          {
+            "type": "button",
+            "text": {
+              "type": "plain_text",
+              "emoji": true,
+              "text": "No"
+            },
+            "style": "danger",
+            "action_id": "hs_no"
+          }
+        ]
+      }
+    ]
+  })
+});
+
+
+app.action('they', async ({ ack, body }) => {
+  ack();
+  pronouns = "They/them/theirs"
+  pronoun_1 = "They"
+  updateInteractiveMessage(body.message.ts, body.channel.id, `Awesome! Taken note of. Every profile here has a custom field for pronouns, I recommend you add yours there to let others know! <${`https://slack.com/intl/en-sg/help/articles/204092246-Edit-your-profile`}|Here is a quick tutorial.>`)
+  console.log(pronouns)
+  await timeout(3000)
+  await app.client.chat.postMessage({
+    token: process.env.SLACK_BOT_TOKEN,
+    channel: body.channel.id,
+    blocks: [
+      {
+        "type": "section",
+        "text": {
+          "type": "mrkdwn",
+          "text": `Are you currently a high school student? (it's OK if you're not)`
+        }
+      },
+      {
+        "type": "actions",
+        "elements": [
+          {
+            "type": "button",
+            "text": {
+              "type": "plain_text",
+              "emoji": true,
+              "text": "Yes"
+            },
+            "style": "primary",
+            "action_id": "hs_yes"
+          },
+          {
+            "type": "button",
+            "text": {
+              "type": "plain_text",
+              "emoji": true,
+              "text": "No"
+            },
+            "style": "danger",
+            "action_id": "hs_no"
+          }
+        ]
+      }
+    ]
+  })
+});
+
+app.action('something_else', async ({ ack, body }) => {
+  ack();
+  
+  await sendMessage(body.channel.id, `Awesome! Could you please elaborate on how would you like us to address you in the format of They/Them/Theirs?`)
+  
+});
+
+app.action('hs-question', async ({ ack, body }) => {
+
+});
 app.action('hs_yes', async ({ ack, body }) => {
   ack();
   updateInteractiveMessage(body.message.ts, body.channel.id, 'Hack Club is a community of high schoolers, so you\'ll fit right in!')
@@ -100,7 +281,7 @@ app.action('hs_no', async ({ ack, body }) => {
 app.action('hs_acknowledge', async ({ ack, body }) => {
   ack();
   await updateInteractiveMessage(body.message.ts, body.channel.id, '👍')
-  await sendMessage(body.channel.id, `What brings you (type your answer in the chat)`)
+  await sendMessage(body.channel.id, `What brings you to the Hack Club community? (type your answer in the chat)`)
 });
 
 app.event('message', async body => {
@@ -125,10 +306,61 @@ app.event('message', async body => {
     )
     const lastBotMessage = botHistory[0].text
     const lastUserMessage = history.messages[0].text
+    
+    if (lastBotMessage.includes('Could you please elaborate')) {
+      
+      pronouns = lastUserMessage
+      pronoun_1 = lastUserMessage.slice(0, lastUserMessage.search("/"))
+      console.log(pronouns)
+      
+      await sendMessage(body.event.channel, `Thanks! Taken note of. Every profile here has a custom field for pronouns, I recommend you add yours there to let others know! <${`https://slack.com/intl/en-sg/help/articles/204092246-Edit-your-profile`}|Here is a quick tutorial.>`)
+      
+      await timeout(3000)
+      await app.client.chat.postMessage({
+        token: process.env.SLACK_BOT_TOKEN,
+        channel: body.event.channel,
+        blocks: [
+          {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": `Are you currently a high school student? (it's OK if you're not)`
+            }
+          },
+          {
+            "type": "actions",
+            "elements": [
+              {
+                "type": "button",
+                "text": {
+                  "type": "plain_text",
+                  "emoji": true,
+                  "text": "Yes"
+                },
+                "style": "primary",
+                "action_id": "hs_yes"
+              },
+              {
+                "type": "button",
+                "text": {
+                  "type": "plain_text",
+                  "emoji": true,
+                  "text": "No"
+                },
+                "style": "danger",
+                "action_id": "hs_no"
+              }
+            ]
+          }
+        ]
+      })
+      
+      
+    }  
 
     if (lastBotMessage.includes('What brings you')) {
       // send it to welcome-committee
-      await sendMessage('GLFAEL1SL', 'New user <@' + body.event.user + '> joined! Here\'s why they joined the Hack Club community:\n\n' + lastUserMessage + '\n\nReact to this message to take ownership on reaching out.', 10)
+      await sendMessage('C011YTBQ205', 'New user <@' + body.event.user + '> joined! Here\'s why ' + pronoun_1.toLowerCase() + ' joined the Hack Club community:\n\n' + lastUserMessage + '\n\n' + pronoun_1 + ' prefer these pronouns: '+ pronouns +  '\n\nReact to this message to take ownership on reaching out.', 10)
 
       await sendMessage(body.event.channel, `Ah, very interesting! Well, let me show you around the community.`)
       await sendMessage(body.event.channel, `You're currently on Slack, the platform our community uses. If you're familiar with Discord, you'll find that Slack feels similar.`)
@@ -182,8 +414,12 @@ app.action('coc_acknowledge', async ({ ack, body }) => {
   await sendMessage(body.channel.id, shipDesc, 10, finalTs)
   await sendMessage(body.channel.id, codeDesc, 10, finalTs)
   await sendMessage(body.channel.id, `Here are a bunch of other active channels that you may be interested in:`, 10, finalTs)
-  await sendMessage(body.channel.id, `<#C0JDWKJVA> <#C0NP503L7> <#C6LHL48G2> <#C0DCUUH7E> <#CA3UH038Q> <#C90686D0T> <#CCW6Q86UF> <#C1C3K2RQV> <#CCW8U2LBC> <#CDLBHGUQN> <#CDJV1CXC2> <#C14D3AQTT> <#CBX54ACPJ> <#CC78UKWAC> <#C8P6DHA3W> <#C010SJJH1PT> <#CDJMS683D> <#CDN99BE9L> <#CSHEL6LP5>`, 10, finalTs)
-
+  if (pronouns === "They/them/theirs" || pronouns === "She/her/hers"){
+  await sendMessage(body.channel.id, `<#C0JDWKJVA> <#C0NP503L7> <#C6LHL48G2> <#C0DCUUH7E> <#CA3UH038Q> <#C90686D0T> <#CCW6Q86UF> <#C1C3K2RQV> <#CCW8U2LBC> <#CDLBHGUQN> <#CDJV1CXC2> <#C14D3AQTT> <#CBX54ACPJ> <#CC78UKWAC> <#C8P6DHA3W> <#C010SJJH1PT> <#CDJMS683D> <#CDN99BE9L> <#CSHEL6LP5> <#CFZMXJ3FB> (an awesome channel just for girls + nb people)`, 10, finalTs)
+  }
+  else{
+   await sendMessage(body.channel.id, `<#C0JDWKJVA> <#C0NP503L7> <#C6LHL48G2> <#C0DCUUH7E> <#CA3UH038Q> <#C90686D0T> <#CCW6Q86UF> <#C1C3K2RQV> <#CCW8U2LBC> <#CDLBHGUQN> <#CDJV1CXC2> <#C14D3AQTT> <#CBX54ACPJ> <#CC78UKWAC> <#C8P6DHA3W> <#C010SJJH1PT> <#CDJMS683D> <#CDN99BE9L> <#CSHEL6LP5>`, 10, finalTs)
+  }
   await completeTutorial(body.user.id)
 
   // add user to default channels
@@ -271,73 +507,92 @@ async function sendEphemeralMessage(channel, text, user) {
 }
 
 async function startTutorial(user, restart) {
-  const islandName = await generateIslandName()
+  const islandName = await generateIslandName().catch(err => console.log(err))
   const newChannel = await app.client.conversations.create({
     token: process.env.SLACK_BOT_TOKEN,
     name: islandName.channel,
     is_private: true,
     user_ids: process.env.BOT_USER_ID
-  })
-  const channelId = newChannel.channel.id
-  console.log(`New tutorial channel created: ${channelId}`)
+  }).catch(err => console.log(err));
+  const channelId = newChannel.channel.id;
 
-  await app.client.conversations.invite({
-    token: process.env.SLACK_BOT_TOKEN,
-    channel: channelId,
-    users: user
-  })
-    .catch(err => console.log(err.data.errors))
-  await app.client.conversations.invite({
-    token: process.env.SLACK_BOT_TOKEN,
-    channel: channelId,
-    users: 'U012FPRJEVB'
-  })
-
-  await app.client.conversations.setTopic({
-    token: process.env.SLACK_OAUTH_TOKEN,
-    channel: channelId,
-    topic: `Welcome to Hack Club! :wave: Unlock the community by completing this tutorial.`
-  })
+  await app.client.conversations
+    .invite({
+      token: process.env.SLACK_BOT_TOKEN,
+      channel: channelId,
+      users: user
+    })
+    .catch(err => console.log(err.data.errors));
 
   if (restart) {
-    let record = await getUserRecord(user)
-    if (typeof record === 'undefined') {
+    let record = await getUserRecord(user);
+    if (typeof record === "undefined") {
       record = await islandTable.create({
-        'Name': user,
-        'Island Channel ID': channelId,
-        'Island Channel Name': islandName.channel,
-        'Has completed tutorial': false,
-        'Pushed first button': false
-      })
+        Name: user,
+        "Island Channel ID": channelId,
+        "Island Channel Name": islandName.channel,
+        "Has completed tutorial": false
+      });
     }
     await islandTable.update(record.id, {
-      'Island Channel ID': channelId,
-      'Island Channel Name': islandName.channel,
-      'Has completed tutorial': true,
-      'Pushed first button': false
-    })
+      "Island Channel ID": channelId,
+      "Island Channel Name": islandName.channel,
+      "Has completed tutorial": true
+    });
   } else {
     await islandTable.create({
-      'Name': user,
-      'Island Channel ID': channelId,
-      'Island Channel Name': islandName.channel,
-      'Has completed tutorial': false,
-      'Pushed first button': false
-    })
+      Name: user,
+      "Island Channel ID": channelId,
+      "Island Channel Name": islandName.channel,
+      "Has completed tutorial": false
+    });
   }
 
-  await sendSingleBlockMessage(channelId, `Hi, I'm Clippy! I'm the Hack Club assistant and my job is to get you on the Slack. Do you need assistance?`, `What the heck? Who are you?`, `intro_progress`, 10)
-  await timeout(15000)
-  let pushedButton = await hasPushedButton(user)
-  if (!pushedButton) {
-    await sendMessage(channelId, `(<@${user}> Psst—this is an intro to Hack Club that every new member completes. Unlock the community by completing it. To get started, push the button that says "What the heck? Who are you?")`, 10)
-  }
+  await sendSingleBlockMessage(
+    channelId,
+    `Hi, I'm Clippy! I'm the Hack Club assistant and my job is to get you on the Slack. Do you need assistance?`,
+    `What the heck? Who are you?`,
+    `intro_progress`,
+    10
+  );
 }
 
 async function sendSingleBlockMessage(channel, text, blockText, actionId, delay) {
   await timeout(delay || 3000)
-  await app.client.chat.postMessage({
+  let message = await app.client.chat.postMessage({
     token: process.env.SLACK_BOT_TOKEN,
+    channel: channel,
+    "blocks": [
+      {
+        "type": "section",
+        "text": {
+          "type": "mrkdwn",
+          "text": text
+        }
+      },
+      {
+        "type": "actions",
+        "elements": [
+          {
+            "type": "button",
+            "text": {
+              "type": "plain_text",
+              "text": blockText,
+              "emoji": true
+            },
+            "action_id": actionId
+          }
+        ]
+      }
+    ]
+  })
+  return message
+}
+
+async function updateSingleBlockMessage(ts, channel, text, blockText, actionId) {
+  await app.client.chat.update({
+    token: process.env.SLACK_BOT_TOKEN,
+    ts: ts,
     channel: channel,
     "blocks": [
       {
@@ -520,3 +775,4 @@ function timeout(ms) {
 
   console.log("⚡️ Bolt app is running!");
 })();
+
