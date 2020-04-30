@@ -256,7 +256,7 @@ app.action('coc_acknowledge', async ({ ack, body }) => {
   await sendMessage(body.channel.id, `Here are a bunch of other active channels that you may be interested in:`, 10, finalTs)
   await sendMessage(body.channel.id, `<#C0JDWKJVA> <#C0NP503L7> <#C6LHL48G2> <#C0DCUUH7E> <#CA3UH038Q> <#C90686D0T> <#CCW6Q86UF> <#C1C3K2RQV> <#CCW8U2LBC> <#CDLBHGUQN> <#CDJV1CXC2> <#C14D3AQTT> <#CBX54ACPJ> <#CC78UKWAC> <#C8P6DHA3W> <#C010SJJH1PT> <#CDJMS683D> <#CDN99BE9L> <#CSHEL6LP5>`, 10, finalTs)
 
-  let pronouns = getPronouns(body.user.id)
+  let pronouns = await getPronouns(body.user.id)
   if (pronouns.pronouns === "they/them/theirs" || pronouns.pronouns === "she/her/hers") {
     await sendMessage(body.channel.id, `Also, check out <#CFZMXJ3FB>—it’s a channel for women/femme/non-binary people in Hack Club!`, 1000)
   }
@@ -319,7 +319,7 @@ app.event('member_joined_channel', async body => {
     let islandName = await getIslandName(body.event.user)
     console.log(islandId)
     console.log(islandName)
-    await sendEphemeralMessage(islandId, `<@${body.event.user} It looks like you tried to join <#${body.event.channel}>. You can't join any channels yet—I need to finish helping you join the community first.`, body.event.user)
+    await sendEphemeralMessage(islandId, `<@${body.event.user}> It looks like you tried to join <#${body.event.channel}>. You can't join any channels yet—I need to finish helping you join the community first.`, body.event.user)
     await sendEphemeralMessage(body.event.channel, `<@${body.event.user} It looks like you tried to join <#${body.event.channel}>. You can't join any channels yet—I need to finish helping you join the community first. Head back over to <${`https://hackclub.slack.com/archives/${islandId}`}|#${islandName}> to unlock the rest of the community.`, body.event.user)
   }
 });
