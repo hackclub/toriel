@@ -35,13 +35,13 @@ app.event('team_join', async body => {
 
 app.action('intro_progress', async ({ ack, body }) => {
   ack();
-  updateInteractiveMessage(body.message.ts, body.channel.id, `Hi, I'm Clippy! My job is to get you on the Slack. Do you need assistance?`)
+  updateInteractiveMessage(body.message.ts, body.channel.id, `Hi, I'm Clippy! I'm the Hack Club assistant and my job is to get you on the Slack. Do you need assistance?`)
 
   updatePushedButton(body.user.id)
   await sendMessage(body.channel.id, '...', 1000)
   await sendMessage(body.channel.id, '...', 1000)
-  await sendMessage(body.channel.id, `Excellent! I'm happy to assist you in joining Hack Club today.`, 1000)
-  await sendMessage(body.channel.id, `A few quick questions:`)
+  await sendMessage(body.channel.id, `I'll take that as a yes! I'm happy to assist you in joining Hack Club today.`, 1000)
+  await sendMessage(body.channel.id, `Just a few quick questions to get you started.`)
 
   await timeout(3000)
   await app.client.chat.postMessage({
