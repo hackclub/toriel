@@ -315,8 +315,8 @@ app.event('member_joined_channel', async body => {
       channel: body.event.channel,
       user: body.event.user
     })
-    let islandId = getIslandId(body.event.user)
-    let islandName = getIslandName(body.event.user)
+    let islandId = await getIslandId(body.event.user)
+    let islandName = await getIslandName(body.event.user)
     console.log(islandId)
     console.log(islandName)
     await sendEphemeralMessage(islandId, `<@${body.event.user} It looks like you tried to join <#${body.event.channel}>. You can't join any channels yet—I need to finish helping you join the community first.`, body.event.user)
