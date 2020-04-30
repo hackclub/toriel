@@ -316,11 +316,7 @@ app.event('member_joined_channel', async body => {
       user: body.event.user
     })
     let islandId = await getIslandId(body.event.user)
-    let islandName = await getIslandName(body.event.user)
-    console.log(islandId)
-    console.log(islandName)
     await sendEphemeralMessage(islandId, `<@${body.event.user}> It looks like you tried to join <#${body.event.channel}>. You can't join any channels yet—I need to finish helping you join the community first.`, body.event.user)
-    await sendEphemeralMessage(body.event.channel, `<@${body.event.user} It looks like you tried to join <#${body.event.channel}>. You can't join any channels yet—I need to finish helping you join the community first. Head back over to <${`https://hackclub.slack.com/archives/${islandId}`}|#${islandName}> to unlock the rest of the community.`, body.event.user)
   }
 });
 
