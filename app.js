@@ -24,13 +24,6 @@ const app = new App({
 
 /* Add functionality here */
 
-const app = new App({
-  signingSecret: process.env.SLACK_SIGNING_SECRET,
-  token: process.env.SLACK_BOT_TOKEN
-});
-
-/* Add functionality here */
-
 app.command('/restart', async ({ command, ack, say }) => {
   await ack();
   startTutorial(command.user_id, true)
