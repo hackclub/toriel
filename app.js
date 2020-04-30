@@ -304,7 +304,7 @@ app.event('member_joined_channel', async body => {
       token: process.env.SLACK_BOT_TOKEN,
       channel: body.event.channel
     })
-    if (!(members.members.includes('U4QAK9SRW'))) { // user who owns the oauth, in this case @matthew
+    if (!(members.members.includes('U012FPRJEVB'))) { // user who owns the oauth, in this case @Clippy Admin
       await app.client.conversations.join({
         token: process.env.SLACK_OAUTH_TOKEN,
         channel: body.event.channel
@@ -317,6 +317,8 @@ app.event('member_joined_channel', async body => {
     })
     let islandId = getIslandId(body.event.user)
     let islandName = getIslandName(body.event.user)
+    console.log(islandId)
+    console.log(islandName)
     await sendEphemeralMessage(islandId, `<@${body.event.user} It looks like you tried to join <#${body.event.channel}>. You can't join any channels yet—I need to finish helping you join the community first.`, body.event.user)
     await sendEphemeralMessage(body.event.channel, `<@${body.event.user} It looks like you tried to join <#${body.event.channel}>. You can't join any channels yet—I need to finish helping you join the community first. Head back over to <${`https://hackclub.slack.com/archives/${islandId}`}|#${islandName}> to unlock the rest of the community.`, body.event.user)
   }
