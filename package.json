@@ -1,7 +1,7 @@
 {
-  "name": "hackclub-gatekeeper-bot",
+  "name": "clippy",
   "version": "1.0.0",
-  "description": "Hack Club's gatekeeper bot. Welcomes new members to the community and keeps bad people out of the commuinty",
+  "description": "Hack Club's welcomer bot. Welcomes new members to the community and keeps bad people out",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
