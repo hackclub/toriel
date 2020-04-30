@@ -353,7 +353,7 @@ app.event('message', async body => {
 
     if (lastBotMessage.includes('What brings you')) {
       // send it to welcome-committee
-      await sendMessage('C011YTBQ205', 'New user <@' + body.event.user + '> joined! Here\'s why ' + pronoun_1.toLowerCase() + ' joined the Hack Club community:\n\n' + lastUserMessage + '\n\n' + pronoun_1 + ' prefer these pronouns: '+ pronouns +  '\n\nReact to this message to take ownership on reaching out.', 10)
+      await sendMessage('GLFAEL1SL', 'New user <@' + body.event.user + '> joined! Here\'s why ' + pronoun_1.toLowerCase() + ' joined the Hack Club community:\n\n' + lastUserMessage + '\n\n' + pronoun_1 + ' prefer these pronouns: '+ pronouns +  '\n\nReact to this message to take ownership on reaching out.', 10)
 
       await sendMessage(body.event.channel, `Ah, very interesting! Well, let me show you around the community.`)
       await sendMessage(body.event.channel, `You're currently on Slack, the platform our community uses. If you're familiar with Discord, you'll find that Slack feels similar.`)
@@ -500,92 +500,73 @@ async function sendEphemeralMessage(channel, text, user) {
 }
 
 async function startTutorial(user, restart) {
-  const islandName = await generateIslandName().catch(err => console.log(err))
+  const islandName = await generateIslandName()
   const newChannel = await app.client.conversations.create({
     token: process.env.SLACK_BOT_TOKEN,
     name: islandName.channel,
     is_private: true,
     user_ids: process.env.BOT_USER_ID
-  }).catch(err => console.log(err));
-  const channelId = newChannel.channel.id;
+  })
+  const channelId = newChannel.channel.id
+  console.log(`New tutorial channel created: ${channelId}`)
 
-  await app.client.conversations
-    .invite({
-      token: process.env.SLACK_BOT_TOKEN,
-      channel: channelId,
-      users: user
-    })
-    .catch(err => console.log(err.data.errors));
+  await app.client.conversations.invite({
+    token: process.env.SLACK_BOT_TOKEN,
+    channel: channelId,
+    users: user
+  })
+    .catch(err => console.log(err.data.errors))
+  await app.client.conversations.invite({
+    token: process.env.SLACK_BOT_TOKEN,
+    channel: channelId,
+    users: 'U012FPRJEVB'
+  })
+
+  await app.client.conversations.setTopic({
+    token: process.env.SLACK_OAUTH_TOKEN,
+    channel: channelId,
+    topic: `Welcome to Hack Club! :wave: Unlock the community by completing this tutorial.`
+  })
 
   if (restart) {
-    let record = await getUserRecord(user);
-    if (typeof record === "undefined") {
+    let record = await getUserRecord(user)
+    if (typeof record === 'undefined') {
       record = await islandTable.create({
-        Name: user,
-        "Island Channel ID": channelId,
-        "Island Channel Name": islandName.channel,
-        "Has completed tutorial": false
-      });
+        'Name': user,
+        'Island Channel ID': channelId,
+        'Island Channel Name': islandName.channel,
+        'Has completed tutorial': false,
+        'Pushed first button': false
+      })
     }
     await islandTable.update(record.id, {
-      "Island Channel ID": channelId,
-      "Island Channel Name": islandName.channel,
-      "Has completed tutorial": true
-    });
+      'Island Channel ID': channelId,
+      'Island Channel Name': islandName.channel,
+      'Has completed tutorial': true,
+      'Pushed first button': false
+    })
   } else {
     await islandTable.create({
-      Name: user,
-      "Island Channel ID": channelId,
-      "Island Channel Name": islandName.channel,
-      "Has completed tutorial": false
-    });
+      'Name': user,
+      'Island Channel ID': channelId,
+      'Island Channel Name': islandName.channel,
+      'Has completed tutorial': false,
+      'Pushed first button': false
+    })
   }
 
-  await sendSingleBlockMessage(
-    channelId,
-    `Hi, I'm Clippy! I'm the Hack Club assistant and my job is to get you on the Slack. Do you need assistance?`,
-    `What the heck? Who are you?`,
-    `intro_progress`,
-    10
-  );
+  await sendSingleBlockMessage(channelId, `Hi, I'm Clippy! I'm the Hack Club assistant and my job is to get you on the Slack. Do you need assistance?`, `What the heck? Who are you?`, `intro_progress`, 10)
+  await timeout(15000)
+  let pushedButton = await hasPushedButton(user)
+  if (!pushedButton) {
+    await sendMessage(channelId, `(<@${user}> Psst—this is an intro to Hack Club that every new member completes. Unlock the community by completing it. To get started, push the button that says "What the heck? Who are you?")`, 10)
+  }
 }
 
 async function sendSingleBlockMessage(channel, text, blockText, actionId, delay) {
   await timeout(delay || 3000)
-  let message = await app.client.chat.postMessage({
+  await app.client.chat.postMessage({
     token: process.env.SLACK_BOT_TOKEN,
-    channel: channel,
-    "blocks": [
-      {
-        "type": "section",
-        "text": {
-          "type": "mrkdwn",
-          "text": text
-        }
-      },
-      {
-        "type": "actions",
-        "elements": [
-          {
-            "type": "button",
-            "text": {
-              "type": "plain_text",
-              "text": blockText,
-              "emoji": true
-            },
-            "action_id": actionId
-          }
-        ]
-      }
-    ]
-  })
-  return message
-}
-
-async function updateSingleBlockMessage(ts, channel, text, blockText, actionId) {
-  await app.client.chat.update({
-    token: process.env.SLACK_BOT_TOKEN,
-    ts: ts,
     channel: channel,
     "blocks": [
       {
@@ -768,4 +749,3 @@ function timeout(ms) {
 
   console.log("⚡️ Bolt app is running!");
 })();
-
