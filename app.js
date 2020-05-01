@@ -479,7 +479,7 @@ async function startTutorial(user, restart) {
     })
   }
 
-  let firstMessage = await app.client.chat.postMessage({
+  await app.client.chat.postMessage({
     token: process.env.SLACK_BOT_TOKEN,
     channel: channelId,
     blocks: [
@@ -598,9 +598,7 @@ async function updateSingleBlockMessage(ts, channel, text, blockText, actionId) 
 async function updateInteractiveMessage(ts, channel, message) {
   const result = await app.client.chat.update({
     token: process.env.SLACK_BOT_TOKEN,
-    // ts of message to update
     ts: ts,
-    // Channel of message
     channel: channel,
     blocks: [
       {
