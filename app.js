@@ -36,9 +36,21 @@ app.event('team_join', async body => {
   await startTutorial(body.event.user.id)
 });
 
-app.action('intro_progress', async ({ ack, body }) => {
+app.action('intro_progress_1', async ({ ack, body }) => {
   ack();
-  updateInteractiveMessage(body.message.ts, body.channel.id, `Hi, I'm Clippy! My job is to get you on the Slack. Do you need assistance?`)
+  introProgress(body)
+});
+app.action('intro_progress_2', async ({ ack, body }) => {
+  ack();
+  introProgress(body)
+});
+app.action('intro_progress_3', async ({ ack, body }) => {
+  ack();
+  introProgress(body)
+});
+
+async function introProgress(body) {
+  updateInteractiveMessage(body.message.ts, body.channel.id, `Hi, I'm Clippy! My job is to help you join the Hack Club community. Do you need assistance?`)
 
   updatePushedButton(body.user.id)
   await sendMessage(body.channel.id, '...', 1000)
@@ -105,7 +117,7 @@ app.action('intro_progress', async ({ ack, body }) => {
       }
     ]
   })
-});
+}
 
 app.action('she', async ({ ack, body }) => {
   ack();
@@ -406,6 +418,11 @@ async function startTutorial(user, restart) {
     token: process.env.SLACK_BOT_TOKEN,
     channel: channelId,
     users: 'U012FPRJEVB'
+  })
+  await app.client.conversations.invite({
+    token: process.env.SLACK_BOT_TOKEN,
+    channel: channelId,
+    users: 'UH50T81A6' //banker
   })
 
   await app.client.conversations.setTopic({
