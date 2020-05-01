@@ -523,7 +523,7 @@ async function startTutorial(user, restart) {
   await timeout(30000)
   let pushedButton = await hasPushedButton(user)
   if (!pushedButton) {
-    await sendMessage(channelId, `(<@${user}> Psst—every new member completes this quick 1-minute intro to unlock the Hack Club community. Click any of the three buttons above to begin :star2: :money_with_wings: :eye:)`, 10)
+    await sendMessage(channelId, `(<@${user}> Psst—every new member completes this quick intro to unlock the Hack Club community. It only takes 1 minute—I promise—and you get free stuff along the way. Click any of the three buttons above to begin :star2: :money_with_wings: :eye:)`, 10)
   }
 }
 
