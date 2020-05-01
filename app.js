@@ -699,25 +699,6 @@ async function getNextEvent() {
   }
 }
 
-async function sendGP(user, channel, amount) {
-  const completed = await hasCompletedTutorial(user)
-  if (completed) {
-    console.log(`${user} has completed this tutorial before, so I won't give them the gp.`)
-    await sendMessage(channel, `(Looks like you completed this tutorial before, so I won't give you the gp this time)`, 1000)
-  }
-  else {
-    axios.post('https://bankerapi.glitch.me/give', {
-      'token': process.env.BANKER_TOKEN,
-      'send_id': user,
-      'bot_id': process.env.BOT_USER_ID,
-      'gp': amount,
-      'reason': 'Starting you off!'
-    })
-      .then(response => console.log(response))
-      .catch(err => console.log(err))
-  }
-}
-
 async function generateIslandName() {
   const words = friendlyWords.predicates
   const word1 = words[Math.floor(Math.random() * 1455)]
