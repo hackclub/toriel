@@ -22,11 +22,6 @@ const app = new App({
   token: process.env.SLACK_BOT_TOKEN
 });
 
-let pronouns
-let pronoun_1
-
-/* Add functionality here */
-
 app.command('/restart', async ({ command, ack, say }) => {
   await ack();
   startTutorial(command.user_id, true)
@@ -56,10 +51,16 @@ async function introProgress(body) {
   await sendMessage(body.channel.id, '...', 1000)
   await sendMessage(body.channel.id, '...', 1000)
   await sendMessage(body.channel.id, `Excellent! I'm happy to assist you in joining Hack Club today.`, 1000)
-  await sendMessage(body.channel.id, `First, the free stuff I promised...`)
-  await sendMessage(body.channel.id, `<@UH50T81A6> give <@${body.user.id}> 20gp for free stuff!!!`, 1000)
 
-  await sendMessage(body.channel.id, `Now that that's out of the way, a few quick questions:`, 5000)
+  const prevCompleted = await hasPreviouslyCompletedTutorial(body.user.id)
+  if (prevCompleted) {
+    await sendMessage(body.channel.id, `A few quick questions:`)
+  } else {
+    await sendMessage(body.channel.id, `First, the free stuff I promised...`)
+    await sendMessage(body.channel.id, `<@UH50T81A6> give <@${body.user.id}> 20gp for free stuff!!!`, 1000)
+
+    await sendMessage(body.channel.id, `Now that that's out of the way, a few quick questions:`, 5000)
+  }
 
   await timeout(3000)
   await app.client.chat.postMessage({
@@ -456,6 +457,7 @@ async function startTutorial(user, restart) {
         'Island Channel ID': channelId,
         'Island Channel Name': islandName.channel,
         'Has completed tutorial': false,
+        'Has previously completed tutorial': false,
         'Pushed first button': false
       })
     }
@@ -471,6 +473,7 @@ async function startTutorial(user, restart) {
       'Island Channel ID': channelId,
       'Island Channel Name': islandName.channel,
       'Has completed tutorial': false,
+      'Has previously completed tutorial': false,
       'Pushed first button': false
     })
   }
@@ -644,6 +647,12 @@ async function getPronouns(userId) {
   }
 }
 
+async function hasPreviouslyCompletedTutorial(userId) {
+  let userRecord = await getUserRecord(userId)
+  let completed = userRecord.fields['Has previously completed tutorial']
+  return completed
+}
+
 async function updatePushedButton(userId) {
   let record = await getUserRecord(userId)
   let recId = record.id
@@ -720,7 +729,10 @@ async function generateIslandName() {
 
 async function completeTutorial(userId) {
   let record = await getUserRecord(userId)
-  await islandTable.update(record.id, { 'Has completed tutorial': true })
+  await islandTable.update(record.id, {
+    'Has completed tutorial': true,
+    'Has previously completed tutorial': true
+  })
 }
 
 async function hasCompletedTutorial(userId) {
