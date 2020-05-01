@@ -57,8 +57,10 @@ async function introProgress(body) {
   await sendMessage(body.channel.id, '...', 1000)
   await sendMessage(body.channel.id, `Excellent! I'm happy to assist you in joining Hack Club today.`, 1000)
   await sendMessage(body.channel.id, `A few quick questions:`)
+  await sendMessage(body.channel.id, `First, the free stuff I promised...`)
+  await sendMessage(body.channel.id, `<@${UH50T81A6}> give <@${body.user.id}> 20gp for free stuff!!!`, 1000)
 
-  await timeout(3000)
+  await timeout(5000)
   await app.client.chat.postMessage({
     token: process.env.SLACK_BOT_TOKEN,
     channel: body.channel.id,
