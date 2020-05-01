@@ -279,7 +279,7 @@ app.action('coc_acknowledge', async ({ ack, body }) => {
   // add user to default channels
   await inviteUserToChannel(body.user.id, 'C0C78SG9L') //hq
   await inviteUserToChannel(body.user.id, 'C0266FRGV') //lounge
-  await inviteUserToChannel(body.user.id, 'C0M8PUPU6') //ship
+  //await inviteUserToChannel(body.user.id, 'C0M8PUPU6') //ship
   await inviteUserToChannel(body.user.id, 'C0EA9S0A0') //code
 
   await sendEphemeralMessage('C0C78SG9L', hqDesc, body.user.id)
