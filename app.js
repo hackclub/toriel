@@ -455,13 +455,56 @@ async function startTutorial(user, restart) {
     })
   }
 
-  let firstMessage = await sendSingleBlockMessage(channelId, `Hi, I'm Clippy! My job is to get you on the Slack. Do you need assistance?`, `What the heck? Who are you?`, `intro_progress`, 10)
+  let firstMessage = await app.client.chat.postMessage({
+    token: process.env.SLACK_BOT_TOKEN,
+    channel: channelId,
+    blocks: [
+      {
+        "type": "section",
+        "text": {
+          "type": "mrkdwn",
+          "text": `Hi, I'm Clippy! My job is to help you join the Hack Club community. Do you need assistance?`
+        }
+      },
+      {
+        "type": "actions",
+        "elements": [
+          {
+            "type": "button",
+            "text": {
+              "type": "plain_text",
+              "emoji": true,
+              "text": ":star2:What??? What's this?"
+            },
+            "action_id": "intro_progress_1"
+          },
+          {
+            "type": "button",
+            "text": {
+              "type": "plain_text",
+              "emoji": true,
+              "text": ":money_with_wings:Of course I want free stuff!"
+            },
+            "action_id": "intro_progress_2"
+          },
+          {
+            "type": "button",
+            "text": {
+              "type": "plain_text",
+              "emoji": true,
+              "text": ":eye:Wait what?"
+            },
+            "action_id": "intro_progress_3"
+          }
+        ]
+      }
+    ]
+  })
 
   await timeout(30000)
   let pushedButton = await hasPushedButton(user)
   if (!pushedButton) {
     await sendMessage(channelId, `(<@${user}> Psst—every new member completes this quick 1-minute intro to unlock the Hack Club community. Click the button above to begin :star2:)`, 10)
-    await updateSingleBlockMessage(firstMessage.message.ts, channelId, `Hi, I'm Clippy! My job is to get you on the Slack. Do you need assistance?`, `What the heck? Who are you? 🌟`, `intro_progress`)
   }
 }
 
