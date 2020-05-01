@@ -459,7 +459,7 @@ async function startTutorial(user, restart) {
   await timeout(30000)
   let pushedButton = await hasPushedButton(user)
   if (!pushedButton) {
-    await sendMessage(channelId, `(<@${user}> Psst—every new member completes this quick 1-minute intro to unlock the Hack Club community. Hit the button above to begin :star2:)`, 10)
+    await sendMessage(channelId, `(<@${user}> Psst—every new member completes this quick 1-minute intro to unlock the Hack Club community. Click the button above to begin :star2:)`, 10)
     await updateSingleBlockMessage(firstMessage.message.ts, channelId, `Hi, I'm Clippy! My job is to get you on the Slack. Do you need assistance?`, `What the heck? Who are you? 🌟`, `intro_progress`)
   }
 }
