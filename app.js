@@ -58,6 +58,7 @@ async function introProgress(body) {
   } else {
     await sendMessage(body.channel.id, `First, the free stuff I promised...`)
     await sendMessage(body.channel.id, `<@UH50T81A6> give <@${body.user.id}> 20gp for free stuff!!!`, 1000)
+    await setPreviouslyCompletedTutorial(body.user.id)
 
     await sendMessage(body.channel.id, `Now that that's out of the way, a few quick questions:`, 5000)
   }
@@ -652,6 +653,15 @@ async function hasPreviouslyCompletedTutorial(userId) {
   return completed
 }
 
+async function setPreviouslyCompletedTutorial(userId) {
+  let userRecord = await getUserRecord(userId)
+  let recId = userRecord.id
+
+  islandTable.update(recId, {
+    'Has previously completed tutorial': true
+  })
+}
+
 async function updatePushedButton(userId) {
   let record = await getUserRecord(userId)
   let recId = record.id
@@ -729,8 +739,7 @@ async function generateIslandName() {
 async function completeTutorial(userId) {
   let record = await getUserRecord(userId)
   await islandTable.update(record.id, {
-    'Has completed tutorial': true,
-    'Has previously completed tutorial': true
+    'Has completed tutorial': true
   })
 }
 
