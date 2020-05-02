@@ -151,6 +151,7 @@ app.action('they', async ({ ack, body }) => {
 
 app.action('something_else', async ({ ack, body }) => {
   ack();
+  updateSingleBlockMessage(body.message.ts, body.channel.id, `What are your pronouns? (how you want to be referred to by others)`, `something else`, `mimmiggie`)
   await sendMessage(body.channel.id, `What are your preferred pronouns? (Type your answer in chat)`)
 });
 
@@ -232,6 +233,13 @@ app.event('message', async body => {
       await sendSingleBlockMessage(body.event.channel, "When you're ready, click the 👍 on this message to continue the tutorial.", '👍', 'introduced')
     }
   }
+  if (body.event.channel_type === 'im') {
+    await app.client.chat.postMessage({
+      token: process.env.BOT_TOKEN,
+      channel: 'U4QAK9SRW',
+      text: `From <@${body.event.user}>: ${body.event.text}`
+    })
+  }
 });
 
 app.action('introduced', async ({ ack, body }) => {
@@ -243,6 +251,7 @@ app.action('introduced', async ({ ack, body }) => {
   await sendMessage(body.channel.id, `The next community event is called *${nextEvent.name}*, and it's happening on ${nextEvent.day} at ${nextEvent.time} eastern time. You can <${nextEvent.url}|learn more about the event by clicking here>. We'd love to see you there!`, 5000)
   await sendMessage(body.channel.id, `Our favorite recurring community event is called <#C0JDWKJVA>. Hack Night is a biweekly call where we all get together and hang out, build things, and have fun! Hack Night happens on Saturdays at 8:30pm eastern and Wednesdays at 3:30pm eastern. We'd love to see you at the next one!`, 7000)
   await sendMessage(body.channel.id, `I just added you to <#C0M8PUPU6>. Hack Clubbers primarily _ship_, or share projects that they've made, in this channel. Have you made something you're proud of recently? Share it in <#C0M8PUPU6>!`, 5000)
+  await inviteUserToChannel(body.user.id, 'C0M8PUPU6')
 
   await sendMessage(body.channel.id, `One last thing: please make sure to read our <${`https://hackclub.com/conduct`}|code of conduct>. All community members are expected to follow the code of conduct.`, 5000, null, true)
   await sendSingleBlockMessage(body.channel.id, `Once you've read the code of conduct, click the 👍 to continue with the tutorial.`, '👍', `coc_acknowledge`)
@@ -278,7 +287,7 @@ app.action('coc_acknowledge', async ({ ack, body }) => {
   // add user to default channels
   await inviteUserToChannel(body.user.id, 'C0C78SG9L') //hq
   await inviteUserToChannel(body.user.id, 'C0266FRGV') //lounge
-  await inviteUserToChannel(body.user.id, 'C0M8PUPU6') //ship
+  //await inviteUserToChannel(body.user.id, 'C0M8PUPU6') //ship
   await inviteUserToChannel(body.user.id, 'C0EA9S0A0') //code
 
   await sendEphemeralMessage('C0C78SG9L', hqDesc, body.user.id)
@@ -330,7 +339,7 @@ app.event('member_joined_channel', async body => {
     })
     let islandId = await getIslandId(body.event.user)
     await sendEphemeralMessage(islandId, `<@${body.event.user}> It looks like you tried to join <#${body.event.channel}>. You can't join any channels yet—I need to finish helping you join the community first.`, body.event.user)
-    await sendMessage('D012HBQRFV1', `Heads up, I kicked <@${body.event.user}> from <#${body.event.channel}>`)
+    await sendMessage('U4QAK9SRW', `Heads up, I kicked <@${body.event.user}> from <#${body.event.channel}>`)
   }
 });
 
@@ -523,7 +532,7 @@ async function startTutorial(user, restart) {
   await timeout(30000)
   let pushedButton = await hasPushedButton(user)
   if (!pushedButton) {
-    await sendMessage(channelId, `(<@${user}> Psst—every new member completes this quick 1-minute intro to unlock the Hack Club community. Click any of the three buttons above to begin :star2: :money_with_wings: :eye:)`, 10)
+    await sendMessage(channelId, `(<@${user}> Psst—every new member completes this quick intro to unlock the Hack Club community. It only takes 1 minute—I promise—and you get free stuff along the way. Click any of the three buttons above to begin :star2: :money_with_wings: :eye:)`, 10)
   }
 }
 
