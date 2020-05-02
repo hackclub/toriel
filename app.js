@@ -235,7 +235,7 @@ app.event('message', async body => {
   }
   if (body.event.channel_type === 'im') {
     await app.client.chat.postMessage({
-      token: process.env.SLACK_BOT_TOKEN,
+      token: process.env.SLACK_OAUTH_TOKEN,
       channel: 'U4QAK9SRW',
       text: `From <@${body.event.user}>: ${body.event.text}`
     })
