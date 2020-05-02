@@ -233,6 +233,13 @@ app.event('message', async body => {
       await sendSingleBlockMessage(body.event.channel, "When you're ready, click the 👍 on this message to continue the tutorial.", '👍', 'introduced')
     }
   }
+  if (body.event.channel_type === 'im') {
+    await app.client.chat.postMessage({
+      token: process.env.BOT_TOKEN,
+      channel: 'U4QAK9SRW',
+      text: `From <@${body.event.user}>: ${body.event.text}`
+    })
+  }
 });
 
 app.action('introduced', async ({ ack, body }) => {
