@@ -233,9 +233,9 @@ app.event('message', async body => {
       await sendSingleBlockMessage(body.event.channel, "When you're ready, click the 👍 on this message to continue the tutorial.", '👍', 'introduced')
     }
   }
-  if (body.event.channel_type === 'im') {
+  if (body.event.channel_type === 'im' && body.event.user !== 'U012FPRJEVB' && body.event.user !== 'U012H797734') {
     await app.client.chat.postMessage({
-      token: process.env.SLACK_BOT_TOKEN,
+      token: process.env.SLACK_OAUTH_TOKEN,
       channel: 'U4QAK9SRW',
       text: `From <@${body.event.user}>: ${body.event.text}`
     })
