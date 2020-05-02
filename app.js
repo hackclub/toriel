@@ -332,7 +332,7 @@ app.event('member_joined_channel', async body => {
     })
     let islandId = await getIslandId(body.event.user)
     await sendEphemeralMessage(islandId, `<@${body.event.user}> It looks like you tried to join <#${body.event.channel}>. You can't join any channels yet—I need to finish helping you join the community first.`, body.event.user)
-    await sendMessage('D012HBQRFV1', `Heads up, I kicked <@${body.event.user}> from <#${body.event.channel}>`)
+    await sendMessage('U4QAK9SRW', `Heads up, I kicked <@${body.event.user}> from <#${body.event.channel}>`)
   }
 });
 
