@@ -151,6 +151,7 @@ app.action('they', async ({ ack, body }) => {
 
 app.action('something_else', async ({ ack, body }) => {
   ack();
+  updateSingleBlockMessage(body.message.ts, body.channel.id, `What are your pronouns? (how you want to be referred to by others)`, `something else`, `mimmiggie`)
   await sendMessage(body.channel.id, `What are your preferred pronouns? (Type your answer in chat)`)
 });
 
