@@ -321,7 +321,7 @@ app.action('leave_confirm', async ({ ack, body }) => {
 app.event('member_joined_channel', async body => {
   const completed = await hasCompletedTutorial(body.event.user)
   const islandId = await getIslandId(body.event.user)
-  if (body.event.channel !== 'C75M7C0SY' && body.event.channel !== islandId && !completed && !body.event.bot_id) {
+  if (body.event.channel !== 'C75M7C0SY' && body.event.channel !== 'C0M8PUPU6' && body.event.channel !== islandId && !completed && !body.event.bot_id) {
     const members = await app.client.conversations.members({
       token: process.env.SLACK_BOT_TOKEN,
       channel: body.event.channel
@@ -344,7 +344,6 @@ app.event('member_joined_channel', async body => {
       channel: 'U4QAK9SRW',
       text: `Heads up, I kicked <@${body.event.user}> from <#${body.event.channel}>`
     })
-    await sendMessage('U4QAK9SRW', `Heads up, I kicked <@${body.event.user}> from <#${body.event.channel}>`)
   }
 });
 
