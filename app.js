@@ -680,6 +680,7 @@ async function updatePushedButton(userId) {
 
 async function hasPushedButton(userId) {
   let record = await getUserRecord(userId)
+  if (typeof record === 'undefined') return true
   return record.fields['Pushed first button']
 }
 
