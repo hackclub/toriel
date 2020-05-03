@@ -28,7 +28,7 @@ app.command('/restart', async ({ command, ack, say }) => {
 });
 
 app.event('team_join', async body => {
-  await startTutorial(body.event.user.id)
+  if (!body.event.bot_id) await startTutorial(body.event.user.id)
 });
 
 app.action('intro_progress_1', async ({ ack, body }) => {
