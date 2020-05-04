@@ -245,7 +245,7 @@ app.event('message', async body => {
 
 app.action('introduced', async ({ ack, body }) => {
   ack();
-  updateInteractiveMessage(body.message.ts, body.channel.id, 'Awesome! Let\'s keep going.')
+  updateInteractiveMessage(body.message.ts, body.channel.id, '👍')
 
   const nextEvent = await getNextEvent()
   await sendMessage(body.channel.id, `There are awesome things happening in the Hack Club community every day! Check out <#C0266FRGT> to see the latest community event. We do everything from coding challenges to AMAs with famous people (<${`https://www.youtube.com/watch?v=4beK7VYabjs`}|we did one with Elon Musk last week!>) to fun hangouts, and more!`, 3000, null, false)
