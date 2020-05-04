@@ -59,6 +59,7 @@ async function introProgress(body) {
     await sendMessage(body.channel.id, `First, the free stuff I promised...`)
     await sendMessage(body.channel.id, `<@UH50T81A6> give <@${body.user.id}> 20gp for free stuff!!!`, 1000)
     await setPreviouslyCompletedTutorial(body.user.id)
+    await sendMessage(body.channel.id, 'You can check your balance at any time by typing `/balance`.', 1000)
 
     await sendMessage(body.channel.id, `Now that that's out of the way, a few quick questions:`, 5000)
   }
