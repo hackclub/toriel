@@ -59,6 +59,7 @@ async function introProgress(body) {
     await sendMessage(body.channel.id, `First, the free stuff I promised...`)
     await sendMessage(body.channel.id, `<@UH50T81A6> give <@${body.user.id}> 20gp for free stuff!!!`, 1000)
     await setPreviouslyCompletedTutorial(body.user.id)
+    await sendMessage(body.channel.id, 'You can check your balance at any time by typing `/balance`.', 1000)
 
     await sendMessage(body.channel.id, `Now that that's out of the way, a few quick questions:`, 5000)
   }
@@ -223,7 +224,7 @@ app.event('message', async body => {
       await sendMessage(body.event.channel, `Ah, very interesting! Well, let me show you around the community.`)
       await sendMessage(body.event.channel, `You're currently on Slack, the platform our community uses. It's like Discord, but better.`)
       await sendMessage(body.event.channel, `Slack is organized into "channels". We have _hundreds_ of channels in our Slack, covering everything from <#C6LHL48G2> and <#C0EA9S0A0> to <#CBX54ACPJ> and <#C010SJJH1PT>. I'll show you a few of my favorites in a minute.`, 5000)
-      await sendMessage(body.event.channel, `I just invited you to your first channel, <#C75M7C0SY>. Join by clicking on it in your sidebar, and introduce yourself to the community.`, 5000)
+      await sendMessage(body.event.channel, `I just invited you to your first channel, <#C75M7C0SY>. Join by clicking on it in your sidebar, and feel free to introduce yourself to the community. (totally optional, no expectations)`, 5000)
 
       // add user to #welcome
       await inviteUserToChannel(body.event.user, 'C75M7C0SY')
@@ -244,7 +245,8 @@ app.event('message', async body => {
 
 app.action('introduced', async ({ ack, body }) => {
   ack();
-  updateInteractiveMessage(body.message.ts, body.channel.id, 'Awesome! Let\'s keep going.')
+  updateInteractiveMessage(body.message.ts, body.channel.id, '👍')
+  await sendMessage(body.channel.id, `Awesome! Let's keep going.`)
 
   const nextEvent = await getNextEvent()
   await sendMessage(body.channel.id, `There are awesome things happening in the Hack Club community every day! Check out <#C0266FRGT> to see the latest community event. We do everything from coding challenges to AMAs with famous people (<${`https://www.youtube.com/watch?v=4beK7VYabjs`}|we did one with Elon Musk last week!>) to fun hangouts, and more!`, 3000, null, false)
@@ -319,11 +321,11 @@ app.action('leave_confirm', async ({ ack, body }) => {
 })
 
 app.event('member_joined_channel', async body => {
-  const completed = await hasCompletedTutorial(body.event.user)
   const pushedFirstButton = await hasPushedButton(body.event.user)
+  const completed = await hasCompletedTutorial(body.event.user)
   const islandId = await getIslandId(body.event.user)
 
-  if (body.event.channel !== 'C75M7C0SY' && body.event.channel !== 'C0M8PUPU6' && body.event.channel !== islandId && (!pushedFirstButton || !completed) && !body.event.bot_id) {
+  if (body.event.channel !== 'C75M7C0SY' && body.event.channel !== 'C0M8PUPU6' && body.event.channel !== islandId && !completed && !body.event.bot_id) {
     const members = await app.client.conversations.members({
       token: process.env.SLACK_BOT_TOKEN,
       channel: body.event.channel
