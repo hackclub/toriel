@@ -203,7 +203,6 @@ app.event('message', async body => {
     const lastUserMessage = history.messages[0].text
 
     if (lastBotMessage.includes('What are your preferred pronouns')) {
-
       let pronouns = lastUserMessage
       let pronoun1 = lastUserMessage.slice(0, lastUserMessage.search("/"))
       await setPronouns(body.event.user, pronouns, pronoun1.toLowerCase())
@@ -304,7 +303,6 @@ app.action('coc_acknowledge', async ({ ack, body }) => {
   }
 
   await completeTutorial(body.user.id)
-
   // add user to default channels
   await inviteUserToChannel(body.user.id, 'C0C78SG9L') //hq
   await inviteUserToChannel(body.user.id, 'C0266FRGV') //lounge
