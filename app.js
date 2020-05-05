@@ -129,7 +129,7 @@ app.action('she', async ({ ack, body }) => {
   ack();
   await setPronouns(body.user.id, 'she/her/hers', 'she')
   updateSingleBlockMessage(body.message.ts, body.channel.id, `What are your pronouns? (how you want to be referred to by others)`, `she/her/hers`, `mimmiggie`)
-  await sendMessage(body.channel.id, `:heart: Every profile here has a custom field for pronouns—I've set yours up to feature yours! <${`https://slack.com/intl/en-sg/help/articles/204092246-Edit-your-profile`}|Here's a quick tutorial if you'd like to change them.>`)
+  await sendMessage(body.channel.id, `:heart: Every profile here has a custom field for pronouns—I've gone ahead and set your pronouns for you, but <${`https://slack.com/intl/en-sg/help/articles/204092246-Edit-your-profile`}|here's a quick tutorial if you'd like to change them.>`)
   sendHsQuestion(body.channel.id)
 });
 
@@ -137,7 +137,7 @@ app.action('he', async ({ ack, body }) => {
   ack();
   await setPronouns(body.user.id, 'he/him/his', 'he')
   updateSingleBlockMessage(body.message.ts, body.channel.id, `What are your pronouns? (how you want to be referred to by others)`, `he/him/his`, `mimmiggie`)
-  await sendMessage(body.channel.id, `:heart: Every profile here has a custom field for pronouns—I've set yours up to feature yours! <${`https://slack.com/intl/en-sg/help/articles/204092246-Edit-your-profile`}|Here's a quick tutorial if you'd like to change them.>`)
+  await sendMessage(body.channel.id, `:heart: Every profile here has a custom field for pronouns—I've gone ahead and set your pronouns for you, but <${`https://slack.com/intl/en-sg/help/articles/204092246-Edit-your-profile`}|here's a quick tutorial if you'd like to change them.>`)
   sendHsQuestion(body.channel.id)
 });
 
@@ -146,7 +146,7 @@ app.action('they', async ({ ack, body }) => {
   ack();
   await setPronouns(body.user.id, 'they/them/theirs', 'they')
   updateSingleBlockMessage(body.message.ts, body.channel.id, `What are your pronouns? (how you want to be referred to by others)`, `they/them/theirs`, `mimmiggie`)
-  await sendMessage(body.channel.id, `:heart: Every profile here has a custom field for pronouns—I've set yours up to feature yours! <${`https://slack.com/intl/en-sg/help/articles/204092246-Edit-your-profile`}|Here's a quick tutorial if you'd like to change them.>`)
+  await sendMessage(body.channel.id, `:heart: Every profile here has a custom field for pronouns—I've gone ahead and set your pronouns for you, but <${`https://slack.com/intl/en-sg/help/articles/204092246-Edit-your-profile`}|here's a quick tutorial if you'd like to change them.>`)
   sendHsQuestion(body.channel.id)
 });
 
@@ -666,7 +666,7 @@ async function setPronouns(userId, pronouns, pronoun1) {
   })
   await app.client.users.profile.set({
     token: process.env.SLACK_OAUTH_TOKEN,
-    name: 'Pronoun',
+    profile: { 'XfD4V9MG3V': pronouns },
     value: pronouns,
     user: userId
   })
