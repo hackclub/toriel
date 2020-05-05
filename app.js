@@ -667,7 +667,6 @@ async function setPronouns(userId, pronouns, pronoun1) {
   await app.client.users.profile.set({
     token: process.env.SLACK_OAUTH_TOKEN,
     profile: { 'XfD4V9MG3V': pronouns },
-    value: pronouns,
     user: userId
   })
 }
