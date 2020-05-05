@@ -277,23 +277,23 @@ app.action('coc_acknowledge', async ({ ack, body }) => {
   await sendMessage(body.channel.id, `Here are a bunch of other active channels that you may be interested in:`, 10, finalTs)
   await sendMessage(
     body.channel.id,
-    `<#C0NP503L7> - Upcoming events \n
-    <#C6LHL48G2> - Game Development \n
-    <#C0DCUUH7E> - Share your favorite music! \n
-    <#CA3UH038Q> - Talk to others in the community! \n
-    <#C90686D0T> - Talk about the LGBTQ community! \n
-    <#CCW6Q86UF> - :appleinc: \n
-    <#C1C3K2RQV> - Learn about design! \n
-    <#CCW8U2LBC> - :google:\n
-    <#CDLBHGUQN> - Photos of cats!\n
-    <#CDJV1CXC2> - Photos of dogs! \n
-    <#C14D3AQTT> - A public log of Hack Club's sent packages!\n
-    <#CBX54ACPJ> - Share your photos!\n
-    <#CC78UKWAC> - :jenga_sleep:\n
-    <#C8P6DHA3W> - Don't enter if you're hungry!\n
-    <#C010SJJH1PT> - Learn about cooking!\n
-    <#CDJMS683D> - Count to a million, one at a time.\n
-    <#CDN99BE9L> - Talk about Movies & TV!\n
+    `<#C0NP503L7> - Upcoming events
+    <#C6LHL48G2> - Game Development
+    <#C0DCUUH7E> - Share your favorite music!
+    <#CA3UH038Q> - Talk to others in the community!
+    <#C90686D0T> - Talk about the LGBTQ community!
+    <#CCW6Q86UF> - :appleinc:
+    <#C1C3K2RQV> - Learn about design!
+    <#CCW8U2LBC> - :google:
+    <#CDLBHGUQN> - Photos of cats!
+    <#CDJV1CXC2> - Photos of dogs!
+    <#C14D3AQTT> - A public log of Hack Club's sent packages!
+    <#CBX54ACPJ> - Share your photos!
+    <#CC78UKWAC> - :jenga_sleep:
+    <#C8P6DHA3W> - Don't enter if you're hungry!
+    <#C010SJJH1PT> - Learn about cooking!
+    <#CDJMS683D> - Count to a million, one at a time.
+    <#CDN99BE9L> - Talk about Movies & TV!
     <#CSHEL6LP5> - Play AI dungeon!`,
     10,
     finalTs
