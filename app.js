@@ -128,7 +128,7 @@ app.action('she', async ({ ack, body }) => {
   ack();
   await setPronouns(body.user.id, 'she/her/hers', 'she')
   updateSingleBlockMessage(body.message.ts, body.channel.id, `What are your pronouns? (how you want to be referred to by others)`, `she/her/hers`, `mimmiggie`)
-  await setPronounsOnProfile(body.user.id, pronouns)
+  await setPronounsOnProfile(body.user.id, 'she/her/hers')
   await sendMessage(body.channel.id, `:heart: Every profile here has a custom field for pronouns—I've set yours up to feature yours! <${`https://slack.com/intl/en-sg/help/articles/204092246-Edit-your-profile`}|Here's a quick tutorial if you'd like to change them.>`)
   sendHsQuestion(body.channel.id)
 });
@@ -137,7 +137,7 @@ app.action('he', async ({ ack, body }) => {
   ack();
   await setPronouns(body.user.id, 'he/him/his', 'he')
   updateSingleBlockMessage(body.message.ts, body.channel.id, `What are your pronouns? (how you want to be referred to by others)`, `he/him/his`, `mimmiggie`)
-  await setPronounsOnProfile(body.user.id, pronouns)
+  await setPronounsOnProfile(body.user.id, 'he/him/his')
   await sendMessage(body.channel.id, `:heart: Every profile here has a custom field for pronouns—I've set yours up to feature yours! <${`https://slack.com/intl/en-sg/help/articles/204092246-Edit-your-profile`}|Here's a quick tutorial if you'd like to change them.>`)
   sendHsQuestion(body.channel.id)
 });
@@ -147,7 +147,7 @@ app.action('they', async ({ ack, body }) => {
   ack();
   await setPronouns(body.user.id, 'they/them/theirs', 'they')
   updateSingleBlockMessage(body.message.ts, body.channel.id, `What are your pronouns? (how you want to be referred to by others)`, `they/them/theirs`, `mimmiggie`)
-  await setPronounsOnProfile(body.user.id, pronouns)
+  await setPronounsOnProfile(body.user.id, 'they/them/theirs')
   await sendMessage(body.channel.id, `:heart: Every profile here has a custom field for pronouns—I've set yours up to feature yours! <${`https://slack.com/intl/en-sg/help/articles/204092246-Edit-your-profile`}|Here's a quick tutorial if you'd like to change them.>`)
   sendHsQuestion(body.channel.id)
 });
