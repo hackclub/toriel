@@ -275,7 +275,29 @@ app.action('coc_acknowledge', async ({ ack, body }) => {
   await sendMessage(body.channel.id, shipDesc, 10, finalTs)
   await sendMessage(body.channel.id, codeDesc, 10, finalTs)
   await sendMessage(body.channel.id, `Here are a bunch of other active channels that you may be interested in:`, 10, finalTs)
-  await sendMessage(body.channel.id, `<#C0JDWKJVA> <#C0NP503L7> <#C6LHL48G2> <#C0DCUUH7E> <#CA3UH038Q> <#C90686D0T> <#CCW6Q86UF> <#C1C3K2RQV> <#CCW8U2LBC> <#CDLBHGUQN> <#CDJV1CXC2> <#C14D3AQTT> <#CBX54ACPJ> <#CC78UKWAC> <#C8P6DHA3W> <#C010SJJH1PT> <#CDJMS683D> <#CDN99BE9L> <#CSHEL6LP5>`, 10, finalTs)
+  await sendMessage(
+    body.channel.id,
+    `<#C0NP503L7> - Upcoming events \n
+    <#C6LHL48G2> - Game Development \n
+    <#C0DCUUH7E> - Share your favorite music! \n
+    <#CA3UH038Q> - Talk to others in the community! \n
+    <#C90686D0T> - Talk about the LGBTQ community! \n
+    <#CCW6Q86UF> - :appleinc: \n
+    <#C1C3K2RQV> - Learn about design! \n
+    <#CCW8U2LBC> - :google:\n
+    <#CDLBHGUQN> - Photos of cats!\n
+    <#CDJV1CXC2> - Photos of dogs! \n
+    <#C14D3AQTT> - A public log of Hack Club's sent packages!\n
+    <#CBX54ACPJ> - Share your photos!\n
+    <#CC78UKWAC> - :jenga_sleep:\n
+    <#C8P6DHA3W> - Don't enter if you're hungry!\n
+    <#C010SJJH1PT> - Learn about cooking!\n
+    <#CDJMS683D> - Count to a million, one at a time.\n
+    <#CDN99BE9L> - Talk about Movies & TV!\n
+    <#CSHEL6LP5> - Play AI dungeon!`,
+    10,
+    finalTs
+  );
 
   let pronouns = await getPronouns(body.user.id)
   if (pronouns.pronouns === "they/them/theirs" || pronouns.pronouns === "she/her/hers") {
