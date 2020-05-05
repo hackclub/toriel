@@ -542,6 +542,15 @@ async function startTutorial(user, restart) {
   }
 }
 
+async function setPronounsOnProfile(userId, pronouns) {
+   await app.client.users.profile.set({
+        token: process.env.SLACK_OAUTH_TOKEN,
+        name: 'Pronoun',
+        value: pronouns,
+        user: userId
+    })
+}
+
 async function sendSingleBlockMessage(channel, text, blockText, actionId, delay) {
   await timeout(delay || 3000)
   let message = await app.client.chat.postMessage({
@@ -643,6 +652,8 @@ async function setPronouns(userId, pronouns, pronoun1) {
     'Pronouns': pronouns,
     'Pronoun 1': pronoun1
   })
+
+  await setPronounsOnProfile(userId, pronouns)
 }
 
 async function getPronouns(userId) {
