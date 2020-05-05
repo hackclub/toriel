@@ -210,8 +210,8 @@ app.event('message', async body => {
       let pronouns = lastUserMessage
       let pronoun1 = lastUserMessage.slice(0, lastUserMessage.search("/"))
       await setPronouns(body.event.user, pronouns, pronoun1.toLowerCase())
-      await setPronounsOnProfile(body.user.id, pronouns)
-      await sendMessage(body.channel.id, `:heart: Every profile here has a custom field for pronouns—I've set yours up to feature yours! <${`https://slack.com/intl/en-sg/help/articles/204092246-Edit-your-profile`}|Here's a quick tutorial if you'd like to change them.>`)
+      await setPronounsOnProfile(body.event.user, pronouns)
+      await sendMessage(body.event.channel, `:heart: Every profile here has a custom field for pronouns—I've set yours up to feature yours! <${`https://slack.com/intl/en-sg/help/articles/204092246-Edit-your-profile`}|Here's a quick tutorial if you'd like to change them.>`)
       await sendHsQuestion(body.event.channel)
     }
 
