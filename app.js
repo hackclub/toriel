@@ -340,11 +340,20 @@ app.action('leave_confirm', async ({ ack, body }) => {
 })
 
 app.event('member_joined_channel', async body => {
+  // Exempt bot users from auto-kick
+  const result = await app.client.users.info({
+    token: process.env.SLACK_OAUTH_TOKEN,
+    user: body.event.user
+  })
+  if (result.user.is_bot) {
+    return
+  }
+
   const pushedFirstButton = await hasPushedButton(body.event.user)
   const completed = await hasCompletedTutorial(body.event.user)
   const islandId = await getIslandId(body.event.user)
 
-  if (body.event.channel !== 'C75M7C0SY' && body.event.channel !== 'C0M8PUPU6' && body.event.channel !== 'C013AGZKYCS' && body.event.channel !== islandId && !completed && !body.event.bot_id) {
+  if (body.event.channel !== 'C75M7C0SY' && body.event.channel !== 'C0M8PUPU6' && body.event.channel !== 'C013AGZKYCS' && body.event.channel !== islandId && !completed) {
     const members = await app.client.conversations.members({
       token: process.env.SLACK_BOT_TOKEN,
       channel: body.event.channel
