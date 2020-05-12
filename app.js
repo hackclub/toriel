@@ -28,7 +28,8 @@ app.command('/restart', async ({ command, ack, say }) => {
 });
 
 app.event('team_join', async body => {
-  if (!body.event.bot_id) await startTutorial(body.event.user.id)
+  let bot = await isBot(body.event.user.id)
+  if (!bot) await startTutorial(body.event.user.id)
 });
 
 app.action('intro_progress_1', async ({ ack, body }) => {
@@ -344,7 +345,7 @@ app.event('member_joined_channel', async body => {
   const completed = await hasCompletedTutorial(body.event.user)
   const islandId = await getIslandId(body.event.user)
 
-  if (body.event.channel !== 'C75M7C0SY' && body.event.channel !== 'C0M8PUPU6' && body.event.channel !== 'C013AGZKYCS' && body.event.channel !== islandId && !completed && !body.event.bot_id) {
+  if (body.event.channel !== 'C75M7C0SY' && body.event.channel !== 'C0M8PUPU6' && body.event.channel !== 'C013AGZKYCS' && body.event.channel !== islandId && !completed) {
     const members = await app.client.conversations.members({
       token: process.env.SLACK_BOT_TOKEN,
       channel: body.event.channel
@@ -719,6 +720,14 @@ async function getIslandId(userId) {
 async function getIslandName(userId) {
   let record = await getUserRecord(userId)
   return record.fields['Island Channel Name']
+}
+
+async function isBot(userId) {
+  const user = await app.client.users.info({
+    token: process.env.SLACK_OAUTH_TOKEN,
+    user: userId
+  })
+  return user.user.is_bot
 }
 
 async function getNextEvent() {
