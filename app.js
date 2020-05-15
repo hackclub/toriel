@@ -246,10 +246,15 @@ app.action('introduced', async ({ ack, body }) => {
   ack();
   updateInteractiveMessage(body.message.ts, body.channel.id, '👍')
   await sendMessage(body.channel.id, `Awesome! Let's keep going.`)
+  await sendMessage(body.channel.id, `There are awesome things happening in the Hack Club community every day! Check out <#C0266FRGT> to see the latest community event. We do everything from coding challenges to AMAs with famous people (<${`https://www.youtube.com/watch?v=4beK7VYabjs`}|we even did one with Elon Musk!>) to fun hangouts, and more!`, 3000, null, false)
 
   const nextEvent = await getNextEvent()
-  await sendMessage(body.channel.id, `There are awesome things happening in the Hack Club community every day! Check out <#C0266FRGT> to see the latest community event. We do everything from coding challenges to AMAs with famous people (<${`https://www.youtube.com/watch?v=4beK7VYabjs`}|we did one with Elon Musk last week!>) to fun hangouts, and more!`, 3000, null, false)
-  await sendMessage(body.channel.id, `The next community event is called *${nextEvent.name}*, and it's happening on ${nextEvent.day} at ${nextEvent.time} eastern time. You can <${nextEvent.url}|learn more about the event by clicking here>. We'd love to see you there!`, 5000)
+  if (nextEvent !== null) {
+    await sendMessage(body.channel.id, `The next community event is called *${nextEvent.name}*, and it's happening on ${nextEvent.day} at ${nextEvent.time} eastern time. You can <${nextEvent.url}|learn more about the event by clicking here>. We'd love to see you there!`, 5000)
+  }
+  else {
+    await sendMessage(body.channel.id, `There aren't any events coming up, but keep an eye on <#C0266FRGT> and be sure to check <events.hackclub.com|https://events.hackclub.com> soon to learn when we add new events to our calendar.`)
+  }
   await sendMessage(body.channel.id, `Our favorite recurring community event is called <#C0JDWKJVA>. Hack Night is a biweekly call where we all get together and hang out, build things, and have fun! Hack Night happens on Saturdays at 8:30pm eastern and Wednesdays at 3:30pm eastern. We'd love to see you at the next one!`, 7000)
   await sendMessage(body.channel.id, `I just added you to <#C0M8PUPU6>. Hack Clubbers primarily _ship_, or share projects that they've made, in this channel. Have you made something you're proud of recently? Share it in <#C0M8PUPU6>!`, 5000)
   await inviteUserToChannel(body.user.id, 'C0M8PUPU6')
@@ -731,17 +736,22 @@ async function isBot(userId) {
 }
 
 async function getNextEvent() {
-  let record = (await eventsTable.read({
-    view: 'Future Events',
-    maxRecords: 1
-  }))[0]
-  const eventUrl = `https://events.hackclub.com/${slugger.slug(record.fields['Title'])}`
+  try {
+    let record = (await eventsTable.read({
+      view: 'Future Events',
+      maxRecords: 1
+    }))[0]
 
-  return {
-    name: record.fields['Title'],
-    day: record.fields['Date (formatted)'],
-    time: record.fields['Time (formatted)'],
-    url: eventUrl
+    let eventUrl = `https://events.hackclub.com/${slugger.slug(record.fields['Title'])}`
+
+    return {
+      name: record.fields['Title'],
+      day: record.fields['Date (formatted)'],
+      time: record.fields['Time (formatted)'],
+      url: eventUrl
+    }
+  } catch {
+    return null
   }
 }
 
