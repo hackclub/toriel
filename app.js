@@ -253,7 +253,7 @@ app.action('introduced', async ({ ack, body }) => {
     await sendMessage(body.channel.id, `The next community event is called *${nextEvent.name}*, and it's happening on ${nextEvent.day} at ${nextEvent.time} eastern time. You can <${nextEvent.url}|learn more about the event by clicking here>. We'd love to see you there!`, 5000)
   }
   else {
-    await sendMessage(body.channel.id, `There aren't any events coming up, but keep an eye on <#C0266FRGT> and be sure to check <events.hackclub.com|https://events.hackclub.com> soon to learn when we add new events to our calendar.`)
+    await sendMessage(body.channel.id, `There aren't any events coming up in the near future, but keep an eye on <#C0266FRGT> and be sure to check <https://events.hackclub.com|our Events page> to learn when we add new events to our calendar.`)
   }
   await sendMessage(body.channel.id, `Our favorite recurring community event is called <#C0JDWKJVA>. Hack Night is a biweekly call where we all get together and hang out, build things, and have fun! Hack Night happens on Saturdays at 8:30pm eastern and Wednesdays at 3:30pm eastern. We'd love to see you at the next one!`, 7000)
   await sendMessage(body.channel.id, `I just added you to <#C0M8PUPU6>. Hack Clubbers primarily _ship_, or share projects that they've made, in this channel. Have you made something you're proud of recently? Share it in <#C0M8PUPU6>!`, 5000)
