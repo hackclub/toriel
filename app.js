@@ -283,7 +283,8 @@ app.action('coc_acknowledge', async ({ ack, body }) => {
   await sendMessage(body.channel.id, `Here are a bunch of other active channels that you may be interested in:`, 10, finalTs)
   await sendMessage(
     body.channel.id,
-    `<#C0NP503L7> - Upcoming events
+    `<#C013AGZKYCS> – Get to know the community by answering a question every day!
+    <#C0NP503L7> - Upcoming events
     <#C6LHL48G2> - Game Development
     <#C0DCUUH7E> - Share your favorite music!
     <#CA3UH038Q> - Talk to others in the community!
@@ -299,8 +300,7 @@ app.action('coc_acknowledge', async ({ ack, body }) => {
     <#C8P6DHA3W> - Don't enter if you're hungry!
     <#C010SJJH1PT> - Learn about cooking!
     <#CDJMS683D> - Count to a million, one at a time.
-    <#CDN99BE9L> - Talk about Movies & TV!
-    <#CSHEL6LP5> - Play AI dungeon!`,
+    <#CDN99BE9L> - Talk about Movies & TV!`,
     10,
     finalTs
   );
