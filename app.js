@@ -44,6 +44,10 @@ app.action('intro_progress_3', async ({ ack, body }) => {
   ack();
   introProgress(body)
 });
+app.action('intro_progress', async ({ ack, body }) => {
+  ack();
+  introProgress(body)
+});
 
 async function introProgress(body) {
   updateInteractiveMessage(body.message.ts, body.channel.id, `Hi, I'm Clippy! My job is to help you join the Hack Club community. Do you need assistance?`)
