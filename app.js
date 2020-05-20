@@ -264,7 +264,7 @@ app.action('introduced', async ({ ack, body }) => {
   await inviteUserToChannel(body.user.id, 'C0M8PUPU6')
 
   await sendMessage(body.channel.id, `One last thing: please make sure to read our <${`https://hackclub.com/conduct`}|code of conduct>. All community members are expected to follow the code of conduct.`, 5000, null, true)
-  await sendSingleBlockMessage(body.channel.id, `Once you've read the code of conduct, click the 👍 to continue with the tutorial.`, '👍', `coc_acknowledge`)
+  await sendSingleBlockMessage(body.channel.id, `Once you've read the code of conduct, click the 👍 to finish the tutorial.`, '👍', `coc_acknowledge`)
 });
 
 app.action('coc_acknowledge', async ({ ack, body }) => {
