@@ -217,12 +217,16 @@ app.event('message', async body => {
     }
 
     if (lastBotMessage.includes('What brings you')) {
+      if (botHistory[0].latest_reply) {
+        let replies = await app.client.conversations.replies({
+          token: process.env.SLACK_BOT_TOKEN,
+          channel: body.event.channel,
+          ts: botHistory[0].ts
+        })
+        sendToWelcomeCommittee(body.event.user, replies.messages[1].text)
+      }
       // send it to welcome-committee
-      let userPronouns = await getPronouns(body.event.user)
-      let pronouns = userPronouns.pronouns
-      let pronoun1 = userPronouns.pronoun1
-
-      await sendMessage('GLFAEL1SL', 'New user <@' + body.event.user + '> (' + pronouns + ') joined! Here\'s why ' + pronoun1 + ' joined the Hack Club community:\n\n' + lastUserMessage + '\n\nReact to this message to take ownership on reaching out.', 10)
+      sendToWelcomeCommittee(body.event.user, lastUserMessage)
 
       await sendMessage(body.event.channel, `Ah, very interesting! Well, let me show you around the community.`)
       await sendMessage(body.event.channel, `You're currently on Slack, the platform our community uses. It's like Discord, but better.`)
@@ -392,6 +396,14 @@ app.event('member_left_channel', async body => {
     await sendEphemeralMessage(islandId, `<@${body.event.user}> It looks like you tried to leave your tutorial channel. You can't do that just yet—I need to help you complete the tutorial before you can unlock the rest of the community.`, body.event.user)
   }
 });
+
+async function sendToWelcomeCommittee(userId, text) {
+  let userPronouns = await getPronouns(userId)
+  let pronouns = userPronouns.pronouns
+  let pronoun1 = userPronouns.pronoun1
+
+  await sendMessage('GLFAEL1SL', 'New user <@' + userId + '> (' + pronouns + ') joined! Here\'s why ' + pronoun1 + ' joined the Hack Club community:\n\n' + text + '\n\nReact to this message to take ownership on reaching out.', 10)
+}
 
 async function sendHsQuestion(channel) {
   await timeout(3000)
