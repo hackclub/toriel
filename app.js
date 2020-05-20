@@ -225,8 +225,9 @@ app.event('message', async body => {
         })
         sendToWelcomeCommittee(body.event.user, replies.messages[1].text)
       }
-      // send it to welcome-committee
-      sendToWelcomeCommittee(body.event.user, lastUserMessage)
+      else {
+        sendToWelcomeCommittee(body.event.user, lastUserMessage)
+      }
 
       await sendMessage(body.event.channel, `Ah, very interesting! Well, let me show you around the community.`)
       await sendMessage(body.event.channel, `You're currently on Slack, the platform our community uses. It's like Discord, but better.`)
