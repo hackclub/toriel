@@ -242,6 +242,26 @@ app.event('message', async body => {
       await sendSingleBlockMessage(body.event.channel, "When you're ready, click the 👍 on this message to continue the tutorial.", '👍', 'introduced')
     }
   }
+  let completed = await hasCompletedTutorial(body.event.user)
+  if (body.event.channel === 'C75M7C0SY' && !completed) {
+    let ts = body.event.ts.replace('.', '')
+    let welcomeLink = `https://hackclub.slack.com/archives/C75M7C0SY/p${ts}`
+    
+    let welcomeCommitteeSearch = await app.client.search.messages({
+      token: process.env.SLACK_OAUTH_TOKEN,
+      query: `New user <@${body.event.user}>`
+    })
+    let welcomeCommitteeTs = welcomeCommitteeSearch.messages.matches[0].ts
+    let welcomeCommitteeMessage = welcomeCommitteeSearch.message.matches[0].text
+    
+    await sendMessage('GLFAEL1SL', `:fastparrot: <@${body.event.user}> just introduced themself in <#C75M7C0SY>! ${welcomeLink}`, 10, welcomeCommitteeTs)
+    await app.client.chat.update({
+      token: process.env.SLACK_BOT_TOKEN,
+      channel: 'GLFAEL1SL',
+      ts: welcomeCommitteeTs,
+      text: `:fastparrot: ${welcomeCommitteeMessage}`
+    })
+  }
   if (body.event.channel_type === 'im' && body.event.user !== 'U012FPRJEVB' && body.event.user !== 'U012H797734') {
     await app.client.chat.postMessage({
       token: process.env.SLACK_OAUTH_TOKEN,
