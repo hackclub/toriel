@@ -256,7 +256,7 @@ app.event('message', async body => {
       channel: 'GLFAEL1SL'
     })
     console.log(history.messages[0].text)
-    console.log(welcomeCommitteeSearch)
+    //console.log(welcomeCommitteeSearch)
     //let welcomeCommitteeTs = welcomeCommitteeSearch.messages.matches[0].ts
     //let welcomeCommitteeMessage = welcomeCommitteeSearch.message.matches[0].text
     let welcomeCommitteMessage = history.messages.find(text.includes(`New user <@${body.event.user}>`))
