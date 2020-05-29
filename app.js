@@ -251,7 +251,12 @@ app.event('message', async body => {
       token: process.env.SLACK_OAUTH_TOKEN,
       query: `New user <@${body.event.user}>`
     })
-    console.log(welcomeCommitteeSearch)
+    let history = await app.client.conversations.history({
+      token: process.env.SLACK_BOT_TOKEN,
+      channel: 'GLFAEL1SL'
+    })
+    console.log(history)
+    //console.log(welcomeCommitteeSearch)
     let welcomeCommitteeTs = welcomeCommitteeSearch.messages.matches[0].ts
     let welcomeCommitteeMessage = welcomeCommitteeSearch.message.matches[0].text
     
