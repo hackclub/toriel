@@ -247,10 +247,10 @@ app.event('message', async body => {
     let ts = body.event.ts.replace('.', '')
     let welcomeLink = `https://hackclub.slack.com/archives/C75M7C0SY/p${ts}`
     
-    let welcomeCommitteeSearch = await app.client.search.messages({
+    /*let welcomeCommitteeSearch = await app.client.search.messages({
       token: process.env.SLACK_OAUTH_TOKEN,
       query: `New user <@${body.event.user}>`
-    })
+    })*/
     let history = await app.client.conversations.history({
       token: process.env.SLACK_BOT_TOKEN,
       channel: 'GLFAEL1SL'
@@ -258,14 +258,17 @@ app.event('message', async body => {
     console.log(history.messages[0].text)
     console.log(welcomeCommitteeSearch)
     let welcomeCommitteeTs = welcomeCommitteeSearch.messages.matches[0].ts
-    let welcomeCommitteeMessage = welcomeCommitteeSearch.message.matches[0].text
+    //let welcomeCommitteeMessage = welcomeCommitteeSearch.message.matches[0].text
+    let welcomeCommitteMessage = history.messages.find(text.includes(`New user <@${body.event.user}>`))
+    let message = welcomeCommitteeMessage.text
+    let welcomeCommitteeTs = welcomeCommitteMessage.ts
     
     await sendMessage('GLFAEL1SL', `:fastparrot: <@${body.event.user}> just introduced themself in <#C75M7C0SY>! ${welcomeLink}`, 10, welcomeCommitteeTs)
     await app.client.chat.update({
       token: process.env.SLACK_BOT_TOKEN,
       channel: 'GLFAEL1SL',
       ts: welcomeCommitteeTs,
-      text: `:fastparrot: ${welcomeCommitteeMessage}`
+      text: `:fastparrot: ${message}`
     })
   }
   if (body.event.channel_type === 'im' && body.event.user !== 'U012FPRJEVB' && body.event.user !== 'U012H797734') {
