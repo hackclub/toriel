@@ -262,7 +262,7 @@ app.event('message', async body => {
     let welcomeCommitteeMessage = history.messages.find(message => message.text.includes(`New user <@${body.event.user}>`))
     console.log(welcomeCommitteeMessage)
     let message = welcomeCommitteeMessage.text
-    let welcomeCommitteeTs = welcomeCommitteMessage.ts
+    let welcomeCommitteeTs = welcomeCommitteeMessage.ts
     
     await sendMessage('GLFAEL1SL', `:fastparrot: <@${body.event.user}> just introduced themself in <#C75M7C0SY>! ${welcomeLink}`, 10, welcomeCommitteeTs)
     await app.client.chat.update({
