@@ -259,7 +259,7 @@ app.event('message', async body => {
     //console.log(welcomeCommitteeSearch)
     //let welcomeCommitteeTs = welcomeCommitteeSearch.messages.matches[0].ts
     //let welcomeCommitteeMessage = welcomeCommitteeSearch.message.matches[0].text
-    let welcomeCommitteeMessage = history.messages.includes(`New user <@${body.event.user}>`)
+    let welcomeCommitteeMessage = history.messages.find(message => message.text.includes(`New user <@${body.event.user}>`))
     console.log(welcomeCommitteeMessage)
     let message = welcomeCommitteeMessage.text
     let welcomeCommitteeTs = welcomeCommitteMessage.ts
