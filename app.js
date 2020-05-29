@@ -255,11 +255,12 @@ app.event('message', async body => {
       token: process.env.SLACK_BOT_TOKEN,
       channel: 'GLFAEL1SL'
     })
-    console.log(history.messages[0].text)
+    //console.log(history.messages[0].text)
     //console.log(welcomeCommitteeSearch)
     //let welcomeCommitteeTs = welcomeCommitteeSearch.messages.matches[0].ts
     //let welcomeCommitteeMessage = welcomeCommitteeSearch.message.matches[0].text
-    let welcomeCommitteMessage = history.messages.find(text.includes(`New user <@${body.event.user}>`))
+    let welcomeCommitteeMessage = history.messages.find(text.includes(`New user <@${body.event.user}>`))
+    console.log(welcomeCommitteeMessage)
     let message = welcomeCommitteeMessage.text
     let welcomeCommitteeTs = welcomeCommitteMessage.ts
     
