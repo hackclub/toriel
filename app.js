@@ -245,7 +245,8 @@ app.event('message', async body => {
   let completed = await hasCompletedTutorial(body.event.user)
   if (body.event.channel === 'C0143HQ3LNT' && !completed) {
     let ts = body.event.ts.replace('.', '')
-    let welcomeLink = `https://hackclub.slack.com/archives/C75M7C0SY/p${ts}`
+    //let welcomeLink = `https://hackclub.slack.com/archives/C75M7C0SY/p${ts}`
+    let welcomeLink = `https://hackclub.slack.com/archives/C0143HQ3LNT/p${ts}`
     
     /*let welcomeCommitteeSearch = await app.client.search.messages({
       token: process.env.SLACK_OAUTH_TOKEN,
