@@ -243,25 +243,16 @@ app.event('message', async body => {
     }
   }
   let completed = await hasCompletedTutorial(body.event.user)
-  if (body.event.channel === 'C0143HQ3LNT' && !completed) {
+  if (body.event.channel === 'C75M7C0SY' && !completed) {
     let ts = body.event.ts.replace('.', '')
-    //let welcomeLink = `https://hackclub.slack.com/archives/C75M7C0SY/p${ts}`
-    let welcomeLink = `https://hackclub.slack.com/archives/C0143HQ3LNT/p${ts}`
+    let welcomeLink = `https://hackclub.slack.com/archives/C75M7C0SY/p${ts}`
     
-    /*let welcomeCommitteeSearch = await app.client.search.messages({
-      token: process.env.SLACK_OAUTH_TOKEN,
-      query: `New user <@${body.event.user}>`
-    })*/
     let history = await app.client.conversations.history({
       token: process.env.SLACK_BOT_TOKEN,
       channel: 'GLFAEL1SL'
     })
-    //console.log(history.messages[0].text)
-    //console.log(welcomeCommitteeSearch)
-    //let welcomeCommitteeTs = welcomeCommitteeSearch.messages.matches[0].ts
-    //let welcomeCommitteeMessage = welcomeCommitteeSearch.message.matches[0].text
+    
     let welcomeCommitteeMessage = history.messages.find(message => message.text.includes(`New user <@${body.event.user}>`))
-    console.log(welcomeCommitteeMessage)
     let message = welcomeCommitteeMessage.text
     let welcomeCommitteeTs = welcomeCommitteeMessage.ts
     
