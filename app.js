@@ -243,7 +243,7 @@ app.event('message', async body => {
     }
   }
   let completed = await hasCompletedTutorial(body.event.user)
-  if (body.event.channel === 'C75M7C0SY' && !body.event.thread_ts && !completed) {
+  if (body.event.channel === 'C75M7C0SY' && !body.event.thread_ts && body.event.subtype !== 'channel_join' && !completed) {
     console.log(body.event.user)
     let ts = body.event.ts.replace('.', '')
     let welcomeLink = `https://hackclub.slack.com/archives/C75M7C0SY/p${ts}`
