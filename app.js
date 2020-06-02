@@ -821,7 +821,7 @@ async function completeTutorial(userId) {
 async function hasCompletedTutorial(userId) {
   let record = await getUserRecord(userId)
   if (typeof record === 'undefined') return true
-  return record.fields['Has completed tutorial']
+  return (record.fields['Has completed tutorial'] || record.fields['Club leader'])
 }
 
 async function getUserRecord(userId) {
