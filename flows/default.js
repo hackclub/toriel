@@ -7,7 +7,7 @@ const { sendEphemeralMessage, getUserRecord, getIslandId,
   messageIsPartOfTutorial, inviteUserToChannel, getIslandName,
   getNextEvent, completeTutorial, timeout,
   updatePushedButton, setPreviouslyCompletedTutorial, hasPreviouslyCompletedTutorial,
-  generateIslandName } = require('../utils')
+  generateIslandName, islandTable } = require('../utils')
 
 async function defaultFilter(e) {
   //placeholder validation
@@ -16,103 +16,101 @@ async function defaultFilter(e) {
   return e.text === ''
 }
 
-const islandTable = new AirtablePlus({
-  apiKey: process.env.AIRTABLE_API_KEY,
-  baseID: 'appYGt7P3MtotTotg',
-  tableName: 'Tutorial Island'
-})
+async function runInFlow(opts, func) {
+  if (await defaultFilter(opts.command)) {
+    return await func(opts)
+  }
+}
 
 const loadFlow = (app) => {
-  app.command('/restart', async ({ command, ack, say }) => {
+  app.command('/restart', e => runInFlow(e, async ({ command, ack, say }) => {
     //console.log(command)
     let f = await defaultFilter(command)
     if (f) {
       await ack();
-      console.log('hiii')
       startTutorial(command.user_id, true)
     }
-  });
+  }));
 
-  app.event('team_join', async body => {
+  app.event('team_join', e => runInFlow(e, async body => {
     if (defaultFilter) {
       let bot = await isBot(app, body.event.user.id)
       if (!bot) await startTutorial(body.event.user.id)
     }
-  });
+  }));
 
-  app.action('intro_progress_1', async ({ ack, body }) => {
+  app.action('intro_progress_1', e => runInFlow(e, async ({ ack, body }) => {
     ack();
     introProgress(body)
-  });
-  app.action('intro_progress_2', async ({ ack, body }) => {
+  }));
+  app.action('intro_progress_2', e => runInFlow(e, async ({ ack, body }) => {
     ack();
     introProgress(body)
-  });
-  app.action('intro_progress_3', async ({ ack, body }) => {
+  }));
+  app.action('intro_progress_3', e => runInFlow(e, async ({ ack, body }) => {
     ack();
     introProgress(body)
-  });
-  app.action('intro_progress', async ({ ack, body }) => {
+  }));
+  app.action('intro_progress', e => runInFlow(e, async ({ ack, body }) => {
     ack();
     introProgress(body)
-  });
+  }));
 
-  app.action('she', async ({ ack, body }) => {
+  app.action('she', e => runInFlow(e, async ({ ack, body }) => {
     ack();
     await setPronouns(app, body.user.id, 'she/her/hers', 'she')
     updateSingleBlockMessage(app, body.message.ts, body.channel.id, `What are your pronouns? (how you want to be referred to by others)`, `she/her/hers`, `mimmiggie`)
     await sendMessage(app, body.channel.id, `:heart: Every profile here has a custom field for pronouns—I've gone ahead and set your pronouns for you, but <${`https://slack.com/intl/en-sg/help/articles/204092246-Edit-your-profile`}|here's a quick tutorial if you'd like to change them.>`)
     sendHsQuestion(body.channel.id)
-  });
+  }));
 
-  app.action('he', async ({ ack, body }) => {
+  app.action('he', e => runInFlow(e, async ({ ack, body }) => {
     ack();
     await setPronouns(app, body.user.id, 'he/him/his', 'he')
     updateSingleBlockMessage(app, body.message.ts, body.channel.id, `What are your pronouns? (how you want to be referred to by others)`, `he/him/his`, `mimmiggie`)
     await sendMessage(app, body.channel.id, `:heart: Every profile here has a custom field for pronouns—I've gone ahead and set your pronouns for you, but <${`https://slack.com/intl/en-sg/help/articles/204092246-Edit-your-profile`}|here's a quick tutorial if you'd like to change them.>`)
     sendHsQuestion(body.channel.id)
-  });
+  }));
 
-
-  app.action('they', async ({ ack, body }) => {
+  app.action('they', e => runInFlow(e, async ({ ack, body }) => {
     ack();
     await setPronouns(app, body.user.id, 'they/them/theirs', 'they')
     updateSingleBlockMessage(app, body.message.ts, body.channel.id, `What are your pronouns? (how you want to be referred to by others)`, `they/them/theirs`, `mimmiggie`)
     await sendMessage(app, body.channel.id, `:heart: Every profile here has a custom field for pronouns—I've gone ahead and set your pronouns for you, but <${`https://slack.com/intl/en-sg/help/articles/204092246-Edit-your-profile`}|here's a quick tutorial if you'd like to change them.>`)
     sendHsQuestion(body.channel.id)
-  });
+  }));
 
-  app.action('something_else', async ({ ack, body }) => {
+  app.action('something_else', e => runInFlow(e, async ({ ack, body }) => {
     ack();
     updateSingleBlockMessage(app, body.message.ts, body.channel.id, `What are your pronouns? (how you want to be referred to by others)`, `something else`, `mimmiggie`)
     await sendMessage(app, body.channel.id, `What are your preferred pronouns? (Type your answer in chat)`)
-  });
+  }));
 
-  app.action('hs_yes', async ({ ack, body }) => {
+  app.action('hs_yes', e => runInFlow(e, async ({ ack, body }) => {
     ack();
     updateSingleBlockMessage(app, body.message.ts, body.channel.id, `Are you currently a high school student? (it's OK if you're not)`, `Yes`, `mimmiggie`)
     await sendMessage(app, body.channel.id, 'Hack Club is a community of high schoolers, so you\'ll fit right in!')
     await sendMessage(app, body.channel.id, `What brings you to the Hack Club community? (Type your answer in the chat)`)
-  });
+  }));
 
-  app.action('hs_no', async ({ ack, body }) => {
+  app.action('hs_no', e => runInFlow(e, async ({ ack, body }) => {
     ack();
     updateSingleBlockMessage(app, body.message.ts, body.channel.id, `Are you currently a high school student? (it's OK if you're not)`, `No`, `mimmiggie`)
     await sendMessage(app, body.channel.id, 'Just a heads-up: Hack Club is a community of high schoolers, not a community of professional developers. You will likely still find a home here if you are in college, but if you\'re older than that, you may find yourself lost here.')
     await sendSingleBlockMessage(app, body.channel.id, 'If you understand this and still want to continue on, click the 👍 below.', '👍', 'hs_acknowledge')
-  });
+  }));
 
-  app.action('hs_acknowledge', async ({ ack, body }) => {
+  app.action('hs_acknowledge', e => runInFlow(e, async ({ ack, body }) => {
     ack();
     await updateInteractiveMessage(app, body.message.ts, body.channel.id, '👍')
     await sendMessage(app, body.channel.id, `What brings you to the Hack Club community? (Type your answer in the chat)`)
-  });
+  }));
 
-  app.action('mimmiggie', async ({ ack, body }) => {
+  app.action('mimmiggie', e => runInFlow(e, async ({ ack, body }) => {
     ack();
-  });
+  }));
 
-  app.event('message', async body => {
+  app.event('message', e => runInFlow(e, async body => {
     if (body.message.subtype === 'channel_join' &&
       body.message.text === `<@${body.message.user}> has joined the channel`) {
       await app.client.chat.delete({
@@ -199,9 +197,9 @@ const loadFlow = (app) => {
         text: `From <@${body.event.user}>: ${body.event.text}`
       })
     }
-  });
+  }));
 
-  app.action('introduced', async ({ ack, body }) => {
+  app.action('introduced', e => runInFlow(e, async ({ ack, body }) => {
     ack();
     updateInteractiveMessage(app, body.message.ts, body.channel.id, '👍')
     await sendMessage(app, body.channel.id, `Awesome! Let's keep going.`)
@@ -220,9 +218,9 @@ const loadFlow = (app) => {
 
     await sendMessage(app, body.channel.id, `One last thing: please make sure to read our <${`https://hackclub.com/conduct`}|code of conduct>. All community members are expected to follow the code of conduct.`, 5000, null, true)
     await sendSingleBlockMessage(app, body.channel.id, `Once you've read the code of conduct, click the 👍 to finish the tutorial.`, '👍', `coc_acknowledge`)
-  });
+  }));
 
-  app.action('coc_acknowledge', async ({ ack, body }) => {
+  app.action('coc_acknowledge', e => runInFlow(e, async ({ ack, body }) => {
     ack();
     await updateInteractiveMessage(app, body.message.ts, body.channel.id, '👍')
     await sendMessage(app, body.channel.id, `That's all from me! I hope I've been able to help you get acquainted with the Hack Club community.`)
@@ -287,15 +285,15 @@ const loadFlow = (app) => {
     await sendMessage(app, body.channel.id, `Toodles! :wave:`)
     await timeout(3000)
     await sendSingleBlockMessage(app, body.channel.id, `(Btw, if you want to leave + archive this channel, click here)`, 'Leave channel', 'leave_channel')
-  })
+  }));
 
   // botInstance.action('leave_channel', replyWith() )
-  app.action('leave_channel', async ({ ack, body }) => {
+  app.action('leave_channel', e => runInFlow(e, async ({ ack, body }) => {
     ack();
     await updateInteractiveMessage(app, body.message.ts, body.channel.id, `(Btw, if you want to leave + archive this channel, click here)`)
     await sendSingleBlockMessage(app, body.channel.id, `Are you sure? You won't be able to come back to this channel.`, `Yes, I'm sure`, 'leave_confirm', 10)
-  })
-  app.action('leave_confirm', async ({ ack, body }) => {
+  }));
+  app.action('leave_confirm', e => runInFlow(e, async ({ ack, body }) => {
     ack();
     await updateInteractiveMessage(app, body.message.ts, body.channel.id, `Okay! Bye :wave:`)
 
@@ -303,9 +301,9 @@ const loadFlow = (app) => {
       token: process.env.SLACK_OAUTH_TOKEN,
       channel: body.channel.id
     })
-  })
+  }));
 
-  app.event('member_joined_channel', async body => {
+  app.event('member_joined_channel', e => runInFlow(e, async body => {
     const pushedFirstButton = await hasPushedButton(body.event.user)
     const completed = await hasCompletedTutorial(body.event.user)
     const islandId = await getIslandId(body.event.user)
@@ -334,9 +332,9 @@ const loadFlow = (app) => {
         text: `Heads up, I kicked <@${body.event.user}> from <#${body.event.channel}>`
       })
     }
-  });
+  }));
 
-  app.event('member_left_channel', async body => {
+  app.event('member_left_channel', e => runInFlow(e, async body => {
     const completed = await hasCompletedTutorial(body.event.user)
     const islandId = await getIslandId(body.event.user)
     if (body.event.channel === islandId && !completed) {
@@ -347,7 +345,7 @@ const loadFlow = (app) => {
       })
       await sendEphemeralMessage(app, islandId, `<@${body.event.user}> It looks like you tried to leave your tutorial channel. You can't do that just yet—I need to help you complete the tutorial before you can unlock the rest of the community.`, body.event.user)
     }
-  });
+  }));
 
   async function introProgress(body) {
     updateInteractiveMessage(app, body.message.ts, body.channel.id, `Hi, I'm Clippy! My job is to help you join the Hack Club community. Do you need assistance?`)
