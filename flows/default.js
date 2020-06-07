@@ -14,7 +14,6 @@ async function defaultFilter(e) {
   //placeholder validation
   const userID = e.body.user_id || (e.body.event ? e.body.event.user : e.body.user.id)
   console.log(userID)
-  console.log(e)
   console.log(e.body)
   //return userID === 'U0120F9NAGK'
   //console.log(e.body)
