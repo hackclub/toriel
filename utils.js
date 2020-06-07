@@ -201,14 +201,14 @@ const getIslandName = async userId => {
 }
 exports.getIslandName = getIslandName
 
-const hasPushedButton = async (userId) => {
+const hasPushedButton = async userId => {
 	let record = await getUserRecord(userId)
 	if (typeof record === 'undefined') return true
 	return record.fields['Pushed first button']
 }
 exports.hasPushedButton = hasPushedButton
 
-const hasCompletedTutorial = async (userId) => {
+const hasCompletedTutorial = async userId => {
 	let record = await getUserRecord(userId)
 	if (typeof record === 'undefined') return true
 	return (record.fields['Has completed tutorial'] || record.fields['Club leader'])
@@ -224,7 +224,7 @@ const isBot = async (app, userId) => {
 }
 exports.isBot = isBot
 
-const getUserRecord = async (userId) => {
+const getUserRecord = async userId => {
 	try {
 		let record = (await islandTable.read({
 			filterByFormula: `{Name} = '${userId}'`,
