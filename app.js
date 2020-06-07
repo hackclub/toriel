@@ -1,7 +1,8 @@
 const { App } = require("@slack/bolt")
 const AirtablePlus = require('airtable-plus')
 
-const { hasPushedButton, hasCompletedTutorial, getIslandId, sendEphemeralMessage } = require('./utils')
+const { hasPushedButton, hasCompletedTutorial, getIslandId,
+  sendEphemeralMessage, updateInteractiveMessage, sendSingleBlockMessage } = require('./utils')
 
 const app = new App({
   signingSecret: process.env.SLACK_SIGNING_SECRET,
@@ -58,7 +59,38 @@ app.event('member_left_channel', async body => {
   }
 });
 
+app.event('message', async body => {
+  if (body.message.subtype === 'channel_join' &&
+    body.message.text === `<@${body.message.user}> has joined the channel`) {
+    await app.client.chat.delete({
+      token: process.env.SLACK_OAUTH_TOKEN,
+      channel: body.message.channel,
+      ts: body.message.event_ts
+    })
+  }
+})
+
+app.action('mimmiggie', async ({ ack, body }) => {
+  ack();
+});
+
+// botInstance.action('leave_channel', replyWith() )
+app.action('leave_channel', async ({ ack, body }) => {
+  ack();
+  await updateInteractiveMessage(app, body.message.ts, body.channel.id, `(Btw, if you want to leave + archive this channel, click here)`)
+  await sendSingleBlockMessage(app, body.channel.id, `Are you sure? You won't be able to come back to this channel.`, `Yes, I'm sure`, 'leave_confirm', 10)
+});
+app.action('leave_confirm', async ({ ack, body }) => {
+  ack();
+  await updateInteractiveMessage(app, body.message.ts, body.channel.id, `Okay! Bye :wave:`)
+
+  await app.client.conversations.archive({
+    token: process.env.SLACK_OAUTH_TOKEN,
+    channel: body.channel.id
+  })
+});
+
 (async () => {
-  await app.start(process.env.PORT || 3000)
-  console.log("⚡️ Bolt app is running!")
+  await app.start(process.env.PORT || 3000);
+  console.log("⚡️ Bolt app is running!");
 })();
