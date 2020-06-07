@@ -55,7 +55,7 @@ app.event('member_left_channel', async body => {
       channel: body.event.channel,
       user: body.event.user
     })
-    await sendEphemeralMessage(islandId, `<@${body.event.user}> It looks like you tried to leave your tutorial channel. You can't do that just yet—I need to help you complete the tutorial before you can unlock the rest of the community.`, body.event.user)
+    await sendEphemeralMessage(app, islandId, `<@${body.event.user}> It looks like you tried to leave your tutorial channel. You can't do that just yet—I need to help you complete the tutorial before you can unlock the rest of the community.`, body.event.user)
   }
 });
 
