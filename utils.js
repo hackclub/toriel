@@ -13,7 +13,7 @@ const sendMessage = async (app, channel, text, delay, ts, unfurl) => {
 		channel: channel,
 		text: text,
 		thread_ts: null || ts,
-		unfurl_links: unfurl ? unfurl : false
+		unfurl_links: unfurl || false
 	})
 	return msg
 }
