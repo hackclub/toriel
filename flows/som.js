@@ -316,14 +316,14 @@ const loadFlow = app => {
 				}
 
 				await sendMessage(app, body.event.channel, `Very interesting! We're super excited to have you here.`)
-				await sendMessage(app, body.event.channel, `Summer of Making is all about making things and sharing your work. I just invited you to #wip and #ship to help you get started.`)
-				//inviteUserToChannel(app, body.event.user, '#ship')
-				//inviteUserToChannel(app, body.event.user, '#wip')
+				await sendMessage(app, body.event.channel, `Summer of Making is all about making things and sharing your work. I just invited you to <#CCU43K0PK> and <#C0M8PUPU6> to help you get started.`)
+				inviteUserToChannel(app, body.event.user, 'CCU43K0PK')
+				inviteUserToChannel(app, body.event.user, 'C0M8PUPU6')
 				await sendMessage(app, body.event.channel, `WIP stands for "work in progress"—if you share your work-in-progress projects in here, you'll get points!`)
 				await sendMessage(app, body.event.channel, `<#C0M8PUPU6>ping a project means sharing or launching a project. #ship is where people share their completed projects.`)
 				await sendMessage(app, body.event.channel, `But the Summer of Making isn't all there is to Hack Club. We have _hundreds_ of channels in our community, covering everything from <#C6LHL48G2> and <#C0EA9S0A0> to <#CBX54ACPJ> and <#C010SJJH1PT>. I'll show you a few of my favorites in a minute.`)
-				await sendMessage(app, body.event.channel, `Before you go, though—I just invited you to #welcome. I highly recommend introducing yourself to the community!`)
-				//inviteUserToChannel(app, body.event.user, '#welcome')
+				await sendMessage(app, body.event.channel, `Before you go, though—I just invited you to <#C75M7C0SY>. I highly recommend introducing yourself to the community!`)
+				inviteUserToChannel(app, body.event.user, 'C75M7C0SY')
 				await sendMessage(app, body.event.channel, `One last thing: please make sure to read our <${`https://hackclub.com/conduct`}|code of conduct>. All community members are expected to follow the code of conduct.`, 5000, null, true)
 				await sendSingleBlockMessage(app, body.event.channel, `Once you've read the code of conduct, click the 👍 to finish the tutorial.`, '👍', `coc_acknowledge`)
 			}
