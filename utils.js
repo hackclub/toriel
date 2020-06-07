@@ -8,11 +8,14 @@ const islandTable = new AirtablePlus({
 	baseID: 'appYGt7P3MtotTotg',
 	tableName: 'Tutorial Island'
 })
+exports.islandTable = islandTable
+
 const eventsTable = new AirtablePlus({
 	apiKey: process.env.AIRTABLE_API_KEY,
 	baseID: 'appezi7TOQFt8vTfa',
 	tableName: 'Events'
 })
+exports.eventsTable = eventsTable
 
 const sendMessage = async (app, channel, text, delay, ts, unfurl) => {
 	await timeout(delay || 3000)
@@ -43,6 +46,26 @@ const getIslandId = async (userId) => {
 	return record.fields['Island Channel ID']
 }
 exports.getIslandId = getIslandId
+
+const getLatestMessages = async (app, channelId) => {
+	const history = await app.client.conversations.history({
+		token: process.env.SLACK_BOT_TOKEN,
+		channel: channelId
+	})
+	const botHistory = history.messages.filter(
+		message => message.user === process.env.BOT_USER_ID
+	)
+	const lastBotMessage = botHistory[0].text
+	const lastUserMessage = history.messages[0].text
+
+	return {
+		lastBotMessage: lastBotMessage,
+		lastUserMessage: lastUserMessage,
+		latestReply: botHistory[0].latest_reply,
+		latestTs: botHistory[0].ts
+	}
+}
+exports.getLatestMessages = getLatestMessages
 
 const sendSingleBlockMessage = async (app, channel, text, blockText, actionId, delay) => {
 	await timeout(delay || 3000)

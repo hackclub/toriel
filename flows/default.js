@@ -8,12 +8,12 @@ const { sendEphemeralMessage, getUserRecord, getIslandId,
   messageIsPartOfTutorial, inviteUserToChannel, getIslandName,
   getNextEvent, completeTutorial, timeout,
   updatePushedButton, setPreviouslyCompletedTutorial, hasPreviouslyCompletedTutorial,
-  generateIslandName, islandTable } = require('../utils')
+  generateIslandName, islandTable, getLatestMessages } = require('../utils')
 
 async function defaultFilter(e) {
   //placeholder validation
   const userID = e.body.user_id || (e.body.event ? e.body.event.user : e.body.user.id)
-  console.log(userID)
+  //console.log(userID)
   //console.log(e.body)
   //return userID === 'U0120F9NAGK'
   //console.log(e.body)
@@ -23,8 +23,8 @@ async function defaultFilter(e) {
   }
   let data = await axios('https://api2.hackclub.com/v0.1/Tutorial%20Island/Tutorial%20Island?select=' + JSON.stringify(options)).then(r => r.data)
 
-  const shouldContinue = data[0] != null
-  console.log('Does event pass the default filter?', shouldContinue)
+  const shouldContinue = data[0] != null || e.body.text === ''
+  //console.log('Does event pass the default filter?', shouldContinue)
   return shouldContinue
 }
 
@@ -38,6 +38,7 @@ const loadFlow = (app) => {
   app.command('/restart', e => runInFlow(e, async ({ command, ack, say }) => {
     //console.log(command)
     await ack();
+    console.log('default')
     startTutorial(command.user_id, true)
   }));
 
@@ -116,32 +117,13 @@ const loadFlow = (app) => {
     await sendMessage(app, body.channel.id, `What brings you to the Hack Club community? (Type your answer in the chat)`)
   }));
 
-  app.action('mimmiggie', e => runInFlow(e, async ({ ack, body }) => {
-    ack();
-  }));
-
   app.event('message', e => runInFlow(e, async body => {
-    if (body.message.subtype === 'channel_join' &&
-      body.message.text === `<@${body.message.user}> has joined the channel`) {
-      await app.client.chat.delete({
-        token: process.env.SLACK_OAUTH_TOKEN,
-        channel: body.message.channel,
-        ts: body.message.event_ts
-      })
-    }
-
     const correctChannel = await getIslandId(body.event.user)
 
     if (messageIsPartOfTutorial(body, correctChannel)) {
-      const history = await app.client.conversations.history({
-        token: process.env.SLACK_BOT_TOKEN,
-        channel: body.event.channel
-      })
-      const botHistory = history.messages.filter(
-        message => message.user === process.env.BOT_USER_ID
-      )
-      const lastBotMessage = botHistory[0].text
-      const lastUserMessage = history.messages[0].text
+      const latestMessages = await getLatestMessages(app, body.event.channel)
+      const lastBotMessage = latestMessages.lastBotMessage
+      const lastUserMessage = latestMessages.lastUserMessage
 
       if (lastBotMessage.includes('What are your preferred pronouns')) {
         let pronouns = lastUserMessage
@@ -152,11 +134,11 @@ const loadFlow = (app) => {
       }
 
       if (lastBotMessage.includes('What brings you')) {
-        if (botHistory[0].latest_reply) {
+        if (latestMessages.latestReply) {
           let replies = await app.client.conversations.replies({
             token: process.env.SLACK_BOT_TOKEN,
             channel: body.event.channel,
-            ts: botHistory[0].ts
+            ts: latestMessages.latestTs
           })
           sendToWelcomeCommittee(body.event.user, replies.messages[1].text)
         }
@@ -295,22 +277,6 @@ const loadFlow = (app) => {
     await sendMessage(app, body.channel.id, `Toodles! :wave:`)
     await timeout(3000)
     await sendSingleBlockMessage(app, body.channel.id, `(Btw, if you want to leave + archive this channel, click here)`, 'Leave channel', 'leave_channel')
-  }));
-
-  // botInstance.action('leave_channel', replyWith() )
-  app.action('leave_channel', e => runInFlow(e, async ({ ack, body }) => {
-    ack();
-    await updateInteractiveMessage(app, body.message.ts, body.channel.id, `(Btw, if you want to leave + archive this channel, click here)`)
-    await sendSingleBlockMessage(app, body.channel.id, `Are you sure? You won't be able to come back to this channel.`, `Yes, I'm sure`, 'leave_confirm', 10)
-  }));
-  app.action('leave_confirm', e => runInFlow(e, async ({ ack, body }) => {
-    ack();
-    await updateInteractiveMessage(app, body.message.ts, body.channel.id, `Okay! Bye :wave:`)
-
-    await app.client.conversations.archive({
-      token: process.env.SLACK_OAUTH_TOKEN,
-      channel: body.channel.id
-    })
   }));
 
   app.event('member_joined_channel', e => runInFlow(e, async body => {
