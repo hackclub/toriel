@@ -1,9 +1,17 @@
 const AirtablePlus = require('airtable-plus')
+const friendlyWords = require('friendly-words')
+const GithubSlugger = require('github-slugger')
+const slugger = new GithubSlugger()
 
 const islandTable = new AirtablePlus({
 	apiKey: process.env.AIRTABLE_API_KEY,
 	baseID: 'appYGt7P3MtotTotg',
 	tableName: 'Tutorial Island'
+})
+const eventsTable = new AirtablePlus({
+	apiKey: process.env.AIRTABLE_API_KEY,
+	baseID: 'appezi7TOQFt8vTfa',
+	tableName: 'Events'
 })
 
 const sendMessage = async (app, channel, text, delay, ts, unfurl) => {
@@ -36,7 +44,7 @@ const getIslandId = async (userId) => {
 }
 exports.getIslandId = getIslandId
 
-const sendSingleBlockMessage = async (channel, text, blockText, actionId, delay) => {
+const sendSingleBlockMessage = async (app, channel, text, blockText, actionId, delay) => {
 	await timeout(delay || 3000)
 	let message = await app.client.chat.postMessage({
 		token: process.env.SLACK_BOT_TOKEN,
@@ -69,7 +77,7 @@ const sendSingleBlockMessage = async (channel, text, blockText, actionId, delay)
 }
 exports.sendSingleBlockMessage = sendSingleBlockMessage
 
-const updateSingleBlockMessage = async (ts, channel, text, blockText, actionId) => {
+const updateSingleBlockMessage = async (app, ts, channel, text, blockText, actionId) => {
 	await app.client.chat.update({
 		token: process.env.SLACK_BOT_TOKEN,
 		ts: ts,
@@ -101,7 +109,7 @@ const updateSingleBlockMessage = async (ts, channel, text, blockText, actionId) 
 }
 exports.updateSingleBlockMessage = updateSingleBlockMessage
 
-const updateInteractiveMessage = async (ts, channel, message) => {
+const updateInteractiveMessage = async (app, ts, channel, message) => {
 	const result = await app.client.chat.update({
 		token: process.env.SLACK_BOT_TOKEN,
 		ts: ts,
@@ -120,7 +128,7 @@ const updateInteractiveMessage = async (ts, channel, message) => {
 }
 exports.updateInteractiveMessage = updateInteractiveMessage
 
-const inviteUserToChannel = async (user, channel) => {
+const inviteUserToChannel = async (app, user, channel) => {
 	await app.client.conversations.invite({
 		token: process.env.SLACK_BOT_TOKEN,
 		channel: channel,
@@ -133,7 +141,7 @@ const inviteUserToChannel = async (user, channel) => {
 }
 exports.inviteUserToChannel = inviteUserToChannel
 
-const setPronouns = async (userId, pronouns, pronoun1) => {
+const setPronouns = async (app, userId, pronouns, pronoun1) => {
 	let record = await getUserRecord(userId)
 	let recId = record.id
 
@@ -207,7 +215,7 @@ const hasCompletedTutorial = async (userId) => {
 }
 exports.hasCompletedTutorial = hasCompletedTutorial
 
-const isBot = async userId => {
+const isBot = async (app, userId) => {
 	const user = await app.client.users.info({
 		token: process.env.SLACK_OAUTH_TOKEN,
 		user: userId
