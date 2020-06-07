@@ -4,54 +4,63 @@ const GithubSlugger = require('github-slugger')
 const slugger = new GithubSlugger()
 // const axios = require('axios')
 
-async function defaultFilter({ message, next }) {
+const { sendEphemeralMessage, getUserRecord, getIslandId, hasPushedButton, hasCompletedTutorial } = require('../utils')
+
+async function defaultFilter(e) {
   //placeholder validation
-  if (message.user && message.user === "UX12345") {
-    await next();
-  }
+  //const userID = e.user_id || e.event.user || e.event.user.id
+  //return userID === 'U0120F9NAGK'
+  return e.text === ''
 }
 
 const islandTable = new AirtablePlus({
-  apiKey: "process.env.AIRTABLE_API_KEY",
+  apiKey: process.env.AIRTABLE_API_KEY,
   baseID: 'appYGt7P3MtotTotg',
   tableName: 'Tutorial Island'
 })
 
 const eventsTable = new AirtablePlus({
-  apiKey: "process.env.AIRTABLE_API_KEY",
+  apiKey: process.env.AIRTABLE_API_KEY,
   baseID: 'appezi7TOQFt8vTfa',
   tableName: 'Events'
 })
 
-export const loadFlow = (app) => {
-  app.command(defaultFilter, '/restart', async ({ command, ack, say }) => {
-    await ack();
-    startTutorial(command.user_id, true)
+const loadFlow = (app) => {
+  app.command('/restart', async ({ command, ack, say }) => {
+    //console.log(command)
+    let f = await defaultFilter(command)
+    if (f) {
+      await ack();
+      console.log('hiii')
+      startTutorial(command.user_id, true)
+    }
   });
 
-  app.event(defaultFilter, 'team_join', async body => {
-    let bot = await isBot(body.event.user.id)
-    if (!bot) await startTutorial(body.event.user.id)
+  app.event('team_join', async body => {
+    if (defaultFilter) {
+      let bot = await isBot(body.event.user.id)
+      if (!bot) await startTutorial(body.event.user.id)
+    }
   });
 
-  app.action(defaultFilter, 'intro_progress_1', async ({ ack, body }) => {
+  app.action('intro_progress_1', async ({ ack, body }) => {
     ack();
     introProgress(body)
   });
-  app.action(defaultFilter, 'intro_progress_2', async ({ ack, body }) => {
+  app.action('intro_progress_2', async ({ ack, body }) => {
     ack();
     introProgress(body)
   });
-  app.action(defaultFilter, 'intro_progress_3', async ({ ack, body }) => {
+  app.action('intro_progress_3', async ({ ack, body }) => {
     ack();
     introProgress(body)
   });
-  app.action(defaultFilter, 'intro_progress', async ({ ack, body }) => {
+  app.action('intro_progress', async ({ ack, body }) => {
     ack();
     introProgress(body)
   });
 
-  app.action(defaultFilter, 'she', async ({ ack, body }) => {
+  app.action('she', async ({ ack, body }) => {
     ack();
     await setPronouns(body.user.id, 'she/her/hers', 'she')
     updateSingleBlockMessage(body.message.ts, body.channel.id, `What are your pronouns? (how you want to be referred to by others)`, `she/her/hers`, `mimmiggie`)
@@ -59,7 +68,7 @@ export const loadFlow = (app) => {
     sendHsQuestion(body.channel.id)
   });
 
-  app.action(defaultFilter, 'he', async ({ ack, body }) => {
+  app.action('he', async ({ ack, body }) => {
     ack();
     await setPronouns(body.user.id, 'he/him/his', 'he')
     updateSingleBlockMessage(body.message.ts, body.channel.id, `What are your pronouns? (how you want to be referred to by others)`, `he/him/his`, `mimmiggie`)
@@ -68,7 +77,7 @@ export const loadFlow = (app) => {
   });
 
 
-  app.action(defaultFilter, 'they', async ({ ack, body }) => {
+  app.action('they', async ({ ack, body }) => {
     ack();
     await setPronouns(body.user.id, 'they/them/theirs', 'they')
     updateSingleBlockMessage(body.message.ts, body.channel.id, `What are your pronouns? (how you want to be referred to by others)`, `they/them/theirs`, `mimmiggie`)
@@ -76,37 +85,37 @@ export const loadFlow = (app) => {
     sendHsQuestion(body.channel.id)
   });
 
-  app.action(defaultFilter, 'something_else', async ({ ack, body }) => {
+  app.action('something_else', async ({ ack, body }) => {
     ack();
     updateSingleBlockMessage(body.message.ts, body.channel.id, `What are your pronouns? (how you want to be referred to by others)`, `something else`, `mimmiggie`)
     await sendMessage(body.channel.id, `What are your preferred pronouns? (Type your answer in chat)`)
   });
 
-  app.action(defaultFilter, 'hs_yes', async ({ ack, body }) => {
+  app.action('hs_yes', async ({ ack, body }) => {
     ack();
     updateSingleBlockMessage(body.message.ts, body.channel.id, `Are you currently a high school student? (it's OK if you're not)`, `Yes`, `mimmiggie`)
     await sendMessage(body.channel.id, 'Hack Club is a community of high schoolers, so you\'ll fit right in!')
     await sendMessage(body.channel.id, `What brings you to the Hack Club community? (Type your answer in the chat)`)
   });
 
-  app.action(defaultFilter, 'hs_no', async ({ ack, body }) => {
+  app.action('hs_no', async ({ ack, body }) => {
     ack();
     updateSingleBlockMessage(body.message.ts, body.channel.id, `Are you currently a high school student? (it's OK if you're not)`, `No`, `mimmiggie`)
     await sendMessage(body.channel.id, 'Just a heads-up: Hack Club is a community of high schoolers, not a community of professional developers. You will likely still find a home here if you are in college, but if you\'re older than that, you may find yourself lost here.')
     await sendSingleBlockMessage(body.channel.id, 'If you understand this and still want to continue on, click the 👍 below.', '👍', 'hs_acknowledge')
   });
 
-  app.action(defaultFilter, 'hs_acknowledge', async ({ ack, body }) => {
+  app.action('hs_acknowledge', async ({ ack, body }) => {
     ack();
     await updateInteractiveMessage(body.message.ts, body.channel.id, '👍')
     await sendMessage(body.channel.id, `What brings you to the Hack Club community? (Type your answer in the chat)`)
   });
 
-  app.action(defaultFilter, 'mimmiggie', async ({ ack, body }) => {
+  app.action('mimmiggie', async ({ ack, body }) => {
     ack();
   });
 
-  app.event(defaultFilter, 'message', async body => {
+  app.event('message', async body => {
     if (body.message.subtype === 'channel_join' &&
       body.message.text === `<@${body.message.user}> has joined the channel`) {
       await app.client.chat.delete({
@@ -168,16 +177,16 @@ export const loadFlow = (app) => {
       console.log(body.event.user)
       let ts = body.event.ts.replace('.', '')
       let welcomeLink = `https://hackclub.slack.com/archives/C75M7C0SY/p${ts}`
-      
+
       let history = await app.client.conversations.history({
         token: process.env.SLACK_BOT_TOKEN,
         channel: 'GLFAEL1SL'
       })
-      
+
       let welcomeCommitteeMessage = history.messages.find(message => message.text.includes(`New user <@${body.event.user}>`))
       let message = welcomeCommitteeMessage.text
       let welcomeCommitteeTs = welcomeCommitteeMessage.ts
-      
+
       await sendMessage('GLFAEL1SL', `:fastparrot: <@${body.event.user}> just introduced themself in <#C75M7C0SY>! ${welcomeLink}`, 10, welcomeCommitteeTs)
       await app.client.chat.update({
         token: process.env.SLACK_BOT_TOKEN,
@@ -195,7 +204,7 @@ export const loadFlow = (app) => {
     }
   });
 
-  app.action(defaultFilter, 'introduced', async ({ ack, body }) => {
+  app.action('introduced', async ({ ack, body }) => {
     ack();
     updateInteractiveMessage(body.message.ts, body.channel.id, '👍')
     await sendMessage(body.channel.id, `Awesome! Let's keep going.`)
@@ -216,7 +225,7 @@ export const loadFlow = (app) => {
     await sendSingleBlockMessage(body.channel.id, `Once you've read the code of conduct, click the 👍 to finish the tutorial.`, '👍', `coc_acknowledge`)
   });
 
-  app.action(defaultFilter, 'coc_acknowledge', async ({ ack, body }) => {
+  app.action('coc_acknowledge', async ({ ack, body }) => {
     ack();
     await updateInteractiveMessage(body.message.ts, body.channel.id, '👍')
     await sendMessage(body.channel.id, `That's all from me! I hope I've been able to help you get acquainted with the Hack Club community.`)
@@ -284,12 +293,12 @@ export const loadFlow = (app) => {
   })
 
   // botInstance.action('leave_channel', replyWith() )
-  app.action(defaultFilter, 'leave_channel', async ({ ack, body }) => {
+  app.action('leave_channel', async ({ ack, body }) => {
     ack();
     await updateInteractiveMessage(body.message.ts, body.channel.id, `(Btw, if you want to leave + archive this channel, click here)`)
     await sendSingleBlockMessage(body.channel.id, `Are you sure? You won't be able to come back to this channel.`, `Yes, I'm sure`, 'leave_confirm', 10)
   })
-  app.action(defaultFilter, 'leave_confirm', async ({ ack, body }) => {
+  app.action('leave_confirm', async ({ ack, body }) => {
     ack();
     await updateInteractiveMessage(body.message.ts, body.channel.id, `Okay! Bye :wave:`)
 
@@ -299,7 +308,7 @@ export const loadFlow = (app) => {
     })
   })
 
-  app.event(defaultFilter, 'member_joined_channel', async body => {
+  app.event('member_joined_channel', async body => {
     const pushedFirstButton = await hasPushedButton(body.event.user)
     const completed = await hasCompletedTutorial(body.event.user)
     const islandId = await getIslandId(body.event.user)
@@ -330,7 +339,7 @@ export const loadFlow = (app) => {
     }
   });
 
-  app.event(defaultFilter, 'member_left_channel', async body => {
+  app.event('member_left_channel', async body => {
     const completed = await hasCompletedTutorial(body.event.user)
     const islandId = await getIslandId(body.event.user)
     if (body.event.channel === islandId && !completed) {
@@ -343,198 +352,214 @@ export const loadFlow = (app) => {
     }
   });
 
-async function introProgress(body) {
-  updateInteractiveMessage(body.message.ts, body.channel.id, `Hi, I'm Clippy! My job is to help you join the Hack Club community. Do you need assistance?`)
+  async function introProgress(body) {
+    updateInteractiveMessage(body.message.ts, body.channel.id, `Hi, I'm Clippy! My job is to help you join the Hack Club community. Do you need assistance?`)
 
-  updatePushedButton(body.user.id)
-  await sendMessage(body.channel.id, '...', 1000)
-  await sendMessage(body.channel.id, '...', 1000)
-  await sendMessage(body.channel.id, `Excellent! I'm happy to assist you in joining Hack Club today.`, 1000)
+    updatePushedButton(body.user.id)
+    await sendMessage(body.channel.id, '...', 1000)
+    await sendMessage(body.channel.id, '...', 1000)
+    await sendMessage(body.channel.id, `Excellent! I'm happy to assist you in joining Hack Club today.`, 1000)
 
-  const prevCompleted = await hasPreviouslyCompletedTutorial(body.user.id)
-  if (prevCompleted) {
-    await sendMessage(body.channel.id, `A few quick questions:`)
-  } else {
-    await sendMessage(body.channel.id, `First, the free stuff I promised...`)
-    await sendMessage(body.channel.id, `<@UH50T81A6> give <@${body.user.id}> 20gp for free stuff!!!`, 1000)
-    await setPreviouslyCompletedTutorial(body.user.id)
-    await sendMessage(body.channel.id, 'You can check your balance at any time by typing `/balance`.', 1000)
+    const prevCompleted = await hasPreviouslyCompletedTutorial(body.user.id)
+    if (prevCompleted) {
+      await sendMessage(body.channel.id, `A few quick questions:`)
+    } else {
+      await sendMessage(body.channel.id, `First, the free stuff I promised...`)
+      await sendMessage(body.channel.id, `<@UH50T81A6> give <@${body.user.id}> 20gp for free stuff!!!`, 1000)
+      await setPreviouslyCompletedTutorial(body.user.id)
+      await sendMessage(body.channel.id, 'You can check your balance at any time by typing `/balance`.', 1000)
 
-    await sendMessage(body.channel.id, `Now that that's out of the way, a few quick questions:`, 5000)
+      await sendMessage(body.channel.id, `Now that that's out of the way, a few quick questions:`, 5000)
+    }
+
+    await timeout(3000)
+    await app.client.chat.postMessage({
+      token: process.env.SLACK_BOT_TOKEN,
+      channel: body.channel.id,
+      blocks: [
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": `What are your pronouns? (how you want to be referred to by others)`
+          }
+        },
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "emoji": true,
+                "text": "she/her/hers"
+              },
+              "style": "primary",
+              "action_id": "she"
+            },
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "emoji": true,
+                "text": "he/him/his"
+              },
+              "style": "primary",
+              "action_id": "he"
+            },
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "emoji": true,
+                "text": "they/them/theirs"
+              },
+              "style": "primary",
+              "action_id": "they"
+            },
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "emoji": true,
+                "text": "something else"
+              },
+              "style": "primary",
+              "action_id": "something_else"
+            }
+          ]
+        }
+      ]
+    })
   }
 
-  await timeout(3000)
-  await app.client.chat.postMessage({
-    token: process.env.SLACK_BOT_TOKEN,
-    channel: body.channel.id,
-    blocks: [
-      {
-        "type": "section",
-        "text": {
-          "type": "mrkdwn",
-          "text": `What are your pronouns? (how you want to be referred to by others)`
-        }
-      },
-      {
-        "type": "actions",
-        "elements": [
-          {
-            "type": "button",
-            "text": {
-              "type": "plain_text",
-              "emoji": true,
-              "text": "she/her/hers"
-            },
-            "style": "primary",
-            "action_id": "she"
-          },
-          {
-            "type": "button",
-            "text": {
-              "type": "plain_text",
-              "emoji": true,
-              "text": "he/him/his"
-            },
-            "style": "primary",
-            "action_id": "he"
-          },
-          {
-            "type": "button",
-            "text": {
-              "type": "plain_text",
-              "emoji": true,
-              "text": "they/them/theirs"
-            },
-            "style": "primary",
-            "action_id": "they"
-          },
-          {
-            "type": "button",
-            "text": {
-              "type": "plain_text",
-              "emoji": true,
-              "text": "something else"
-            },
-            "style": "primary",
-            "action_id": "something_else"
+
+  async function sendToWelcomeCommittee(userId, text) {
+    let userPronouns = await getPronouns(userId)
+    let pronouns = userPronouns.pronouns
+    let pronoun1 = userPronouns.pronoun1
+
+    await sendMessage('GLFAEL1SL', 'New user <@' + userId + '> (' + pronouns + ') joined! Here\'s why ' + pronoun1 + ' joined the Hack Club community:\n\n' + text + '\n\nReact to this message to take ownership on reaching out.', 10)
+  }
+
+  async function sendHsQuestion(channel) {
+    await timeout(3000)
+    await app.client.chat.postMessage({
+      token: process.env.SLACK_BOT_TOKEN,
+      channel: channel,
+      blocks: [
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": `Are you currently a high school student? (it's OK if you're not)`
           }
-        ]
-      }
-    ]
-  })
-}
-
-
-async function sendToWelcomeCommittee(userId, text) {
-  let userPronouns = await getPronouns(userId)
-  let pronouns = userPronouns.pronouns
-  let pronoun1 = userPronouns.pronoun1
-
-  await sendMessage('GLFAEL1SL', 'New user <@' + userId + '> (' + pronouns + ') joined! Here\'s why ' + pronoun1 + ' joined the Hack Club community:\n\n' + text + '\n\nReact to this message to take ownership on reaching out.', 10)
-}
-
-async function sendHsQuestion(channel) {
-  await timeout(3000)
-  await app.client.chat.postMessage({
-    token: process.env.SLACK_BOT_TOKEN,
-    channel: channel,
-    blocks: [
-      {
-        "type": "section",
-        "text": {
-          "type": "mrkdwn",
-          "text": `Are you currently a high school student? (it's OK if you're not)`
+        },
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "emoji": true,
+                "text": "Yes"
+              },
+              "style": "primary",
+              "action_id": "hs_yes"
+            },
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "emoji": true,
+                "text": "No"
+              },
+              "style": "danger",
+              "action_id": "hs_no"
+            }
+          ]
         }
-      },
-      {
-        "type": "actions",
-        "elements": [
-          {
-            "type": "button",
-            "text": {
-              "type": "plain_text",
-              "emoji": true,
-              "text": "Yes"
-            },
-            "style": "primary",
-            "action_id": "hs_yes"
-          },
-          {
-            "type": "button",
-            "text": {
-              "type": "plain_text",
-              "emoji": true,
-              "text": "No"
-            },
-            "style": "danger",
-            "action_id": "hs_no"
-          }
-        ]
+      ]
+    })
+  }
+
+  async function sendMessage(channel, text, delay, ts, unfurl) {
+    await timeout(delay || 3000)
+    const msg = await app.client.chat.postMessage({
+      token: process.env.SLACK_BOT_TOKEN,
+      channel: channel,
+      text: text,
+      thread_ts: null || ts,
+      unfurl_links: unfurl ? unfurl : false
+    })
+    return msg
+  }
+
+  //   async function sendEphemeralMessage(channel, text, user) {
+  //     await app.client.chat.postEphemeral({
+  //       token: process.env.SLACK_BOT_TOKEN,
+  //       attachments: [],
+  //       channel: channel,
+  //       text: text,
+  //       user: user
+  //     })
+  //   }
+
+  async function startTutorial(user, restart) {
+    const islandName = await generateIslandName()
+    const newChannel = await app.client.conversations.create({
+      token: process.env.SLACK_BOT_TOKEN,
+      name: islandName.channel,
+      is_private: true,
+      user_ids: process.env.BOT_USER_ID
+    })
+    const channelId = newChannel.channel.id
+    console.log(`New tutorial channel created: ${channelId}`)
+
+    await app.client.conversations.invite({
+      token: process.env.SLACK_BOT_TOKEN,
+      channel: channelId,
+      users: user
+    })
+      .catch(err => console.log(err.data.errors))
+    /*await app.client.conversations.invite({
+      token: process.env.SLACK_BOT_TOKEN,
+      channel: channelId,
+      users: 'U012FPRJEVB'
+    })
+    await app.client.conversations.invite({
+      token: process.env.SLACK_BOT_TOKEN,
+      channel: channelId,
+      users: 'UH50T81A6' //banker
+    })*/
+
+    await app.client.conversations.setTopic({
+      token: process.env.SLACK_OAUTH_TOKEN,
+      channel: channelId,
+      topic: `Welcome to Hack Club! :wave: Unlock the community by completing this tutorial.`
+    })
+
+    if (restart) {
+      let record = await getUserRecord(user)
+      if (typeof record === 'undefined') {
+        record = await islandTable.create({
+          'Name': user,
+          'Island Channel ID': channelId,
+          'Island Channel Name': islandName.channel,
+          'Has completed tutorial': false,
+          'Has previously completed tutorial': false,
+          'Pushed first button': false
+        })
       }
-    ]
-  })
-}
-
-async function sendMessage(channel, text, delay, ts, unfurl) {
-  await timeout(delay || 3000)
-  const msg = await app.client.chat.postMessage({
-    token: process.env.SLACK_BOT_TOKEN,
-    channel: channel,
-    text: text,
-    thread_ts: null || ts,
-    unfurl_links: unfurl ? unfurl : false
-  })
-  return msg
-}
-
-async function sendEphemeralMessage(channel, text, user) {
-  await app.client.chat.postEphemeral({
-    token: process.env.SLACK_BOT_TOKEN,
-    attachments: [],
-    channel: channel,
-    text: text,
-    user: user
-  })
-}
-
-async function startTutorial(user, restart) {
-  const islandName = await generateIslandName()
-  const newChannel = await app.client.conversations.create({
-    token: process.env.SLACK_BOT_TOKEN,
-    name: islandName.channel,
-    is_private: true,
-    user_ids: process.env.BOT_USER_ID
-  })
-  const channelId = newChannel.channel.id
-  console.log(`New tutorial channel created: ${channelId}`)
-
-  await app.client.conversations.invite({
-    token: process.env.SLACK_BOT_TOKEN,
-    channel: channelId,
-    users: user
-  })
-    .catch(err => console.log(err.data.errors))
-  await app.client.conversations.invite({
-    token: process.env.SLACK_BOT_TOKEN,
-    channel: channelId,
-    users: 'U012FPRJEVB'
-  })
-  await app.client.conversations.invite({
-    token: process.env.SLACK_BOT_TOKEN,
-    channel: channelId,
-    users: 'UH50T81A6' //banker
-  })
-
-  await app.client.conversations.setTopic({
-    token: process.env.SLACK_OAUTH_TOKEN,
-    channel: channelId,
-    topic: `Welcome to Hack Club! :wave: Unlock the community by completing this tutorial.`
-  })
-
-  if (restart) {
-    let record = await getUserRecord(user)
-    if (typeof record === 'undefined') {
-      record = await islandTable.create({
+      await islandTable.update(record.id, {
+        'Island Channel ID': channelId,
+        'Island Channel Name': islandName.channel,
+        'Has completed tutorial': true,
+        'Pushed first button': false
+      })
+    } else {
+      await islandTable.create({
         'Name': user,
         'Island Channel ID': channelId,
         'Island Channel Name': islandName.channel,
@@ -543,320 +568,279 @@ async function startTutorial(user, restart) {
         'Pushed first button': false
       })
     }
-    await islandTable.update(record.id, {
-      'Island Channel ID': channelId,
-      'Island Channel Name': islandName.channel,
-      'Has completed tutorial': true,
-      'Pushed first button': false
+
+    await app.client.chat.postMessage({
+      token: process.env.SLACK_BOT_TOKEN,
+      channel: channelId,
+      blocks: [
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": `Hi, I'm Clippy! My job is to help you join the Hack Club community. Do you need assistance?`
+          }
+        },
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "emoji": true,
+                "text": ":star2:What??? What's this?"
+              },
+              "action_id": "intro_progress_1"
+            },
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "emoji": true,
+                "text": ":money_with_wings:Of course I want free stuff!"
+              },
+              "action_id": "intro_progress_2"
+            },
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "emoji": true,
+                "text": ":eye:Wait what?"
+              },
+              "action_id": "intro_progress_3"
+            }
+          ]
+        }
+      ]
     })
-  } else {
-    await islandTable.create({
-      'Name': user,
-      'Island Channel ID': channelId,
-      'Island Channel Name': islandName.channel,
-      'Has completed tutorial': false,
-      'Has previously completed tutorial': false,
-      'Pushed first button': false
-    })
-  }
 
-  await app.client.chat.postMessage({
-    token: process.env.SLACK_BOT_TOKEN,
-    channel: channelId,
-    blocks: [
-      {
-        "type": "section",
-        "text": {
-          "type": "mrkdwn",
-          "text": `Hi, I'm Clippy! My job is to help you join the Hack Club community. Do you need assistance?`
-        }
-      },
-      {
-        "type": "actions",
-        "elements": [
-          {
-            "type": "button",
-            "text": {
-              "type": "plain_text",
-              "emoji": true,
-              "text": ":star2:What??? What's this?"
-            },
-            "action_id": "intro_progress_1"
-          },
-          {
-            "type": "button",
-            "text": {
-              "type": "plain_text",
-              "emoji": true,
-              "text": ":money_with_wings:Of course I want free stuff!"
-            },
-            "action_id": "intro_progress_2"
-          },
-          {
-            "type": "button",
-            "text": {
-              "type": "plain_text",
-              "emoji": true,
-              "text": ":eye:Wait what?"
-            },
-            "action_id": "intro_progress_3"
-          }
-        ]
-      }
-    ]
-  })
-
-  await timeout(30000)
-  let pushedButton = await hasPushedButton(user)
-  if (!pushedButton) {
-    await sendMessage(channelId, `(<@${user}> Psst—every new member completes this quick intro to unlock the Hack Club community. It only takes 1 minute—I promise—and you get free stuff along the way. Click any of the three buttons above to begin :star2: :money_with_wings: :eye:)`, 10)
-  }
-}
-
-async function sendSingleBlockMessage(channel, text, blockText, actionId, delay) {
-  await timeout(delay || 3000)
-  let message = await app.client.chat.postMessage({
-    token: process.env.SLACK_BOT_TOKEN,
-    channel: channel,
-    "blocks": [
-      {
-        "type": "section",
-        "text": {
-          "type": "mrkdwn",
-          "text": text
-        }
-      },
-      {
-        "type": "actions",
-        "elements": [
-          {
-            "type": "button",
-            "text": {
-              "type": "plain_text",
-              "text": blockText,
-              "emoji": true
-            },
-            "action_id": actionId
-          }
-        ]
-      }
-    ]
-  })
-  return message
-}
-
-async function updateSingleBlockMessage(ts, channel, text, blockText, actionId) {
-  await app.client.chat.update({
-    token: process.env.SLACK_BOT_TOKEN,
-    ts: ts,
-    channel: channel,
-    "blocks": [
-      {
-        "type": "section",
-        "text": {
-          "type": "mrkdwn",
-          "text": text
-        }
-      },
-      {
-        "type": "actions",
-        "elements": [
-          {
-            "type": "button",
-            "text": {
-              "type": "plain_text",
-              "text": blockText,
-              "emoji": true
-            },
-            "action_id": actionId
-          }
-        ]
-      }
-    ]
-  })
-}
-
-async function updateInteractiveMessage(ts, channel, message) {
-  const result = await app.client.chat.update({
-    token: process.env.SLACK_BOT_TOKEN,
-    ts: ts,
-    channel: channel,
-    blocks: [
-      {
-        type: 'section',
-        text: {
-          type: 'mrkdwn',
-          text: message
-        }
-      }
-    ],
-    text: 'Message from Test App'
-  });
-}
-
-async function inviteUserToChannel(user, channel) {
-  await app.client.conversations.invite({
-    token: process.env.SLACK_BOT_TOKEN,
-    channel: channel,
-    users: user
-  }).catch(err => {
-    if (err.data.error === 'already_in_channel') {
-      console.log(`${user} is already in ${channel}—skipping this step...`)
+    await timeout(30000)
+    let pushedButton = await hasPushedButton(user)
+    if (!pushedButton) {
+      await sendMessage(channelId, `(<@${user}> Psst—every new member completes this quick intro to unlock the Hack Club community. It only takes 1 minute—I promise—and you get free stuff along the way. Click any of the three buttons above to begin :star2: :money_with_wings: :eye:)`, 10)
     }
-  })
-}
-
-async function setPronouns(userId, pronouns, pronoun1) {
-  let record = await getUserRecord(userId)
-  let recId = record.id
-
-  await islandTable.update(recId, {
-    'Pronouns': pronouns,
-    'Pronoun 1': pronoun1
-  })
-  await app.client.users.profile.set({
-    token: process.env.SLACK_OAUTH_TOKEN,
-    profile: { 'XfD4V9MG3V': pronouns },
-    user: userId
-  })
-}
-
-async function getPronouns(userId) {
-  let userRecord = await getUserRecord(userId)
-  let pronouns = userRecord.fields['Pronouns']
-  let pronoun1 = userRecord.fields['Pronoun 1']
-  return {
-    pronouns: pronouns,
-    pronoun1: pronoun1
   }
-}
 
-async function hasPreviouslyCompletedTutorial(userId) {
-  let userRecord = await getUserRecord(userId)
-  let completed = userRecord.fields['Has previously completed tutorial']
-  return completed
-}
+  async function sendSingleBlockMessage(channel, text, blockText, actionId, delay) {
+    await timeout(delay || 3000)
+    let message = await app.client.chat.postMessage({
+      token: process.env.SLACK_BOT_TOKEN,
+      channel: channel,
+      "blocks": [
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": text
+          }
+        },
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "text": blockText,
+                "emoji": true
+              },
+              "action_id": actionId
+            }
+          ]
+        }
+      ]
+    })
+    return message
+  }
 
-async function setPreviouslyCompletedTutorial(userId) {
-  let userRecord = await getUserRecord(userId)
-  let recId = userRecord.id
+  async function updateSingleBlockMessage(ts, channel, text, blockText, actionId) {
+    await app.client.chat.update({
+      token: process.env.SLACK_BOT_TOKEN,
+      ts: ts,
+      channel: channel,
+      "blocks": [
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": text
+          }
+        },
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "text": blockText,
+                "emoji": true
+              },
+              "action_id": actionId
+            }
+          ]
+        }
+      ]
+    })
+  }
 
-  islandTable.update(recId, {
-    'Has previously completed tutorial': true
-  })
-}
+  async function updateInteractiveMessage(ts, channel, message) {
+    const result = await app.client.chat.update({
+      token: process.env.SLACK_BOT_TOKEN,
+      ts: ts,
+      channel: channel,
+      blocks: [
+        {
+          type: 'section',
+          text: {
+            type: 'mrkdwn',
+            text: message
+          }
+        }
+      ],
+      text: 'Message from Test App'
+    });
+  }
 
-async function updatePushedButton(userId) {
-  let record = await getUserRecord(userId)
-  let recId = record.id
+  async function inviteUserToChannel(user, channel) {
+    await app.client.conversations.invite({
+      token: process.env.SLACK_BOT_TOKEN,
+      channel: channel,
+      users: user
+    }).catch(err => {
+      if (err.data.error === 'already_in_channel') {
+        console.log(`${user} is already in ${channel}—skipping this step...`)
+      }
+    })
+  }
 
-  islandTable.update(recId, {
-    'Pushed first button': true
-  })
-}
+  async function setPronouns(userId, pronouns, pronoun1) {
+    let record = await getUserRecord(userId)
+    let recId = record.id
 
-async function hasPushedButton(userId) {
-  let record = await getUserRecord(userId)
-  if (typeof record === 'undefined') return true
-  return record.fields['Pushed first button']
-}
+    await islandTable.update(recId, {
+      'Pronouns': pronouns,
+      'Pronoun 1': pronoun1
+    })
+    await app.client.users.profile.set({
+      token: process.env.SLACK_OAUTH_TOKEN,
+      profile: { 'XfD4V9MG3V': pronouns },
+      user: userId
+    })
+  }
 
-async function getIslandId(userId) {
-  let record = await getUserRecord(userId)
-  if (typeof record === 'undefined') return null
-  return record.fields['Island Channel ID']
-}
-async function getIslandName(userId) {
-  let record = await getUserRecord(userId)
-  return record.fields['Island Channel Name']
-}
+  async function getPronouns(userId) {
+    let userRecord = await getUserRecord(userId)
+    let pronouns = userRecord.fields['Pronouns']
+    let pronoun1 = userRecord.fields['Pronoun 1']
+    return {
+      pronouns: pronouns,
+      pronoun1: pronoun1
+    }
+  }
 
-async function isBot(userId) {
-  const user = await app.client.users.info({
-    token: process.env.SLACK_OAUTH_TOKEN,
-    user: userId
-  })
-  return user.user.is_bot
-}
+  async function hasPreviouslyCompletedTutorial(userId) {
+    let userRecord = await getUserRecord(userId)
+    let completed = userRecord.fields['Has previously completed tutorial']
+    return completed
+  }
 
-async function getNextEvent() {
-  try {
-    let record = (await eventsTable.read({
-      view: 'Future Events',
-      maxRecords: 1
-    }))[0]
+  async function setPreviouslyCompletedTutorial(userId) {
+    let userRecord = await getUserRecord(userId)
+    let recId = userRecord.id
 
-    let eventUrl = `https://events.hackclub.com/${slugger.slug(record.fields['Title'])}`
+    islandTable.update(recId, {
+      'Has previously completed tutorial': true
+    })
+  }
+
+  async function updatePushedButton(userId) {
+    let record = await getUserRecord(userId)
+    let recId = record.id
+
+    islandTable.update(recId, {
+      'Pushed first button': true
+    })
+  }
+
+  async function getIslandName(userId) {
+    let record = await getUserRecord(userId)
+    return record.fields['Island Channel Name']
+  }
+
+  async function isBot(userId) {
+    const user = await app.client.users.info({
+      token: process.env.SLACK_OAUTH_TOKEN,
+      user: userId
+    })
+    return user.user.is_bot
+  }
+
+  async function getNextEvent() {
+    try {
+      let record = (await eventsTable.read({
+        view: 'Future Events',
+        maxRecords: 1
+      }))[0]
+
+      let eventUrl = `https://events.hackclub.com/${slugger.slug(record.fields['Title'])}`
+
+      return {
+        name: record.fields['Title'],
+        day: record.fields['Date (formatted)'],
+        time: record.fields['Time (formatted)'],
+        url: eventUrl
+      }
+    } catch {
+      return null
+    }
+  }
+
+  async function generateIslandName() {
+    const words = friendlyWords.predicates
+    const word1 = words[Math.floor(Math.random() * 1455)]
+    const word2 = words[Math.floor(Math.random() * 1455)]
+    const channel = `${word1}-${word2}-tutorial`
+    const pretty = `${capitalizeFirstLetter(word1)} ${capitalizeFirstLetter(word2)} Tutorial`
+
+    const taken = await checkIslandNameTaken(channel)
+    if (taken) return generateIslandName()
 
     return {
-      name: record.fields['Title'],
-      day: record.fields['Date (formatted)'],
-      time: record.fields['Time (formatted)'],
-      url: eventUrl
+      channel: channel,
+      pretty: pretty
     }
-  } catch {
-    return null
   }
-}
 
-async function generateIslandName() {
-  const words = friendlyWords.predicates
-  const word1 = words[Math.floor(Math.random() * 1455)]
-  const word2 = words[Math.floor(Math.random() * 1455)]
-  const channel = `${word1}-${word2}-tutorial`
-  const pretty = `${capitalizeFirstLetter(word1)} ${capitalizeFirstLetter(word2)} Tutorial`
-
-  const taken = await checkIslandNameTaken(channel)
-  if (taken) return generateIslandName()
-
-  return {
-    channel: channel,
-    pretty: pretty
+  async function completeTutorial(userId) {
+    let record = await getUserRecord(userId)
+    await islandTable.update(record.id, {
+      'Has completed tutorial': true
+    })
   }
-}
 
-async function completeTutorial(userId) {
-  let record = await getUserRecord(userId)
-  await islandTable.update(record.id, {
-    'Has completed tutorial': true
-  })
-}
-
-async function hasCompletedTutorial(userId) {
-  let record = await getUserRecord(userId)
-  if (typeof record === 'undefined') return true
-  return (record.fields['Has completed tutorial'] || record.fields['Club leader'])
-}
-
-async function getUserRecord(userId) {
-  try {
+  async function checkIslandNameTaken(islandName) {
     let record = (await islandTable.read({
-      filterByFormula: `{Name} = '${userId}'`,
+      filterByFormula: `{Island Channel Name} = '${islandName}'`,
       maxRecords: 1
     }))[0]
-    return record
-  } catch { }
+    return record !== undefined
+  }
+
+  function messageIsPartOfTutorial(body, correctChannel) {
+    return body.event.channel_type === 'group' && body.event.subtype !== 'group_join'
+      && body.event.subtype !== 'channel_join' && body.event.user !== 'U012CUN4U1X'
+      && body.event.channel === correctChannel
+  }
+
+  function capitalizeFirstLetter(str) {
+    return str[0].toUpperCase() + str.slice(1)
+  }
+
+  function timeout(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms))
+  }
 }
 
-async function checkIslandNameTaken(islandName) {
-  let record = (await islandTable.read({
-    filterByFormula: `{Island Channel Name} = '${islandName}'`,
-    maxRecords: 1
-  }))[0]
-  return record !== undefined
-}
-
-function messageIsPartOfTutorial(body, correctChannel) {
-  return body.event.channel_type === 'group' && body.event.subtype !== 'group_join'
-    && body.event.subtype !== 'channel_join' && body.event.user !== 'U012CUN4U1X'
-    && body.event.channel === correctChannel
-}
-
-function capitalizeFirstLetter(str) {
-  return str[0].toUpperCase() + str.slice(1)
-}
-
-function timeout(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms))
-}
-}
+exports.loadFlow = loadFlow
