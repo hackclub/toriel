@@ -1,4 +1,5 @@
 const AirtablePlus = require('airtable-plus')
+const axios = require('axios')
 
 const { sendEphemeralMessage, getUserRecord, getIslandId,
   hasPushedButton, hasCompletedTutorial, isBot,
@@ -11,13 +12,24 @@ const { sendEphemeralMessage, getUserRecord, getIslandId,
 
 async function defaultFilter(e) {
   //placeholder validation
-  //const userID = e.user_id || e.event.user || e.event.user.id
+  const userID = e.body.user_id || (e.body.event ? e.body.event.user : e.body.user.id)
+  console.log(userID)
+  //console.log(e.body)
   //return userID === 'U0120F9NAGK'
-  return e.text === ''
+  //console.log(e.body)
+  const options = {
+    maxRecords: 1,
+    filterByFormula: `AND(Name = '${userID}', Flow = 'Default')`
+  }
+  let data = await axios('https://api2.hackclub.com/v0.1/Tutorial%20Island/Tutorial%20Island?select=' + JSON.stringify(options)).then(r => r.data)
+
+  const shouldContinue = data[0] != null
+  console.log('Does event pass the default filter?', shouldContinue)
+  return shouldContinue
 }
 
 async function runInFlow(opts, func) {
-  if (await defaultFilter(opts.command)) {
+  if (await defaultFilter(opts)) {
     return await func(opts)
   }
 }
@@ -25,11 +37,8 @@ async function runInFlow(opts, func) {
 const loadFlow = (app) => {
   app.command('/restart', e => runInFlow(e, async ({ command, ack, say }) => {
     //console.log(command)
-    let f = await defaultFilter(command)
-    if (f) {
-      await ack();
-      startTutorial(command.user_id, true)
-    }
+    await ack();
+    startTutorial(command.user_id, true)
   }));
 
   app.event('team_join', e => runInFlow(e, async body => {
@@ -41,6 +50,7 @@ const loadFlow = (app) => {
 
   app.action('intro_progress_1', e => runInFlow(e, async ({ ack, body }) => {
     ack();
+    console.log(body)
     introProgress(body)
   }));
   app.action('intro_progress_2', e => runInFlow(e, async ({ ack, body }) => {
