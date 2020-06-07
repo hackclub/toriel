@@ -45,6 +45,19 @@ app.event('member_joined_channel', async body => {
   }
 });
 
+app.event('member_left_channel', async body => {
+  const completed = await hasCompletedTutorial(body.event.user)
+  const islandId = await getIslandId(body.event.user)
+  if (body.event.channel === islandId && !completed) {
+    await app.client.conversations.invite({
+      token: process.env.SLACK_OAUTH_TOKEN,
+      channel: body.event.channel,
+      user: body.event.user
+    })
+    await sendEphemeralMessage(islandId, `<@${body.event.user}> It looks like you tried to leave your tutorial channel. You can't do that just yet—I need to help you complete the tutorial before you can unlock the rest of the community.`, body.event.user)
+  }
+});
+
 (async () => {
   await app.start(process.env.PORT || 3000)
   console.log("⚡️ Bolt app is running!")

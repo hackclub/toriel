@@ -2,7 +2,6 @@ const AirtablePlus = require('airtable-plus')
 const friendlyWords = require('friendly-words')
 const GithubSlugger = require('github-slugger')
 const slugger = new GithubSlugger()
-// const axios = require('axios')
 
 const { sendEphemeralMessage, getUserRecord, getIslandId, hasPushedButton, hasCompletedTutorial } = require('../utils')
 
@@ -484,28 +483,6 @@ const loadFlow = (app) => {
     })
   }
 
-  async function sendMessage(channel, text, delay, ts, unfurl) {
-    await timeout(delay || 3000)
-    const msg = await app.client.chat.postMessage({
-      token: process.env.SLACK_BOT_TOKEN,
-      channel: channel,
-      text: text,
-      thread_ts: null || ts,
-      unfurl_links: unfurl ? unfurl : false
-    })
-    return msg
-  }
-
-  //   async function sendEphemeralMessage(channel, text, user) {
-  //     await app.client.chat.postEphemeral({
-  //       token: process.env.SLACK_BOT_TOKEN,
-  //       attachments: [],
-  //       channel: channel,
-  //       text: text,
-  //       user: user
-  //     })
-  //   }
-
   async function startTutorial(user, restart) {
     const islandName = await generateIslandName()
     const newChannel = await app.client.conversations.create({
@@ -523,7 +500,7 @@ const loadFlow = (app) => {
       users: user
     })
       .catch(err => console.log(err.data.errors))
-    /*await app.client.conversations.invite({
+    await app.client.conversations.invite({
       token: process.env.SLACK_BOT_TOKEN,
       channel: channelId,
       users: 'U012FPRJEVB'
@@ -532,7 +509,7 @@ const loadFlow = (app) => {
       token: process.env.SLACK_BOT_TOKEN,
       channel: channelId,
       users: 'UH50T81A6' //banker
-    })*/
+    })
 
     await app.client.conversations.setTopic({
       token: process.env.SLACK_OAUTH_TOKEN,
@@ -549,14 +526,16 @@ const loadFlow = (app) => {
           'Island Channel Name': islandName.channel,
           'Has completed tutorial': false,
           'Has previously completed tutorial': false,
-          'Pushed first button': false
+          'Pushed first button': false,
+          'Flow': 'Default'
         })
       }
       await islandTable.update(record.id, {
         'Island Channel ID': channelId,
         'Island Channel Name': islandName.channel,
         'Has completed tutorial': true,
-        'Pushed first button': false
+        'Pushed first button': false,
+        'Flow': 'Default'
       })
     } else {
       await islandTable.create({
@@ -565,7 +544,8 @@ const loadFlow = (app) => {
         'Island Channel Name': islandName.channel,
         'Has completed tutorial': false,
         'Has previously completed tutorial': false,
-        'Pushed first button': false
+        'Pushed first button': false,
+        'Flow': 'Default'
       })
     }
 
@@ -620,226 +600,6 @@ const loadFlow = (app) => {
     if (!pushedButton) {
       await sendMessage(channelId, `(<@${user}> Psst—every new member completes this quick intro to unlock the Hack Club community. It only takes 1 minute—I promise—and you get free stuff along the way. Click any of the three buttons above to begin :star2: :money_with_wings: :eye:)`, 10)
     }
-  }
-
-  async function sendSingleBlockMessage(channel, text, blockText, actionId, delay) {
-    await timeout(delay || 3000)
-    let message = await app.client.chat.postMessage({
-      token: process.env.SLACK_BOT_TOKEN,
-      channel: channel,
-      "blocks": [
-        {
-          "type": "section",
-          "text": {
-            "type": "mrkdwn",
-            "text": text
-          }
-        },
-        {
-          "type": "actions",
-          "elements": [
-            {
-              "type": "button",
-              "text": {
-                "type": "plain_text",
-                "text": blockText,
-                "emoji": true
-              },
-              "action_id": actionId
-            }
-          ]
-        }
-      ]
-    })
-    return message
-  }
-
-  async function updateSingleBlockMessage(ts, channel, text, blockText, actionId) {
-    await app.client.chat.update({
-      token: process.env.SLACK_BOT_TOKEN,
-      ts: ts,
-      channel: channel,
-      "blocks": [
-        {
-          "type": "section",
-          "text": {
-            "type": "mrkdwn",
-            "text": text
-          }
-        },
-        {
-          "type": "actions",
-          "elements": [
-            {
-              "type": "button",
-              "text": {
-                "type": "plain_text",
-                "text": blockText,
-                "emoji": true
-              },
-              "action_id": actionId
-            }
-          ]
-        }
-      ]
-    })
-  }
-
-  async function updateInteractiveMessage(ts, channel, message) {
-    const result = await app.client.chat.update({
-      token: process.env.SLACK_BOT_TOKEN,
-      ts: ts,
-      channel: channel,
-      blocks: [
-        {
-          type: 'section',
-          text: {
-            type: 'mrkdwn',
-            text: message
-          }
-        }
-      ],
-      text: 'Message from Test App'
-    });
-  }
-
-  async function inviteUserToChannel(user, channel) {
-    await app.client.conversations.invite({
-      token: process.env.SLACK_BOT_TOKEN,
-      channel: channel,
-      users: user
-    }).catch(err => {
-      if (err.data.error === 'already_in_channel') {
-        console.log(`${user} is already in ${channel}—skipping this step...`)
-      }
-    })
-  }
-
-  async function setPronouns(userId, pronouns, pronoun1) {
-    let record = await getUserRecord(userId)
-    let recId = record.id
-
-    await islandTable.update(recId, {
-      'Pronouns': pronouns,
-      'Pronoun 1': pronoun1
-    })
-    await app.client.users.profile.set({
-      token: process.env.SLACK_OAUTH_TOKEN,
-      profile: { 'XfD4V9MG3V': pronouns },
-      user: userId
-    })
-  }
-
-  async function getPronouns(userId) {
-    let userRecord = await getUserRecord(userId)
-    let pronouns = userRecord.fields['Pronouns']
-    let pronoun1 = userRecord.fields['Pronoun 1']
-    return {
-      pronouns: pronouns,
-      pronoun1: pronoun1
-    }
-  }
-
-  async function hasPreviouslyCompletedTutorial(userId) {
-    let userRecord = await getUserRecord(userId)
-    let completed = userRecord.fields['Has previously completed tutorial']
-    return completed
-  }
-
-  async function setPreviouslyCompletedTutorial(userId) {
-    let userRecord = await getUserRecord(userId)
-    let recId = userRecord.id
-
-    islandTable.update(recId, {
-      'Has previously completed tutorial': true
-    })
-  }
-
-  async function updatePushedButton(userId) {
-    let record = await getUserRecord(userId)
-    let recId = record.id
-
-    islandTable.update(recId, {
-      'Pushed first button': true
-    })
-  }
-
-  async function getIslandName(userId) {
-    let record = await getUserRecord(userId)
-    return record.fields['Island Channel Name']
-  }
-
-  async function isBot(userId) {
-    const user = await app.client.users.info({
-      token: process.env.SLACK_OAUTH_TOKEN,
-      user: userId
-    })
-    return user.user.is_bot
-  }
-
-  async function getNextEvent() {
-    try {
-      let record = (await eventsTable.read({
-        view: 'Future Events',
-        maxRecords: 1
-      }))[0]
-
-      let eventUrl = `https://events.hackclub.com/${slugger.slug(record.fields['Title'])}`
-
-      return {
-        name: record.fields['Title'],
-        day: record.fields['Date (formatted)'],
-        time: record.fields['Time (formatted)'],
-        url: eventUrl
-      }
-    } catch {
-      return null
-    }
-  }
-
-  async function generateIslandName() {
-    const words = friendlyWords.predicates
-    const word1 = words[Math.floor(Math.random() * 1455)]
-    const word2 = words[Math.floor(Math.random() * 1455)]
-    const channel = `${word1}-${word2}-tutorial`
-    const pretty = `${capitalizeFirstLetter(word1)} ${capitalizeFirstLetter(word2)} Tutorial`
-
-    const taken = await checkIslandNameTaken(channel)
-    if (taken) return generateIslandName()
-
-    return {
-      channel: channel,
-      pretty: pretty
-    }
-  }
-
-  async function completeTutorial(userId) {
-    let record = await getUserRecord(userId)
-    await islandTable.update(record.id, {
-      'Has completed tutorial': true
-    })
-  }
-
-  async function checkIslandNameTaken(islandName) {
-    let record = (await islandTable.read({
-      filterByFormula: `{Island Channel Name} = '${islandName}'`,
-      maxRecords: 1
-    }))[0]
-    return record !== undefined
-  }
-
-  function messageIsPartOfTutorial(body, correctChannel) {
-    return body.event.channel_type === 'group' && body.event.subtype !== 'group_join'
-      && body.event.subtype !== 'channel_join' && body.event.user !== 'U012CUN4U1X'
-      && body.event.channel === correctChannel
-  }
-
-  function capitalizeFirstLetter(str) {
-    return str[0].toUpperCase() + str.slice(1)
-  }
-
-  function timeout(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms))
   }
 }
 
