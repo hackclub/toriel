@@ -472,7 +472,7 @@ const loadFlow = (app) => {
       users: user
     })
       .catch(err => console.log(err.data.errors))
-    /*await app.client.conversations.invite({
+    await app.client.conversations.invite({
       token: process.env.SLACK_BOT_TOKEN,
       channel: channelId,
       users: 'U012FPRJEVB'
@@ -481,7 +481,7 @@ const loadFlow = (app) => {
       token: process.env.SLACK_BOT_TOKEN,
       channel: channelId,
       users: 'UH50T81A6' //banker
-    })*/
+    })
     if (defaultFilter(e)) {
       await app.client.conversations.setTopic({
         token: process.env.SLACK_OAUTH_TOKEN,
