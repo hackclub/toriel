@@ -479,45 +479,45 @@ const loadFlow = (app) => {
     }
     let somData = await axios(`https://api2.hackclub.com/v0.1/Pre-register/Applications?select=${JSON.stringify(somOptions)}`).then(r => r.data)
 
-    if (defaultFilter(e)) {
-      await app.client.conversations.setTopic({
-        token: process.env.SLACK_OAUTH_TOKEN,
-        channel: channelId,
-        topic: `Welcome to Hack Club! :wave: Unlock the community by completing this tutorial.`
-      })
 
-      if (restart) {
-        let record = await getUserRecord(user)
-        if (typeof record === 'undefined') {
-          record = await islandTable.create({
-            'Name': user,
-            'Island Channel ID': channelId,
-            'Island Channel Name': islandName.channel,
-            'Has completed tutorial': false,
-            'Has previously completed tutorial': false,
-            'Pushed first button': false,
-            'Flow': 'Default'
-          })
-        }
-        await islandTable.update(record.id, {
-          'Island Channel ID': channelId,
-          'Island Channel Name': islandName.channel,
-          'Has completed tutorial': true,
-          'Pushed first button': false,
-          'Flow': 'Default'
-        })
-      } else {
-        await islandTable.create({
+    await app.client.conversations.setTopic({
+      token: process.env.SLACK_OAUTH_TOKEN,
+      channel: channelId,
+      topic: `Welcome to Hack Club! :wave: Unlock the community by completing this tutorial.`
+    })
+
+    if (restart) {
+      let record = await getUserRecord(user)
+      if (typeof record === 'undefined') {
+        record = await islandTable.create({
           'Name': user,
           'Island Channel ID': channelId,
           'Island Channel Name': islandName.channel,
           'Has completed tutorial': false,
           'Has previously completed tutorial': false,
           'Pushed first button': false,
-          'Flow': somData[0] === null ? 'Default' : 'Summer of Making'
+          'Flow': 'Default'
         })
       }
-
+      await islandTable.update(record.id, {
+        'Island Channel ID': channelId,
+        'Island Channel Name': islandName.channel,
+        'Has completed tutorial': true,
+        'Pushed first button': false,
+        'Flow': 'Default'
+      })
+    } else {
+      await islandTable.create({
+        'Name': user,
+        'Island Channel ID': channelId,
+        'Island Channel Name': islandName.channel,
+        'Has completed tutorial': false,
+        'Has previously completed tutorial': false,
+        'Pushed first button': false,
+        'Flow': somData[0] === null ? 'Default' : 'Summer of Making'
+      })
+    }
+    if (defaultFilter(e)) {
       await app.client.chat.postMessage({
         token: process.env.SLACK_BOT_TOKEN,
         channel: channelId,
