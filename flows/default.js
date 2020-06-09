@@ -445,6 +445,7 @@ const loadFlow = (app) => {
   }
 
   async function startTutorial(e, user, restart) {
+    console.log(e)
     const islandName = await generateIslandName()
     const newChannel = await app.client.conversations.create({
       token: process.env.SLACK_BOT_TOKEN,
