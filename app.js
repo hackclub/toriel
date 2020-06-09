@@ -37,7 +37,7 @@ app.event('member_joined_channel', async body => {
       user: body.event.user
     })
     let islandId = await getIslandId(body.event.user)
-    await sendEphemeralMessage(islandId, `<@${body.event.user}> It looks like you tried to join <#${body.event.channel}>. You can't join any channels yet—I need to finish helping you join the community first.`, body.event.user)
+    await sendEphemeralMessage(app, islandId, `<@${body.event.user}> It looks like you tried to join <#${body.event.channel}>. You can't join any channels yet—I need to finish helping you join the community first.`, body.event.user)
     await app.client.chat.postMessage({
       token: process.env.SLACK_OAUTH_TOKEN,
       channel: 'U4QAK9SRW',
