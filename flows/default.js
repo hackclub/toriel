@@ -1,4 +1,3 @@
-const AirtablePlus = require('airtable-plus')
 const axios = require('axios')
 
 const { sendEphemeralMessage, getUserRecord, getIslandId,
