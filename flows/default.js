@@ -445,7 +445,6 @@ const loadFlow = (app) => {
   }
 
   async function startTutorial(e, user, restart) {
-    console.log(e)
     const islandName = await generateIslandName()
     const newChannel = await app.client.conversations.create({
       token: process.env.SLACK_BOT_TOKEN,
@@ -479,6 +478,7 @@ const loadFlow = (app) => {
       authKey: process.env.AIRTABLE_API_KEY
     }
     let somData = await axios(`https://api2.hackclub.com/v0.1/Pre-register/Applications?select=${JSON.stringify(somOptions)}`).then(r => r.data)
+    console.log(somData)
 
 
     await app.client.conversations.setTopic({
@@ -515,7 +515,7 @@ const loadFlow = (app) => {
         'Has completed tutorial': false,
         'Has previously completed tutorial': false,
         'Pushed first button': false,
-        'Flow': somData[0] === null ? 'Default' : 'Summer of Making'
+        'Flow': somData[0] == null ? 'Default' : 'Summer of Making'
       })
     }
     if (defaultFilter(e)) {
