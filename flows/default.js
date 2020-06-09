@@ -37,7 +37,7 @@ const loadFlow = (app) => {
     //console.log(command)
     await ack();
     console.log('default')
-    startTutorial(body, command.user_id, true)
+    startTutorial(e, command.user_id, true)
   }));
 
   app.event('team_join', async body => {
