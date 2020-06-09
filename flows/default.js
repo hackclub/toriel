@@ -180,13 +180,6 @@ const loadFlow = (app) => {
         text: `:fastparrot: ${message}`
       })
     }
-    if (body.event.channel_type === 'im' && body.event.user !== 'U012FPRJEVB' && body.event.user !== 'U012H797734') {
-      await app.client.chat.postMessage({
-        token: process.env.SLACK_OAUTH_TOKEN,
-        channel: 'U4QAK9SRW',
-        text: `From <@${body.event.user}>: ${body.event.text}`
-      })
-    }
   }));
 
   app.action('introduced', e => runInFlow(e, async ({ ack, body }) => {

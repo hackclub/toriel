@@ -15,6 +15,16 @@ require("fs").readdirSync(normalizedPath).forEach(function (file) {
   require("./flows/" + file).loadFlow(app);
 });
 
+app.event('message', async body => {
+  if (body.event.channel_type === 'im' && body.event.user !== 'U012FPRJEVB' && body.event.user !== 'U012H797734') {
+    await app.client.chat.postMessage({
+      token: process.env.SLACK_OAUTH_TOKEN,
+      channel: 'U4QAK9SRW',
+      text: `From <@${body.event.user}>: ${body.event.text}`
+    })
+  }
+})
+
 app.event('member_joined_channel', async body => {
   const pushedFirstButton = await hasPushedButton(body.event.user)
   const completed = await hasCompletedTutorial(body.event.user)
