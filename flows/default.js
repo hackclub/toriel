@@ -15,11 +15,11 @@ async function defaultFilter(e) {
   console.log(userID)
   //return userID === 'U0120F9NAGK'
   //console.log(e.body)
-  const options = {
+  const flowOptions = {
     maxRecords: 1,
-    filterByFormula: `AND(Name = '${userID}', Flow = 'Default')`
+    filterByFormula: `AND(Name = '${userID}', Flow = 'Default')`,
   }
-  let data = await axios('https://api2.hackclub.com/v0.1/Tutorial%20Island/Tutorial%20Island?select=' + JSON.stringify(options)).then(r => r.data)
+  let data = await axios('https://api2.hackclub.com/v0.1/Tutorial%20Island/Tutorial%20Island?select=' + JSON.stringify(flowOptions)).then(r => r.data)
 
   const shouldContinue = data[0] != null || e.body.text === ''
   //console.log('Does event pass the default filter?', shouldContinue)
@@ -41,9 +41,7 @@ const loadFlow = (app) => {
   }));
 
   app.event('team_join', async body => {
-    console.log('hi')
     const bot = await isBot(app, body.event.user.id)
-    console.log(bot)
     if (!bot) await startTutorial(body, body.event.user.id)
   });
 
@@ -466,13 +464,21 @@ const loadFlow = (app) => {
     await app.client.conversations.invite({
       token: process.env.SLACK_BOT_TOKEN,
       channel: channelId,
-      users: 'U012FPRJEVB'
+      users: 'U012FPRJEVB' //Clippy Admin
     })
     await app.client.conversations.invite({
       token: process.env.SLACK_BOT_TOKEN,
       channel: channelId,
       users: 'UH50T81A6' //banker
     })
+
+    const somOptions = {
+      maxRecords: 1,
+      filterByFormula: `Email = '${e.user.profile.email}'`,
+      authKey: process.env.AIRTABLE_API_KEY
+    }
+    let somData = await axios(`https://api2.hackclub.com/v0.1/Pre-register/Applications?select=${JSON.stringify(somOptions)}`).then(r => r.data)
+
     if (defaultFilter(e)) {
       await app.client.conversations.setTopic({
         token: process.env.SLACK_OAUTH_TOKEN,
@@ -508,7 +514,7 @@ const loadFlow = (app) => {
           'Has completed tutorial': false,
           'Has previously completed tutorial': false,
           'Pushed first button': false,
-          'Flow': 'Default'
+          'Flow': somData[0] === null ? 'Default' : 'Summer of Making'
         })
       }
 
