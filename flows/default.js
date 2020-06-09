@@ -475,9 +475,8 @@ const loadFlow = (app) => {
     const somOptions = {
       maxRecords: 1,
       filterByFormula: `Email = '${e.event.user.profile.email}'`,
-      authKey: process.env.AIRTABLE_API_KEY
     }
-    let somData = await axios(`https://api2.hackclub.com/v0.1/Pre-register/Applications?select=${JSON.stringify(somOptions)}`).then(r => r.data)
+    let somData = await axios(`https://api2.hackclub.com/v0.1/Pre-register/Applications?authKey=${process.env.AIRTABLE_API_KEY}&select=${JSON.stringify(somOptions)}`).then(r => r.data)
     console.log(somData)
 
 
