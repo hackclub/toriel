@@ -6,7 +6,7 @@ const { generateIslandName, getUserRecord, islandTable,
 	setPreviouslyCompletedTutorial, getPronouns, setPronouns,
 	updateSingleBlockMessage, getIslandId, messageIsPartOfTutorial,
 	getLatestMessages, inviteUserToChannel, sendSingleBlockMessage,
-	completeTutorial, sendEphemeralMessage, somIntro } = require('../utils/utils')
+	completeTutorial, sendEphemeralMessage } = require('../utils/utils')
 
 const { somIntro } = require('../utils/intros')
 
