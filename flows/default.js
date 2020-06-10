@@ -473,11 +473,16 @@ const loadFlow = (app) => {
         'Flow': 'Default'
       })
     } else {
-      console.log(e.event.user)
-      console.log(e.event.user.profile)
+      //console.log(e.event.user)
+      //console.log(e.event.user.profile)
+      let userProfile = await app.client.users.profile.get({
+        token: process.env.SLACK_BOT_TOKEN,
+        user: e.event.user.id
+      })
+      console.log(userProfile)
       const somOptions = {
         maxRecords: 1,
-        filterByFormula: `Email = '${e.event.user.profile.email}'`
+        filterByFormula: `Email = '${userProfile.profile.email}'` //e.event.user.profile.email
       }
       let somData = await axios(`https://api2.hackclub.com/v0.1/Pre-register/Applications?authKey=${process.env.AIRTABLE_API_KEY}&select=${JSON.stringify(somOptions)}&meta=true`).then(r => r.data)
       console.log(somData)
