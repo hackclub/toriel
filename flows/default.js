@@ -474,11 +474,6 @@ const loadFlow = (app) => {
     } else {
       //console.log(e.event.user)
       //console.log(e.event.user.profile)
-      let lookup = await app.client.users.lookupByEmail({
-        token: process.env.SLACK_BOT_TOKEN,
-        email: 'summer19@matthewstanciu.me'
-      })
-      console.log(lookup)
       let userProfile = await app.client.users.info({
         token: process.env.SLACK_BOT_TOKEN,
         user: e.event.user.id
@@ -497,7 +492,7 @@ const loadFlow = (app) => {
         'Has completed tutorial': false,
         'Has previously completed tutorial': false,
         'Pushed first button': false,
-        'Flow': somData[0] == null ? 'Default' : 'Summer of Making'
+        'Flow': somData.response[0] == null ? 'Default' : 'Summer of Making'
       })
     }
     console.log(`New tutorial channel created: ${channelId}`)
