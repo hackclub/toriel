@@ -1,8 +1,9 @@
 const { App } = require("@slack/bolt")
 const AirtablePlus = require('airtable-plus')
+const axios = require('axios')
 
 const { hasPushedButton, hasCompletedTutorial, getIslandId,
-  sendEphemeralMessage, updateInteractiveMessage, sendSingleBlockMessage } = require('./utils')
+  sendEphemeralMessage, updateInteractiveMessage, sendSingleBlockMessage, startTutorial } = require('./utils/utils')
 
 const app = new App({
   signingSecret: process.env.SLACK_SIGNING_SECRET,
@@ -13,6 +14,28 @@ const app = new App({
 const normalizedPath = require("path").join(__dirname, "flows");
 require("fs").readdirSync(normalizedPath).forEach(function (file) {
   require("./flows/" + file).loadFlow(app);
+});
+
+app.event('team_join', async body => {
+  const bot = await isBot(app, body.event.user.id)
+  if (!bot) {
+    let userProfile = await app.client.users.info({
+      token: process.env.SLACK_BOT_TOKEN,
+      user: body.event.user.id
+    })
+    console.log(userProfile)
+    const somOptions = {
+      maxRecords: 1,
+      filterByFormula: `Email = '${userProfile.user.profile.email}'`
+    }
+    let somData = await axios(`https://api2.hackclub.com/v0.1/Pre-register/Applications?authKey=${process.env.AIRTABLE_API_KEY}&select=${JSON.stringify(somOptions)}&meta=true`).then(r => r.data)
+    console.log(somData)
+    if (somData.response[0] == null) {
+      await startTutorial(app, body.event.user.id, 'default')
+    } else {
+      await startTutorial(app, body.event.user.id, 'som')
+    }
+  }
 });
 
 app.event('message', async body => {

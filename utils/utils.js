@@ -3,6 +3,8 @@ const friendlyWords = require('friendly-words')
 const GithubSlugger = require('github-slugger')
 const slugger = new GithubSlugger()
 
+const { defaultIntro, som } = require('./intros')
+
 const islandTable = new AirtablePlus({
 	apiKey: process.env.AIRTABLE_API_KEY,
 	baseID: 'appYGt7P3MtotTotg',
@@ -16,6 +18,86 @@ const eventsTable = new AirtablePlus({
 	tableName: 'Events'
 })
 exports.eventsTable = eventsTable
+
+const startTutorial = async (app, user, flow, restart) => {
+	const islandName = await generateIslandName()
+	const newChannel = await app.client.conversations.create({
+		token: process.env.SLACK_BOT_TOKEN,
+		name: islandName.channel,
+		is_private: true,
+		user_ids: process.env.BOT_USER_ID
+	})
+	const channelId = newChannel.channel.id
+
+	if (restart) {
+		let record = await getUserRecord(user)
+		if (typeof record === 'undefined') {
+			record = await islandTable.create({
+				'Name': user,
+				'Island Channel ID': channelId,
+				'Island Channel Name': islandName.channel,
+				'Has completed tutorial': false,
+				'Has previously completed tutorial': false,
+				'Pushed first button': false,
+				'Flow': flow === 'default' ? 'Default' : 'Summer of Making'
+			})
+		}
+		await islandTable.update(record.id, {
+			'Island Channel ID': channelId,
+			'Island Channel Name': islandName.channel,
+			'Has completed tutorial': true,
+			'Pushed first button': false,
+			'Flow': flow === 'default' ? 'Default' : 'Summer of Making'
+		})
+	} else {
+		await islandTable.create({
+			'Name': user,
+			'Island Channel ID': channelId,
+			'Island Channel Name': islandName.channel,
+			'Has completed tutorial': false,
+			'Has previously completed tutorial': false,
+			'Pushed first button': false,
+			'Flow': flow === 'default' ? 'Default' : 'Summer of Making'
+		})
+	}
+	console.log(`New tutorial channel created: ${channelId}`)
+
+	await app.client.conversations.invite({
+		token: process.env.SLACK_BOT_TOKEN,
+		channel: channelId,
+		users: user
+	})
+		.catch(err => console.log(err.data.errors))
+	await app.client.conversations.invite({
+		token: process.env.SLACK_BOT_TOKEN,
+		channel: channelId,
+		users: 'U012FPRJEVB' //Clippy Admin
+	})
+	await app.client.conversations.invite({
+		token: process.env.SLACK_BOT_TOKEN,
+		channel: channelId,
+		users: 'UH50T81A6' //banker
+	})
+
+	await app.client.conversations.setTopic({
+		token: process.env.SLACK_OAUTH_TOKEN,
+		channel: channelId,
+		topic: `Welcome to Hack Club! :wave: Unlock the community by completing this tutorial.`
+	})
+
+	await app.client.chat.postMessage({
+		token: process.env.SLACK_BOT_TOKEN,
+		channel: channelId,
+		blocks: flow === 'default' ? defaultIntro : som
+	})
+
+	await timeout(30000)
+	let pushedButton = await hasPushedButton(user)
+	if (!pushedButton) {
+		await sendMessage(app, channelId, `(<@${user}> Psst—every new member completes this quick intro to unlock the Hack Club community. It only takes 1 minute—I promise—and you get free stuff along the way. Click any of the three buttons above to begin :star2: :money_with_wings: :eye:)`, 10)
+	}
+}
+exports.startTutorial = startTutorial
 
 const sendMessage = async (app, channel, text, delay, ts, unfurl) => {
 	await timeout(delay || 3000)

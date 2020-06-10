@@ -7,7 +7,9 @@ const { sendEphemeralMessage, getUserRecord, getIslandId,
   messageIsPartOfTutorial, inviteUserToChannel, getIslandName,
   getNextEvent, completeTutorial, timeout,
   updatePushedButton, setPreviouslyCompletedTutorial, hasPreviouslyCompletedTutorial,
-  generateIslandName, islandTable, getLatestMessages } = require('../utils')
+  generateIslandName, islandTable, getLatestMessages } = require('../utils/utils')
+
+const { defaultIntro } = require('../utils/intros')
 
 async function defaultFilter(e) {
   //placeholder validation
@@ -20,7 +22,6 @@ async function defaultFilter(e) {
     filterByFormula: `AND(Name = '${userID}', Flow = 'Default')`,
   }
   let data = await axios('https://api2.hackclub.com/v0.1/Tutorial%20Island/Tutorial%20Island?select=' + JSON.stringify(flowOptions)).then(r => r.data)
-  console.log(data)
 
   const shouldContinue = data[0] != null || e.body.text === ''
   //console.log('Does event pass the default filter?', shouldContinue)
@@ -37,13 +38,8 @@ const loadFlow = (app) => {
   app.command('/restart', e => runInFlow(e, async ({ command, ack, say }) => {
     await ack();
     console.log('default')
-    startTutorial(e, command.user_id, true)
+    startTutorial(app, command.user_id, 'default', true)
   }));
-
-  app.event('team_join', async body => {
-    const bot = await isBot(app, body.event.user.id)
-    if (!bot) await startTutorial(body, body.event.user.id)
-  });
 
   app.action('intro_progress_1', e => runInFlow(e, async ({ ack, body }) => {
     ack();
@@ -441,140 +437,6 @@ const loadFlow = (app) => {
         }
       ]
     })
-  }
-
-  async function startTutorial(e, user, restart) {
-    const islandName = await generateIslandName()
-    const newChannel = await app.client.conversations.create({
-      token: process.env.SLACK_BOT_TOKEN,
-      name: islandName.channel,
-      is_private: true,
-      user_ids: process.env.BOT_USER_ID
-    })
-    const channelId = newChannel.channel.id
-    if (restart) {
-      let record = await getUserRecord(user)
-      if (typeof record === 'undefined') {
-        record = await islandTable.create({
-          'Name': user,
-          'Island Channel ID': channelId,
-          'Island Channel Name': islandName.channel,
-          'Has completed tutorial': false,
-          'Has previously completed tutorial': false,
-          'Pushed first button': false,
-          'Flow': 'Default'
-        })
-      }
-      await islandTable.update(record.id, {
-        'Island Channel ID': channelId,
-        'Island Channel Name': islandName.channel,
-        'Has completed tutorial': true,
-        'Pushed first button': false,
-        'Flow': 'Default'
-      })
-    } else {
-      //console.log(e.event.user)
-      //console.log(e.event.user.profile)
-      let userProfile = await app.client.users.info({
-        token: process.env.SLACK_BOT_TOKEN,
-        user: e.event.user.id
-      })
-      console.log(userProfile)
-      const somOptions = {
-        maxRecords: 1,
-        filterByFormula: `Email = '${userProfile.user.profile.email}'` //e.event.user.profile.email
-      }
-      let somData = await axios(`https://api2.hackclub.com/v0.1/Pre-register/Applications?authKey=${process.env.AIRTABLE_API_KEY}&select=${JSON.stringify(somOptions)}&meta=true`).then(r => r.data)
-      console.log(somData)
-      await islandTable.create({
-        'Name': user,
-        'Island Channel ID': channelId,
-        'Island Channel Name': islandName.channel,
-        'Has completed tutorial': false,
-        'Has previously completed tutorial': false,
-        'Pushed first button': false,
-        'Flow': somData.response[0] == null ? 'Default' : 'Summer of Making'
-      })
-    }
-    console.log(`New tutorial channel created: ${channelId}`)
-
-    await app.client.conversations.invite({
-      token: process.env.SLACK_BOT_TOKEN,
-      channel: channelId,
-      users: user
-    })
-      .catch(err => console.log(err.data.errors))
-    await app.client.conversations.invite({
-      token: process.env.SLACK_BOT_TOKEN,
-      channel: channelId,
-      users: 'U012FPRJEVB' //Clippy Admin
-    })
-    await app.client.conversations.invite({
-      token: process.env.SLACK_BOT_TOKEN,
-      channel: channelId,
-      users: 'UH50T81A6' //banker
-    })
-
-    await app.client.conversations.setTopic({
-      token: process.env.SLACK_OAUTH_TOKEN,
-      channel: channelId,
-      topic: `Welcome to Hack Club! :wave: Unlock the community by completing this tutorial.`
-    })
-
-    let shouldContinue = await defaultFilter(e)
-    if (shouldContinue) {
-      await app.client.chat.postMessage({
-        token: process.env.SLACK_BOT_TOKEN,
-        channel: channelId,
-        blocks: [
-          {
-            "type": "section",
-            "text": {
-              "type": "mrkdwn",
-              "text": `Hi, I'm Clippy! My job is to help you join the Hack Club community. Do you need assistance?`
-            }
-          },
-          {
-            "type": "actions",
-            "elements": [
-              {
-                "type": "button",
-                "text": {
-                  "type": "plain_text",
-                  "emoji": true,
-                  "text": ":star2:What??? What's this?"
-                },
-                "action_id": "intro_progress_1"
-              },
-              {
-                "type": "button",
-                "text": {
-                  "type": "plain_text",
-                  "emoji": true,
-                  "text": ":money_with_wings:Of course I want free stuff!"
-                },
-                "action_id": "intro_progress_2"
-              },
-              {
-                "type": "button",
-                "text": {
-                  "type": "plain_text",
-                  "emoji": true,
-                  "text": ":eye:Wait what?"
-                },
-                "action_id": "intro_progress_3"
-              }
-            ]
-          }
-        ]
-      })
-
-      await timeout(30000)
-      let pushedButton = await hasPushedButton(user)
-      if (!pushedButton) {
-        await sendMessage(app, channelId, `(<@${user}> Psst—every new member completes this quick intro to unlock the Hack Club community. It only takes 1 minute—I promise—and you get free stuff along the way. Click any of the three buttons above to begin :star2: :money_with_wings: :eye:)`, 10)
-      }
-    }
   }
 }
 
