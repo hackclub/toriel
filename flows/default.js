@@ -20,6 +20,7 @@ async function defaultFilter(e) {
     filterByFormula: `AND(Name = '${userID}', Flow = 'Default')`,
   }
   let data = await axios('https://api2.hackclub.com/v0.1/Tutorial%20Island/Tutorial%20Island?select=' + JSON.stringify(flowOptions)).then(r => r.data)
+  console.log(data)
 
   const shouldContinue = data[0] != null || e.body.text === ''
   //console.log('Does event pass the default filter?', shouldContinue)
@@ -520,7 +521,8 @@ const loadFlow = (app) => {
       topic: `Welcome to Hack Club! :wave: Unlock the community by completing this tutorial.`
     })
 
-    if (defaultFilter(e)) {
+    let shouldContinue = await defaultFilter(e)
+    if (shouldContinue) {
       await app.client.chat.postMessage({
         token: process.env.SLACK_BOT_TOKEN,
         channel: channelId,
