@@ -7,7 +7,8 @@ const { sendEphemeralMessage, getUserRecord, getIslandId,
   messageIsPartOfTutorial, inviteUserToChannel, getIslandName,
   getNextEvent, completeTutorial, timeout,
   updatePushedButton, setPreviouslyCompletedTutorial, hasPreviouslyCompletedTutorial,
-  generateIslandName, islandTable, getLatestMessages } = require('../utils/utils')
+  generateIslandName, islandTable, getLatestMessages,
+  startTutorial } = require('../utils/utils')
 
 const { defaultIntro } = require('../utils/intros')
 
