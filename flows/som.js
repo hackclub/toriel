@@ -82,7 +82,60 @@ const loadFlow = app => {
 		await app.client.chat.postMessage({
 			token: process.env.SLACK_BOT_TOKEN,
 			channel: body.channel.id,
-			blocks: somIntro
+			blocks: [
+				{
+					"type": "section",
+					"text": {
+						"type": "mrkdwn",
+						"text": `What are your pronouns? (how you want to be referred to by others)`
+					}
+				},
+				{
+					"type": "actions",
+					"elements": [
+						{
+							"type": "button",
+							"text": {
+								"type": "plain_text",
+								"emoji": true,
+								"text": "she/her/hers"
+							},
+							"style": "primary",
+							"action_id": "she"
+						},
+						{
+							"type": "button",
+							"text": {
+								"type": "plain_text",
+								"emoji": true,
+								"text": "he/him/his"
+							},
+							"style": "primary",
+							"action_id": "he"
+						},
+						{
+							"type": "button",
+							"text": {
+								"type": "plain_text",
+								"emoji": true,
+								"text": "they/them/theirs"
+							},
+							"style": "primary",
+							"action_id": "they"
+						},
+						{
+							"type": "button",
+							"text": {
+								"type": "plain_text",
+								"emoji": true,
+								"text": "something else"
+							},
+							"style": "primary",
+							"action_id": "something_else"
+						}
+					]
+				}
+			]
 		})
 	}
 

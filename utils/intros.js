@@ -46,7 +46,7 @@ const som = [
 		"type": "section",
 		"text": {
 			"type": "mrkdwn",
-			"text": `What are your pronouns? (how you want to be referred to by others)`
+			"text": `Hi, I'm Clippy! My job is to help you get started with the Hack Club Summer of Making. Do you need assistance?`
 		}
 	},
 	{
@@ -57,40 +57,27 @@ const som = [
 				"text": {
 					"type": "plain_text",
 					"emoji": true,
-					"text": "she/her/hers"
+					"text": ":star2:What??? What's this?"
 				},
-				"style": "primary",
-				"action_id": "she"
+				"action_id": "intro_progress_1"
 			},
 			{
 				"type": "button",
 				"text": {
 					"type": "plain_text",
 					"emoji": true,
-					"text": "he/him/his"
+					"text": ":money_with_wings:Of course I want free stuff!"
 				},
-				"style": "primary",
-				"action_id": "he"
+				"action_id": "intro_progress_2"
 			},
 			{
 				"type": "button",
 				"text": {
 					"type": "plain_text",
 					"emoji": true,
-					"text": "they/them/theirs"
+					"text": ":eye:Wait what?"
 				},
-				"style": "primary",
-				"action_id": "they"
-			},
-			{
-				"type": "button",
-				"text": {
-					"type": "plain_text",
-					"emoji": true,
-					"text": "something else"
-				},
-				"style": "primary",
-				"action_id": "something_else"
+				"action_id": "intro_progress_3"
 			}
 		]
 	}
