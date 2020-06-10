@@ -443,7 +443,6 @@ const loadFlow = (app) => {
   }
 
   async function startTutorial(e, user, restart) {
-    console.log(e)
     const islandName = await generateIslandName()
     const newChannel = await app.client.conversations.create({
       token: process.env.SLACK_BOT_TOKEN,
@@ -475,11 +474,15 @@ const loadFlow = (app) => {
     } else {
       //console.log(e.event.user)
       //console.log(e.event.user.profile)
+      let lookup = await app.client.users.lookupByEmail({
+        token: process.env.SLACK_BOT_TOKEN,
+        email: 'summer19@matthewstanciu.me'
+      })
+      console.log(lookup)
       let userProfile = await app.client.users.info({
         token: process.env.SLACK_BOT_TOKEN,
         user: e.event.user.id
       })
-      console.log(userProfile)
       const somOptions = {
         maxRecords: 1,
         filterByFormula: `Email = '${userProfile.user.profile.email}'` //e.event.user.profile.email
