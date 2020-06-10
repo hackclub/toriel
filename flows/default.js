@@ -483,6 +483,7 @@ const loadFlow = (app) => {
         token: process.env.SLACK_BOT_TOKEN,
         user: e.event.user.id
       })
+      console.log(userProfile)
       const somOptions = {
         maxRecords: 1,
         filterByFormula: `Email = '${userProfile.user.profile.email}'` //e.event.user.profile.email
