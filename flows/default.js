@@ -473,6 +473,8 @@ const loadFlow = (app) => {
         'Flow': 'Default'
       })
     } else {
+      console.log(e.event.user)
+      console.log(e.event.user.profile)
       const somOptions = {
         maxRecords: 1,
         filterByFormula: `Email = '${e.event.user.profile.email}'`
