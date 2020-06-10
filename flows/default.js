@@ -35,6 +35,7 @@ async function runInFlow(opts, func) {
 const loadFlow = (app) => {
   app.command('/restart', e => runInFlow(e, async ({ command, ack, say }) => {
     await ack();
+    console.log(e)
     console.log('default')
     startTutorial(e, command.user_id, true)
   }));
