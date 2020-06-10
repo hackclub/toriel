@@ -34,7 +34,6 @@ async function runInFlow(opts, func) {
 
 const loadFlow = (app) => {
   app.command('/restart', e => runInFlow(e, async ({ command, ack, say }) => {
-    //console.log(command)
     await ack();
     console.log('default')
     startTutorial(e, command.user_id, true)
@@ -47,7 +46,6 @@ const loadFlow = (app) => {
 
   app.action('intro_progress_1', e => runInFlow(e, async ({ ack, body }) => {
     ack();
-    console.log(body)
     introProgress(body)
   }));
   app.action('intro_progress_2', e => runInFlow(e, async ({ ack, body }) => {
@@ -472,9 +470,14 @@ const loadFlow = (app) => {
       users: 'UH50T81A6' //banker
     })
 
+    let userProfile = await app.client.users.profile.get({
+      token: process.env.SLACK_BOT_TOKEN,
+      user: e.event.user.id
+    })
+    console.log(userProfile.profile.email)
     const somOptions = {
       maxRecords: 1,
-      filterByFormula: `Email = '${e.event.user.profile.email}'`
+      filterByFormula: `Email = '${userProfile.profile.email}'`
     }
     let somData = await axios(`https://api2.hackclub.com/v0.1/Pre-register/Applications?authKey=${process.env.AIRTABLE_API_KEY}&select=${JSON.stringify(somOptions)}&meta=true`).then(r => r.data)
     console.log(somData)
