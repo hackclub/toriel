@@ -10,14 +10,9 @@ const { sendEphemeralMessage, getUserRecord, getIslandId,
   generateIslandName, islandTable, getLatestMessages,
   startTutorial } = require('../utils/utils')
 
-const { defaultIntro } = require('../utils/intros')
-
 async function defaultFilter(e) {
-  //placeholder validation
   const userID = e.body.user_id || (e.body.event ? e.body.event.user : e.body.user.id)
   console.log(userID)
-  //return userID === 'U0120F9NAGK'
-  //console.log(e.body)
   const flowOptions = {
     maxRecords: 1,
     filterByFormula: `AND(Name = '${userID}', Flow = 'Default')`,
@@ -25,7 +20,6 @@ async function defaultFilter(e) {
   let data = await axios('https://api2.hackclub.com/v0.1/Tutorial%20Island/Tutorial%20Island?select=' + JSON.stringify(flowOptions)).then(r => r.data)
 
   const shouldContinue = data[0] != null || e.body.text === ''
-  //console.log('Does event pass the default filter?', shouldContinue)
   return shouldContinue
 }
 

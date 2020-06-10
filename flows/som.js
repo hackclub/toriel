@@ -8,8 +8,6 @@ const { generateIslandName, getUserRecord, islandTable,
 	getLatestMessages, inviteUserToChannel, sendSingleBlockMessage,
 	completeTutorial, sendEphemeralMessage, startTutorial } = require('../utils/utils')
 
-const { somIntro } = require('../utils/intros')
-
 async function somFilter(e) {
 	const userID = e.body.user_id || (e.body.event ? e.body.event.user : e.body.user.id)
 	console.log(userID)
