@@ -451,44 +451,6 @@ const loadFlow = (app) => {
       user_ids: process.env.BOT_USER_ID
     })
     const channelId = newChannel.channel.id
-    console.log(`New tutorial channel created: ${channelId}`)
-
-    await app.client.conversations.invite({
-      token: process.env.SLACK_BOT_TOKEN,
-      channel: channelId,
-      users: user
-    })
-      .catch(err => console.log(err.data.errors))
-    await app.client.conversations.invite({
-      token: process.env.SLACK_BOT_TOKEN,
-      channel: channelId,
-      users: 'U012FPRJEVB' //Clippy Admin
-    })
-    await app.client.conversations.invite({
-      token: process.env.SLACK_BOT_TOKEN,
-      channel: channelId,
-      users: 'UH50T81A6' //banker
-    })
-
-    let userProfile = await app.client.users.profile.get({
-      token: process.env.SLACK_BOT_TOKEN,
-      user: e.event.user.id
-    })
-    console.log(userProfile.profile.email)
-    const somOptions = {
-      maxRecords: 1,
-      filterByFormula: `Email = '${userProfile.profile.email}'`
-    }
-    let somData = await axios(`https://api2.hackclub.com/v0.1/Pre-register/Applications?authKey=${process.env.AIRTABLE_API_KEY}&select=${JSON.stringify(somOptions)}&meta=true`).then(r => r.data)
-    console.log(somData)
-
-
-    await app.client.conversations.setTopic({
-      token: process.env.SLACK_OAUTH_TOKEN,
-      channel: channelId,
-      topic: `Welcome to Hack Club! :wave: Unlock the community by completing this tutorial.`
-    })
-
     if (restart) {
       let record = await getUserRecord(user)
       if (typeof record === 'undefined') {
@@ -520,6 +482,45 @@ const loadFlow = (app) => {
         'Flow': somData[0] == null ? 'Default' : 'Summer of Making'
       })
     }
+    console.log(`New tutorial channel created: ${channelId}`)
+
+    await app.client.conversations.invite({
+      token: process.env.SLACK_BOT_TOKEN,
+      channel: channelId,
+      users: user
+    })
+      .catch(err => console.log(err.data.errors))
+    await app.client.conversations.invite({
+      token: process.env.SLACK_BOT_TOKEN,
+      channel: channelId,
+      users: 'U012FPRJEVB' //Clippy Admin
+    })
+    await app.client.conversations.invite({
+      token: process.env.SLACK_BOT_TOKEN,
+      channel: channelId,
+      users: 'UH50T81A6' //banker
+    })
+
+    let userProfile = await app.client.users.profile.get({
+      token: process.env.SLACK_BOT_TOKEN,
+      user: e.event.user.id
+    })
+    console.log(userProfile)
+    console.log(userProfile.profile.email)
+    const somOptions = {
+      maxRecords: 1,
+      filterByFormula: `Email = '${userProfile.profile.email}'`
+    }
+    let somData = await axios(`https://api2.hackclub.com/v0.1/Pre-register/Applications?authKey=${process.env.AIRTABLE_API_KEY}&select=${JSON.stringify(somOptions)}&meta=true`).then(r => r.data)
+    console.log(somData)
+
+
+    await app.client.conversations.setTopic({
+      token: process.env.SLACK_OAUTH_TOKEN,
+      channel: channelId,
+      topic: `Welcome to Hack Club! :wave: Unlock the community by completing this tutorial.`
+    })
+
     if (defaultFilter(e)) {
       await app.client.chat.postMessage({
         token: process.env.SLACK_BOT_TOKEN,
