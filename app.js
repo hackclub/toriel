@@ -3,7 +3,8 @@ const AirtablePlus = require('airtable-plus')
 const axios = require('axios')
 
 const { hasPushedButton, hasCompletedTutorial, getIslandId,
-  sendEphemeralMessage, updateInteractiveMessage, sendSingleBlockMessage, startTutorial } = require('./utils/utils')
+  sendEphemeralMessage, updateInteractiveMessage, sendSingleBlockMessage,
+  startTutorial, isBot } = require('./utils/utils')
 
 const app = new App({
   signingSecret: process.env.SLACK_SIGNING_SECRET,
