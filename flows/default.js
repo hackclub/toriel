@@ -12,7 +12,7 @@ const { sendEphemeralMessage, getUserRecord, getIslandId,
 
 async function defaultFilter(e) {
   const userID = e.body.user_id || (e.body.event ? e.body.event.user : e.body.user.id)
-  console.log(userID)
+  //console.log(userID)
   const flowOptions = {
     maxRecords: 1,
     filterByFormula: `AND(Name = '${userID}', Flow = 'Default')`,
