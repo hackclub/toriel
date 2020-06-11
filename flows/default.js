@@ -33,7 +33,7 @@ const loadFlow = (app) => {
   app.command('/restart', e => runInFlow(e, async ({ command, ack, say }) => {
     await ack();
     console.log('default')
-    await setFlow('')
+    await setFlow(command.user_id, '')
     startTutorial(app, command.user_id, 'default', true)
   }));
 
