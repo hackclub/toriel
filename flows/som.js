@@ -18,7 +18,7 @@ async function somFilter(e) {
   }
   let data = await axios('https://api2.hackclub.com/v0.1/Tutorial%20Island/Tutorial%20Island?select=' + JSON.stringify(options)).then(r => r.data)
 
-  if (e.body.text === '') return true
+  if (e.body.text === 'som') return true
   else return data[0] !== null
 }
 
