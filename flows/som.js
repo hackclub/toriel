@@ -17,9 +17,7 @@ async function somFilter(e) {
     filterByFormula: `AND(Name = '${userID}', Flow = 'Summer of Making')`
   }
   let data = await axios('https://api2.hackclub.com/v0.1/Tutorial%20Island/Tutorial%20Island?select=' + JSON.stringify(options)).then(r => r.data)
-
-  if (e.body.text === 'som') return true
-  else return (data[0] !== null)
+  return (data[0] !== null)
 }
 
 async function runInFlow(opts, func) {
@@ -29,17 +27,6 @@ async function runInFlow(opts, func) {
 }
 
 const loadFlow = app => {
-  app.command('/hardware', e => runInFlow(e, async ({ command, ack, say }) => {
-    await ack();
-    console.log('got /hardware command from SOM user!')
-  }))
-  app.command('/restart', e => runInFlow(e, async ({ command, ack, say }) => {
-    await ack();
-    console.log('som')
-    await setFlow(command.user_id, null)
-    await startTutorial(app, command.user_id, 'som', true)
-  }))
-
   app.action('intro_progress_1', e => runInFlow(e, async ({ ack, body }) => {
     ack();
     introProgress(body)

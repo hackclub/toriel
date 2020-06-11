@@ -18,8 +18,7 @@ async function defaultFilter(e) {
     filterByFormula: `AND(Name = '${userID}', Flow = 'Default')`,
   }
   let data = await axios('https://api2.hackclub.com/v0.1/Tutorial%20Island/Tutorial%20Island?select=' + JSON.stringify(flowOptions)).then(r => r.data)
-  if (e.body.text === '') return true
-  else return (data[0] != null)
+  return (data[0] != null)
 }
 
 async function runInFlow(opts, func) {
@@ -29,13 +28,6 @@ async function runInFlow(opts, func) {
 }
 
 const loadFlow = (app) => {
-  app.command('/restart', e => runInFlow(e, async ({ command, ack, say }) => {
-    await ack();
-    console.log('default')
-    await setFlow(command.user_id, null)
-    startTutorial(app, command.user_id, 'default', true)
-  }));
-
   app.action('intro_progress_1', e => runInFlow(e, async ({ ack, body }) => {
     ack();
     introProgress(body)

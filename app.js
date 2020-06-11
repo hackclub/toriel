@@ -39,6 +39,17 @@ app.event('team_join', async body => {
   }
 });
 
+app.command('/restart', async ({ command, ack }) => {
+  await ack()
+  if (command.text === '') {
+    await setFlow(command.user_id, 'Default')
+    await startTutorial(app, command.user_id, 'default', true)
+  } else if (command.text === 'som') {
+    await setFlow(command.user_id, 'Summer of Making')
+    await startTutorial(app, command.user_id, 'som', true)
+  }
+})
+
 app.event('message', async body => {
   if (body.event.channel_type === 'im' && body.event.user !== 'U012FPRJEVB' && body.event.user !== 'U012H797734') {
     await app.client.chat.postMessage({
