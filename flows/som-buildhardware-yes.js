@@ -1,4 +1,4 @@
-const { setFlow, sendDoubleBlockMessage } = require('../utils/utils')
+const { setFlow, sendDoubleBlockMessage, updateSingleBlockMessage } = require('../utils/utils')
 
 const loadFlow = app => {
   app.action('buildhardware_yes', async ({ ack, body }) => {

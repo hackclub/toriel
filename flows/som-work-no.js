@@ -1,4 +1,4 @@
-const { sendMessage, inviteUserToChannel } = require('../utils/utils')
+const { sendMessage, inviteUserToChannel, updateSingleBlockMessage } = require('../utils/utils')
 
 const loadFlow = app => {
   app.action('work_no', async ({ ack, body }) => {
