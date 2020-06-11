@@ -8,7 +8,7 @@ const { sendEphemeralMessage, getUserRecord, getIslandId,
   getNextEvent, completeTutorial, timeout,
   updatePushedButton, setPreviouslyCompletedTutorial, hasPreviouslyCompletedTutorial,
   generateIslandName, islandTable, getLatestMessages,
-  startTutorial } = require('../utils/utils')
+  startTutorial, setFlow } = require('../utils/utils')
 
 async function defaultFilter(e) {
   const userID = e.body.user_id || (e.body.event ? e.body.event.user : e.body.user.id)
