@@ -214,26 +214,8 @@ const updateSingleBlockMessage = async (app, ts, channel, text, blockText, actio
 }
 exports.updateSingleBlockMessage = updateSingleBlockMessage
 
-const updateInteractiveMessage = async (app, ts, channel, message) => {
-  const result = await app.client.chat.update({
-    token: process.env.SLACK_BOT_TOKEN,
-    ts: ts,
-    channel: channel,
-    blocks: [
-      {
-        type: 'section',
-        text: {
-          type: 'mrkdwn',
-          text: message
-        }
-      }
-    ],
-    text: 'Message from Test App'
-  });
-}
-exports.updateInteractiveMessage = updateInteractiveMessage
-
 const sendDoubleBlockMessage = async (app, channel, text, blockText1, blockText2, actionId1, actionId2) => {
+  await timeout(3000)
   await app.client.chat.postMessage({
     token: process.env.SLACK_BOT_TOKEN,
     channel: channel,
@@ -274,6 +256,25 @@ const sendDoubleBlockMessage = async (app, channel, text, blockText1, blockText2
   })
 }
 exports.sendDoubleBlockMessage = sendDoubleBlockMessage
+
+const updateInteractiveMessage = async (app, ts, channel, message) => {
+  await app.client.chat.update({
+    token: process.env.SLACK_BOT_TOKEN,
+    ts: ts,
+    channel: channel,
+    blocks: [
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: message
+        }
+      }
+    ],
+    text: 'Message from Test App'
+  });
+}
+exports.updateInteractiveMessage = updateInteractiveMessage
 
 const inviteUserToChannel = async (app, user, channel) => {
   await app.client.conversations.invite({
