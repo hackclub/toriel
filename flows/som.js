@@ -12,7 +12,6 @@ const { generateIslandName, getUserRecord, islandTable,
 async function somFilter(e) {
   const userID = e.body.user_id || (e.body.event ? e.body.event.user : e.body.user.id)
   console.log(userID)
-  let hasPrevCompleted = await hasPreviouslyCompletedTutorial(userID)
   const options = {
     maxRecords: 1,
     filterByFormula: `AND(Name = '${userID}', Flow = 'Summer of Making')`
