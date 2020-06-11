@@ -6,11 +6,12 @@ const { generateIslandName, getUserRecord, islandTable,
   setPreviouslyCompletedTutorial, getPronouns, setPronouns,
   updateSingleBlockMessage, getIslandId, messageIsPartOfTutorial,
   getLatestMessages, inviteUserToChannel, sendSingleBlockMessage,
-  completeTutorial, sendEphemeralMessage, startTutorial } = require('../utils/utils')
+  completeTutorial, sendEphemeralMessage, startTutorial,
+  sendDoubleBlockMessage } = require('../utils/utils')
 
 async function somFilter(e) {
   const userID = e.body.user_id || (e.body.event ? e.body.event.user : e.body.user.id)
-  //console.log(userID)
+  console.log(userID)
   const options = {
     maxRecords: 1,
     filterByFormula: `AND(Name = '${userID}', Flow = 'Summer of Making')`
@@ -73,9 +74,7 @@ const loadFlow = app => {
 
       await sendMessage(app, body.channel.id, `Now that that's out of the way, a few quick questions:`, 5000)
     }
-    console.log('sldkfdlsk')
     await timeout(3000)
-    console.log('skdlfalkdj')
     await app.client.chat.postMessage({
       token: process.env.SLACK_BOT_TOKEN,
       channel: body.channel.id,
@@ -141,21 +140,21 @@ const loadFlow = app => {
     await setPronouns(app, body.user.id, 'she/her/hers', 'she')
     updateSingleBlockMessage(app, body.message.ts, body.channel.id, `What are your pronouns? (how you want to be referred to by others)`, `she/her/hers`, `mimmiggie`)
     await sendMessage(app, body.channel.id, `:heart: Every profile here has a custom field for pronouns—I've gone ahead and set your pronouns for you, but <${`https://slack.com/intl/en-sg/help/articles/204092246-Edit-your-profile`}|here's a quick tutorial if you'd like to change them.>`)
-    learnQuestion(body.channel.id)
+    hardwareQuestion(body.channel.id)
   }));
   app.action('he', e => runInFlow(e, async ({ ack, body }) => {
     ack();
     await setPronouns(app, body.user.id, 'he/him/his', 'he')
     updateSingleBlockMessage(app, body.message.ts, body.channel.id, `What are your pronouns? (how you want to be referred to by others)`, `he/him/his`, `mimmiggie`)
     await sendMessage(app, body.channel.id, `:heart: Every profile here has a custom field for pronouns—I've gone ahead and set your pronouns for you, but <${`https://slack.com/intl/en-sg/help/articles/204092246-Edit-your-profile`}|here's a quick tutorial if you'd like to change them.>`)
-    learnQuestion(body.channel.id)
+    hardwareQuestion(body.channel.id)
   }));
   app.action('they', e => runInFlow(e, async ({ ack, body }) => {
     ack();
     await setPronouns(app, body.user.id, 'they/them/theirs', 'they')
     updateSingleBlockMessage(app, body.message.ts, body.channel.id, `What are your pronouns? (how you want to be referred to by others)`, `they/them/theirs`, `mimmiggie`)
     await sendMessage(app, body.channel.id, `:heart: Every profile here has a custom field for pronouns—I've gone ahead and set your pronouns for you, but <${`https://slack.com/intl/en-sg/help/articles/204092246-Edit-your-profile`}|here's a quick tutorial if you'd like to change them.>`)
-    learnQuestion(body.channel.id)
+    hardwareQuestion(body.channel.id)
   }));
   app.action('something_else', e => runInFlow(e, async ({ ack, body }) => {
     ack();
@@ -163,8 +162,8 @@ const loadFlow = app => {
     await sendMessage(app, body.channel.id, `What are your preferred pronouns? (Type your answer in chat)`)
   }));
 
-  const learnQuestion = async channel => {
-    await sendMessage(app, channel, `What do you want to learn during Summer of Making? (type your answer in the chat)`)
+  const hardwareQuestion = async channel => {
+    await sendDoubleBlockMessage(app, channel, `Are you building a hardware project during the Summer of Making?`, 'Yes', 'No', 'buildhardware_yes', 'buildhardware_no')
   }
 
   app.event('message', e => runInFlow(e, async body => {
@@ -179,33 +178,7 @@ const loadFlow = app => {
         let pronoun1 = lastUserMessage.slice(0, lastUserMessage.search("/"))
         await setPronouns(app, body.event.user, pronouns, pronoun1.toLowerCase())
         await sendMessage(app, body.event.channel, `:heart: Every profile here has a custom field for pronouns—I've gone ahead and set your pronouns for you, but <${`https://slack.com/intl/en-sg/help/articles/204092246-Edit-your-profile`}|here's a quick tutorial if you'd like to change them.>`)
-        learnQuestion(body.event.channel)
-      }
-
-      if (lastBotMessage.includes('What do you want to learn')) {
-        if (latestMessages.latestReply) {
-          let replies = await app.client.conversations.replies({
-            token: process.env.SLACK_BOT_TOKEN,
-            channel: body.event.channel,
-            ts: latestMessages.latestTs
-          })
-          sendToWelcomeCommittee(body.event.user, replies.messages[1].text)
-        }
-        else {
-          sendToWelcomeCommittee(body.event.user, lastUserMessage)
-        }
-
-        await sendMessage(app, body.event.channel, `Very interesting! We're super excited to have you here.`)
-        await sendMessage(app, body.event.channel, `Summer of Making is all about making things and sharing your work. I just invited you to <#CCU43K0PK> and <#C0M8PUPU6> to help you get started.`)
-        inviteUserToChannel(app, body.event.user, 'CCU43K0PK')
-        inviteUserToChannel(app, body.event.user, 'C0M8PUPU6')
-        await sendMessage(app, body.event.channel, `WIP stands for "work in progress"—if you share your work-in-progress projects in here, you'll get points!`)
-        await sendMessage(app, body.event.channel, `<#C0M8PUPU6>ping a project means sharing or launching a project. #ship is where people share their completed projects.`)
-        await sendMessage(app, body.event.channel, `But the Summer of Making isn't all there is to Hack Club. We have _hundreds_ of channels in our community, covering everything from <#C6LHL48G2> and <#C0EA9S0A0> to <#CBX54ACPJ> and <#C010SJJH1PT>. I'll show you a few of my favorites in a minute.`)
-        await sendMessage(app, body.event.channel, `Before you go, though—I just invited you to <#C75M7C0SY>. I highly recommend introducing yourself to the community!`)
-        inviteUserToChannel(app, body.event.user, 'C75M7C0SY')
-        await sendMessage(app, body.event.channel, `One last thing: please make sure to read our <${`https://hackclub.com/conduct`}|code of conduct>. All community members are expected to follow the code of conduct.`, 5000, null, true)
-        await sendSingleBlockMessage(app, body.event.channel, `Once you've read the code of conduct, click the 👍 to finish the tutorial.`, '👍', `coc_acknowledge`)
+        hardwareQuestion(body.event.channel)
       }
     }
   }));
@@ -278,6 +251,4 @@ const loadFlow = app => {
     await sendSingleBlockMessage(app, body.channel.id, `(Btw, if you want to leave + archive this channel, click here)`, 'Leave channel', 'leave_channel')
   }));
 }
-
-
 exports.loadFlow = loadFlow

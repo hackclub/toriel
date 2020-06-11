@@ -233,6 +233,48 @@ const updateInteractiveMessage = async (app, ts, channel, message) => {
 }
 exports.updateInteractiveMessage = updateInteractiveMessage
 
+const sendDoubleBlockMessage = async (app, channel, text, blockText1, blockText2, actionId1, actionId2) => {
+  await app.client.chat.postMessage({
+    token: process.env.SLACK_BOT_TOKEN,
+    channel: channel,
+    blocks: [
+      {
+        "type": "section",
+        "text": {
+          "type": "mrkdwn",
+          "text": text
+        }
+      },
+      {
+        "type": "actions",
+        "elements": [
+          {
+            "type": "button",
+            "text": {
+              "type": "plain_text",
+              "emoji": true,
+              "text": blockText1
+            },
+            "style": "primary",
+            "action_id": actionId1
+          },
+          {
+            "type": "button",
+            "text": {
+              "type": "plain_text",
+              "emoji": true,
+              "text": blockText2
+            },
+            "style": "danger",
+            "action_id": actionId2
+          }
+        ]
+      }
+    ]
+  })
+}
+exports.sendDoubleBlockMessage = sendDoubleBlockMessage
+
 const inviteUserToChannel = async (app, user, channel) => {
   await app.client.conversations.invite({
     token: process.env.SLACK_BOT_TOKEN,
@@ -289,6 +331,14 @@ const setPreviouslyCompletedTutorial = async userId => {
   })
 }
 exports.setPreviouslyCompletedTutorial = setPreviouslyCompletedTutorial
+
+const setFlow = async (userId, flow) => {
+  let userRecord = await getUserRecord(userId)
+  await islandTable.update(userRecord.id, {
+    'Flow': flow
+  })
+}
+exports.setFlow = setFlow
 
 const updatePushedButton = async userId => {
   let record = await getUserRecord(userId)

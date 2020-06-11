@@ -15,6 +15,7 @@ const app = new App({
 const normalizedPath = require("path").join(__dirname, "flows");
 require("fs").readdirSync(normalizedPath).forEach(function (file) {
   require("./flows/" + file).loadFlow(app);
+  require("./flows/subflows/" + file).loadFlow(app);
 });
 
 app.event('team_join', async body => {
