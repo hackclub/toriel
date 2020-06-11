@@ -7,11 +7,12 @@ const { generateIslandName, getUserRecord, islandTable,
   updateSingleBlockMessage, getIslandId, messageIsPartOfTutorial,
   getLatestMessages, inviteUserToChannel, sendSingleBlockMessage,
   completeTutorial, sendEphemeralMessage, startTutorial,
-  sendDoubleBlockMessage } = require('../utils/utils')
+  sendDoubleBlockMessage, setFlow } = require('../utils/utils')
 
 async function somFilter(e) {
   const userID = e.body.user_id || (e.body.event ? e.body.event.user : e.body.user.id)
   console.log(userID)
+  let hasPrevCompleted = await hasPreviouslyCompletedTutorial(userID)
   const options = {
     maxRecords: 1,
     filterByFormula: `AND(Name = '${userID}', Flow = 'Summer of Making')`
@@ -19,7 +20,7 @@ async function somFilter(e) {
   let data = await axios('https://api2.hackclub.com/v0.1/Tutorial%20Island/Tutorial%20Island?select=' + JSON.stringify(options)).then(r => r.data)
 
   if (e.body.text === 'som') return true
-  else return data[0] !== null
+  else return (data[0] !== null)
 }
 
 async function runInFlow(opts, func) {
@@ -36,6 +37,7 @@ const loadFlow = app => {
   app.command('/restart', e => runInFlow(e, async ({ command, ack, say }) => {
     await ack();
     console.log('som')
+    await setFlow('')
     await startTutorial(app, command.user_id, 'som', true)
   }))
 
