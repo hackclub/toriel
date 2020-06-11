@@ -18,6 +18,8 @@ async function defaultFilter(e) {
     filterByFormula: `AND(Name = '${userID}', Flow = 'Default')`,
   }
   let data = await axios('https://api2.hackclub.com/v0.1/Tutorial%20Island/Tutorial%20Island?select=' + JSON.stringify(flowOptions)).then(r => r.data)
+  console.log(data[0] != null)
+  console.log(data[0] !== null)
   return (data[0] != null)
 }
 
