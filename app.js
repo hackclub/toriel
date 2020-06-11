@@ -4,7 +4,7 @@ const axios = require('axios')
 
 const { hasPushedButton, hasCompletedTutorial, getIslandId,
   sendEphemeralMessage, updateInteractiveMessage, sendSingleBlockMessage,
-  startTutorial, isBot } = require('./utils/utils')
+  startTutorial, isBot, setFlow } = require('./utils/utils')
 
 const app = new App({
   signingSecret: process.env.SLACK_SIGNING_SECRET,
