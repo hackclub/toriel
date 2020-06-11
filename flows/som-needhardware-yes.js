@@ -1,4 +1,4 @@
-const { sendMessage, inviteUserToChannel } = require('../../utils/utils')
+const { sendMessage, inviteUserToChannel } = require('../utils/utils')
 
 const loadFlow = app => {
   app.action('needhardware_yes', async ({ ack, body }) => {
