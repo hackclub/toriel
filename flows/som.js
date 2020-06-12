@@ -125,21 +125,21 @@ const loadFlow = app => {
 
   app.action('she', e => runInFlow(e, async ({ ack, body }) => {
     ack();
-    await setPronouns(app, body.user.id, 'she/her/hers', 'she')
+    setPronouns(app, body.user.id, 'she/her/hers', 'she')
     updateSingleBlockMessage(app, body.message.ts, body.channel.id, `What are your pronouns? (how you want to be referred to by others)`, `she/her/hers`, `mimmiggie`)
     await sendMessage(app, body.channel.id, `:heart: Every profile here has a custom field for pronouns—I've gone ahead and set your pronouns for you, but <${`https://slack.com/intl/en-sg/help/articles/204092246-Edit-your-profile`}|here's a quick tutorial if you'd like to change them.>`)
     hardwareQuestion(body.channel.id)
   }));
   app.action('he', e => runInFlow(e, async ({ ack, body }) => {
     ack();
-    await setPronouns(app, body.user.id, 'he/him/his', 'he')
+    setPronouns(app, body.user.id, 'he/him/his', 'he')
     updateSingleBlockMessage(app, body.message.ts, body.channel.id, `What are your pronouns? (how you want to be referred to by others)`, `he/him/his`, `mimmiggie`)
     await sendMessage(app, body.channel.id, `:heart: Every profile here has a custom field for pronouns—I've gone ahead and set your pronouns for you, but <${`https://slack.com/intl/en-sg/help/articles/204092246-Edit-your-profile`}|here's a quick tutorial if you'd like to change them.>`)
     hardwareQuestion(body.channel.id)
   }));
   app.action('they', e => runInFlow(e, async ({ ack, body }) => {
     ack();
-    await setPronouns(app, body.user.id, 'they/them/theirs', 'they')
+    setPronouns(app, body.user.id, 'they/them/theirs', 'they')
     updateSingleBlockMessage(app, body.message.ts, body.channel.id, `What are your pronouns? (how you want to be referred to by others)`, `they/them/theirs`, `mimmiggie`)
     await sendMessage(app, body.channel.id, `:heart: Every profile here has a custom field for pronouns—I've gone ahead and set your pronouns for you, but <${`https://slack.com/intl/en-sg/help/articles/204092246-Edit-your-profile`}|here's a quick tutorial if you'd like to change them.>`)
     hardwareQuestion(body.channel.id)
@@ -164,7 +164,7 @@ const loadFlow = app => {
       if (lastBotMessage.includes('What are your preferred pronouns?')) {
         let pronouns = lastUserMessage
         let pronoun1 = lastUserMessage.slice(0, lastUserMessage.search("/"))
-        await setPronouns(app, body.event.user, pronouns, pronoun1.toLowerCase())
+        setPronouns(app, body.event.user, pronouns, pronoun1.toLowerCase())
         await sendMessage(app, body.event.channel, `:heart: Every profile here has a custom field for pronouns—I've gone ahead and set your pronouns for you, but <${`https://slack.com/intl/en-sg/help/articles/204092246-Edit-your-profile`}|here's a quick tutorial if you'd like to change them.>`)
         hardwareQuestion(body.event.channel)
       }
