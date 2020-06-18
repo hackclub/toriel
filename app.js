@@ -67,50 +67,6 @@ app.event('message', async body => {
   }
 })
 
-app.event('member_joined_channel', async body => {
-  const pushedFirstButton = await hasPushedButton(body.event.user)
-  const completed = await hasCompletedTutorial(body.event.user)
-  const islandId = await getIslandId(body.event.user)
-
-  if (body.event.channel !== 'C75M7C0SY' && body.event.channel !== 'C0M8PUPU6' && body.event.channel !== 'C013AGZKYCS' && body.event.channel !== islandId && !completed) {
-    const members = await app.client.conversations.members({
-      token: process.env.SLACK_BOT_TOKEN,
-      channel: body.event.channel
-    })
-    if (!(members.members.includes('U012FPRJEVB'))) { // user who owns the oauth, in this case @Clippy Admin
-      await app.client.conversations.join({
-        token: process.env.SLACK_OAUTH_TOKEN,
-        channel: body.event.channel
-      })
-    }
-    await app.client.conversations.kick({
-      token: process.env.SLACK_OAUTH_TOKEN,
-      channel: body.event.channel,
-      user: body.event.user
-    })
-    let islandId = await getIslandId(body.event.user)
-    await sendEphemeralMessage(app, islandId, `<@${body.event.user}> It looks like you tried to join <#${body.event.channel}>. You can't join any channels yet—I need to finish helping you join the community first.`, body.event.user)
-    await app.client.chat.postMessage({
-      token: process.env.SLACK_OAUTH_TOKEN,
-      channel: 'U4QAK9SRW',
-      text: `Heads up, I kicked <@${body.event.user}> from <#${body.event.channel}>`
-    })
-  }
-});
-
-app.event('member_left_channel', async body => {
-  const completed = await hasCompletedTutorial(body.event.user)
-  const islandId = await getIslandId(body.event.user)
-  if (body.event.channel === islandId && !completed) {
-    await app.client.conversations.invite({
-      token: process.env.SLACK_OAUTH_TOKEN,
-      channel: body.event.channel,
-      user: body.event.user
-    })
-    await sendEphemeralMessage(app, islandId, `<@${body.event.user}> It looks like you tried to leave your tutorial channel. You can't do that just yet—I need to help you complete the tutorial before you can unlock the rest of the community.`, body.event.user)
-  }
-});
-
 app.event('message', async body => {
   if (body.message.subtype === 'channel_join' &&
     body.message.text === `<@${body.message.user}> has joined the channel`) {
