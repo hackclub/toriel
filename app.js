@@ -58,16 +58,6 @@ app.command('/restart', async ({ command, ack }) => {
 })
 
 app.event('message', async body => {
-  if (body.event.channel_type === 'im' && body.event.user !== 'U012FPRJEVB' && body.event.user !== 'U012H797734') {
-    await app.client.chat.postMessage({
-      token: process.env.SLACK_OAUTH_TOKEN,
-      channel: 'U4QAK9SRW',
-      text: `From <@${body.event.user}>: ${body.event.text}`
-    })
-  }
-})
-
-app.event('message', async body => {
   if (body.message.subtype === 'channel_join' &&
     body.message.text === `<@${body.message.user}> has joined the channel`) {
     await app.client.chat.delete({

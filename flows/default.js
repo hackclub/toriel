@@ -77,7 +77,7 @@ const loadFlow = (app) => {
 
   app.action('hs_yes', e => runInFlow(e, async ({ ack, body }) => {
     ack();
-    updateSingleBlockMessage(app, body.message.ts, body.channel.id, `Are you currently a high school student? (it's OK if you're not)`, `Yes`, `mimmiggie`)
+    updateSingleBlockMessage(app, body.message.ts, body.channel.id, `Are you currently a high school student? (it's OK if you're not)`, `Yep!`, `mimmiggie`)
     await sendMessage(app, body.channel.id, 'Great. Hack Club is a community of high schoolers, so you\'ll fit right in!')
     await sendMessage(app, body.channel.id, `What brings you to the Hack Club community? (Type your answer in the chat)`)
   }));
@@ -151,7 +151,7 @@ const loadFlow = (app) => {
     await sendMessage(app, body.channel.id, `Awesome! Now let's spiff up your Slack, try this theme:`)
     await sendMessage(app, body.channel.id, `#161618,#000000,#FFCD00,#161618,#000010,#FFCD00,#FFDA60,#FFB500,#000010,#FFBC00`)
 
-    await sendMessage(app, body.channel.id, `A bit gaudy, wouldn't you say?.`, 6000)
+    await sendMessage(app, body.channel.id, `A bit gaudy, wouldn't you say?`, 6000)
 
     await sendMessage(app, body.channel.id, `This one's a bit more reasonable:`)
     await sendMessage(app, body.channel.id, `#1A1D21,#000000,#338EDA,#FFFFFF,#000000,#FFFFFF,#33D6A6,#EC3750,#000000,#FFFFFF`)
@@ -178,6 +178,8 @@ const loadFlow = (app) => {
       sendEphemeralMessage(app, somLounge, `<@${user}> This is <#${somLounge}>! Relax, grab a sparkling water, and chat with fellow hackers while watching the sights go by.`, user),
       sendEphemeralMessage(app, somMixer, `<@${user}> This is <#${somMixer}! It’s a great place to meet other Hack Clubbers. Any existing member can grant you full access by running \`/som-promote\`. But be warned! Everyone can see who invited you, so you’ll need to show you’re kind, helpful, & trustworthy. Enjoy your time! ✨`, user),
     ])
+
+    await sendMessage(app, body.channel.id, `I'm going to head out now. Toodles! :wave:`)
   }));
 
   app.action('coc_acknowledge', e => runInFlow(e, async ({ ack, body }) => {
