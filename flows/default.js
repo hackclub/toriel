@@ -118,21 +118,27 @@ const loadFlow = (app) => {
             channel: body.event.channel,
             ts: latestMessages.latestTs
           })
-          sendToWelcomeCommittee(body.event.user, replies.messages[1].text)
         }
         else {
-          sendToWelcomeCommittee(body.event.user, lastUserMessage)
         }
 
         await sendMessage(app, body.event.channel, `Ah, very interesting! Well, let me show you around the community.`)
         await sendMessage(app, body.event.channel, `You're currently on Slack, the platform our community uses. It's like Discord, but better.`)
-        await sendMessage(app, body.event.channel, `Slack is organized into "channels". We have _hundreds_ of channels in our Slack, covering everything from <#C6LHL48G2> and <#C0EA9S0A0> to <#CBX54ACPJ> and <#C010SJJH1PT>. I'll show you a few of my favorites in a minute.`, 5000)
-        await sendMessage(app, body.event.channel, `I just invited you to your first channel, <#C75M7C0SY>. Join by clicking on it in your sidebar, and feel free to introduce yourself to the community. (totally optional, no expectations)`, 5000)
 
-        // add user to #welcome
-        await inviteUserToChannel(app, body.event.user, 'C75M7C0SY')
+        // TODO: Update numbers when they become out of date / (or remove them)
+        await sendMessage(app, body.event.channel, `Slack is organized into "channels". We have _hundreds_ of channels in our Slack, covering everything from \`#gamedev\` and \`#code\` to \`#photography\` and \`#cooking\`. In the past 7 days, 336 people posted 60,179 messages.`, 5000)
+
+        await sendMessage(app, body.event.channel, `Every new account starts limited to just a few channels. I'll get you situated in Summer of Making channels to start, then you'll have to get an existing Hack Club member to convert your account into a full Slack account for access to all channels.`, 5000)
+
+        const somWelcomeChannel = 'C015MKW1A3D';
+
+        // add user to #som-welcome
+        await inviteUserToChannel(app, body.event.user, somWelcomeChannel, true)
+
+        await sendMessage(app, body.event.channel, `I just invited you to your first channel, <#${somWelcomeChannel}>. Join by clicking on it in your sidebar, and feel free to introduce yourself. (totally optional, no expectations)`, 5000)
+
         const island = await getIslandName(body.event.user)
-        await sendEphemeralMessage(app, 'C75M7C0SY', `<@${body.event.user}> Feel free to introduce yourself to the community in <#C75M7C0SY>. When you're done, head back to <https://hackclub.slack.com/archives/${island}|#${island}> to continue your introduction to the community.`, body.event.user)
+        await sendEphemeralMessage(app, somWelcomeChannel, `<@${body.event.user}> Feel free to introduce yourself to the community in <#${somWelcomeChannel}>. When you're done, head back to <https://hackclub.slack.com/archives/${island}|#${island}> to continue your introduction to the community.`, body.event.user)
 
         await sendSingleBlockMessage(app, body.event.channel, "When you're ready, click the 👍 on this message to continue the tutorial.", '👍', 'introduced')
       }

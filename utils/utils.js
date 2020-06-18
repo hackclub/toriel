@@ -83,7 +83,7 @@ const startTutorial = async (app, user, flow, restart) => {
   await app.client.conversations.setTopic({
     token: process.env.SLACK_OAUTH_TOKEN,
     channel: channelId,
-    topic: `Welcome to Hack Club! :wave: Unlock the community by completing this tutorial.`
+    topic: `Welcome to Hack Club! :wave: Unlock the Summer of Making community by completing this tutorial.`
   })
 
   await app.client.chat.postMessage({
