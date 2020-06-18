@@ -176,7 +176,7 @@ const loadFlow = (app) => {
 
     await Promise.all([
       sendEphemeralMessage(app, somLounge, `<@${user}> This is <#${somLounge}>! Relax, grab a sparkling water, and chat with fellow hackers while watching the sights go by.`, user),
-      sendEphemeralMessage(app, somMixer, `<@${user}> This is <#${somMixer}! It’s a great place to meet other Hack Clubbers. Any existing member can grant you full access by running \`/som-promote\`. But be warned! Everyone can see who invited you, so you’ll need to show you’re kind, helpful, & trustworthy. Enjoy your time! ✨`, user),
+      sendEphemeralMessage(app, somMixer, `<@${user}> This is <#${somMixer}>! It’s a great place to meet other Hack Clubbers. Any existing member can grant you full access by running \`/som-promote\`. But be warned! Everyone can see who invited you, so you’ll need to show you’re kind, helpful, & trustworthy. Enjoy your time! ✨`, user),
     ])
 
     await sendMessage(app, body.channel.id, `I'm going to head out now. Toodles! :wave:`)
