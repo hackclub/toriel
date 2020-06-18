@@ -277,9 +277,13 @@ const updateInteractiveMessage = async (app, ts, channel, message) => {
 }
 exports.updateInteractiveMessage = updateInteractiveMessage
 
-const inviteUserToChannel = async (app, user, channel) => {
+const inviteUserToChannel = async (app, user, channel, doAsAdmin=false) => {
+  const token = doAsAdmin ?
+    process.env.SLACK_OAUTH_TOKEN :
+    process.env.SLACK_BOT_TOKEN
+
   await app.client.conversations.invite({
-    token: process.env.SLACK_BOT_TOKEN,
+    token: token,
     channel: channel,
     users: user
   }).catch(err => {
