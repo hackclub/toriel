@@ -136,6 +136,9 @@ app.action('leave_confirm', async ({ ack, body }) => {
 });
 
 (async () => {
-  await app.start(process.env.PORT || 3000);
-  console.log("⚡️ Bolt app is running!");
+  const port = process.env.PORT || 3000;
+
+  await app.start(port);
+
+  console.log(`⚡️ Bolt app is running on port ${port}!`);
 })();
