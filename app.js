@@ -19,23 +19,30 @@ require("fs").readdirSync(normalizedPath).forEach(function (file) {
 
 app.event('team_join', async body => {
   const bot = await isBot(app, body.event.user.id)
-  if (!bot) {
-    let userProfile = await app.client.users.info({
-      token: process.env.SLACK_BOT_TOKEN,
-      user: body.event.user.id
-    })
-    console.log(userProfile)
-    const somOptions = {
-      maxRecords: 1,
-      filterByFormula: `Email = '${userProfile.user.profile.email}'`
-    }
-    let somData = await axios(`https://api2.hackclub.com/v0.1/Pre-register/Applications?authKey=${process.env.AIRTABLE_API_KEY}&select=${JSON.stringify(somOptions)}&meta=true`).then(r => r.data)
-    console.log(somData)
-    if (somData.response[0] == null) {
-      await startTutorial(app, body.event.user.id, 'default')
-    } else {
-      await startTutorial(app, body.event.user.id, 'som')
-    }
+  if (bot) {
+    return
+  }
+
+  let userProfile = await app.client.users.info({
+    token: process.env.SLACK_BOT_TOKEN,
+    user: body.event.user.id
+  })
+
+  console.log(userProfile)
+
+  const somOptions = {
+    maxRecords: 1,
+    filterByFormula: `Email = '${userProfile.user.profile.email}'`
+  }
+
+  let somData = await axios(`https://api2.hackclub.com/v0.1/Pre-register/Applications?authKey=${process.env.AIRTABLE_API_KEY}&select=${JSON.stringify(somOptions)}&meta=true`).then(r => r.data)
+
+  console.log(somData)
+
+  if (somData.response[0] == null) {
+    await startTutorial(app, body.event.user.id, 'default')
+  } else {
+    await startTutorial(app, body.event.user.id, 'som')
   }
 });
 
