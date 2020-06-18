@@ -425,15 +425,39 @@ const getNextEvent = async () => {
 }
 exports.getNextEvent = getNextEvent
 
+
+// couple important things to note here:
+//
+// current channel names look like "4-lyres-tutorial"
+//
+// it's important that channel names start with a number, so the tutorial
+// channel shows up at the top of the channel list for new users.
+//
+// right now, with the current friendly-words list from glitch, there are 4728
+// possible words. there are 8 numbers between 2 and 9 (inclusive of 2 and 9),
+// meaning that there are 37824 total possible combinations of channel + number
+// combinations.
+//
+// i am purposely trying to keep channel names as short as possible without
+// confusion, which is why a method that generates less permutations was
+// chosen. this will have to be adjusted in the future when hack club gets tens
+// of thousands more students on the slack.
 const generateIslandName = async () => {
-  const words = friendlyWords.predicates
-  const word1 = words[Math.floor(Math.random() * 1455)]
-  const word2 = words[Math.floor(Math.random() * 1455)]
+  const { objects, predicates, teams, collections } = friendlyWords
+  const words = [
+    ...objects,
+    ...predicates,
+    ...teams,
+    ...collections,
+  ]
 
-  // prefix channel name with a number so it shows at the top of the channel list
-  const channel = `42-${word1}-${word2}-tutorial`
+  // random number between 2 and 9
+  const randomNum = Math.floor(Math.random() * 8) + 2
+  const randomWord = words[Math.floor(Math.random() * words.length)]
 
-  const pretty = `${capitalizeFirstLetter(word1)} ${capitalizeFirstLetter(word2)} Tutorial`
+  // start channel name with a number so it shows at the top of the slack list
+  const channel = `${randomNum}-${randomWord}s-tutorial`
+  const pretty = `${randomNum} ${capitalizeFirstLetter(randomWord)}s Tutorial`
 
   const taken = await checkIslandNameTaken(channel)
   if (taken) return generateIslandName()
