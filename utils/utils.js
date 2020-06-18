@@ -1,5 +1,6 @@
 const AirtablePlus = require('airtable-plus')
 const friendlyWords = require('friendly-words')
+const pluralize = require('pluralize')
 const GithubSlugger = require('github-slugger')
 const slugger = new GithubSlugger()
 
@@ -425,7 +426,6 @@ const getNextEvent = async () => {
 }
 exports.getNextEvent = getNextEvent
 
-
 // couple important things to note here:
 //
 // current channel names look like "4-lyres-tutorial"
@@ -455,9 +455,12 @@ const generateIslandName = async () => {
   const randomNum = Math.floor(Math.random() * 8) + 2
   const randomWord = words[Math.floor(Math.random() * words.length)]
 
+  // "tendencys" -> "tendencies"
+  const pluralizedWord = pluralize(randomWord, randomNum)
+
   // start channel name with a number so it shows at the top of the slack list
-  const channel = `${randomNum}-${randomWord}s-tutorial`
-  const pretty = `${randomNum} ${capitalizeFirstLetter(randomWord)}s Tutorial`
+  const channel = `${randomNum}-${pluralizedWord}-tutorial`
+  const pretty = `${randomNum} ${capitalizeFirstLetter(pluralizedWord)} Tutorial`
 
   const taken = await checkIslandNameTaken(channel)
   if (taken) return generateIslandName()
