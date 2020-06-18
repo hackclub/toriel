@@ -140,53 +140,37 @@ const loadFlow = (app) => {
         const island = await getIslandName(body.event.user)
         await sendEphemeralMessage(app, somWelcomeChannel, `<@${body.event.user}> Feel free to introduce yourself to the community in <#${somWelcomeChannel}>. When you're done, head back to <https://hackclub.slack.com/archives/${island}|#${island}> to continue your introduction to the community.`, body.event.user)
 
-        await sendSingleBlockMessage(app, body.event.channel, "When you're ready, click the 👍 on this message to continue the tutorial.", '👍', 'introduced')
+        await sendSingleBlockMessage(app, body.event.channel, "When you're ready, click the 👍 on this message to continue.", '👍', 'introduced')
       }
-    }
-    let completed = await hasCompletedTutorial(body.event.user)
-    if (body.event.channel === 'C75M7C0SY' && !body.event.thread_ts && body.event.subtype !== 'channel_join' && !completed) {
-      console.log(body.event.user)
-      let ts = body.event.ts.replace('.', '')
-      let welcomeLink = `https://hackclub.slack.com/archives/C75M7C0SY/p${ts}`
-
-      let history = await app.client.conversations.history({
-        token: process.env.SLACK_BOT_TOKEN,
-        channel: 'GLFAEL1SL'
-      })
-
-      let welcomeCommitteeMessage = history.messages.find(message => message.text.includes(`New user <@${body.event.user}>`))
-      let message = welcomeCommitteeMessage.text
-      let welcomeCommitteeTs = welcomeCommitteeMessage.ts
-
-      await sendMessage(app, 'GLFAEL1SL', `:fastparrot: <@${body.event.user}> just introduced themself in <#C75M7C0SY>! ${welcomeLink}`, 10, welcomeCommitteeTs)
-      await app.client.chat.update({
-        token: process.env.SLACK_BOT_TOKEN,
-        channel: 'GLFAEL1SL',
-        ts: welcomeCommitteeTs,
-        text: `:fastparrot: ${message}`
-      })
     }
   }));
 
   app.action('introduced', e => runInFlow(e, async ({ ack, body }) => {
     ack();
     updateInteractiveMessage(app, body.message.ts, body.channel.id, '👍')
-    await sendMessage(app, body.channel.id, `Awesome! Let's keep going.`)
-    await sendMessage(app, body.channel.id, `There are awesome things happening in the Hack Club community every day! Check out <#C0266FRGT> to see the latest community event. We do everything from coding challenges to AMAs with famous people (<${`https://www.youtube.com/watch?v=4beK7VYabjs`}|we even did one with Elon Musk!>) to fun hangouts, and more!`, 3000, null, false)
+    await sendMessage(app, body.channel.id, `Awesome! That's all for now! You must abide by the code of conduct at https://conduct.hackclub.com.`)
+    await sendMessage(app, body.channel.id, `I'm adding you to a few last channels. Note: You are on a limited account and don't have access to the vast majority of channels in the Slack yet. You will need to be a kind, helpful person in the channels you're in and - if you are - an existing Hack Clubber will choose to convert your account to a full account with full access. Every existing Hack Club member has the ability to convert new accounts.`)
 
-    const nextEvent = await getNextEvent()
-    if (nextEvent !== null) {
-      await sendMessage(app, body.channel.id, `The next community event is called *${nextEvent.name}*, and it's happening on ${nextEvent.day} at ${nextEvent.time} eastern time. You can <${nextEvent.url}|learn more about the event by clicking here>. We'd love to see you there!`, 5000)
-    }
-    else {
-      await sendMessage(app, body.channel.id, `There aren't any events coming up in the near future, but keep an eye on <#C0266FRGT> and be sure to check <https://events.hackclub.com|our Events page> to learn when we add new events to our calendar.`)
-    }
-    await sendMessage(app, body.channel.id, `Our favorite recurring community event is called <#C0JDWKJVA>. Hack Night is a biweekly call where we all get together and hang out, build things, and have fun! Hack Night happens on Saturdays at 8:30pm eastern and Wednesdays at 3:30pm eastern. We'd love to see you at the next one!`, 7000)
-    await sendMessage(app, body.channel.id, `I just added you to <#C0M8PUPU6>. Hack Clubbers primarily _ship_, or share projects that they've made, in this channel. Have you made something you're proud of recently? Share it in <#C0M8PUPU6>!`, 5000)
-    await inviteUserToChannel(app, body.user.id, 'C0M8PUPU6')
+    const user = body.user.id
 
-    await sendMessage(app, body.channel.id, `One last thing: please make sure to read our <${`https://hackclub.com/conduct`}|code of conduct>. All community members are expected to follow the code of conduct.`, 5000, null, true)
-    await sendSingleBlockMessage(app, body.channel.id, `Once you've read the code of conduct, click the 👍 to finish the tutorial.`, '👍', `coc_acknowledge`)
+    // add user to remaining channels
+    const somLounge = 'C015LQDP2Q2'
+    const somMixer = 'C015ZDB0GRF'
+    const scrapbook = 'C01504DCLVD' // TODO switch to #scrapbook, is dev channel now
+
+    console.log("before last invites", body)
+
+    await Promise.all([
+      inviteUserToChannel(app, user, somLounge, true),
+      inviteUserToChannel(app, user, somMixer, true),
+      inviteUserToChannel(app, user, scrapbook, true)
+    ])
+
+    await Promise.all([
+      sendEphemeralMessage(app, somLounge, `<@${user}> This is <#${somLounge}>! Relax, grab a sparkling water, and chat with fellow hackers while watching the sights go by.`, user),
+      sendEphemeralMessage(app, somMixer, `<@${user}> This is <#${somMixer}>! To convert your account to a full account on the Hack Club Slack to get access to all channels, you'll need to convince a current Hack Club member to invite you. They just need to run \`/som-promote\` to let you in. Be warned! Everyone can see who invited you, so you need to prove that you are trustworthy. The best way to get an invite is to hang out, be kind, and be helpful in the other public Summer of Making channels. You will be banned if you spam current Hack Club members in DMs asking for invites (and we built a confidential reporting function just in case you decide to try us).`, user),
+      sendEphemeralMessage(app, scrapbook, `<@${user}> This is <#${scrapbook}>! Make your scrapbook today!`, user)
+    ])
   }));
 
   app.action('coc_acknowledge', e => runInFlow(e, async ({ ack, body }) => {
