@@ -78,7 +78,7 @@ const loadFlow = (app) => {
   app.action('hs_yes', e => runInFlow(e, async ({ ack, body }) => {
     ack();
     updateSingleBlockMessage(app, body.message.ts, body.channel.id, `Are you currently a high school student? (it's OK if you're not)`, `Yes`, `mimmiggie`)
-    await sendMessage(app, body.channel.id, 'Hack Club is a community of high schoolers, so you\'ll fit right in!')
+    await sendMessage(app, body.channel.id, 'Great. Hack Club is a community of high schoolers, so you\'ll fit right in!')
     await sendMessage(app, body.channel.id, `What brings you to the Hack Club community? (Type your answer in the chat)`)
   }));
 
@@ -126,7 +126,7 @@ const loadFlow = (app) => {
         await sendMessage(app, body.event.channel, `You're currently on Slack, the platform our community uses. It's like Discord, but better.`)
 
         // TODO: Update numbers when they become out of date / (or remove them)
-        await sendMessage(app, body.event.channel, `Slack is organized into "channels". We have _hundreds_ of channels in our Slack, covering everything from \`#gamedev\` and \`#code\` to \`#photography\` and \`#cooking\`. In the past 7 days, 336 people posted 60,179 messages.`, 5000)
+        await sendMessage(app, body.event.channel, `Slack is organized into topical "channels". We have _hundreds_ of channels in our Slack, covering everything from \`#gamedev\` and \`#code\` to \`#photography\` and \`#cooking\`. In the past 7 days, 336 people posted 60,179 messages.`, 5000)
 
         await sendMessage(app, body.event.channel, `Every new account starts limited to just a few channels. I'll get you situated in Summer of Making channels to start, then you'll have to get an existing Hack Club member to convert your account into a full Slack account for access to all channels.`, 5000)
 
@@ -151,20 +151,20 @@ const loadFlow = (app) => {
     await sendMessage(app, body.channel.id, `Awesome! Now let's spiff up your Slack, try this theme:`)
     await sendMessage(app, body.channel.id, `#161618,#000000,#FFCD00,#161618,#000010,#FFCD00,#FFDA60,#FFB500,#000010,#FFBC00`)
 
-    await sendMessage(app, body.channel.id, `A bit gaudy, wouldn't you say?.`, 8000)
+    await sendMessage(app, body.channel.id, `A bit gaudy, wouldn't you say?.`, 6000)
 
-    await sendMessage(app, body.channel.id, `This one's a bit more reasonable:`, 3000)
+    await sendMessage(app, body.channel.id, `This one's a bit more reasonable:`)
     await sendMessage(app, body.channel.id, `#1A1D21,#000000,#338EDA,#FFFFFF,#000000,#FFFFFF,#33D6A6,#EC3750,#000000,#FFFFFF`)
 
-    await sendMessage(app, body.channel.id, `OK! That's all for now! You must abide by the code of conduct at https://conduct.hackclub.com.`, 10000)
-    await sendMessage(app, body.channel.id, `I'm adding you to a few last channels. Note: You are on a limited account and don't have access to the vast majority of channels in the Slack yet. You will need to be a kind, helpful person in the channels you're in and - if you are - an existing Hack Clubber will choose to convert your account to a full account with full access. Every existing Hack Club member has the ability to convert new accounts.`)
+    await sendMessage(app, body.channel.id, `OK! That's all for now! Quick note that you must abide by the code of conduct at https://conduct.hackclub.com.`, 10000)
+    await sendMessage(app, body.channel.id, `I'm adding you to a few more Summer of Making-related channels. Note: You have a limited account and don't have access to the vast majority of channels yet. If you’re kind & helpful to others, any existing Hack Clubber can choose to grant your account full access.`)
 
     const user = body.user.id
 
     // add user to remaining channels
     const somLounge = 'C015LQDP2Q2'
     const somMixer = 'C015ZDB0GRF'
-    const scrapbook = 'C01504DCLVD' // TODO switch to #scrapbook, is dev channel now
+    const scrapbook = 'C01504DCLVD'
 
     console.log("before last invites", body)
 
@@ -176,8 +176,7 @@ const loadFlow = (app) => {
 
     await Promise.all([
       sendEphemeralMessage(app, somLounge, `<@${user}> This is <#${somLounge}>! Relax, grab a sparkling water, and chat with fellow hackers while watching the sights go by.`, user),
-      sendEphemeralMessage(app, somMixer, `<@${user}> This is <#${somMixer}>! To convert your account to a full account on the Hack Club Slack to get access to all channels, you'll need to convince a current Hack Club member to invite you. They just need to run \`/som-promote\` to let you in. Be warned! Everyone can see who invited you, so you need to prove that you are trustworthy. The best way to get an invite is to hang out, be kind, and be helpful in the other public Summer of Making channels. You will be banned if you spam current Hack Club members in DMs asking for invites (and we built a confidential reporting function just in case you decide to try us).`, user),
-      sendEphemeralMessage(app, scrapbook, `<@${user}> This is <#${scrapbook}>! Make your scrapbook today!`, user)
+      sendEphemeralMessage(app, somMixer, `<@${user}> This is <#${somMixer}! It’s a great place to meet other Hack Clubbers. Any existing member can grant you full access by running \`/som-promote\`. But be warned! Everyone can see who invited you, so you’ll need to show you’re kind, helpful, & trustworthy. Enjoy your time! ✨`, user),
     ])
   }));
 
@@ -252,19 +251,17 @@ const loadFlow = (app) => {
     updateInteractiveMessage(app, body.message.ts, body.channel.id, `Hi, I'm Clippy! My job is to help you join the Hack Club community. Do you need assistance?`)
 
     updatePushedButton(body.user.id)
-    await sendMessage(app, body.channel.id, '...', 1000)
-    await sendMessage(app, body.channel.id, '...', 1000)
     await sendMessage(app, body.channel.id, `Excellent! I'm happy to assist you in joining Hack Club today.`, 1000)
 
     const prevCompleted = await hasPreviouslyCompletedTutorial(body.user.id)
     if (prevCompleted) {
       await sendMessage(app, body.channel.id, `A few quick questions:`)
     } else {
-      await sendMessage(app, body.channel.id, `First, the free stuff I promised...`)
-      await sendMessage(app, body.channel.id, `<@UH50T81A6> give <@${body.user.id}> 20gp for free stuff!!!`, 1000)
+      await sendMessage(app, body.channel.id, `First, the free stuff I promised:`)
+      const gpMessage = await sendMessage(app, body.channel.id, `<@UH50T81A6> give <@${body.user.id}> 20gp for free stuff!!!`, 1000)
+      await sendMessage(app, body.channel.id, 'You can check your balance at any time by typing `@banker balance`.', 10, gpMessage.message.ts)
       await setPreviouslyCompletedTutorial(body.user.id)
-      await sendMessage(app, body.channel.id, 'You can check your balance at any time by typing `/balance`.', 1000)
-
+      await sendMessage(app, body.channel.id, `Discovering the many uses of GP is a Hack Club rite of passage.`, 1000)
       await sendMessage(app, body.channel.id, `Now that that's out of the way, a few quick questions:`, 5000)
     }
 
@@ -359,7 +356,7 @@ const loadFlow = (app) => {
               "text": {
                 "type": "plain_text",
                 "emoji": true,
-                "text": "Yes"
+                "text": "Yep!"
               },
               "style": "primary",
               "action_id": "hs_yes"
