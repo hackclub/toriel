@@ -429,7 +429,10 @@ const generateIslandName = async () => {
   const words = friendlyWords.predicates
   const word1 = words[Math.floor(Math.random() * 1455)]
   const word2 = words[Math.floor(Math.random() * 1455)]
-  const channel = `${word1}-${word2}-tutorial`
+
+  // prefix channel name with a number so it shows at the top of the channel list
+  const channel = `42-${word1}-${word2}-tutorial`
+
   const pretty = `${capitalizeFirstLetter(word1)} ${capitalizeFirstLetter(word2)} Tutorial`
 
   const taken = await checkIslandNameTaken(channel)
