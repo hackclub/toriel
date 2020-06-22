@@ -93,14 +93,15 @@ app.action('leave_confirm', async ({ ack, body }) => {
 
 // Orpheus POSTS to this endpoint with the user ID of the promoted user and the ID of the promoter
 // args: promotedId, promoterId
-/*receiver.router.post('/promoted', async (req, res) => {
+receiver.router.post('/promoted', async (req, res) => {
   const userId = req.body.promotedId
   const promoterId = req.body.promoterId
   const userRecord = await getUserRecord(userId)
   const islandId = userRecord.fields['Island Channel ID']
 
   sendSingleBlockMessage(app, islandId, `<@${userId}> :wave: Hey there! You've just been promoted to a full user by <@${promoterId}>. That means you have access to all of Hack Club's hundreds of channels instead of only the 4 you were added to.\n\nTo unlock the Hack Club community, click the :star2: below!`, ':star2:', 'promoted')
-});*/
+  res.status(200).end()
+});
 
 app.action('promoted', async ({ ack, body }) => {
   ack()
