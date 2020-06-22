@@ -1,15 +1,17 @@
-const { App } = require("@slack/bolt")
+const { App, ExpressReceiver } = require("@slack/bolt")
 const AirtablePlus = require('airtable-plus')
 const axios = require('axios')
 
 const { hasPushedButton, hasCompletedTutorial, getIslandId,
   sendEphemeralMessage, updateInteractiveMessage, sendSingleBlockMessage,
-  startTutorial, isBot, setFlow } = require('./utils/utils')
+  startTutorial, isBot, setFlow, getUserRecord, updateSingleBlockMessage, sendMessage } = require('./utils/utils')
 
 const app = new App({
   signingSecret: process.env.SLACK_SIGNING_SECRET,
   token: process.env.SLACK_BOT_TOKEN
 });
+
+const receiver = new ExpressReceiver({ signingSecret: process.env.SLACK_SIGNING_SECRET })
 
 // Load all files in the "/flows" folder
 const normalizedPath = require("path").join(__dirname, "flows");
@@ -87,6 +89,54 @@ app.action('leave_confirm', async ({ ack, body }) => {
     token: process.env.SLACK_OAUTH_TOKEN,
     channel: body.channel.id
   })
+});
+
+// Orpheus POSTS to this endpoint with the user ID of the promoted user and the ID of the promoter
+// args: promotedId, promoterId
+receiver.router.post('/promoted', (req, res) => {
+  const userId = req.body.promotedId
+  const promoterId = req.body.promoterId
+  const userRecord = await getUserRecord(userId)
+  const islandId = userRecord.fields['Island Channel ID']
+
+  sendSingleBlockMessage(app, islandId, `<@${userId}> :wave: Hey there! You've just been promoted to a full user by <@${promoterId}>. That means you have access to all of Hack Club's hundreds of channels instead of only the 4 you were added to.\n\nTo unlock the Hack Club community, click the :star2: below!`, ':star2:', 'promoted')
+});
+
+app.action('promoted', async ({ ack, body }) => {
+  ack()
+  await updateInteractiveMessage(app, body.message.ts, body.channel.ts, `:star2:`)
+  await sendMessage(app, body.channel.id, `Woohoo! Welcome to Hack Club! :yay::orpheus::snootslide:`, 1000)
+
+  await inviteUserToChannel(app, body.user.id, 'C0C78SG9L') //hq
+  await inviteUserToChannel(app, body.user.id, 'C0266FRGV') //lounge
+  await inviteUserToChannel(app, body.user.id, 'C0M8PUPU6') //ship
+  await inviteUserToChannel(app, body.user.id, 'C0EA9S0A0') //code
+
+  const inviteMessage = await sendMessage(app, body.channel.id, `I just invited you to the community's default channels. But click on this message to see a bunch of other cool channels you can join!`)
+
+  await sendMessage(app,
+    body.channel.id,
+    `<#C013AGZKYCS> – Get to know the community by answering a question every day!
+    <#C0NP503L7> - Upcoming events
+    <#C6LHL48G2> - Game Development
+    <#C0DCUUH7E> - Share your favorite music!
+    <#CA3UH038Q> - Talk to others in the community!
+    <#C90686D0T> - Talk about the LGBTQ community!
+    <#CCW6Q86UF> - :appleinc:
+    <#C1C3K2RQV> - Learn about design!
+    <#CCW8U2LBC> - :google:
+    <#CDLBHGUQN> - Photos of cats!
+    <#CDJV1CXC2> - Photos of dogs!
+    <#C14D3AQTT> - A public log of Hack Club's sent packages!
+    <#CBX54ACPJ> - Share your photos!
+    <#CC78UKWAC> - :jenga_sleep:
+    <#C8P6DHA3W> - Don't enter if you're hungry!
+    <#C010SJJH1PT> - Learn about cooking!
+    <#CDJMS683D> - Count to a million, one at a time.
+    <#CDN99BE9L> - Talk about Movies & TV!`,
+    10,
+    inviteMessage.message.ts
+  )
 });
 
 (async () => {
