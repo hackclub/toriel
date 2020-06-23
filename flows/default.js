@@ -163,20 +163,23 @@ const loadFlow = (app) => {
 
     // add user to remaining channels
     const somLounge = 'C015LQDP2Q2'
-    const somMixer = 'C015ZDB0GRF'
+    const somCode = 'C015ZDB0GRF'
+    const somHardware = 'C015Q3KF678'
     const scrapbook = 'C01504DCLVD'
 
     console.log("before last invites", body)
 
     await Promise.all([
       inviteUserToChannel(app, user, somLounge, true),
-      inviteUserToChannel(app, user, somMixer, true),
+      inviteUserToChannel(app, user, somCode, true),
+      inviteUserToChannel(app, user, somHardware, true),
       inviteUserToChannel(app, user, scrapbook, true)
     ])
 
     await Promise.all([
       sendEphemeralMessage(app, somLounge, `<@${user}> This is <#${somLounge}>! Relax, grab a sparkling water, and chat with fellow hackers while watching the sights go by.`, user),
-      sendEphemeralMessage(app, somMixer, `<@${user}> This is <#${somMixer}>! It’s a great place to meet other Hack Clubbers. Any existing member can grant you full access by running \`/som-promote\`. But be warned! Everyone can see who invited you, so you’ll need to show you’re kind, helpful, & trustworthy. Enjoy your time! ✨`, user),
+      sendEphemeralMessage(app, somCode, `<@${user}> This is <#${somCode}>! Ask coding questions here! ✨`, user),
+      sendEphemeralMessage(app, somHardware, `<@${user}> This is <#${somHardware}! If you're working on a hardware project for the Summer of Making, this is the place to chat with fellow hardware-makers and ask questions!`, user)
     ])
 
     await sendMessage(app, body.channel.id, `I'm going to head out now. Toodles! :wave:`)
