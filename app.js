@@ -108,13 +108,12 @@ app.action('promoted', async ({ ack, body }) => {
   ack()
   await updateInteractiveMessage(app, body.message.ts, body.channel.id, ':star2:')
   await sendMessage(app, body.channel.id, `Woohoo! Welcome to Hack Club! :yay::orpheus::snootslide:`, 1000)
+  const inviteMessage = await sendMessage(app, body.channel.id, `I just invited you to the community's default channels. But click on this message to see a bunch of other cool channels you can join!`)
 
   await inviteUserToChannel(app, body.user.id, 'C0C78SG9L') //hq
   await inviteUserToChannel(app, body.user.id, 'C0266FRGV') //lounge
   await inviteUserToChannel(app, body.user.id, 'C0M8PUPU6') //ship
   await inviteUserToChannel(app, body.user.id, 'C0EA9S0A0') //code
-
-  const inviteMessage = await sendMessage(app, body.channel.id, `I just invited you to the community's default channels. But click on this message to see a bunch of other cool channels you can join!`)
 
   await sendMessage(app,
     body.channel.id,
