@@ -93,7 +93,7 @@ app.action('leave_confirm', async ({ ack, body }) => {
 
 // Orpheus POSTS to this endpoint with the user ID of the promoted user and the ID of the promoter
 // args: promotedId, promoterId
-receiver.app.post('/promoted', async (req, res) => {
+receiver.app.post('/promote', async (req, res) => {
   console.log('received', req.body)
   const userId = req.body.promotedId
   const promoterId = req.body.promoterId
