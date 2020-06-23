@@ -4,7 +4,7 @@ const express = require('express')
 
 const { hasPushedButton, hasCompletedTutorial, getIslandId,
   sendEphemeralMessage, updateInteractiveMessage, sendSingleBlockMessage,
-  startTutorial, isBot, setFlow, getUserRecord, updateSingleBlockMessage, sendMessage } = require('./utils/utils')
+  startTutorial, isBot, setFlow, getUserRecord, inviteUserToChannel, sendMessage } = require('./utils/utils')
 
 const receiver = new ExpressReceiver({ signingSecret: process.env.SLACK_SIGNING_SECRET })
 
