@@ -4,7 +4,7 @@ const express = require('express')
 
 const { hasPushedButton, hasCompletedTutorial, getIslandId,
   sendEphemeralMessage, updateInteractiveMessage, sendSingleBlockMessage,
-  startTutorial, isBot, setFlow, getUserRecord, inviteUserToChannel, sendMessage } = require('./utils/utils')
+  startTutorial, isBot, setFlow, getUserRecord, inviteUserToChannel, sendMessage, updateSingleBlockMessage } = require('./utils/utils')
 
 const receiver = new ExpressReceiver({ signingSecret: process.env.SLACK_SIGNING_SECRET })
 
@@ -106,7 +106,7 @@ receiver.app.post('/promote', async (req, res) => {
 
 app.action('promoted', async ({ ack, body }) => {
   ack()
-  await updateInteractiveMessage(app, body.message.ts, body.channel.id, ':star2:')
+  await updateInteractiveMessage(app, body.message.ts, body.channel.id, `<@${userId}> :wave: Hey there! You've just been promoted to a full user by <@${promoterId}>. That means you have access to all of Hack Club's hundreds of channels instead of only the 4 you were added to.\n\nTo unlock the Hack Club community, click the :star2: below!\n\n:star2:`)
   await sendMessage(app, body.channel.id, `Woohoo! Welcome to Hack Club! :yay::orpheus::snootslide:`, 1000)
   const inviteMessage = await sendMessage(app, body.channel.id, `I just invited you to the community's default channels. But click on this message to see a bunch of other cool channels you can join!`)
 
