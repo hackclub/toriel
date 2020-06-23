@@ -118,23 +118,23 @@ app.action('promoted', async ({ ack, body }) => {
   await sendMessage(app,
     body.channel.id,
     `<#C013AGZKYCS> – Get to know the community by answering a question every day!
-    <#C0NP503L7> - Upcoming events
-    <#C6LHL48G2> - Game Development
-    <#C0DCUUH7E> - Share your favorite music!
-    <#CA3UH038Q> - Talk to others in the community!
-    <#C90686D0T> - Talk about the LGBTQ community!
-    <#CCW6Q86UF> - :appleinc:
-    <#C1C3K2RQV> - Learn about design!
-    <#CCW8U2LBC> - :google:
-    <#CDLBHGUQN> - Photos of cats!
-    <#CDJV1CXC2> - Photos of dogs!
-    <#C14D3AQTT> - A public log of Hack Club's sent packages!
-    <#CBX54ACPJ> - Share your photos!
-    <#CC78UKWAC> - :jenga_sleep:
-    <#C8P6DHA3W> - Don't enter if you're hungry!
-    <#C010SJJH1PT> - Learn about cooking!
-    <#CDJMS683D> - Count to a million, one at a time.
-    <#CDN99BE9L> - Talk about Movies & TV!`,
+<#C0NP503L7> - Upcoming events
+<#C6LHL48G2> - Game development
+<#C0DCUUH7E> - Share your favorite songs & discover new music
+<#CA3UH038Q> - Talk to others in the community!
+<#C90686D0T> - Talk about LGBTQ+ things!
+<#CCW6Q86UF> - :appleinc:
+<#C1C3K2RQV> - Learn about design!
+<#CCW8U2LBC> - :google:
+<#CDLBHGUQN> - Photos of cats!
+<#CDJV1CXC2> - Photos of dogs!
+<#C14D3AQTT> - A public log of Hack Club's sent packages
+<#CBX54ACPJ> - Share your photos!
+<#CC78UKWAC> - :jenga_sleep:
+<#C8P6DHA3W> - Don't enter if you're hungry!
+<#C010SJJH1PT> - Learn about cooking!
+<#CDJMS683D> - Count to a million, one at a time.
+<#CDN99BE9L> - Talk about Movies & TV!`,
     10,
     inviteMessage.message.ts
   )
