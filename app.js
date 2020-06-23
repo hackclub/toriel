@@ -1,7 +1,6 @@
 const { App, ExpressReceiver } = require("@slack/bolt")
 const AirtablePlus = require('airtable-plus')
-const axios = require('axios')
-const bodyParser = require('body-parser')
+const express = require('express')
 
 const { hasPushedButton, hasCompletedTutorial, getIslandId,
   sendEphemeralMessage, updateInteractiveMessage, sendSingleBlockMessage,
@@ -94,6 +93,7 @@ app.action('leave_confirm', async ({ ack, body }) => {
 
 // Orpheus POSTS to this endpoint with the user ID of the promoted user and the ID of the promoter
 // args: promotedId, promoterId
+receiver.app.use(express.json())
 receiver.app.post('/promote', async (req, res) => {
   console.log('received', req, req.query, req.body)
   const userId = req.body.promotedId
