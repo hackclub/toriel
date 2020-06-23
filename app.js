@@ -95,7 +95,6 @@ app.action('leave_confirm', async ({ ack, body }) => {
 // args: promotedId, promoterId
 receiver.app.use(express.json())
 receiver.app.post('/promote', async (req, res) => {
-  console.log('received', req, req.query, req.body)
   const userId = req.body.promotedId
   const promoterId = req.body.promoterId
   const userRecord = await getUserRecord(userId)
@@ -107,7 +106,7 @@ receiver.app.post('/promote', async (req, res) => {
 
 app.action('promoted', async ({ ack, body }) => {
   ack()
-  await updateInteractiveMessage(app, body.message.ts, body.channel.ts, `:star2:`)
+  await updateInteractiveMessage(app, body.message.ts, body.channel, ':star2:')
   await sendMessage(app, body.channel.id, `Woohoo! Welcome to Hack Club! :yay::orpheus::snootslide:`, 1000)
 
   await inviteUserToChannel(app, body.user.id, 'C0C78SG9L') //hq
