@@ -95,7 +95,7 @@ app.action('leave_confirm', async ({ ack, body }) => {
 // args: promotedId, promoterId
 receiver.app.use(express.json())
 receiver.app.post('/promote', async (req, res) => {
-  if (req.body.key != process.env.ORPHEUS_KEY) return res.status(400).send('Only Orpheus can make this request!')
+  if (req.body.key != process.env.ORPHEUS_KEY) return res.status(403).send('Only Orpheus can make this request!')
   const userId = req.body.promotedId
   const promoterId = req.body.promoterId
   const userRecord = await getUserRecord(userId)
