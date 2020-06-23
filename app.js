@@ -106,7 +106,7 @@ receiver.app.post('/promote', async (req, res) => {
 
 app.action('promoted', async ({ ack, body }) => {
   ack()
-  await updateInteractiveMessage(app, body.message.ts, body.channel, ':star2:')
+  await updateInteractiveMessage(app, body.message.ts, body.channel.id, ':star2:')
   await sendMessage(app, body.channel.id, `Woohoo! Welcome to Hack Club! :yay::orpheus::snootslide:`, 1000)
 
   await inviteUserToChannel(app, body.user.id, 'C0C78SG9L') //hq
