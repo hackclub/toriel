@@ -166,6 +166,7 @@ const loadFlow = (app) => {
     const somCode = 'C015ZDB0GRF'
     const somHardware = 'C015Q3KF678'
     const scrapbook = 'C01504DCLVD'
+    const scrapbookCSS = 'C015M6U6JKU'
 
     console.log("before last invites", body)
 
@@ -173,7 +174,8 @@ const loadFlow = (app) => {
       inviteUserToChannel(app, user, somLounge, true),
       inviteUserToChannel(app, user, somCode, true),
       inviteUserToChannel(app, user, somHardware, true),
-      inviteUserToChannel(app, user, scrapbook, true)
+      inviteUserToChannel(app, user, scrapbook, true),
+      inviteUserToChannel(app, user, scrapbookCSS, true)
     ])
 
     await Promise.all([
