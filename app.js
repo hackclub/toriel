@@ -5,7 +5,8 @@ const express = require('express')
 const { hasPushedButton, hasCompletedTutorial, getIslandId,
   sendEphemeralMessage, updateInteractiveMessage, sendSingleBlockMessage,
   startTutorial, isBot, setFlow, getUserRecord, inviteUserToChannel, sendMessage, updateSingleBlockMessage,
-  getPronouns } = require('./utils/utils')
+  getPronouns,
+  sendToWelcomeCommittee } = require('./utils/utils')
 
 const receiver = new ExpressReceiver({ signingSecret: process.env.SLACK_SIGNING_SECRET })
 
@@ -141,9 +142,13 @@ app.action('promoted', async ({ ack, body }) => {
     inviteMessage.message.ts
   )
 
+  const userRecord = await getUserRecord(body.user.id)
+  const reasonJoined = userRecord.fields['What brings them?']
+  sendToWelcomeCommittee(body.user.id, reasonJoined)
+
   const pronouns = await getPronouns(body.user.id)
   if (pronouns.pronouns === "they/them/theirs" || pronouns.pronouns === "she/her/hers") {
-    await sendMessage(app, body.channel.id, `By the way, I also recommend checking out <#CFZMXJ3FB>—it’s a channel for women/femme/non-binary people in Hack Club! :orpheus::sparkling_heart:`, 1000)
+    await sendMessage(app, body.channel.id, `By the way, I also recommend checking out <#CFZMXJ3FB>—it’s a channel for women/femme/non-binary people in Hack Club! :orpheus::sparkling_heart:`)
   }
 });
 

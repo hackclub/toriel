@@ -8,7 +8,7 @@ const { sendEphemeralMessage, getUserRecord, getIslandId,
   getNextEvent, completeTutorial, timeout,
   updatePushedButton, setPreviouslyCompletedTutorial, hasPreviouslyCompletedTutorial,
   generateIslandName, islandTable, getLatestMessages,
-  startTutorial, setFlow } = require('../utils/utils')
+  startTutorial, setFlow, sendToWelcomeCommittee } = require('../utils/utils')
 
 async function defaultFilter(e) {
   const userID = e.body.user_id || (e.body.event ? e.body.event.user : e.body.user.id)
@@ -112,16 +112,8 @@ const loadFlow = (app) => {
       }
 
       if (lastBotMessage.includes('What brings you')) {
-        if (latestMessages.latestReply) {
-          let replies = await app.client.conversations.replies({
-            token: process.env.SLACK_BOT_TOKEN,
-            channel: body.event.channel,
-            ts: latestMessages.latestTs
-          })
-        }
-        else {
-        }
-
+        const userRecord = await getUserRecord(body.event.user)
+        islandTable.update(userRecord.id, { 'What brings them?': body.event.text })
         await sendMessage(app, body.event.channel, `Ah, very interesting! Well, let me show you around the community.`)
         await sendMessage(app, body.event.channel, `You're currently on Slack, the platform our community uses. It's like Discord, but better.`)
 
@@ -331,15 +323,6 @@ const loadFlow = (app) => {
         }
       ]
     })
-  }
-
-
-  async function sendToWelcomeCommittee(userId, text) {
-    let userPronouns = await getPronouns(userId)
-    let pronouns = userPronouns.pronouns
-    let pronoun1 = userPronouns.pronoun1
-
-    await sendMessage(app, 'GLFAEL1SL', 'New user <@' + userId + '> (' + pronouns + ') joined! Here\'s why ' + pronoun1 + ' joined the Hack Club community:\n\n' + text + '\n\nReact to this message to take ownership on reaching out.', 10)
   }
 
   async function sendHsQuestion(channel) {
