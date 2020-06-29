@@ -100,7 +100,7 @@ const startTutorial = async (app, user, flow, restart) => {
 }
 exports.startTutorial = startTutorial
 
-const sendToWelcomeCommittee = async (userId, text) => {
+const sendToWelcomeCommittee = async (app, userId, text) => {
   let userPronouns = await getPronouns(userId)
   let pronouns = userPronouns.pronouns
   let pronoun1 = userPronouns.pronoun1
