@@ -100,13 +100,14 @@ const startTutorial = async (app, user, flow, restart) => {
 }
 exports.startTutorial = startTutorial
 
-export const sendToWelcomeCommittee = async (userId, text) => {
+const sendToWelcomeCommittee = async (userId, text) => {
   let userPronouns = await getPronouns(userId)
   let pronouns = userPronouns.pronouns
   let pronoun1 = userPronouns.pronoun1
 
   await sendMessage(app, 'GLFAEL1SL', '<@' + userId + '> (' + pronouns + ') was just promoted to a full member! Here\'s why ' + pronoun1 + ' joined the Hack Club community:\n\n' + text + '\n\nReact to this message to take ownership on reaching out.', 10)
 }
+exports.sendToWelcomeCommittee = sendToWelcomeCommittee
 
 const sendMessage = async (app, channel, text, delay, ts, unfurl) => {
   await timeout(delay || 3000)
