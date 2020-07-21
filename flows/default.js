@@ -173,7 +173,7 @@ const loadFlow = (app) => {
     await Promise.all([
       sendEphemeralMessage(app, somLounge, `<@${user}> This is <#${somLounge}>! Relax, grab a sparkling water, and chat with fellow hackers while watching the sights go by.`, user),
       sendEphemeralMessage(app, somCode, `<@${user}> This is <#${somCode}>! Ask coding questions here! ✨`, user),
-      sendEphemeralMessage(app, somHardware, `<@${user}> This is <#${somHardware}! If you're working on a hardware project for the Summer of Making, this is the place to chat with fellow hardware-makers and ask questions!`, user)
+      sendEphemeralMessage(app, somHardware, `<@${user}> This is <#${somHardware}>! If you're working on a hardware project for the Summer of Making, this is the place to chat with fellow hardware-makers and ask questions!`, user)
     ])
 
     await sendMessage(app, body.channel.id, `I'm going to head out now. Toodles! :wave:`)
