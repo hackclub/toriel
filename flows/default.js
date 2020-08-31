@@ -153,7 +153,7 @@ const loadFlow = (app) => {
   app.action('coc_acknowledge', e => runInFlow(e, async ({ ack, body }) => {
     ack();
     await updateInteractiveMessage(app, body.message.ts, body.channel.id, '👍')
-    await sendMessage(app, body.channel.id, `That's all from me! I hope I've been able to help you get acquainted with the Hack Club community.`)
+    await sendMessage(app, body.channel.id, `Woohoo! Welcome to Hack Club! :yay::orpheus::snootslide:`, 1000)
     const finalMessage = await sendMessage(app, body.channel.id, `I've added you to a few of the most popular channels, but there are many, many more! Click on "6 replies" to learn more about the channels you were just added to and discover some other cool channels...`, 5000)
     const finalTs = finalMessage.message.ts
 
