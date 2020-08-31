@@ -1,6 +1,7 @@
 const AirtablePlus = require('airtable-plus')
 const friendlyWords = require('friendly-words')
 const pluralize = require('pluralize')
+const fetch = require('node-fetch')
 const GithubSlugger = require('github-slugger')
 const slugger = new GithubSlugger()
 
@@ -484,6 +485,26 @@ const generateIslandName = async () => {
   }
 }
 exports.generateIslandName = generateIslandName
+
+const promoteUser = async user =>
+  new Promise((resolve, reject) => {
+    const form = new FormData()
+    form.append('user', user)
+    form.append('token', process.env.SLACK_INVITE_TOKEN)
+    fetch(
+      'https://slack.com/api/users.admin.setRegular?slack_route=T0266FRGM',
+      {
+        method: 'POST',
+        body: form,
+      }
+    )
+      .then(res => {
+        console.log(res)
+        resolve(res)
+      })
+      .catch(err => reject(err))
+  })
+exports.promoteUser = promoteUser
 
 const completeTutorial = async userId => {
   let record = await getUserRecord(userId)

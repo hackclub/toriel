@@ -8,7 +8,7 @@ const { sendEphemeralMessage, getUserRecord, getIslandId,
   getNextEvent, completeTutorial, timeout,
   updatePushedButton, setPreviouslyCompletedTutorial, hasPreviouslyCompletedTutorial,
   generateIslandName, islandTable, getLatestMessages,
-  startTutorial, setFlow, sendToWelcomeCommittee } = require('../utils/utils')
+  startTutorial, setFlow, sendToWelcomeCommittee, promoteUser } = require('../utils/utils')
 
 async function defaultFilter(e) {
   const userID = e.body.user_id || (e.body.event ? e.body.event.user : e.body.user.id)
@@ -115,22 +115,22 @@ const loadFlow = (app) => {
         const userRecord = await getUserRecord(body.event.user)
         islandTable.update(userRecord.id, { 'What brings them?': body.event.text })
         await sendMessage(app, body.event.channel, `Ah, very interesting! Well, let me show you around the community.`)
-        await sendMessage(app, body.event.channel, `You're currently on Slack, the platform our community uses. It's like Discord, but better.`)
+        await sendMessage(app, body.event.channel, `You're currently on Slack, the platform our community uses. It's kind of Discord, but a little different.`)
 
         // TODO: Update numbers when they become out of date / (or remove them)
         await sendMessage(app, body.event.channel, `Slack is organized into topical "channels". We have _hundreds_ of channels in our Slack, covering everything from \`#gamedev\` and \`#code\` to \`#photography\` and \`#cooking\`. In the past 7 days, 336 people posted 60,179 messages.`, 5000)
 
         await sendMessage(app, body.event.channel, `Every new account starts limited to just a few channels. I'll get you situated in Summer of Making channels to start, then you'll have to get an existing Hack Club member to convert your account into a full Slack account for access to all channels.`, 5000)
 
-        const somWelcomeChannel = 'C015MKW1A3D';
+        const welcomeChannel = 'C75M7C0SY';
 
-        // add user to #som-welcome
-        await inviteUserToChannel(app, body.event.user, somWelcomeChannel, true)
+        // add user to #welcome
+        await inviteUserToChannel(app, body.event.user, welcomeChannel, true)
 
-        await sendMessage(app, body.event.channel, `I just invited you to your first channel, <#${somWelcomeChannel}>. Join by clicking on it in your sidebar, and feel free to introduce yourself. (totally optional, no expectations)`, 5000)
+        await sendMessage(app, body.event.channel, `I just invited you to your first channel, <#${welcomeChannel}>. Join by clicking on it in your sidebar, and feel free to introduce yourself. (totally optional, no expectations)`, 5000)
 
         const island = await getIslandName(body.event.user)
-        await sendEphemeralMessage(app, somWelcomeChannel, `<@${body.event.user}> Feel free to introduce yourself to the community in <#${somWelcomeChannel}>. When you're done, head back to <https://hackclub.slack.com/archives/${island}|#${island}> to continue your introduction to the community.`, body.event.user)
+        await sendEphemeralMessage(app, welcomeChannel, `<@${body.event.user}> Feel free to introduce yourself to the community in <#${welcomeChannel}>. When you're done, head back to <https://hackclub.slack.com/archives/${island}|#${island}> to continue your introduction to the community.`, body.event.user)
 
         await sendSingleBlockMessage(app, body.event.channel, "When you're ready, click the 👍 on this message to continue.", '👍', 'introduced')
       }
@@ -148,35 +148,9 @@ const loadFlow = (app) => {
     await sendMessage(app, body.channel.id, `This one's a bit more reasonable:`)
     await sendMessage(app, body.channel.id, `#1A1D21,#000000,#338EDA,#FFFFFF,#000000,#FFFFFF,#33D6A6,#EC3750,#000000,#FFFFFF`)
 
-    await sendMessage(app, body.channel.id, `OK! That's all for now! Quick note that you must abide by the code of conduct at https://conduct.hackclub.com.`, 10000)
-    await sendMessage(app, body.channel.id, `I'm adding you to a few more Summer of Making-related channels. Note: You have a limited account and don't have access to the vast majority of channels yet. If you’re kind & helpful to others, any existing Hack Clubber can choose to grant your account full access.`)
-
-    const user = body.user.id
-
-    // add user to remaining channels
-    const somLounge = 'C015LQDP2Q2'
-    const somCode = 'C015ZDB0GRF'
-    const somHardware = 'C015Q3KF678'
-    const scrapbook = 'C01504DCLVD'
-    const scrapbookCSS = 'C015M6U6JKU'
-
-    console.log("before last invites", body)
-
-    await Promise.all([
-      inviteUserToChannel(app, user, somLounge, true),
-      inviteUserToChannel(app, user, somCode, true),
-      inviteUserToChannel(app, user, somHardware, true),
-      inviteUserToChannel(app, user, scrapbook, true),
-      inviteUserToChannel(app, user, scrapbookCSS, true)
-    ])
-
-    await Promise.all([
-      sendEphemeralMessage(app, somLounge, `<@${user}> This is <#${somLounge}>! Relax, grab a sparkling water, and chat with fellow hackers while watching the sights go by.`, user),
-      sendEphemeralMessage(app, somCode, `<@${user}> This is <#${somCode}>! Ask coding questions here! ✨`, user),
-      sendEphemeralMessage(app, somHardware, `<@${user}> This is <#${somHardware}>! If you're working on a hardware project for the Summer of Making, this is the place to chat with fellow hardware-makers and ask questions!`, user)
-    ])
-
-    await sendMessage(app, body.channel.id, `I'm going to head out now. Toodles! :wave:`)
+    await sendMessage(app, body.channel.id, `OK! That's all from me! Before you can proceed, you must abide by the code of conduct at https://conduct.hackclub.com.`, 5000)
+    await promoteUser(body.user.id)
+    await sendSingleBlockMessage(app, body.channel.id, `Once you've read the code of conduct, click the :thumbsup: to unlock the Hack Club community.`, '👍', 'coc_acknowledge')
   }));
 
   app.action('coc_acknowledge', e => runInFlow(e, async ({ ack, body }) => {
@@ -230,8 +204,9 @@ const loadFlow = (app) => {
     // add user to default channels
     await inviteUserToChannel(app, body.user.id, 'C0C78SG9L') //hq
     await inviteUserToChannel(app, body.user.id, 'C0266FRGV') //lounge
-    //await inviteUserToChannel(app, body.user.id, 'C0M8PUPU6') //ship
+    await inviteUserToChannel(app, body.user.id, 'C0M8PUPU6') //ship
     await inviteUserToChannel(app, body.user.id, 'C0EA9S0A0') //code
+    await inviteUserToChannel(app, body.user.id, 'C01504DCLVD') //scrapbook
 
     await sendEphemeralMessage(app, 'C0C78SG9L', hqDesc, body.user.id)
     await sendEphemeralMessage(app, 'C0266FRGV', loungeDesc, body.user.id)
