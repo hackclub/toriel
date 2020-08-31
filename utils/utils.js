@@ -42,7 +42,7 @@ const startTutorial = async (app, user, flow, restart) => {
         'Has completed tutorial': false,
         'Has previously completed tutorial': false,
         'Pushed first button': false,
-        'Flow': flow === 'default' ? 'Default' : 'Summer of Making'
+        'Flow': 'Default'
       })
     }
     await islandTable.update(record.id, {
@@ -50,7 +50,7 @@ const startTutorial = async (app, user, flow, restart) => {
       'Island Channel Name': islandName.channel,
       'Has completed tutorial': true,
       'Pushed first button': false,
-      'Flow': flow === 'default' ? 'Default' : 'Summer of Making'
+      'Flow': 'Default'
     })
   } else {
     await islandTable.create({
@@ -60,7 +60,7 @@ const startTutorial = async (app, user, flow, restart) => {
       'Has completed tutorial': false,
       'Has previously completed tutorial': false,
       'Pushed first button': false,
-      'Flow': flow === 'default' ? 'Default' : 'Summer of Making'
+      'Flow': 'Default'
     })
   }
   console.log(`New tutorial channel created: ${channelId}`)
@@ -91,7 +91,7 @@ const startTutorial = async (app, user, flow, restart) => {
   await app.client.chat.postMessage({
     token: process.env.SLACK_BOT_TOKEN,
     channel: channelId,
-    blocks: flow === 'default' ? defaultIntro : som
+    blocks: defaultIntro
   })
 
   await timeout(30000)
