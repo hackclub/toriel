@@ -120,10 +120,7 @@ const loadFlow = (app) => {
         // TODO: Update numbers when they become out of date / (or remove them)
         await sendMessage(app, body.event.channel, `Slack is organized into topical "channels". We have _hundreds_ of channels in our Slack, covering everything from \`#gamedev\` and \`#code\` to \`#photography\` and \`#cooking\`. In the past 7 days, 336 people posted 60,179 messages.`, 5000)
 
-        await sendMessage(app, body.event.channel, `Every new account starts limited to just a few channels. I'll get you situated in Summer of Making channels to start, then you'll have to get an existing Hack Club member to convert your account into a full Slack account for access to all channels.`, 5000)
-
         const welcomeChannel = 'C75M7C0SY';
-
         // add user to #welcome
         await inviteUserToChannel(app, body.event.user, welcomeChannel, true)
 

@@ -2,6 +2,7 @@ const AirtablePlus = require('airtable-plus')
 const friendlyWords = require('friendly-words')
 const pluralize = require('pluralize')
 const fetch = require('node-fetch')
+const FormData = require('form-data')
 const GithubSlugger = require('github-slugger')
 const slugger = new GithubSlugger()
 
@@ -84,7 +85,7 @@ const startTutorial = async (app, user, flow, restart) => {
   await app.client.conversations.setTopic({
     token: process.env.SLACK_OAUTH_TOKEN,
     channel: channelId,
-    topic: `Welcome to Hack Club! :wave: Unlock the Summer of Making community by completing this tutorial.`
+    topic: `Welcome to Hack Club! :wave: Unlock the community by completing this tutorial.`
   })
 
   await app.client.chat.postMessage({
