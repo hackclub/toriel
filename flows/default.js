@@ -119,7 +119,7 @@ const loadFlow = (app) => {
 
         // TODO: Update numbers when they become out of date / (or remove them)
         await sendMessage(app, body.event.channel, `Slack is organized into topical "channels". We have _hundreds_ of channels in our Slack, covering everything from \`#gamedev\` and \`#code\` to \`#photography\` and \`#cooking\`. In the past 7 days, 336 people posted 60,179 messages.`, 5000)
-        await sendEphemeralMessage(app, 'C74HZS5A5', `<@${body.event.user}> Welcome to <#C74HZS5A5>, the lobby for new Hack Clubbers! Feel free to chat, hang out, ask questions, whatever :orpheus:`)
+        await sendEphemeralMessage(app, 'C74HZS5A5', `<@${body.event.user}> Welcome to <#C74HZS5A5>, the lobby for new Hack Clubbers! Feel free to chat, hang out, ask questions, whatever :orpheus:`, body.event.user)
         await sendMessage(app, body.event.channel, `Woah—it looks like you're already in a channel! <#C74HZS5A5>, the intro channel for new members. Try clicking the red :ping: on your sidebar to the left :eyes:`, 5000)
         await sendMessage(app, body.event.channel, `Want to be invited to another channel?`, 7000)
 
