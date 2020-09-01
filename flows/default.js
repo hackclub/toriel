@@ -119,12 +119,15 @@ const loadFlow = (app) => {
 
         // TODO: Update numbers when they become out of date / (or remove them)
         await sendMessage(app, body.event.channel, `Slack is organized into topical "channels". We have _hundreds_ of channels in our Slack, covering everything from \`#gamedev\` and \`#code\` to \`#photography\` and \`#cooking\`. In the past 7 days, 336 people posted 60,179 messages.`, 5000)
+        await sendEphemeralMessage(app, 'C74HZS5A5', `<@${body.event.user}> Welcome to <#C74HZS5A5>, the lobby for new Hack Clubbers! Feel free to chat, hang out, ask questions, whatever :orpheus:`)
+        await sendMessage(app, body.event.channel, `Woah—it looks like you're already in a channel! <#C74HZS5A5>, the intro channel for new members. Try clicking the red :ping: on your sidebar to the left :eyes:`, 5000)
+        await sendMessage(app, body.event.channel, `Want to be invited to another channel?`, 7000)
 
         const welcomeChannel = 'C75M7C0SY';
         // add user to #welcome
         await inviteUserToChannel(app, body.event.user, welcomeChannel, true)
 
-        await sendMessage(app, body.event.channel, `I just invited you to your first channel, <#${welcomeChannel}>. Join by clicking on it in your sidebar, and feel free to introduce yourself. (totally optional, no expectations)`, 5000)
+        await sendMessage(app, body.event.channel, `I just invited you to your second channel, <#${welcomeChannel}>. Join by clicking on it in your sidebar, and feel free to introduce yourself to the community. (totally optional, no expectations)`, 1000)
 
         const island = await getIslandName(body.event.user)
         await sendEphemeralMessage(app, welcomeChannel, `<@${body.event.user}> Feel free to introduce yourself to the community in <#${welcomeChannel}>. When you're done, head back to <https://hackclub.slack.com/archives/${island}|#${island}> to continue your introduction to the community.`, body.event.user)
@@ -140,7 +143,7 @@ const loadFlow = (app) => {
     await sendMessage(app, body.channel.id, `Awesome! Now let's spiff up your Slack, try this theme:`)
     await sendMessage(app, body.channel.id, `#161618,#000000,#FFCD00,#161618,#000010,#FFCD00,#FFDA60,#FFB500,#000010,#FFBC00`)
 
-    await sendMessage(app, body.channel.id, `A bit gaudy, wouldn't you say?`, 6000)
+    await sendMessage(app, body.channel.id, `A bit gaudy, wouldn't you say?`, 5000)
 
     await sendMessage(app, body.channel.id, `This one's a bit more reasonable:`)
     await sendMessage(app, body.channel.id, `#1A1D21,#000000,#338EDA,#FFFFFF,#000000,#FFFFFF,#33D6A6,#EC3750,#000000,#FFFFFF`)
