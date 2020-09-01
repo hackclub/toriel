@@ -115,13 +115,14 @@ const loadFlow = (app) => {
         const userRecord = await getUserRecord(body.event.user)
         islandTable.update(userRecord.id, { 'What brings them?': body.event.text })
         await sendMessage(app, body.event.channel, `Ah, very interesting! Well, let me show you around the community.`)
-        await sendMessage(app, body.event.channel, `You're currently on Slack, the platform our community uses. It's kind of Discord, but a little different.`)
+        await sendMessage(app, body.event.channel, `You're currently on Slack, the platform our community uses. It's kind of like Discord, but a little different.`)
 
         // TODO: Update numbers when they become out of date / (or remove them)
         await sendMessage(app, body.event.channel, `Slack is organized into topical "channels". We have _hundreds_ of channels in our Slack, covering everything from \`#gamedev\` and \`#code\` to \`#photography\` and \`#cooking\`. In the past 7 days, 336 people posted 60,179 messages.`, 5000)
+        await timeout(5000)
         await sendEphemeralMessage(app, 'C74HZS5A5', `<@${body.event.user}> Welcome to <#C74HZS5A5>, the lobby for new Hack Clubbers! Feel free to chat, hang out, ask questions, whatever :orpheus:`, body.event.user)
-        await sendMessage(app, body.event.channel, `Woah—it looks like you're already in a channel! <#C74HZS5A5>, the intro channel for new members. Try clicking the red :ping: on your sidebar to the left :eyes:`, 5000)
-        await sendMessage(app, body.event.channel, `Want to be invited to another channel?`, 7000)
+        await sendMessage(app, body.event.channel, `Woah—it looks like you're already in a channel! <#C74HZS5A5>, the intro channel for new members. Try clicking the red :ping: on your sidebar to the left :eyes:`)
+        await sendMessage(app, body.event.channel, `Want to be invited to another channel?`, 10000)
 
         const welcomeChannel = 'C75M7C0SY';
         // add user to #welcome
