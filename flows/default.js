@@ -117,22 +117,22 @@ const loadFlow = (app) => {
         await sendMessage(app, body.event.channel, `Ah, very interesting! Well, let me show you around the community.`)
         await sendMessage(app, body.event.channel, `You're currently on Slack, the platform our community uses. It's kind of like Discord, but a little different.`)
 
-        // TODO: Update numbers when they become out of date / (or remove them)
-        await sendMessage(app, body.event.channel, `Slack is organized into topical "channels". We have _hundreds_ of channels in our Slack, covering everything from \`#gamedev\` and \`#code\` to \`#photography\` and \`#cooking\`. In the past 7 days, 336 people posted 60,179 messages.`, 5000)
-        await timeout(5000)
+        await sendMessage(app, body.event.channel, `Slack is organized into topical "channels". We have _hundreds_ of channels in our Slack, covering everything from—`, 5000)
+        await timeout(500)
         await sendEphemeralMessage(app, 'C74HZS5A5', `<@${body.event.user}> Welcome to <#C74HZS5A5>, the lobby for new Hack Clubbers! Feel free to chat, hang out, ask questions, whatever :orpheus:`, body.event.user)
-        await sendMessage(app, body.event.channel, `Woah—it looks like you're already in a channel! <#C74HZS5A5>, the intro channel for new members. Try clicking the red :ping: on your sidebar to the left :eyes:`)
-        await sendMessage(app, body.event.channel, `Want to be invited to another channel?`, 10000)
+        await sendMessage(app, body.event.channel, 'Wait a second...', 2000)
+        await sendMessage(app, body.event.channel, `It looks like you're already in a channel! <#C74HZS5A5>, the intro channel for new members.`, 1000)
+        await sendMessage(app, body.event.channel, `Try clicking the red :ping: on your sidebar to the left :eyes:`, 1000)
+        await sendMessage(app, body.event.channel, `As I was saying before I got distracted, we have _hundreds_ of these "channels" in the community, covering every topic you can think of, from \`#gamedev\` and \`#code\` to \`#photography\` and \`#cooking\`. We have nearly 1,000 weekly active members on here—wowee, that's a lot!!!`, 10000)
+        await sendMessage(app, body.event.channel, `Want to be invited to another channel?`, 5000)
 
         const welcomeChannel = 'C75M7C0SY';
-        // add user to #welcome
+        await timeout(1000)
         await inviteUserToChannel(app, body.event.user, welcomeChannel, true)
-
-        await sendMessage(app, body.event.channel, `I just invited you to your second channel, <#${welcomeChannel}>. Join by clicking on it in your sidebar, and feel free to introduce yourself to the community. (totally optional, no expectations)`, 1000)
-
         const island = await getIslandName(body.event.user)
         await sendEphemeralMessage(app, welcomeChannel, `<@${body.event.user}> Feel free to introduce yourself to the community in <#${welcomeChannel}>. When you're done, head back to <https://hackclub.slack.com/archives/${island}|#${island}> to continue your introduction to the community.`, body.event.user)
 
+        await sendMessage(app, body.event.channel, `I just invited you to your second channel, <#${welcomeChannel}>. Join by clicking on it in your sidebar, and feel free to introduce yourself to the community. (totally optional, no expectations)`, 1000)
         await sendSingleBlockMessage(app, body.event.channel, "When you're ready, click the 👍 on this message to continue.", '👍', 'introduced')
       }
     }
