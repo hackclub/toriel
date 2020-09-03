@@ -118,7 +118,7 @@ const loadFlow = (app) => {
         await sendMessage(app, body.event.channel, `You're currently on Slack, the platform our community uses. It's kind of like Discord, but a little different.`)
 
         await sendMessage(app, body.event.channel, `Slack is organized into topical "channels". We have _hundreds_ of channels in our Slack, covering everything from—`, 5000)
-        await timeout(500)
+        await timeout(1000)
         await sendEphemeralMessage(app, 'C74HZS5A5', `<@${body.event.user}> Welcome to <#C74HZS5A5>, the lobby for new Hack Clubbers! Feel free to chat, hang out, ask questions, whatever :orpheus:`, body.event.user)
         await sendMessage(app, body.event.channel, 'Wait a second...', 2000)
         await sendMessage(app, body.event.channel, `It looks like you're already in a channel! <#C74HZS5A5>, the intro channel for new members.`, 1000)
