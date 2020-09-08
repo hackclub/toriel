@@ -3,7 +3,7 @@ const defaultIntro = [
     "type": "section",
     "text": {
       "type": "mrkdwn",
-      "text": `Hi, I'm Clippy! My job is to help you join the Hack Club community. Do you need assistance?`
+      "text": `Hi there, I'm Clippy! It looks like you want join the Hack Club community. Do you need assistance?`
     }
   },
   {

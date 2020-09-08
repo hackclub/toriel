@@ -63,8 +63,8 @@ app.command('/restart', async ({ command, ack }) => {
 })
 
 app.event('message', async body => {
-  if (body.message.subtype === 'channel_join' &&
-    body.message.text === `<@${body.message.user}> has joined the channel`) {
+  if ((body.message.subtype === 'channel_join' &&
+    body.message.text === `<@${body.message.user}> has joined the channel`) || (body.message.channel === 'C01A6SCS14M' && body.message.user !== 'U012H797734')) {
     await app.client.chat.delete({
       token: process.env.SLACK_OAUTH_TOKEN,
       channel: body.message.channel,

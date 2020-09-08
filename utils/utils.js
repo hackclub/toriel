@@ -115,14 +115,28 @@ const sendMessage = async (app, channel, text, delay, ts, unfurl) => {
   await timeout(delay || 3000)
   const msg = await app.client.chat.postMessage({
     token: process.env.SLACK_BOT_TOKEN,
-    channel: channel,
-    text: text,
+    channel,
+    text,
     thread_ts: null || ts,
     unfurl_links: unfurl || false
   })
   return msg
 }
 exports.sendMessage = sendMessage
+
+const sendCustomizedMessage = async (app, channel, text, icon_url, username, delay, ts, unfurl) => {
+  await timeout(delay || 3000)
+  return await app.client.chat.postMessage({
+    token: process.env.SLACK_BOT_TOKEN,
+    channel,
+    text,
+    icon_url,
+    username,
+    thread_ts: null || ts,
+    unfurl_links: unfurl || false
+  })
+}
+exports.sendCustomizedMessage = sendCustomizedMessage
 
 const sendEphemeralMessage = async (app, channel, text, user) => {
   return await app.client.chat.postEphemeral({
