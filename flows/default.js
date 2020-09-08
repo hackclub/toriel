@@ -27,86 +27,85 @@ async function runInFlow(opts, func) {
   }
 }
 
-async function introProgress(body) {
-  updateInteractiveMessage(app, body.message.ts, body.channel.id, `Hi there, I'm Clippy! It looks like you want join the Hack Club community. Do you need assistance?`)
-
-  updatePushedButton(body.user.id)
-  await sendMessage(app, body.channel.id, `Excellent! I'm happy to assist you in joining Hack Club today.`, 1000)
-
-  const prevCompleted = await hasPreviouslyCompletedTutorial(body.user.id)
-  if (prevCompleted) {
-    await sendMessage(app, body.channel.id, `A few quick questions:`)
-  } else {
-    await sendMessage(app, body.channel.id, `First, the free stuff I promised:`)
-    const gpMessage = await sendMessage(app, body.channel.id, `<@UH50T81A6> give <@${body.user.id}> 20gp for free stuff!!!`, 1000)
-    await sendMessage(app, body.channel.id, 'You can check your balance at any time by typing `@banker balance`.', 10, gpMessage.message.ts)
-    await setPreviouslyCompletedTutorial(body.user.id)
-    await sendMessage(app, body.channel.id, `Discovering the many uses of GP is a Hack Club rite of passage.`, 1000)
-    await sendMessage(app, body.channel.id, `Now that that's out of the way, a few quick questions:`, 5000)
-  }
-
-  await timeout(3000)
-  await app.client.chat.postMessage({
-    token: process.env.SLACK_BOT_TOKEN,
-    channel: body.channel.id,
-    blocks: [
-      {
-        "type": "section",
-        "text": {
-          "type": "mrkdwn",
-          "text": `What are your pronouns? (how you want to be referred to by others)`
-        }
-      },
-      {
-        "type": "actions",
-        "elements": [
-          {
-            "type": "button",
-            "text": {
-              "type": "plain_text",
-              "emoji": true,
-              "text": "she/her/hers"
-            },
-            "style": "primary",
-            "action_id": "she"
-          },
-          {
-            "type": "button",
-            "text": {
-              "type": "plain_text",
-              "emoji": true,
-              "text": "he/him/his"
-            },
-            "style": "primary",
-            "action_id": "he"
-          },
-          {
-            "type": "button",
-            "text": {
-              "type": "plain_text",
-              "emoji": true,
-              "text": "they/them/theirs"
-            },
-            "style": "primary",
-            "action_id": "they"
-          },
-          {
-            "type": "button",
-            "text": {
-              "type": "plain_text",
-              "emoji": true,
-              "text": "something else"
-            },
-            "style": "primary",
-            "action_id": "something_else"
-          }
-        ]
-      }
-    ]
-  })
-}
-
 const loadFlow = (app) => {
+  async function introProgress(body) {
+    updateInteractiveMessage(app, body.message.ts, body.channel.id, `Hi there, I'm Clippy! It looks like you want join the Hack Club community. Do you need assistance?`)
+
+    updatePushedButton(body.user.id)
+    await sendMessage(app, body.channel.id, `Excellent! I'm happy to assist you in joining Hack Club today.`, 1000)
+
+    const prevCompleted = await hasPreviouslyCompletedTutorial(body.user.id)
+    if (prevCompleted) {
+      await sendMessage(app, body.channel.id, `A few quick questions:`)
+    } else {
+      await sendMessage(app, body.channel.id, `First, the free stuff I promised:`)
+      const gpMessage = await sendMessage(app, body.channel.id, `<@UH50T81A6> give <@${body.user.id}> 20gp for free stuff!!!`, 1000)
+      await sendMessage(app, body.channel.id, 'You can check your balance at any time by typing `@banker balance`.', 10, gpMessage.message.ts)
+      await setPreviouslyCompletedTutorial(body.user.id)
+      await sendMessage(app, body.channel.id, `Discovering the many uses of GP is a Hack Club rite of passage.`, 1000)
+      await sendMessage(app, body.channel.id, `Now that that's out of the way, a few quick questions:`, 5000)
+    }
+
+    await timeout(3000)
+    await app.client.chat.postMessage({
+      token: process.env.SLACK_BOT_TOKEN,
+      channel: body.channel.id,
+      blocks: [
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": `What are your pronouns? (how you want to be referred to by others)`
+          }
+        },
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "emoji": true,
+                "text": "she/her/hers"
+              },
+              "style": "primary",
+              "action_id": "she"
+            },
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "emoji": true,
+                "text": "he/him/his"
+              },
+              "style": "primary",
+              "action_id": "he"
+            },
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "emoji": true,
+                "text": "they/them/theirs"
+              },
+              "style": "primary",
+              "action_id": "they"
+            },
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "emoji": true,
+                "text": "something else"
+              },
+              "style": "primary",
+              "action_id": "something_else"
+            }
+          ]
+        }
+      ]
+    })
+  }
   app.action('intro_progress_1', e => runInFlow(e, async ({ ack, body }) => {
     ack();
     introProgress(body)
