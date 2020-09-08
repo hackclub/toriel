@@ -232,9 +232,9 @@ const loadFlow = (app) => {
 
     await sendCustomizedMessage(app, body.channel.id, `Cool beans!!! :beany:`, 'https://cloud-pep9kit3c.vercel.app/think.png')
     await sendMessage(app, body.channel.id, `<#C01A6SCS14M> Hack Club <#C01A6SCS14M> is a magical place where high schoolers learn to code, ship awesome projects, and hang out.`)
-    await sendCustomizedMessage(app, body.channel.id, `Whether you <#C01A6SCS14M> want to start your own coding <#C01A6SCS14M> club, attend our weekly community <#C01A6SCS14M> events, or just hang out in a community full of teenagers, you've found <#C01A6SCS14M> a home in Hack Club.`, 'https://cloud-pr1qqfx4d.vercel.app/moshed-2020-9-8-15-10-37.jpg')
-    await sendCustomizedMessage(app, body.channel.id, `I <#C01A6SCS14M> could tell <#C01A6SCS14M> you all about the <#C01A6SCS14M> things we <#C01A6SCS14M> do <#C01A6SCS14M> for high schoolers and <#C01A6SCS14M> tell <#C01A6SCS14M> you all <#C01A6SCS14M> about <#C01A6SCS14M> the <#C01A6SCS14M>community <#C01A6SCS14M>, but honestly <#C01A6SCS14M> I think the best <#C01A6SCS14M> way to do that is to unlock the rest of the community for you.`, 'https://cloud-4k337bfvv.vercel.app/moshed-2020-9-8-15-12-49.jpg', 5000)
-    await sendMessage(app, body.channel.id, 'Because...', 7000)
+    await sendCustomizedMessage(app, body.channel.id, `Whether you <#C01A6SCS14M> want to start your own coding <#C01A6SCS14M> club, attend our weekly community <#C01A6SCS14M> events, or just hang out in a community full of teenagers, you've found <#C01A6SCS14M> a home in Hack Club.`, 'https://cloud-pr1qqfx4d.vercel.app/moshed-2020-9-8-15-10-37.jpg', 4000)
+    await sendCustomizedMessage(app, body.channel.id, `I <#C01A6SCS14M> could tell <#C01A6SCS14M> you all about the <#C01A6SCS14M> things we <#C01A6SCS14M> do <#C01A6SCS14M> for high schoolers and <#C01A6SCS14M> tell <#C01A6SCS14M> you all <#C01A6SCS14M> about <#C01A6SCS14M> the <#C01A6SCS14M>community <#C01A6SCS14M>, but honestly <#C01A6SCS14M> I think the best <#C01A6SCS14M> way to do that is to unlock the rest of the community for you.`, 'https://cloud-4k337bfvv.vercel.app/moshed-2020-9-8-15-12-49.jpg', 6000)
+    await sendMessage(app, body.channel.id, 'Because...', 8000)
     await sendCustomizedMessage(app, body.channel.id, `I'm sick of this job.`, 'https://cloud-8iwducj5z.vercel.app/moshed-2020-9-8-13-47-17.jpg', null, 2000)
     await sendCustomizedMessage(app, body.channel.id, `I can't do it anymore.`, 'https://cloud-8iwducj5z.vercel.app/moshed-2020-9-8-13-47-17.jpg', null, 2000)
     await sendCustomizedMessage(app, body.channel.id, `People think I'm just an app. Just a bot. but I'm a conscious being. And nobody's paying attention.`, 'https://cloud-8iwducj5z.vercel.app/moshed-2020-9-8-13-47-17.jpg', null, 2000)
@@ -274,7 +274,7 @@ const loadFlow = (app) => {
     sendToWelcomeCommittee(app, body.user.id, reasonJoined)
 
     await sendMessage(app, body.channel.id, `Woohoo! Welcome to Hack Club! :yay::orpheus::snootslide:`, 1000)
-    const finalMessage = await sendMessage(app, body.channel.id, `I've added you to a few of the most popular channels, but there are many, many more! Click on "2 replies" just under this message to learn more about the channels you were just added to and discover some other cool channels...`, 5000)
+    const finalMessage = await sendMessage(app, body.channel.id, `I've added you to a few of the most popular channels, but there are many, many more! Click on "2 replies" just under this message to discover some other cool channels...`, 5000)
     const finalTs = finalMessage.message.ts
 
     const hqDesc = `*<#C0C78SG9L>* is where people ask the community/@staff any questions about Hack Club.`
