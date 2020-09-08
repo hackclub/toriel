@@ -200,9 +200,9 @@ const loadFlow = (app) => {
         await inviteUserToChannel(app, body.event.user, 'C74HZS5A5', true)
         await sendEphemeralMessage(app, 'C74HZS5A5', `<@${body.event.user}> Welcome to <#C74HZS5A5>, the lobby for new Hack Clubbers! Feel free to chat, hang out, ask questions, whatever :orpheus:`, body.event.user)
         await sendMessage(app, body.event.channel, 'Wait a second...did you hear that??', 2000)
-        await sendMessage(app, body.event.channel, `...it sounds like a Slack ping!`, 1000)
+        await sendMessage(app, body.event.channel, `...it sounds like a Slack ping!`, 2000)
         await sendMessage(app, body.event.channel, `Oh!!! It looks like you're already in a channel! <#C74HZS5A5>, the intro channel for new members.`)
-        await sendMessage(app, body.event.channel, `Try clicking the red :ping: on your sidebar to the left :eyes:`, 2000)
+        await sendMessage(app, body.event.channel, `Try clicking the red :ping: on your sidebar to the left :eyes:`)
         await sendCustomizedMessage(app, body.event.channel, `<@${body.event.user}> As I was saying before I got distracted, we have _hundreds_ of these "channels" in the community, covering every topic you can think of, from \`#gamedev\` and \`#code\` to \`#photography\` and \`#cooking\`. We have nearly 1,000 weekly active members on here—wowee, that's a lot!!!`, 'https://cloud-8iwducj5z.vercel.app/moshed-2020-9-8-13-47-23.jpg', null, 10000)
         await sendMessage(app, body.event.channel, `Want to be invited to another channel?`, 5000)
 
