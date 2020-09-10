@@ -144,7 +144,7 @@ app.action('promoted', async ({ ack, body }) => {
 
   const userRecord = await getUserRecord(body.user.id)
   const reasonJoined = userRecord.fields['What brings them?']
-  sendToWelcomeCommittee(app, body.user.id, reasonJoined)
+  sendToWelcomeCommittee(app, body.user.id, reasonJoined, true)
 
   const pronouns = await getPronouns(body.user.id)
   if (pronouns.pronouns === "they/them/theirs" || pronouns.pronouns === "she/her/hers") {

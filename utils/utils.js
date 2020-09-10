@@ -102,12 +102,16 @@ const startTutorial = async (app, user, flow, restart) => {
 }
 exports.startTutorial = startTutorial
 
-const sendToWelcomeCommittee = async (app, userId, text) => {
+const sendToWelcomeCommittee = async (app, userId, text, summer) => {
   let userPronouns = await getPronouns(userId)
   let pronouns = userPronouns.pronouns
   let pronoun1 = userPronouns.pronoun1
 
-  await sendMessage(app, 'GLFAEL1SL', '<@' + userId + '> (' + pronouns + ') was just promoted to a full member! Here\'s why ' + pronoun1 + ' joined the Hack Club community:\n\n' + text + '\n\nReact to this message to take ownership on reaching out.', 10)
+  if (summer) {
+    await sendCustomizedMessage(app, 'GLFAEL1SL', '<@' + userId + '> (' + pronouns + ') was just promoted to a full member! Here\'s why ' + pronoun1 + ' joined the Hack Club community:\n\n' + text + '\n\nReact to this message to take ownership on reaching out.', 'https://cloud-kow60jksb.vercel.app/imageedit_3_4872718040.jpg', 'Summer Clippy', 10)
+  } else {
+    await sendMessage(app, 'GLFAEL1SL', '<@' + userId + '> (' + pronouns + ') just joined Hack Club! Here\'s why ' + pronoun1 + ' joined the community:\n\n' + text + '\n\nReact to this message to take ownership on reaching out.', 10)
+  }
 }
 exports.sendToWelcomeCommittee = sendToWelcomeCommittee
 
