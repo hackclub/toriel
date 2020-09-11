@@ -73,6 +73,16 @@ app.event('message', async body => {
   }
 })
 
+app.event('member_joined_channel', async (body) => {
+  if (body.event.channel === 'C01A6SCS14M') {
+    await app.client.conversations.kick({
+      token: process.env.SLACK_OAUTH_TOKEN,
+      channel: body.event.channel,
+      user: body.event.user
+    })
+  }
+})
+
 app.action('mimmiggie', async ({ ack, body }) => {
   ack();
 });
