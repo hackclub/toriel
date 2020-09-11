@@ -1,6 +1,7 @@
 const { App, ExpressReceiver } = require("@slack/bolt")
 const AirtablePlus = require('airtable-plus')
 const express = require('express')
+const fetch = require('node-fetch')
 
 const { hasPushedButton, hasCompletedTutorial, getIslandId,
   sendEphemeralMessage, updateInteractiveMessage, sendSingleBlockMessage,
@@ -164,8 +165,14 @@ app.action('promoted', async ({ ack, body }) => {
 
 (async () => {
   const port = process.env.PORT || 3000;
-
   await app.start(port);
-
   console.log(`⚡️ Bolt app is running on port ${port}!`);
+
+  let latestCommitMsg = '¯\\_(ツ)_/¯'
+  await fetch('https://api.github.com/repos/hackclub/clippy/commits/main')
+    .then((r) => r.json())
+    .then((d) => (latestCommitMsg = d.commit.message))
+
+  const message = `It looks like I'm alive again! Here's what I'm up to now: *${latestCommitMsg}*`
+  await sendMessage(app, 'C0P5NE354', message, 10)
 })();
