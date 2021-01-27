@@ -257,11 +257,11 @@ const loadFlow = (app) => {
     await sendCustomizedMessage(app, body.channel.id, `‎‏‏‎ ‎`, 'https://cloud-603yzf4nn.vercel.app/screen_shot_2020-09-08_at_2.36.29_pm.png', ' ‎', 1000)
     await sendMessage(app, body.channel.id, `‎‏‏‎...`, 1000)
     await sendMessage(app, body.channel.id, `‎‏‏‎...`, 1000)
-    await sendMessage(app, body.channel.id, `That's all from me! I can't wait to have you in the community :partyparrot:`)
     await sendMessage(app, body.channel.id, `Before you proceed, please make sure to read and abide by our <https://hackclub.com/conduct|code of conduct>. Every community member is expected to follow the code of conduct anywhere in the community.`)
 
     await promoteUser(body.user.id)
     await sendSingleBlockMessage(app, body.channel.id, `Once you've read the code of conduct, click the :thumbsup: to unlock the Hack Club community.`, '👍', 'coc_acknowledge')
+    await sendMessage(app, body.channel.id, `That's all from me! I can't wait to have you in the community :partyparrot:`)
   }));
 
   app.action('coc_acknowledge', e => runInFlow(e, async ({ ack, body }) => {
