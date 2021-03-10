@@ -22,6 +22,10 @@ async function defaultFilter(e) {
 }
 
 async function runInFlow(opts, func) {
+  return await func(opts)
+
+  // this code will not run.
+  // we used to use it when supporting both a 'default' flow & a 'summer of making' flow
   if (await defaultFilter(opts)) {
     return await func(opts)
   }
