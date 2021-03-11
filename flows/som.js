@@ -21,7 +21,7 @@ async function somFilter(e) {
 }
 
 async function runInFlow(opts, func) {
-  return await func(opts)
+  // return await func(opts)
 
   // this code will not run.
   // we used to use it when supporting both a 'default' flow & a 'summer of making' flow
