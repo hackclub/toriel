@@ -1,4 +1,4 @@
-/*const axios = require('axios')
+const axios = require('axios')
 
 const { generateIslandName, getUserRecord, islandTable,
   sendMessage, timeout, hasPushedButton,
@@ -244,4 +244,3 @@ const loadFlow = app => {
   }));
 }
 exports.loadFlow = loadFlow
-*/
