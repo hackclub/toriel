@@ -179,8 +179,10 @@ const loadFlow = (app) => {
 
   app.event('message', async body => {
     const correctChannel = await getIslandId(body.event.user)
+    console.log('correct channel', correctChannel)
 
     if (messageIsPartOfTutorial(body, correctChannel)) {
+      console.log('message is part of tutorial')
       const latestMessages = await getLatestMessages(app, body.event.channel)
       const lastBotMessage = latestMessages.lastBotMessage
       const lastUserMessage = latestMessages.lastUserMessage
@@ -194,6 +196,7 @@ const loadFlow = (app) => {
       }
 
       if (lastBotMessage.includes('What brings you')) {
+        console.log('what brings you!')
         const userRecord = await getUserRecord(body.event.user)
         islandTable.update(userRecord.id, { 'What brings them?': body.event.text })
         await sendCustomizedMessage(app, body.event.channel, `Neatoio! Well, it looks like the next step on my script is to show you around the community :hackclub::slack:`, 'https://cloud-8iwducj5z.vercel.app/moshed-2020-9-8-13-47-17.jpg')
