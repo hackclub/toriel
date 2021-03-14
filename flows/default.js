@@ -179,13 +179,15 @@ const loadFlow = (app) => {
 
   app.event('message', async body => {
     const correctChannel = await getIslandId(body.event.user)
-    console.log('correct channel', correctChannel)
+    // console.log('correct channel', correctChannel)
 
     if (messageIsPartOfTutorial(body, correctChannel)) {
       console.log('message is part of tutorial')
       const latestMessages = await getLatestMessages(app, body.event.channel)
       const lastBotMessage = latestMessages.lastBotMessage
       const lastUserMessage = latestMessages.lastUserMessage
+      console.log('last bot message', lastBotMessage)
+      console.log('last user message', lastUserMessage)
 
       if (lastBotMessage.includes('What are your preferred pronouns')) {
         let pronouns = lastUserMessage
