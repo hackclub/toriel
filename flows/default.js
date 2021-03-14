@@ -177,7 +177,7 @@ const loadFlow = (app) => {
     await sendMessage(app, body.channel.id, `What brings you to the Hack Club community? (Type your answer in the chat)`)
   }));
 
-  app.event('message', e => runInFlow(e, async body => {
+  app.event('message', async body => {
     const correctChannel = await getIslandId(body.event.user)
 
     if (messageIsPartOfTutorial(body, correctChannel)) {
@@ -219,7 +219,7 @@ const loadFlow = (app) => {
         await sendSingleBlockMessage(app, body.event.channel, "When you're ready, click the 👍 on this message to continue.", '👍', 'introduced')
       }
     }
-  }));
+  });
 
   app.action('introduced', e => runInFlow(e, async ({ ack, body }) => {
     ack();
