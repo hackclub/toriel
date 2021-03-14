@@ -180,6 +180,7 @@ const loadFlow = (app) => {
   app.event('message', async body => {
     const correctChannel = await getIslandId(body.event.user)
     // console.log('correct channel', correctChannel)
+    console.log('message is part of tutorial?', messageIsPartOfTutorial(body, correctChannel))
 
     if (messageIsPartOfTutorial(body, correctChannel)) {
       console.log('message is part of tutorial')
