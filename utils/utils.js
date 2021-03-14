@@ -534,8 +534,7 @@ const completeTutorial = async userId => {
 exports.completeTutorial = completeTutorial
 
 const messageIsPartOfTutorial = (body, correctChannel) => {
-  return body.event.channel_type === 'group' && body.event.subtype !== 'group_join'
-    && body.event.subtype !== 'channel_join' && body.event.user !== 'U012CUN4U1X'
+  return body.event.subtype !== 'channel_join' && body.event.user !== 'U012CUN4U1X'
     && body.event.channel === correctChannel
 }
 exports.messageIsPartOfTutorial = messageIsPartOfTutorial
