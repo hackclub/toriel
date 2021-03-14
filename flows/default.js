@@ -179,17 +179,6 @@ const loadFlow = (app) => {
 
   app.event('message', async body => {
     const correctChannel = await getIslandId(body.event.user)
-    // console.log('correct channel', correctChannel)
-    if (body.event.user === 'U01R622FMGA') {
-      console.log('message is part of tutorial?', messageIsPartOfTutorial(body, correctChannel))
-      console.log('channel type = group?', body.event.channel_type === 'group')
-      console.log('subtype is not group join?', body.event.subtype !== 'group_join')
-      console.log('subtype is not channel join?', body.event.subtype !== 'channel_join')
-      console.log('user is not U012CUN4U1X?', body.event.user !== 'U012CUN4U1X')
-      console.log('channel is correct channel?', body.event.channel === correctChannel)
-      console.log('------')
-      console.log('event channel, correct channel:', body.event.channel, correctChannel)
-    }
 
     if (messageIsPartOfTutorial(body, correctChannel)) {
       console.log('message is part of tutorial')
