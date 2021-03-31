@@ -1,3 +1,4 @@
+require('dotenv').config()
 const { App, ExpressReceiver } = require("@slack/bolt")
 const AirtablePlus = require('airtable-plus')
 const express = require('express')
@@ -52,7 +53,7 @@ app.event('team_join', async body => {
   // }
 });
 
-app.command('/restart', async ({ command, ack }) => {
+app.command('/dev-restart', async ({ command, ack }) => {
   await ack()
   if (command.text === '') {
     await setFlow(command.user_id, 'Default')
@@ -130,6 +131,9 @@ app.action('promoted', async ({ ack, body }) => {
   await inviteUserToChannel(app, body.user.id, 'C0266FRGV') //lounge
   await inviteUserToChannel(app, body.user.id, 'C0M8PUPU6') //ship
   await inviteUserToChannel(app, body.user.id, 'C0EA9S0A0') //code
+  await inviteUserToChannel(app, body.user.id, 'C0EA9S0A0') //streambot find right code for this
+
+  // come up with 3 user profiles and decide what the best onboarding flow
 
   await sendMessage(app,
     body.channel.id,
