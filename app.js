@@ -7,7 +7,7 @@ const fetch = require('node-fetch')
 const { hasPushedButton, hasCompletedTutorial, getIslandId,
   sendEphemeralMessage, updateInteractiveMessage, sendSingleBlockMessage,
   startTutorial, isBot, setFlow, getUserRecord, inviteUserToChannel, sendMessage, updateSingleBlockMessage,
-  getPronouns,
+  getPronouns, getWhereFrom,
   sendToWelcomeCommittee } = require('./utils/utils')
 
 const receiver = new ExpressReceiver({ signingSecret: process.env.SLACK_SIGNING_SECRET })
@@ -135,7 +135,7 @@ app.action('promoted', async ({ ack, body }) => {
 
   // come up with 3 user profiles and decide what the best onboarding flow
 
-  await sendMessage(app,
+  /*await sendMessage(app,
     body.channel.id,
     `<#C013AGZKYCS> – Get to know the community by answering a question every day!
 <#C0NP503L7> - Upcoming events
@@ -157,7 +157,7 @@ app.action('promoted', async ({ ack, body }) => {
 <#CDN99BE9L> - Talk about Movies & TV!`,
     10,
     inviteMessage.message.ts
-  )
+  )*/
 
   const userRecord = await getUserRecord(body.user.id)
   const reasonJoined = userRecord.fields['What brings them?']

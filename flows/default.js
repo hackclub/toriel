@@ -33,7 +33,7 @@ async function runInFlow(opts, func) {
 
 const loadFlow = (app) => {
   async function introProgress(body) {
-    updateInteractiveMessage(app, body.message.ts, body.channel.id, `Hi there, I'm Clippy! It looks like you want join the Hack Club community. Do you need assistance?`)
+    updateInteractiveMessage(app, body.message.ts, body.channel.id, `Hi there, I'm Clippy! It looks like you want join the Hack Club community. Could you please click that button :point_down: so we can get this show on the road?`)
 
     updatePushedButton(body.user.id)
     await sendMessage(app, body.channel.id, `Excellent! I'm happy to assist you in joining Hack Club today.`, 1000)
@@ -131,6 +131,7 @@ const loadFlow = (app) => {
     await setPronouns(app, body.user.id, 'she/her/hers', 'she')
     updateSingleBlockMessage(app, body.message.ts, body.channel.id, `What are your pronouns? (how you want to be referred to by others)`, `she/her/hers`, `mimmiggie`)
     await sendMessage(app, body.channel.id, `:heart: Every profile here has a custom field for pronouns—I've gone ahead and set your pronouns for you, but <${`https://slack.com/intl/en-sg/help/articles/204092246-Edit-your-profile`}|here's a quick tutorial if you'd like to change them.>`)
+    console.log("here.");
     sendHsQuestion(body.channel.id)
   }));
 
@@ -174,6 +175,7 @@ const loadFlow = (app) => {
     ack();
     await updateInteractiveMessage(app, body.message.ts, body.channel.id, '👍')
     await sendMessage(app, body.channel.id, `What brings you to the Hack Club community? (Type your answer in the chat)`)
+    console.log(body);
   }));
 
   app.event('message', async body => {
@@ -192,9 +194,10 @@ const loadFlow = (app) => {
         let pronoun1 = lastUserMessage.slice(0, lastUserMessage.search("/"))
         await setPronouns(app, body.event.user, pronouns, pronoun1.toLowerCase())
         await sendMessage(app, body.event.channel, `:heart: Every profile here has a custom field for pronouns—I've gone ahead and set your pronouns for you, but <${`https://slack.com/intl/en-sg/help/articles/204092246-Edit-your-profile`}|here's a quick tutorial if you'd like to change them.>`)
+        console.log("yeah, it runs");
         await sendHsQuestion(body.event.channel)
       }
-
+      console.log("ooooooof");
       if (lastBotMessage.includes('What brings you')) {
         console.log('what brings you!')
         const userRecord = await getUserRecord(body.event.user)

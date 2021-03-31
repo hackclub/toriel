@@ -76,14 +76,14 @@ const startTutorial = async (app, user, flow, restart) => {
     channel: channelId,
     users: 'U012FPRJEVB' //Clippy Admin
   })
-  await app.client.conversations.invite({
+  /*await app.client.conversations.invite({
     token: process.env.SLACK_BOT_TOKEN,
     channel: channelId,
     users: 'UH50T81A6' //banker
-  })
+  })*/
 
   await app.client.conversations.setTopic({
-    token: process.env.SLACK_OAUTH_TOKEN,
+    token: process.env.SLACK_BOT_TOKEN,
     channel: channelId,
     topic: `Welcome to Hack Club! :wave: Unlock the community by completing this tutorial.`
   })
@@ -97,7 +97,7 @@ const startTutorial = async (app, user, flow, restart) => {
   await timeout(30000)
   let pushedButton = await hasPushedButton(user)
   if (!pushedButton) {
-    await sendMessage(app, channelId, `(<@${user}> Psst—every new member completes this quick intro to unlock the Hack Club community. It only takes 1 minute—I promise—and you get free stuff along the way. Click any of the three buttons above to begin :star2: :money_with_wings: :eye:)`, 10)
+    await sendMessage(app, channelId, `(<@${user}> I promise, there are good chats going on here; you just need to complete a quick intro so you can get the most out of Hack Club! It'll only take 1 minute.`, 10)
   }
 }
 exports.startTutorial = startTutorial
@@ -353,6 +353,37 @@ const getPronouns = async userId => {
   }
 }
 exports.getPronouns = getPronouns
+
+const setWhereFrom = async (app, userId, whereFrom, whereFrom1) => {
+  let record = await getUserRecord(userId)
+  let recId = record.id
+
+  await islandTable.update(recId, {
+    'whereFrom': whereFrom,
+    'whereFrom1': whereFrom1
+  })
+  try {
+    app.client.users.profile.set({
+      token: process.env.SLACK_OAUTH_TOKEN,
+      profile: { 'XfD4V9MG3V': whereFrom },
+      user: userId
+    })
+  } catch {
+    console.log(`Could not update where from for ${userId} because they are a Slack admin`)
+  }
+}
+exports.setWhereFrom = setWhereFrom
+
+const getWhereFrom = async userId => {
+  let userRecord = await getUserRecord(userId)
+  let whereFrom = userRecord.fields['whereFrom']
+  let whereFrom1 = userRecord.fields['whereFrom1']
+  return {
+    whereFrom: whereFrom,
+    whereFrom1: whereFrom1
+  }
+}
+exports.getWhereFrom = getWhereFrom
 
 const hasPreviouslyCompletedTutorial = async userId => {
   let userRecord = await getUserRecord(userId)

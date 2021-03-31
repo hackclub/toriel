@@ -14,27 +14,9 @@ const defaultIntro = [
         "text": {
           "type": "plain_text",
           "emoji": true,
-          "text": ":star2:What??? What's this?"
+          "text": "Let me in, Clippy!"
         },
         "action_id": "intro_progress_1"
-      },
-      {
-        "type": "button",
-        "text": {
-          "type": "plain_text",
-          "emoji": true,
-          "text": ":money_with_wings:Of course I want free stuff!"
-        },
-        "action_id": "intro_progress_2"
-      },
-      {
-        "type": "button",
-        "text": {
-          "type": "plain_text",
-          "emoji": true,
-          "text": ":eye:Wait what?"
-        },
-        "action_id": "intro_progress_3"
       }
     ]
   }
