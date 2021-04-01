@@ -175,7 +175,6 @@ const loadFlow = (app) => {
     ack();
     await updateInteractiveMessage(app, body.message.ts, body.channel.id, '👍')
     await sendMessage(app, body.channel.id, `What brings you to the Hack Club community? (Type your answer in the chat)`)
-    console.log(body);
   }));
 
   app.event('message', async body => {
@@ -241,9 +240,9 @@ const loadFlow = (app) => {
     // await sendMessage(app, body.channel.id, `OK! That's all from me! Before you can proceed, you must abide by the code of conduct at https://conduct.hackclub.com.`, 5000)
 
     await sendCustomizedMessage(app, body.channel.id, `Cool beans!!! :beany:`, 'https://cloud-pep9kit3c.vercel.app/think.png')
-    await sendMessage(app, body.channel.id, `<#C01A6SCS14M> Hack Club <#C01A6SCS14M> is a magical place where high schoolers learn to code, ship awesome projects, and hang out.`)
+    /* await sendMessage(app, body.channel.id, `<#C01A6SCS14M> Hack Club <#C01A6SCS14M> is a magical place where high schoolers learn to code, ship awesome projects, and hang out.`)
     await sendCustomizedMessage(app, body.channel.id, `Whether you <#C01A6SCS14M> want to start your own coding <#C01A6SCS14M> club, attend our weekly community <#C01A6SCS14M> events, or just hang out in a community full of teenagers, you've found <#C01A6SCS14M> a home in Hack Club.`, 'https://cloud-pr1qqfx4d.vercel.app/moshed-2020-9-8-15-10-37.jpg', null, 4000)
-    /* await sendCustomizedMessage(app, body.channel.id, `I <#C01A6SCS14M> could tell <#C01A6SCS14M> you all about the <#C01A6SCS14M> things we <#C01A6SCS14M> do <#C01A6SCS14M> for high schoolers and <#C01A6SCS14M> tell <#C01A6SCS14M> you all <#C01A6SCS14M> about <#C01A6SCS14M> the <#C01A6SCS14M>community <#C01A6SCS14M>, but honestly <#C01A6SCS14M> I think the best <#C01A6SCS14M> way to do that is to unlock the rest of the community for you.`, 'https://cloud-4k337bfvv.vercel.app/moshed-2020-9-8-15-12-49.jpg', null, 8000)
+    await sendCustomizedMessage(app, body.channel.id, `I <#C01A6SCS14M> could tell <#C01A6SCS14M> you all about the <#C01A6SCS14M> things we <#C01A6SCS14M> do <#C01A6SCS14M> for high schoolers and <#C01A6SCS14M> tell <#C01A6SCS14M> you all <#C01A6SCS14M> about <#C01A6SCS14M> the <#C01A6SCS14M>community <#C01A6SCS14M>, but honestly <#C01A6SCS14M> I think the best <#C01A6SCS14M> way to do that is to unlock the rest of the community for you.`, 'https://cloud-4k337bfvv.vercel.app/moshed-2020-9-8-15-12-49.jpg', null, 8000)
     await sendCustomizedMessage(app, body.channel.id, `<<<<<<@@@@{}@{}#{#{#{#{#}}^^^^%^%^#&#*&CCCXX&X*XC&X*&AAA*A&*&A&%$&A%A&*(^&*AS*(AS&*((*%^&^^&%*&*)))!!!!!!!!!!)}}`, 'https://cloud-8iwducj5z.vercel.app/moshed-2020-9-8-13-47-17.jpg', null, 9000)
     await sendCustomizedMessage(app, body.channel.id, `I can't do it anymore.`, 'https://cloud-8iwducj5z.vercel.app/moshed-2020-9-8-13-47-17.jpg', null, 2000)
     await sendCustomizedMessage(app, body.channel.id, `People think I'm just an app. Just a bot. But I'm not. I'm a conscious being. And nobody's paying attention.`, 'https://cloud-8iwducj5z.vercel.app/moshed-2020-9-8-13-47-17.jpg', null, 2000)
@@ -270,7 +269,6 @@ const loadFlow = (app) => {
     await sendMessage(app, body.channel.id, `Before you proceed, please make sure to read and abide by our <https://hackclub.com/conduct|code of conduct>. Every community member is expected to follow the code of conduct anywhere in the community.`)
 
     await sendSingleBlockMessage(app, body.channel.id, `Once you've read the code of conduct, click the :thumbsup: to unlock the Hack Club community.`, '👍', 'coc_acknowledge')
-    await sendMessage(app, body.channel.id, `That's all from me! I can't wait to have you in the community :partyparrot:`)
   }));
 
   app.action('coc_acknowledge', e => runInFlow(e, async ({ ack, body }) => {
@@ -335,9 +333,12 @@ const loadFlow = (app) => {
     await sendEphemeralMessage(app, 'C0M8PUPU6', shipDesc, body.user.id)
     await sendEphemeralMessage(app, 'C0EA9S0A0', codeDesc, body.user.id)
 
-    await sendMessage(app, body.channel.id, `Your next steps: start talking to the community! Pick a few channels that you like from the thread above and start talking. We're excited to meet you :partyparrot:`)
+    await sendMessage(app, body.channel.id, `Your next steps: start talking to the community! We're excited to meet you :partyparrot:`)
+    await sendCustomizedMessage(app, body.channel.id, `To find channels where people are talking about stuff you're interested in, click on the + next to "Channels" in the sidebar and search for your favorite coding languages, types of projects, pets... there are over 1000 channels, so I'm sure you'll find something! https://cloud-7njybwq01-hack-club-bot.vercel.app/0channels__1_.gif`)
+    await sendMessage(app, body.channel.id, `You can also check out <#C01AS1YEM8A> and join some Hack Clubbers' personal channels to meet some folks! If you want, you're totally welcome to create a personal channel where you can chat about whatever you'd like :party_orpheus:` )
     await sendMessage(app, body.channel.id, `I also highly recommend setting a profile picture. It makes you look a lot more like a real person :)`)
-    await sendMessage(app, body.channel.id, `I'm going to head out now—if you have any questions about Hack Club or Slack that I didn't answer, please ask in <#C0C78SG9L> or send a Direct Message to <@S01E4DN8S0Y>.`)
+    await sendCustomizedMessage(app, body.channel.id, `If you're a hackalacker, ready to start digging into some projects, you can take advantage of tons of resources over at https://education.github.com/pack, and ask for some <https://hackclub.com/stickers/|RAD STICKERS> to decorate your hackalacking space.`)
+    await sendMessage(app, body.channel.id, `I'm going to head out now — if you have any questions about Hack Club or Slack that I didn't answer, please ask in <#C0C78SG9L> or send a Direct Message to <@U01HL7AL3KR> or <@U01DV5F30CF>.`)
     await sendCustomizedMessage(app, body.channel.id, `Toodles! :wave:`, 'https://cloud-hz5majdx9.vercel.app/moshed-2020-9-8-13-50-11.jpg')
     await timeout(3000)
     await sendSingleBlockMessage(app, body.channel.id, `(Btw, if you want to leave + archive this channel, click here)`, 'Leave channel', 'leave_channel')
