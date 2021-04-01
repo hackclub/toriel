@@ -132,6 +132,11 @@ app.action('promoted', async ({ ack, body }) => {
   await inviteUserToChannel(app, body.user.id, 'C0M8PUPU6') //ship
   await inviteUserToChannel(app, body.user.id, 'C0EA9S0A0') //code
   await inviteUserToChannel(app, body.user.id, 'C0EA9S0A0') //streambot find right code for this
+<<<<<<< HEAD
+=======
+
+  // come up with 3 user profiles and decide what the best onboarding flow
+>>>>>>> a1df285b47d2057e91cd30b7dcaf801f7a091fca
 
   // come up with 3 user profiles and decide what the best onboarding flow
 
