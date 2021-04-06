@@ -33,6 +33,9 @@ async function runInFlow(opts, func) {
 
 const loadFlow = (app) => {
   async function introProgress(body) {
+    console.log('channel', body.channel.id)
+    console.log('user', body.user.id)
+    console.log('body', body)
     updateInteractiveMessage(app, body.message.ts, body.channel.id, `Hi there, I'm Clippy! It looks like you want join the Hack Club community. Do you need assistance?`)
 
     updatePushedButton(body.user.id)
