@@ -63,6 +63,25 @@ app.command('/restart', async ({ command, ack }) => {
   }
 })
 
+app.command('/clippy-channel', async ({ command, ack, respond }) => {
+  await ack()
+  if (command.text === '') {
+    await respond({
+      text: `Usage: \`/clippy-channel @username\``,
+      response_type: 'ephemeral'
+    })
+  } else {
+    const userId = command.text.split(' ')[0].split('|')[0].substring(2)
+    console.log('user id', userId)
+    const userRecord = await getUserRecord(userId)
+    
+    await respond({
+      text: `<@${userId}>'s Clippy channel is \`${userRecord.fields['Island Channel Name']}\`. \`https://app.slack.com/client/T0266FRGM/${userRecord.fields['Island Channel ID']}\``,
+      response_type: 'ephemeral'
+    })
+  }
+})
+
 app.event('message', async body => {
   const defaultAdds = ['C0C78SG9L', 'C0EA9S0A0', 'C0266FRGV', 'C0M8PUPU6', 'C75M7C0SY', 'C74HZS5A5']
   
