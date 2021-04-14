@@ -53,7 +53,7 @@ app.event('team_join', async body => {
   // }
 });
 
-async function restart({ command, ack }) => {
+app.command('/dev-restart', async ({ command, ack }) => {
   await ack()
   if (command.text === '') {
     await setFlow(command.user_id, 'Default')
@@ -62,10 +62,7 @@ async function restart({ command, ack }) => {
     await setFlow(command.user_id, 'Summer of Making')
     await startTutorial(app, command.user_id, 'som', true)
   }
-}
-
-app.command('/dev-restart', async (args) => restart) // for dev app
-app.command('/restart', async (args) => restart) // for production app
+})
 
 app.command('/clippy-channel', async ({ command, ack, respond }) => {
   await ack()
