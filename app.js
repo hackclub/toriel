@@ -64,8 +64,8 @@ async function restart({ command, ack }) {
   }
 }
 
-app.command('/dev-restart', async (args) => restart) // for dev app
-app.command('/restart', async (args) => restart) // for production app
+app.command('/dev-restart', restart) // for dev app
+app.command('/restart', restart) // for production app
 
 app.command('/clippy-channel', async ({ command, ack, respond }) => {
   await ack()
