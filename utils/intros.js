@@ -3,7 +3,7 @@ const defaultIntro = [
     "type": "section",
     "text": {
       "type": "mrkdwn",
-      "text": `Hi there, I'm Clippy! It looks like you want join the Hack Club community. Could you please click that button :point_down: so we can get this show on the road?`
+      "text": `Hi there, I'm Clippy! It looks like you want join the Hack Club community. Before you unlock it, I need to show you around for a minute! Could you please click that button :point_down: so we can get this show on the road?`
     }
   },
   {
@@ -28,7 +28,7 @@ const som = [
     "type": "section",
     "text": {
       "type": "mrkdwn",
-      "text": `Hi there, I'm Clippy! It looks like you want join the Hack Club community. Could you please click that button :point_down: so we can get this show on the road?`
+      "text": `Hi there, I'm Clippy! It looks like you want join the Hack Club community. Before you unlock it, I need to show you around for a minute! Could you please click that button :point_down: so we can get this show on the road?`
     }
   },
   {

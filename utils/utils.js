@@ -97,7 +97,7 @@ const startTutorial = async (app, user, flow, restart) => {
   await timeout(30000)
   let pushedButton = await hasPushedButton(user)
   if (!pushedButton) {
-    await sendMessage(app, channelId, `(<@${user}> I promise, there are good chats going on here; you just need to complete a quick intro so you can get the most out of Hack Club! It'll only take 1 minute.`, 10)
+    await sendMessage(app, channelId, `(<@${user}> I promise, there are good chats going on here; you just need to complete a quick intro so you can get the most out of Hack Club! It'll only take 1 minute.)`, 10)
   }
 }
 exports.startTutorial = startTutorial

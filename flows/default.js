@@ -33,7 +33,7 @@ async function runInFlow(opts, func) {
 
 const loadFlow = (app) => {
   async function introProgress(body) {
-    updateInteractiveMessage(app, body.message.ts, body.channel.id, `Hi there, I'm Clippy! It looks like you want join the Hack Club community. Could you please click that button :point_down: so we can get this show on the road?`)
+    updateInteractiveMessage(app, body.message.ts, body.channel.id, `Hi there, I'm Clippy! It looks like you want join the Hack Club community. Before you unlock it, I need to show you around for a minute! Could you please click that button :point_down: so we can get this show on the road?`)
 
     updatePushedButton(body.user.id)
     await sendMessage(app, body.channel.id, `Excellent! I'm happy to assist you in joining Hack Club today.`, 1000)
@@ -201,7 +201,7 @@ const loadFlow = (app) => {
         console.log('what brings you!')
         const userRecord = await getUserRecord(body.event.user)
         islandTable.update(userRecord.id, { 'What brings them?': body.event.text })
-        await sendCustomizedMessage(app, body.event.channel, `Neatoio! Well, it looks like the next step on my script is to show you around the community :hackclub::slack:`, 'https://cloud-8iwducj5z.vercel.app/moshed-2020-9-8-13-47-17.jpg')
+        await sendMessage(app, body.event.channel, `Neatoio! Well, it looks like the next step on my script is to show you around the community :hackclub::slack:`)
         await sendMessage(app, body.event.channel, `You're currently on Slack, the platform our community uses. It's kind of like Discord, but a little different.`)
 
         await sendMessage(app, body.event.channel, `Slack is organized into topical "channels". We have _hundreds_ of channels in our Slack, covering everything from—`, 5000)
@@ -212,11 +212,11 @@ const loadFlow = (app) => {
         await sendMessage(app, body.event.channel, `...it sounds like a Slack ping!`, 2000)
         await sendMessage(app, body.event.channel, `Oh!!! It looks like you're already in a channel! <#C74HZS5A5>, the intro channel for new members.`)
         await sendMessage(app, body.event.channel, `Try clicking the red :ping: on your sidebar to the left :eyes:`)
-        await sendCustomizedMessage(app, body.event.channel, `<@${body.event.user}> As I was saying before I got distracted, we have _hundreds_ of these "channels" in the community, covering every topic you can think of, from \`#gamedev\` and \`#code\` to \`#photography\` and \`#cooking\`. We have nearly 1,000 weekly active members on here—wowee, that's a lot!!!`, 'https://cloud-8iwducj5z.vercel.app/moshed-2020-9-8-13-47-23.jpg', null, 10000)
+        await sendMessage(app, body.event.channel, `<@${body.event.user}> As I was saying before I got distracted, we have _hundreds_ of these "channels" in the community, covering every topic you can think of, from \`#gamedev\` and \`#code\` to \`#photography\` and \`#cooking\`. We have nearly 1,000 weekly active members on here—wowee, that's a lot!!!`, 10000)
         await sendMessage(app, body.event.channel, `Want to be invited to another channel?`, 5000)
 
         const welcomeChannel = 'C75M7C0SY';
-        await timeout(1000)
+        await timeout(3000)
         await inviteUserToChannel(app, body.event.user, welcomeChannel, true)
         const island = await getIslandName(body.event.user)
         await sendEphemeralMessage(app, welcomeChannel, `<@${body.event.user}> Feel free to introduce yourself to the community in <#${welcomeChannel}>. When you're done, head back to <https://hackclub.slack.com/archives/${island}|#${island}> to continue your introduction to the community.`, body.event.user)
@@ -239,7 +239,7 @@ const loadFlow = (app) => {
 
     // await sendMessage(app, body.channel.id, `OK! That's all from me! Before you can proceed, you must abide by the code of conduct at https://conduct.hackclub.com.`, 5000)
 
-    await sendCustomizedMessage(app, body.channel.id, `Cool beans!!! :beany:`, 'https://cloud-pep9kit3c.vercel.app/think.png')
+    await sendMessage(app, body.channel.id, `Cool beans!!! :beany:`)
     /* await sendMessage(app, body.channel.id, `<#C01A6SCS14M> Hack Club <#C01A6SCS14M> is a magical place where high schoolers learn to code, ship awesome projects, and hang out.`)
     await sendCustomizedMessage(app, body.channel.id, `Whether you <#C01A6SCS14M> want to start your own coding <#C01A6SCS14M> club, attend our weekly community <#C01A6SCS14M> events, or just hang out in a community full of teenagers, you've found <#C01A6SCS14M> a home in Hack Club.`, 'https://cloud-pr1qqfx4d.vercel.app/moshed-2020-9-8-15-10-37.jpg', null, 4000)
     /* await sendCustomizedMessage(app, body.channel.id, `I <#C01A6SCS14M> could tell <#C01A6SCS14M> you all about the <#C01A6SCS14M> things we <#C01A6SCS14M> do <#C01A6SCS14M> for high schoolers and <#C01A6SCS14M> tell <#C01A6SCS14M> you all <#C01A6SCS14M> about <#C01A6SCS14M> the <#C01A6SCS14M>community <#C01A6SCS14M>, but honestly <#C01A6SCS14M> I think the best <#C01A6SCS14M> way to do that is to unlock the rest of the community for you.`, 'https://cloud-4k337bfvv.vercel.app/moshed-2020-9-8-15-12-49.jpg', null, 8000)
@@ -266,7 +266,7 @@ const loadFlow = (app) => {
     await sendCustomizedMessage(app, body.channel.id, `‎‏‏‎ ‎`, 'https://cloud-603yzf4nn.vercel.app/screen_shot_2020-09-08_at_2.36.29_pm.png', ' ‎', 1000)
     await sendMessage(app, body.channel.id, `‎‏‏‎...`, 1000)
     await sendMessage(app, body.channel.id, `‎‏‏‎...`, 1000) */
-    await sendMessage(app, body.channel.id, `Before you proceed, please make sure to read and abide by our <https://hackclub.com/conduct|code of conduct>. Every community member is expected to follow the code of conduct anywhere in the community.`)
+    await sendMessage(app, body.channel.id, `Before you proceed, please make sure to read and abide by our <https://hackclub.com/conduct|code of conduct>. Every community member is expected to follow the code of conduct anywhere in the community.`, 3000, null, true)
 
     await sendSingleBlockMessage(app, body.channel.id, `Once you've read the code of conduct, click the :thumbsup: to unlock the Hack Club community.`, '👍', 'coc_acknowledge')
   }));
@@ -290,7 +290,7 @@ const loadFlow = (app) => {
     const codeDesc = `*<#C0EA9S0A0>* is where people go to ask technical questions about code. If you're stuck on a problem or need some guidance, this is the place to go. `
 
     // channel descriptions
-   /* await sendMessage(app, body.channel.id, `Here are a bunch of other active channels that you may be interested in:`, 10, finalTs)
+    await sendMessage(app, body.channel.id, `Here are a bunch of other active channels that you may be interested in:`, 10, finalTs)
     await sendMessage(app,
       body.channel.id,
       `<#C013AGZKYCS> – Get to know the community by answering a question every day!
@@ -313,7 +313,7 @@ const loadFlow = (app) => {
       <#CDN99BE9L> - Talk about Movies & TV!`,
       10,
       finalTs
-    ); */
+    );
 
     let pronouns = await getPronouns(body.user.id)
     if (pronouns.pronouns === "they/them/theirs" || pronouns.pronouns === "she/her/hers") {
@@ -333,12 +333,10 @@ const loadFlow = (app) => {
     await sendEphemeralMessage(app, 'C0M8PUPU6', shipDesc, body.user.id)
     await sendEphemeralMessage(app, 'C0EA9S0A0', codeDesc, body.user.id)
 
-    await sendMessage(app, body.channel.id, `Your next steps: start talking to the community! We're excited to meet you :partyparrot:`)
-    await sendCustomizedMessage(app, body.channel.id, `To find channels where people are talking about stuff you're interested in, click on the + next to "Channels" in the sidebar and search for your favorite coding languages, types of projects, pets... there are over 1000 channels, so I'm sure you'll find something! https://cloud-7njybwq01-hack-club-bot.vercel.app/0channels__1_.gif`)
-    await sendMessage(app, body.channel.id, `You can also check out <#C01AS1YEM8A> and join some Hack Clubbers' personal channels to meet some folks! If you want, you're totally welcome to create a personal channel where you can chat about whatever you'd like :party_orpheus:` )
+    await sendMessage(app, body.channel.id, `I just invited you to the default channels. Your next steps: start talking to the community! We're excited to meet you :partyparrot:`)
+    await sendCustomizedMessage(app, body.channel.id, `To find channels where people are talking about stuff you're interested in, click on the \`+\` next to "Channels" in the sidebar and search for your favorite coding languages, types of projects, pets... there are over 1000 channels, so I'm sure you'll find something! https://cloud-7njybwq01-hack-club-bot.vercel.app/0channels__1_.gif`)
     await sendMessage(app, body.channel.id, `I also highly recommend setting a profile picture. It makes you look a lot more like a real person :)`)
-    await sendCustomizedMessage(app, body.channel.id, `If you're a hackalacker, ready to start digging into some projects, you can take advantage of tons of resources over at https://education.github.com/pack, and ask for some <https://hackclub.com/stickers/|RAD STICKERS> to decorate your hackalacking space.`)
-    await sendMessage(app, body.channel.id, `I'm going to head out now — if you have any questions about Hack Club or Slack that I didn't answer, please ask in <#C0C78SG9L> or send a Direct Message to <@U01HL7AL3KR> or <@U01DV5F30CF>.`)
+    await sendMessage(app, body.channel.id, `I'm going to head out now — if you have any questions about Hack Club or Slack that I didn't answer, please ask in <#C0C78SG9L> or send a Direct Message to <@U01DV5F30CF>.`)
     await sendCustomizedMessage(app, body.channel.id, `Toodles! :wave:`, 'https://cloud-hz5majdx9.vercel.app/moshed-2020-9-8-13-50-11.jpg')
     await timeout(3000)
     await sendSingleBlockMessage(app, body.channel.id, `(Btw, if you want to leave + archive this channel, click here)`, 'Leave channel', 'leave_channel')
