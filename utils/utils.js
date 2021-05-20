@@ -334,7 +334,7 @@ const setPronouns = async (app, userId, pronouns, pronoun1) => {
   try {
     app.client.users.profile.set({
       token: process.env.SLACK_OAUTH_TOKEN,
-      profile: { 'XfD4V9MG3V': pronouns },
+      profile: {pronouns, 'XfD4V9MG3V': pronouns },
       user: userId
     })
   } catch {
