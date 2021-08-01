@@ -335,6 +335,8 @@ const loadFlow = (app) => {
     
     // add to club channel if they are clubs
     
+    
+    
     let userProfile = await app.client.users.info({
       token: process.env.SLACK_BOT_TOKEN,
       user: body.user.id
@@ -352,6 +354,7 @@ const loadFlow = (app) => {
     if(joinData["response"].length > 0){
       if(joinData["response"][0]["fields"]["Club"]){
         await app.client.conversations.join({
+          token: process.env.SLACK_BOT_TOKEN,
           channel: joinData["response"][0]["fields"]["Club"]
         })
         await inviteUserToChannel(app, body.user.id, joinData["response"][0]["fields"]["Club"]) //add to club channel
