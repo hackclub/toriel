@@ -47,28 +47,18 @@ app.event('team_join', async body => {
 
   console.log(joinData)
 
-  await startTutorial(app, body.event.user.id, 'default', false, joinData["response"][0]["fields"])
+  await startTutorial(app, body.event.user.id, 'default', false, joinData["response"][0]["fields"]["Club"] ? joinData["response"][0]["fields"]["Club"] : false)
   
 });
 
 async function restart({ command, ack }) {
   await ack()
-  let userProfile = await app.client.users.info({
-    token: process.env.SLACK_BOT_TOKEN,
-    user: command.user_id
-  })
-  console.log(userProfile)
-  const airtableQueryOptions = {
-    maxRecords: 1,
-    filterByFormula: `{Email Address} = '${userProfile.user.profile.email}'`
-  }
-  let joinData = await axios(`https://api2.hackclub.com/v0.1/Joins/Join%20Requests?authKey=${process.env.AIRTABLE_API_KEY}&select=${JSON.stringify(airtableQueryOptions)}&meta=true`).then(r => r.data)
   if (command.text === '') {
     await setFlow(command.user_id, 'Default')
-    await startTutorial(app, command.user_id, 'default', true, joinData["response"][0]["fields"])
+    await startTutorial(app, command.user_id, 'default', true, false)
   } else if (command.text === 'som') {
     await setFlow(command.user_id, 'Summer of Making')
-    await startTutorial(app, command.user_id, 'som', true, joinData["response"][0]["fields"])
+    await startTutorial(app, command.user_id, 'som', true, false)
   }
 }
 
