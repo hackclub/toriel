@@ -352,6 +352,9 @@ const loadFlow = (app) => {
     if(joinData["response"].length > 0){
       if(joinData["response"][0]["fields"]["Club"]){
         try{
+          await app.client.conversations.join({
+            channel: joinData["response"][0]["fields"]["Club"]
+          })
           await inviteUserToChannel(app, body.user.id, joinData["response"][0]["fields"]["Club"]) //add to club channel
           await sendMessage(app, body.channel.id, `:eyes: I see you are a member of the <#${joinData["response"][0]["fields"]["Club"]}> club! I've added you to the club's channel so you can chat with your fellow club members!`)
           await timeout(3000)
