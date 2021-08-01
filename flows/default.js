@@ -332,7 +332,33 @@ const loadFlow = (app) => {
     await sendEphemeralMessage(app, 'C0266FRGV', loungeDesc, body.user.id)
     await sendEphemeralMessage(app, 'C0M8PUPU6', shipDesc, body.user.id)
     await sendEphemeralMessage(app, 'C0EA9S0A0', codeDesc, body.user.id)
+    
+    // add to club channel if they are clubs
+    
+    let userProfile = await app.client.users.info({
+      token: process.env.SLACK_BOT_TOKEN,
+      user: body.event.user.id
+    })
 
+    console.log(userProfile)
+
+    const airtableQueryOptions = {
+      maxRecords: 1,
+      filterByFormula: `{Email Address} = '${userProfile.user.profile.email}'`
+    }
+
+    let joinData = await axios(`https://api2.hackclub.com/v0.1/Joins/Join%20Requests?authKey=${process.env.AIRTABLE_API_KEY}&select=${JSON.stringify(airtableQueryOptions)}&meta=true`).then(r => r.data)
+    
+    if(joinData["response"].length > 0){
+      if(joinData["response"][0]["fields"]["Club"]){
+        try{
+          await inviteUserToChannel(app, body.user.id, joinData["response"][0]["fields"]["Club"]) //add to club channel
+          await sendMessage(app, body.channel.id, `:eyes: I see you are a member of the <#${joinData["response"][0]["fields"]["Club"]}> club! I've added you to the club's channel so you can chat with your fellow club members!`)
+          await timeout(3000)
+        }
+      }
+    }
+    
     await sendMessage(app, body.channel.id, `Your next steps: start talking to the community! We're excited to meet you :partyparrot:`)
     await sendCustomizedMessage(app, body.channel.id, `To find channels where people are talking about stuff you're interested in, click on the \`+\` next to "Channels" in the sidebar and search for your favorite coding languages, types of projects, pets... there are over 1000 channels, so I'm sure you'll find something! https://cloud-7njybwq01-hack-club-bot.vercel.app/0channels__1_.gif`)
     await sendMessage(app, body.channel.id, `I also highly recommend setting a profile picture. It makes you look a lot more like a real person :)`)
