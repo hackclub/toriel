@@ -40,7 +40,7 @@ app.event('team_join', async body => {
 
   const airtableQueryOptions = {
     maxRecords: 1,
-    filterByFormula: `Email Address = '${userProfile.user.profile.email}'`
+    filterByFormula: `{Email Address} = '${userProfile.user.profile.email}'`
   }
 
   let joinData = await axios(`https://api2.hackclub.com/v0.1/Joins/Join%20Requests?authKey=${process.env.AIRTABLE_API_KEY}&select=${JSON.stringify(airtableQueryOptions)}&meta=true`).then(r => r.data)
