@@ -337,7 +337,7 @@ const loadFlow = (app) => {
     
     let userProfile = await app.client.users.info({
       token: process.env.SLACK_BOT_TOKEN,
-      user: body.event.user.id
+      user: body.user.id
     })
 
     console.log(userProfile)
