@@ -356,6 +356,8 @@ const loadFlow = (app) => {
           await sendMessage(app, body.channel.id, `:eyes: I see you are a member of the <#${joinData["response"][0]["fields"]["Club"]}> club! I've added you to the club's channel so you can chat with your fellow club members!`)
           await timeout(3000)
         }
+        catch{
+        }
       }
     }
     
