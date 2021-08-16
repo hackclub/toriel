@@ -82,7 +82,7 @@ app.command('/clippy-channel', async ({ command, ack, respond }) => {
 })
 
 app.event('message', async body => {
-  const defaultAdds = ['C0C78SG9L', 'C0EA9S0A0', 'C0266FRGV', 'C0M8PUPU6', 'C75M7C0SY', 'C74HZS5A5', 'C01504DCLVD']
+  const defaultAdds = ['C0C78SG9L', 'C0EA9S0A0', 'C0266FRGV', 'C0M8PUPU6', 'C75M7C0SY', 'C01504DCLVD']
   
   if ((body.message.subtype === 'channel_join' && body.message.text === `<@${body.message.user}> has joined the channel` && defaultAdds.includes(body.message.channel))
       || (body.message.channel === 'C01A6SCS14M' && body.message.user !== 'U012H797734')) {

@@ -206,11 +206,11 @@ const loadFlow = (app) => {
 
         await sendMessage(app, body.event.channel, `Slack is organized into topical "channels". We have _hundreds_ of channels in our Slack, covering everything from—`, 5000)
         await timeout(1000)
-        await inviteUserToChannel(app, body.event.user, 'C74HZS5A5', true)
-        await sendEphemeralMessage(app, 'C74HZS5A5', `<@${body.event.user}> Welcome to <#C74HZS5A5>, the lobby for new Hack Clubbers! Feel free to chat, hang out, ask questions, whatever :orpheus:`, body.event.user)
+        await inviteUserToChannel(app, body.event.user, 'C0266FRGV', true)
+        await sendEphemeralMessage(app, 'C0266FRGV', `<@${body.event.user}> Welcome to <#C0266FRGV>, the hangout spot for Hack Clubbers! Feel free to chat, hang out, ask questions, whatever :orpheus:`, body.event.user)
         await sendMessage(app, body.event.channel, 'Wait a second...did you hear that??', 2000)
         await sendMessage(app, body.event.channel, `...it sounds like a Slack ping!`, 2000)
-        await sendMessage(app, body.event.channel, `Oh!!! It looks like you're already in a channel! <#C74HZS5A5>, the intro channel for new members.`)
+        await sendMessage(app, body.event.channel, `Oh!!! It looks like you're already in a channel! <#C0266FRGV>, the hangout channel for Hack Club members.`)
         await sendMessage(app, body.event.channel, `Try clicking the red :ping: on your sidebar to the left :eyes:`)
         await sendMessage(app, body.event.channel, `<@${body.event.user}> As I was saying before I got distracted, we have _hundreds_ of these "channels" in the community, covering every topic you can think of, from \`#gamedev\` and \`#code\` to \`#photography\` and \`#cooking\`. We have nearly 1,000 weekly active members on here—wowee, that's a lot!!!`, 10000)
         await sendMessage(app, body.event.channel, `Want to be invited to another channel?`, 5000)
@@ -323,13 +323,11 @@ const loadFlow = (app) => {
     await completeTutorial(body.user.id)
     // add user to default channels
     await inviteUserToChannel(app, body.user.id, 'C0C78SG9L') //hq
-    await inviteUserToChannel(app, body.user.id, 'C0266FRGV') //lounge
     await inviteUserToChannel(app, body.user.id, 'C0M8PUPU6') //ship
     await inviteUserToChannel(app, body.user.id, 'C0EA9S0A0') //code
     await inviteUserToChannel(app, body.user.id, 'C01504DCLVD') //scrapbook
 
     await sendEphemeralMessage(app, 'C0C78SG9L', hqDesc, body.user.id)
-    await sendEphemeralMessage(app, 'C0266FRGV', loungeDesc, body.user.id)
     await sendEphemeralMessage(app, 'C0M8PUPU6', shipDesc, body.user.id)
     await sendEphemeralMessage(app, 'C0EA9S0A0', codeDesc, body.user.id)
     
