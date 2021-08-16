@@ -288,6 +288,7 @@ const loadFlow = (app) => {
     const loungeDesc = `*<#C0266FRGV>* is where people go to hang out with the community. There are no expectations here; just have fun and hang out with the community :)`
     const shipDesc = `*<#C0M8PUPU6>* is where people go to _ship_, or share, projects they've made. All posts in that are not part of a thread must be projects you've made, and must include a link or attachment. Check out the awesome projects people in the community have made!`
     const codeDesc = `*<#C0EA9S0A0>* is where people go to ask technical questions about code. If you're stuck on a problem or need some guidance, this is the place to go. `
+    const communityDesc = `*<#C01D7AHKMPF>* is where you'll find community-related announcements! :mega:`
 
     // channel descriptions
     await sendMessage(app, body.channel.id, `Here are a bunch of other active channels that you may be interested in:`, 10, finalTs)
@@ -326,10 +327,12 @@ const loadFlow = (app) => {
     await inviteUserToChannel(app, body.user.id, 'C0M8PUPU6') //ship
     await inviteUserToChannel(app, body.user.id, 'C0EA9S0A0') //code
     await inviteUserToChannel(app, body.user.id, 'C01504DCLVD') //scrapbook
+    await inviteUserToChannel(app, body.user.id, 'C01D7AHKMPF') //community
 
     await sendEphemeralMessage(app, 'C0C78SG9L', hqDesc, body.user.id)
     await sendEphemeralMessage(app, 'C0M8PUPU6', shipDesc, body.user.id)
     await sendEphemeralMessage(app, 'C0EA9S0A0', codeDesc, body.user.id)
+    await sendEphemeralMessage(app, 'C01D7AHKMPF', communityDesc, body.user.id)
     
     // add to club channel if they are clubs
     
