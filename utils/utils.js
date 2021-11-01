@@ -536,24 +536,35 @@ const generateIslandName = async () => {
 }
 exports.generateIslandName = generateIslandName
 
-const promoteUser = async user =>
-  new Promise((resolve, reject) => {
-    const form = new FormData()
-    form.append('user', user)
-    form.append('token', process.env.SLACK_INVITE_TOKEN)
-    fetch(
-      'https://slack.com/api/users.admin.setRegular?slack_route=T0266FRGM',
-      {
-        method: 'POST',
-        body: form,
-      }
-    )
+const promoteUser = async user => {
+  const form2 = new FormData()
+  form2.append('user', user)
+  form2.append('token', process.env.SLACK_INVITE_TOKEN)
+  let userProfile = await (await fetch("https://slack.com/api/users.info", { body: form2, method: 'POST' })).json()
+  
+  if (userProfile.user.is_restricted || userProfile.user.is_ultra_restricted) {
+    return new Promise((resolve, reject) => {
+      const form = new FormData()
+      form.append('user', user)
+      form.append('token', process.env.SLACK_INVITE_TOKEN)
+      fetch(
+        'https://slack.com/api/users.admin.setRegular?slack_route=T0266FRGM',
+        {
+          method: 'POST',
+          body: form,
+        }
+      )
       .then(res => {
         console.log(res)
         resolve(res)
       })
       .catch(err => reject(err))
-  })
+    })
+  } else {
+    console.log(`User ${user} is already promoted, no need to promote again`)
+    return
+  }
+}
 exports.promoteUser = promoteUser
 
 const completeTutorial = async userId => {
