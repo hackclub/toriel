@@ -280,6 +280,25 @@ const loadFlow = (app) => {
     const reasonJoined = userRecord.fields['What brings them?']
     sendToWelcomeCommittee(app, body.user.id, reasonJoined)
 
+    await timeout(3000)
+    await sendCustomizedMessage(app, body.channel.id,
+      "There's another thing you should know: you can find out what's sup in this Slack by running `/sup`.",
+    )
+    await sendCustomizedMessage(app, body.channel.id,
+      "Try it out now! You can do it :cool-thumbs: Just type out `/sup` in the chat below and press `Enter`.",
+    )
+    await timeout(6000)
+    await sendCustomizedMessage(app, body.channel.id,
+      "You can also try `/supwit #lounge`, `/supwit @clippy`, or `/supwit :upvote:`",
+    )
+    await sendCustomizedMessage(app, body.channel.id,
+      "This command will tell you what's sup wit a certain thingy in Slack, like a user or channel or emoji.",
+    )
+    await sendCustomizedMessage(app, body.channel.id,
+      "If you need any help with /sup or /supwit, ask <@U01S7UUCB89> for some help by sending the message '<@U01S7UUCB89> help' in public channel",
+    )
+
+
     await sendMessage(app, body.channel.id, `Woohoo! Welcome to Hack Club! :yay::orpheus::snootslide:`, 1000)
     const finalMessage = await sendMessage(app, body.channel.id, `I've added you to a few of the most popular channels, but there are many, many more! Click on "2 replies" just under this message to discover some other cool channels...`, 5000)
     const finalTs = finalMessage.message.ts
@@ -333,19 +352,6 @@ const loadFlow = (app) => {
     await sendEphemeralMessage(app, 'C0M8PUPU6', shipDesc, body.user.id)
     await sendEphemeralMessage(app, 'C0EA9S0A0', codeDesc, body.user.id)
     await sendEphemeralMessage(app, 'C01D7AHKMPF', communityDesc, body.user.id)
-
-    await timeout(3000)
-    await sendCustomizedMessage(app, body.channel.id,
-      "There's another thing you should know: you can find out what's sup in this Slack by running `/sup`.",
-      "Try it out now! You can do it :cool-thumbs: Just type out `/sup` in the chat below and press `Enter`.",
-    )
-    await timeout(6000)
-    await sendCustomizedMessage(app, body.channel.id,
-      "You can also try `/supwit #lounge`, `/supwit @clippy`, or `/supwit :upvote:`",
-      "This command will tell you what's sup wit a certain thingy in Slack, like a user or channel or emoji.",
-      "If you need any help with /sup or /supwit, ask <@U01S7UUCB89> for some help by sending the message '<@U01S7UUCB89> help' in public channel",
-    )
-
     
     // add to club channel if they are clubs
     
