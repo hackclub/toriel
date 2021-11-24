@@ -348,8 +348,8 @@ const loadFlow = (app) => {
     await sendCustomizedMessage(app, body.channel.id,
       "If you need any help with /sup or /supwit, ask <@U01S7UUCB89> for some help by sending the message '<@U01S7UUCB89> help' in public channel",)
     await sendSingleBlockMessage(app, body.channel.id,
-      `Once you've run /sup, click the :thumbsup:`,
-      '👍',
+      `Once you've run /sup, click the :axe:`,
+      '🪓',
       'sup_acknowledge')
     
     // add to club channel if they are clubs
@@ -359,7 +359,7 @@ const loadFlow = (app) => {
 
   app.action('sup_acknowledge', e => runInFlow(e, async ({ ack, body }) => {
     ack();
-    await updateInteractiveMessage(app, body.message.ts, body.channel.id, '👍')
+    await updateInteractiveMessage(app, body.message.ts, body.channel.id, '🪓')
 
     //await timeout(3000)
     let userProfile = await app.client.users.info({
