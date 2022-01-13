@@ -23,7 +23,7 @@ const defaultIntro = [
 ]
 exports.defaultIntro = defaultIntro
 
-const defajankathonIntroltIntro = [
+const jankathonIntro = [
   {
     "type": "section",
     "text": {
@@ -46,7 +46,7 @@ const defajankathonIntroltIntro = [
     ]
   }
 ]
-exports.defaultIntro = jankathonIntro
+exports.jankathonIntro = jankathonIntro
 
 const som = [
   {
