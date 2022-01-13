@@ -5,6 +5,7 @@ const fetch = require('node-fetch')
 const FormData = require('form-data')
 const GithubSlugger = require('github-slugger')
 const slugger = new GithubSlugger()
+const axios = require('axios')
 
 const { defaultIntro, som } = require('./intros')
 
