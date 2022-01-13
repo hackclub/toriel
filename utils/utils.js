@@ -13,6 +13,7 @@ const islandTable = new AirtablePlus({
   baseID: 'appYGt7P3MtotTotg',
   tableName: 'Tutorial Island'
 })
+let flow = 'Default'
 exports.islandTable = islandTable
 
 const eventsTable = new AirtablePlus({
@@ -28,9 +29,30 @@ const startTutorial = async (app, user, flow, restart) => {
     token: process.env.SLACK_BOT_TOKEN,
     name: islandName.channel,
     is_private: true,
-    user_ids: process.env.BOT_USER_ID
-  })
-  const channelId = newChannel.channel.id
+    user_ids: process.env.BOT_USER_ID,
+  });
+  const channelId = newChannel.channel.id;
+  let userProfile = await app.client.users.info({
+    token: process.env.SLACK_BOT_TOKEN,
+    user: user,
+  });
+
+  const airtableQueryOptions = {
+    maxRecords: 1,
+    filterByFormula: `{Email Address} = '${userProfile.user.profile.email}'`,
+  };
+
+  let joinData = await axios(
+    `https://api2.hackclub.com/v0.1/Joins/Join%20Requests?authKey=${
+      process.env.AIRTABLE_API_KEY
+    }&select=${JSON.stringify(airtableQueryOptions)}&meta=true`
+  ).then((r) => r.data);
+
+  if (joinData["response"].length > 0) {
+    if (joinData["response"][0]["fields"]["Reason"] == "Jankathon") {
+      flow = "Jankathon"
+    }
+  }
 
   if (restart) {
     let record = await getUserRecord(user)
@@ -42,7 +64,7 @@ const startTutorial = async (app, user, flow, restart) => {
         'Has completed tutorial': false,
         'Has previously completed tutorial': false,
         'Pushed first button': false,
-        'Flow': 'Default'
+        'Flow': flow
       })
     }
     await islandTable.update(record.id, {
@@ -50,7 +72,7 @@ const startTutorial = async (app, user, flow, restart) => {
       'Island Channel Name': islandName.channel,
       'Has completed tutorial': true,
       'Pushed first button': false,
-      'Flow': 'Default'
+      'Flow': flow
     })
   } else {
     await islandTable.create({
@@ -60,7 +82,7 @@ const startTutorial = async (app, user, flow, restart) => {
       'Has completed tutorial': false,
       'Has previously completed tutorial': false,
       'Pushed first button': false,
-      'Flow': 'Default'
+      'Flow': flow
     })
   }
   console.log(`New tutorial channel created: ${channelId}`)
