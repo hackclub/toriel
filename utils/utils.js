@@ -7,7 +7,7 @@ const GithubSlugger = require('github-slugger')
 const slugger = new GithubSlugger()
 const axios = require('axios')
 
-const { defaultIntro, som } = require('./intros')
+const { defaultIntro, jankathonIntro } = require('./intros')
 
 const islandTable = new AirtablePlus({
   apiKey: process.env.AIRTABLE_API_KEY,
@@ -118,7 +118,7 @@ const startTutorial = async (app, user, flow, restart) => {
   await app.client.chat.postMessage({
     token: process.env.SLACK_BOT_TOKEN,
     channel: channelId,
-    blocks: defaultIntro
+    blocks: flow == "Default" ? defaultIntro : jankathonIntro
   })
 
   await timeout(30000)

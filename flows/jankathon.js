@@ -157,7 +157,7 @@ const loadFlow = (app) => {
     ack();
     updateSingleBlockMessage(app, body.message.ts, body.channel.id, `Are you currently a high school student? (it's OK if you're not)`, `Yep!`, `mimmiggie`)
     await sendMessage(app, body.channel.id, 'Great. Hack Club is a community of high schoolers, so you\'ll fit right in!')
-    await sendMessage(app, body.channel.id, `What brings you to the Hack Club community? (Type your answer in the chat)`)
+    await sendMessage(app, body.channel.id, `What brings you to the Jankathon? (Type your answer in the chat)`)
   }));
 
   app.action('hs_no', e => runInFlow(e, async ({ ack, body }) => {
@@ -207,7 +207,7 @@ const loadFlow = (app) => {
           await sendEphemeralMessage(app, 'C0266FRGV', `<@${body.event.user}> Welcome to <#C0266FRGV>, the hangout spot for Hack Clubbers! Feel free to chat, hang out, ask questions, whatever :orpheus:`, body.event.user)
           await sendMessage(app, body.event.channel, 'Wait a second...did you hear that??', 2000)
           await sendMessage(app, body.event.channel, `...it sounds like a Slack ping!`, 2000)
-          await sendMessage(app, body.event.channel, `Oh!!! It looks like you're already in a channel! <#C0266FRGV>, the hangout channel for Hack Club members.`)
+          await sendMessage(app, body.event.channel, `Oh!!! It looks like you're already in a channel! <#C0266FRGV>, the main channel for the Jankathon.`)
           await sendMessage(app, body.event.channel, `Try clicking the red :ping: on your sidebar to the left :eyes:`)
           await sendMessage(app, body.event.channel, `<@${body.event.user}> As I was saying before I got distracted, we have _hundreds_ of these "channels" in the community, covering every topic you can think of, from \`#gamedev\` and \`#code\` to \`#photography\` and \`#cooking\`. We have nearly 1,000 weekly active members on here—wowee, that's a lot!!!`, 10000)
           await sendMessage(app, body.event.channel, `Want to be invited to another channel?`, 5000)
@@ -304,65 +304,6 @@ const loadFlow = (app) => {
     await sendEphemeralMessage(app, 'C0M8PUPU6', shipDesc, body.user.id)
     await sendEphemeralMessage(app, 'C0EA9S0A0', codeDesc, body.user.id)
     await sendEphemeralMessage(app, 'C01D7AHKMPF', communityDesc, body.user.id)
-
-    // /sup, /supwit
-    await sendCustomizedMessage(app, body.channel.id,
-      "There's another thing you should know: you can find out what's sup in this Slack by running `/sup`.",)
-    await sendCustomizedMessage(app, body.channel.id,
-      "Try it out now! You can do it :cooll-thumbs: Just type out `/sup` in the chat below and press `Enter`.",)
-    await timeout(6000)
-    await sendCustomizedMessage(app, body.channel.id,
-      "You can also try `/supwit #lounge`, `/supwit @clippy`, or `/supwit :upvote:`",)
-    await timeout(1000)
-    await sendCustomizedMessage(app, body.channel.id,
-      "This command will tell you what's sup wit a certain thingy in Slack, like a user or channel or emoji.",)
-    await timeout(1000)
-    await sendCustomizedMessage(app, body.channel.id,
-      "Here's a GIF of me doing it :yuh: https://cloud-h4j1oc3zw-hack-club-bot.vercel.app/0cleanshot_2021-11-24_at_11.14.38.gif",)
-    await timeout(1000)
-    await sendCustomizedMessage(app, body.channel.id,
-      "If you need any help with /sup or /supwit, ask <@U01S7UUCB89> for some help by sending the message '<@U01S7UUCB89> help' in public channel",)
-    await timeout(1000)
-    await sendSingleBlockMessage(app, body.channel.id,
-      `Once you've run /sup, click the :axe:`,
-      '🪓',
-      'sup_acknowledge')
-    
-    // add to club channel if they are clubs
-    
-    
-  }));
-
-  app.action('sup_acknowledge', e => runInFlow(e, async ({ ack, body }) => {
-    ack();
-    await updateInteractiveMessage(app, body.message.ts, body.channel.id, '🪓')
-
-    //await timeout(3000)
-    let userProfile = await app.client.users.info({
-      token: process.env.SLACK_BOT_TOKEN,
-      user: body.user.id
-    })
-
-    console.log(userProfile)
-
-    const airtableQueryOptions = {
-      maxRecords: 1,
-      filterByFormula: `{Email Address} = '${userProfile.user.profile.email}'`
-    }
-
-    let joinData = await axios(`https://api2.hackclub.com/v0.1/Joins/Join%20Requests?authKey=${process.env.AIRTABLE_API_KEY}&select=${JSON.stringify(airtableQueryOptions)}&meta=true`).then(r => r.data)
-    
-    if(joinData["response"].length > 0){
-      if(joinData["response"][0]["fields"]["Club"]){
-        await app.client.conversations.join({
-          token: process.env.SLACK_BOT_TOKEN,
-          channel: joinData["response"][0]["fields"]["Club"]
-        })
-        await inviteUserToChannel(app, body.user.id, joinData["response"][0]["fields"]["Club"]) //add to club channel
-        await sendMessage(app, body.channel.id, `:eyes: I see you are a member of the <#${joinData["response"][0]["fields"]["Club"]}> club! I've added you to the club's channel so you can chat with your fellow club members!`)
-        await timeout(3000)
-      }
-    }
     
     await sendMessage(app, body.channel.id, `Your next steps: start talking to the community! We're excited to meet you :partyparrot:`)
     await sendCustomizedMessage(app, body.channel.id, `To find channels where people are talking about stuff you're interested in, click on the \`+\` next to "Channels" in the sidebar and search for your favorite coding languages, types of projects, pets... there are over 1000 channels, so I'm sure you'll find something! https://cloud-7njybwq01-hack-club-bot.vercel.app/0channels__1_.gif`)
