@@ -50,6 +50,8 @@ const startTutorial = async (app, user, flow, restart) => {
     }&select=${JSON.stringify(airtableQueryOptions)}&meta=true`
   ).then((r) => r.data);
 
+  console.log(joinData)
+
   if (joinData["response"].length > 0) {
     if (joinData["response"][0]["fields"]["Reason"] == "Jankathon") {
       flow = "Jankathon"
