@@ -153,17 +153,38 @@ const loadFlow = (app) => {
     await sendMessage(app, body.channel.id, `What are your preferred pronouns? (Type your answer in chat)`)
   }));
 
-  app.action('apac', e => runInFlow(e, async ({ ack, body }) => {
+  app.action('asia', e => runInFlow(e, async ({ ack, body }) => {
     ack();
     await setRegion(app, body.user.id, 'APAC')
-    updateSingleBlockMessage(app, body.message.ts, body.channel.id, `Which continent do you currently live in?`, `☑️`, `mimmiggie`)
+    updateSingleBlockMessage(app, body.message.ts, body.channel.id, `Which continent do you currently live in?`, `Asia`, `mimmiggie`)
     sendHsQuestion(body.channel.id)
   }));
 
-  app.action('non-apac', e => runInFlow(e, async ({ ack, body }) => {
+  app.action('africa', e => runInFlow(e, async ({ ack, body }) => {
+    ack();
+    await setRegion(app, body.user.id, 'APAC')
+    updateSingleBlockMessage(app, body.message.ts, body.channel.id, `Which continent do you currently live in?`, `Africa`, `mimmiggie`)
+    sendHsQuestion(body.channel.id)
+  }));
+
+  app.action('americas', e => runInFlow(e, async ({ ack, body }) => {
     ack();
     await setRegion(app, body.user.id, 'Non-APAC')
-    updateSingleBlockMessage(app, body.message.ts, body.channel.id, `Which continent do you currently live in?`, `☑️`, `mimmiggie`)
+    updateSingleBlockMessage(app, body.message.ts, body.channel.id, `Which continent do you currently live in?`, `The Americas`, `mimmiggie`)
+    sendHsQuestion(body.channel.id)
+  }));
+
+  app.action('europe', e => runInFlow(e, async ({ ack, body }) => {
+    ack();
+    await setRegion(app, body.user.id, 'Non-APAC')
+    updateSingleBlockMessage(app, body.message.ts, body.channel.id, `Which continent do you currently live in?`, `Europe`, `mimmiggie`)
+    sendHsQuestion(body.channel.id)
+  }));
+
+  app.action('oceania', e => runInFlow(e, async ({ ack, body }) => {
+    ack();
+    await setRegion(app, body.user.id, 'Non-APAC')
+    updateSingleBlockMessage(app, body.message.ts, body.channel.id, `Which continent do you currently live in?`, `Oceania`, `mimmiggie`)
     sendHsQuestion(body.channel.id)
   }));
 
@@ -488,7 +509,7 @@ const loadFlow = (app) => {
                 "text": "The Americas"
               },
               "style": "primary",
-              "action_id": "non-apac"
+              "action_id": "americas"
             },
             {
               "type": "button",
@@ -498,7 +519,7 @@ const loadFlow = (app) => {
                 "text": "Europe"
               },
               "style": "primary",
-              "action_id": "non-apac"
+              "action_id": "europe"
             },
             {
               "type": "button",
@@ -508,7 +529,7 @@ const loadFlow = (app) => {
                 "text": "Africa"
               },
               "style": "primary",
-              "action_id": "apac"
+              "action_id": "africa"
             },
             {
               "type": "button",
@@ -518,7 +539,7 @@ const loadFlow = (app) => {
                 "text": "Asia"
               },
               "style": "primary",
-              "action_id": "apac"
+              "action_id": "asia"
             },
             {
               "type": "button",
@@ -528,7 +549,7 @@ const loadFlow = (app) => {
                 "text": "Oceania"
               },
               "style": "primary",
-              "action_id": "non-apac"
+              "action_id": "oceania"
             }
           ]
         }
