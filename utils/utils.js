@@ -370,6 +370,28 @@ const setPronouns = async (app, userId, pronouns, pronoun1) => {
 }
 exports.setPronouns = setPronouns
 
+const setRegion = async (app, userId, region) => {
+  let record = await getUserRecord(userId)
+  let recId = record.id
+
+  await islandTable.update(recId, {
+    'Regional Flow': region
+  })
+
+}
+exports.setRegion = setRegion
+
+const setHS = async (app, userId, hs) => {
+  let record = await getUserRecord(userId)
+  let recId = record.id
+
+  return await islandTable.update(recId, {
+    'High School': hs
+  })
+
+}
+exports.setHS = setHS
+
 const getPronouns = async userId => {
   let userRecord = await getUserRecord(userId)
   let pronouns = userRecord.fields['Pronouns']

@@ -8,7 +8,7 @@ const { sendEphemeralMessage, getUserRecord, getIslandId,
   getNextEvent, completeTutorial, timeout,
   updatePushedButton, setPreviouslyCompletedTutorial, hasPreviouslyCompletedTutorial,
   generateIslandName, islandTable, getLatestMessages,
-  startTutorial, setFlow, sendToWelcomeCommittee, promoteUser, sendCustomizedMessage } = require('../utils/utils')
+  startTutorial, setFlow, sendToWelcomeCommittee, promoteUser, sendCustomizedMessage, setHS, setRegion } = require('../utils/utils')
 
 async function defaultFilter(e) {
   const userID = e.body.user_id || (e.body.event ? e.body.event.user : e.body.user.id)
@@ -128,7 +128,7 @@ const loadFlow = (app) => {
     updateSingleBlockMessage(app, body.message.ts, body.channel.id, `What are your pronouns? (how you want to be referred to by others)`, `she/her/hers`, `mimmiggie`)
     await sendMessage(app, body.channel.id, `:heart: Every profile here has a custom field for pronouns—I've gone ahead and set your pronouns for you, but <${`https://slack.com/intl/en-sg/help/articles/204092246-Edit-your-profile`}|here's a quick tutorial if you'd like to change them.>`)
     console.log("here.");
-    sendHsQuestion(body.channel.id)
+    sendRegionQuestion(body.channel.id)
   }));
 
   app.action('he', e => runInFlow(e, async ({ ack, body }) => {
@@ -136,7 +136,7 @@ const loadFlow = (app) => {
     await setPronouns(app, body.user.id, 'he/him/his', 'he')
     updateSingleBlockMessage(app, body.message.ts, body.channel.id, `What are your pronouns? (how you want to be referred to by others)`, `he/him/his`, `mimmiggie`)
     await sendMessage(app, body.channel.id, `:heart: Every profile here has a custom field for pronouns—I've gone ahead and set your pronouns for you, but <${`https://slack.com/intl/en-sg/help/articles/204092246-Edit-your-profile`}|here's a quick tutorial if you'd like to change them.>`)
-    sendHsQuestion(body.channel.id)
+    sendRegionQuestion(body.channel.id)
   }));
 
   app.action('they', e => runInFlow(e, async ({ ack, body }) => {
@@ -144,7 +144,7 @@ const loadFlow = (app) => {
     await setPronouns(app, body.user.id, 'they/them/theirs', 'they')
     updateSingleBlockMessage(app, body.message.ts, body.channel.id, `What are your pronouns? (how you want to be referred to by others)`, `they/them/theirs`, `mimmiggie`)
     await sendMessage(app, body.channel.id, `:heart: Every profile here has a custom field for pronouns—I've gone ahead and set your pronouns for you, but <${`https://slack.com/intl/en-sg/help/articles/204092246-Edit-your-profile`}|here's a quick tutorial if you'd like to change them.>`)
-    sendHsQuestion(body.channel.id)
+    sendRegionQuestion(body.channel.id)
   }));
 
   app.action('something_else', e => runInFlow(e, async ({ ack, body }) => {
@@ -153,8 +153,23 @@ const loadFlow = (app) => {
     await sendMessage(app, body.channel.id, `What are your preferred pronouns? (Type your answer in chat)`)
   }));
 
+  app.action('apac', e => runInFlow(e, async ({ ack, body }) => {
+    ack();
+    await setRegion(app, body.user.id, 'APAC')
+    updateSingleBlockMessage(app, body.message.ts, body.channel.id, `Which continent do you currently live in?`, `☑️`, `mimmiggie`)
+    sendHsQuestion(body.channel.id)
+  }));
+
+  app.action('non-apac', e => runInFlow(e, async ({ ack, body }) => {
+    ack();
+    await setRegion(app, body.user.id, 'Non-APAC')
+    updateSingleBlockMessage(app, body.message.ts, body.channel.id, `Which continent do you currently live in?`, `☑️`, `mimmiggie`)
+    sendHsQuestion(body.channel.id)
+  }));
+
   app.action('hs_yes', e => runInFlow(e, async ({ ack, body }) => {
     ack();
+    await setHS(app, body.user.id, true)
     updateSingleBlockMessage(app, body.message.ts, body.channel.id, `Are you currently a high school student? (it's OK if you're not)`, `Yep!`, `mimmiggie`)
     await sendMessage(app, body.channel.id, 'Great. Hack Club is a community of high schoolers, so you\'ll fit right in!')
     await sendMessage(app, body.channel.id, `What brings you to the Hack Club community? (Type your answer in the chat)`)
@@ -162,8 +177,14 @@ const loadFlow = (app) => {
 
   app.action('hs_no', e => runInFlow(e, async ({ ack, body }) => {
     ack();
+    let hsCallResponse = await setHS(app, body.user.id, false)
     updateSingleBlockMessage(app, body.message.ts, body.channel.id, `Are you currently a high school student? (it's OK if you're not)`, `No`, `mimmiggie`)
-    await sendMessage(app, body.channel.id, 'Just a heads-up: Hack Club is a community of high schoolers, not a community of professional developers. You will likely still find a home here if you are in college, but if you\'re older than that, you may find yourself lost here.')
+    if(hsCallResponse.fields["Regional Flow"] == "APAC"){
+      await sendMessage(app, body.channel.id, 'Just a heads-up: Hack Club is a community of students, not a community of professional developers.')
+    }
+    else{
+      await sendMessage(app, body.channel.id, 'Just a heads-up: Hack Club is a community of high schoolers, not a community of professional developers. You will likely still find a home here if you are in college, but if you\'re older than that, you may find yourself lost here.')
+    }
     await sendSingleBlockMessage(app, body.channel.id, 'If you understand this and still want to continue on, click the 👍 below.', '👍', 'hs_acknowledge')
   }));
 
@@ -191,7 +212,7 @@ const loadFlow = (app) => {
           await setPronouns(app, body.event.user, pronouns, pronoun1.toLowerCase())
           await sendMessage(app, body.event.channel, `:heart: Every profile here has a custom field for pronouns—I've gone ahead and set your pronouns for you, but <${`https://slack.com/intl/en-sg/help/articles/204092246-Edit-your-profile`}|here's a quick tutorial if you'd like to change them.>`)
           console.log("yeah, it runs");
-          await sendHsQuestion(body.event.channel)
+          await sendRegionQuestion(body.event.channel)
         }
         console.log("ooooooof");
         if (lastBotMessage.includes('What brings you')) {
@@ -435,6 +456,79 @@ const loadFlow = (app) => {
               },
               "style": "danger",
               "action_id": "hs_no"
+            }
+          ]
+        }
+      ]
+    })
+  }
+
+
+  async function sendRegionQuestion(channel) {
+    await timeout(3000)
+    await app.client.chat.postMessage({
+      token: process.env.SLACK_BOT_TOKEN,
+      channel: channel,
+      blocks: [
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": `Which continent do you currently live in?`
+          }
+        },
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "emoji": true,
+                "text": "The Americas"
+              },
+              "style": "primary",
+              "action_id": "non-apac"
+            },
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "emoji": true,
+                "text": "Europe"
+              },
+              "style": "primary",
+              "action_id": "non-apac"
+            },
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "emoji": true,
+                "text": "Africa"
+              },
+              "style": "primary",
+              "action_id": "apac"
+            },
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "emoji": true,
+                "text": "Asia"
+              },
+              "style": "primary",
+              "action_id": "apac"
+            },
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "emoji": true,
+                "text": "Oceania"
+              },
+              "style": "primary",
+              "action_id": "non-apac"
             }
           ]
         }
