@@ -390,7 +390,7 @@ const loadFlow = (app) => {
       await inviteUserToChannel(app, body.user.id, 'C0EA9S0A0') //code
       await inviteUserToChannel(app, body.user.id, 'C01504DCLVD') //scrapbook
       await inviteUserToChannel(app, body.user.id, 'C01D7AHKMPF') //community
-      if(userRecord['fields']['Assigned Flow'] != "APAC-MIX"){
+      if(userRecord['fields']['Assigned Flow'] == "APAC-MIX"){
         await inviteUserToChannel(app, body.user.id, 'C031AQUNKQS') //apac-community
         await sendEphemeralMessage(app, 'C031AQUNKQS', apacCommunityDesc, body.user.id)
       }
