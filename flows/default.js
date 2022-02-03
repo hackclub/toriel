@@ -342,83 +342,107 @@ const loadFlow = (app) => {
 
 
     await sendMessage(app, body.channel.id, `Woohoo! Welcome to Hack Club! :yay::orpheus::snootslide:`, 1000)
-    const finalMessage = await sendMessage(app, body.channel.id, `I've added you to a few of the most popular channels, but there are many, many more! Click on "2 replies" just under this message to discover some other cool channels...`, 5000)
-    const finalTs = finalMessage.message.ts
+    if(userRecord['fields']['Assigned Flow'] != "APAC-FULL"){
+      const finalMessage = await sendMessage(app, body.channel.id, `I've added you to a few of the most popular channels, but there are many, many more! Click on "2 replies" just under this message to discover some other cool channels...`, 5000)
+      const finalTs = finalMessage.message.ts
 
-    const hqDesc = `*<#C0C78SG9L>* is where people ask the community/@staff any questions about Hack Club.`
-    const loungeDesc = `*<#C0266FRGV>* is where people go to hang out with the community. There are no expectations here; just have fun and hang out with the community :)`
-    const shipDesc = `*<#C0M8PUPU6>* is where people go to _ship_, or share, projects they've made. All posts in that are not part of a thread must be projects you've made, and must include a link or attachment. Check out the awesome projects people in the community have made!`
-    const codeDesc = `*<#C0EA9S0A0>* is where people go to ask technical questions about code. If you're stuck on a problem or need some guidance, this is the place to go. `
-    const communityDesc = `*<#C01D7AHKMPF>* is where you'll find community-related announcements! :mega:`
+      const hqDesc = `*<#C0C78SG9L>* is where people ask the community/@staff any questions about Hack Club.`
+      const loungeDesc = `*<#C0266FRGV>* is where people go to hang out with the community. There are no expectations here; just have fun and hang out with the community :)`
+      const shipDesc = `*<#C0M8PUPU6>* is where people go to _ship_, or share, projects they've made. All posts in that are not part of a thread must be projects you've made, and must include a link or attachment. Check out the awesome projects people in the community have made!`
+      const codeDesc = `*<#C0EA9S0A0>* is where people go to ask technical questions about code. If you're stuck on a problem or need some guidance, this is the place to go. `
+      const communityDesc = `*<#C01D7AHKMPF>* is where you'll find community-related announcements! :mega:`
 
-    // channel descriptions
-    await sendMessage(app, body.channel.id, `Here are a bunch of other active channels that you may be interested in:`, 10, finalTs)
-    await sendMessage(app,
-      body.channel.id,
-      `<#C013AGZKYCS> – Get to know the community by answering a question every day!
-      <#C0NP503L7> - Upcoming events
-      <#C6LHL48G2> - Game Development
-      <#C0DCUUH7E> - Share your favorite music!
-      <#CA3UH038Q> - Talk to others in the community!
-      <#C90686D0T> - Talk about the LGBTQ community!
-      <#CCW6Q86UF> - :appleinc:
-      <#C1C3K2RQV> - Learn about design!
-      <#CCW8U2LBC> - :google:
-      <#CDLBHGUQN> - Photos of cats!
-      <#CDJV1CXC2> - Photos of dogs!
-      <#C14D3AQTT> - A public log of Hack Club's sent packages!
-      <#CBX54ACPJ> - Share your photos!
-      <#CC78UKWAC> - :jenga_sleep:
-      <#C8P6DHA3W> - Don't enter if you're hungry!
-      <#C010SJJH1PT> - Learn about cooking!
-      <#CDJMS683D> - Count to a million, one at a time.
-      <#CDN99BE9L> - Talk about Movies & TV!`,
-      10,
-      finalTs
-    );
+      // channel descriptions
+      await sendMessage(app, body.channel.id, `Here are a bunch of other active channels that you may be interested in:`, 10, finalTs)
+      await sendMessage(app,
+        body.channel.id,
+        `<#C013AGZKYCS> – Get to know the community by answering a question every day!
+        <#C0NP503L7> - Upcoming events
+        <#C6LHL48G2> - Game Development
+        <#C0DCUUH7E> - Share your favorite music!
+        <#CA3UH038Q> - Talk to others in the community!
+        <#C90686D0T> - Talk about the LGBTQ community!
+        <#CCW6Q86UF> - :appleinc:
+        <#C1C3K2RQV> - Learn about design!
+        <#CCW8U2LBC> - :google:
+        <#CDLBHGUQN> - Photos of cats!
+        <#CDJV1CXC2> - Photos of dogs!
+        <#C14D3AQTT> - A public log of Hack Club's sent packages!
+        <#CBX54ACPJ> - Share your photos!
+        <#CC78UKWAC> - :jenga_sleep:
+        <#C8P6DHA3W> - Don't enter if you're hungry!
+        <#C010SJJH1PT> - Learn about cooking!
+        <#CDJMS683D> - Count to a million, one at a time.
+        <#CDN99BE9L> - Talk about Movies & TV!`,
+        10,
+        finalTs
+      );
 
-    let pronouns = await getPronouns(body.user.id)
-    if (pronouns.pronouns === "they/them/theirs" || pronouns.pronouns === "she/her/hers") {
-      await sendMessage(app, body.channel.id, `Also, check out <#CFZMXJ3FB>—it’s a channel for women/femme/non-binary people in Hack Club!`, 1000)
-    }
+      let pronouns = await getPronouns(body.user.id)
+      if (pronouns.pronouns === "they/them/theirs" || pronouns.pronouns === "she/her/hers") {
+        await sendMessage(app, body.channel.id, `Also, check out <#CFZMXJ3FB>—it’s a channel for women/femme/non-binary people in Hack Club!`, 1000)
+      }
 
-    await completeTutorial(body.user.id)
-    // add user to default channels
-    await inviteUserToChannel(app, body.user.id, 'C0C78SG9L') //hq
-    await inviteUserToChannel(app, body.user.id, 'C0M8PUPU6') //ship
-    await inviteUserToChannel(app, body.user.id, 'C0EA9S0A0') //code
-    await inviteUserToChannel(app, body.user.id, 'C01504DCLVD') //scrapbook
-    await inviteUserToChannel(app, body.user.id, 'C01D7AHKMPF') //community
+      await completeTutorial(body.user.id)
+      // add user to default channels
+      await inviteUserToChannel(app, body.user.id, 'C0C78SG9L') //hq
+      await inviteUserToChannel(app, body.user.id, 'C0M8PUPU6') //ship
+      await inviteUserToChannel(app, body.user.id, 'C0EA9S0A0') //code
+      await inviteUserToChannel(app, body.user.id, 'C01504DCLVD') //scrapbook
+      await inviteUserToChannel(app, body.user.id, 'C01D7AHKMPF') //community
 
-    await sendEphemeralMessage(app, 'C0C78SG9L', hqDesc, body.user.id)
-    await sendEphemeralMessage(app, 'C0M8PUPU6', shipDesc, body.user.id)
-    await sendEphemeralMessage(app, 'C0EA9S0A0', codeDesc, body.user.id)
-    await sendEphemeralMessage(app, 'C01D7AHKMPF', communityDesc, body.user.id)
+      await sendEphemeralMessage(app, 'C0C78SG9L', hqDesc, body.user.id)
+      await sendEphemeralMessage(app, 'C0M8PUPU6', shipDesc, body.user.id)
+      await sendEphemeralMessage(app, 'C0EA9S0A0', codeDesc, body.user.id)
+      await sendEphemeralMessage(app, 'C01D7AHKMPF', communityDesc, body.user.id)
 
-    // /sup, /supwit
-    await sendCustomizedMessage(app, body.channel.id,
-      "There's another thing you should know: you can find out what's sup in this Slack by running `/sup`.",)
-    await sendCustomizedMessage(app, body.channel.id,
-      "Try it out now! You can do it :cooll-thumbs: Just type out `/sup` in the chat below and press `Enter`.",)
-    await timeout(6000)
-    await sendCustomizedMessage(app, body.channel.id,
-      "You can also try `/supwit #lounge`, `/supwit @clippy`, or `/supwit :upvote:`",)
-    await timeout(1000)
-    await sendCustomizedMessage(app, body.channel.id,
-      "This command will tell you what's sup wit a certain thingy in Slack, like a user or channel or emoji.",)
-    await timeout(1000)
-    await sendCustomizedMessage(app, body.channel.id,
-      "Here's a GIF of me doing it :yuh: https://cloud-h4j1oc3zw-hack-club-bot.vercel.app/0cleanshot_2021-11-24_at_11.14.38.gif",)
-    await timeout(1000)
-    await sendCustomizedMessage(app, body.channel.id,
-      "If you need any help with /sup or /supwit, ask <@U01S7UUCB89> for some help by sending the message '<@U01S7UUCB89> help' in public channel",)
-    await timeout(1000)
-    await sendSingleBlockMessage(app, body.channel.id,
-      `Once you've run /sup, click the :axe:`,
-      '🪓',
-      'sup_acknowledge')
+      // /sup, /supwit
+      await sendCustomizedMessage(app, body.channel.id,
+        "There's another thing you should know: you can find out what's sup in this Slack by running `/sup`.",)
+      await sendCustomizedMessage(app, body.channel.id,
+        "Try it out now! You can do it :cooll-thumbs: Just type out `/sup` in the chat below and press `Enter`.",)
+      await timeout(6000)
+      await sendCustomizedMessage(app, body.channel.id,
+        "You can also try `/supwit #lounge`, `/supwit @clippy`, or `/supwit :upvote:`",)
+      await timeout(1000)
+      await sendCustomizedMessage(app, body.channel.id,
+        "This command will tell you what's sup wit a certain thingy in Slack, like a user or channel or emoji.",)
+      await timeout(1000)
+      await sendCustomizedMessage(app, body.channel.id,
+        "Here's a GIF of me doing it :yuh: https://cloud-h4j1oc3zw-hack-club-bot.vercel.app/0cleanshot_2021-11-24_at_11.14.38.gif",)
+      await timeout(1000)
+      await sendCustomizedMessage(app, body.channel.id,
+        "If you need any help with /sup or /supwit, ask <@U01S7UUCB89> for some help by sending the message '<@U01S7UUCB89> help' in public channel",)
+      await timeout(1000)
+      await sendSingleBlockMessage(app, body.channel.id,
+        `Once you've run /sup, click the :axe:`,
+        '🪓',
+        'sup_acknowledge')
     
-    // add to club channel if they are clubs
+    }
+    else{
+      const hqDesc = `*<#C031456DCHL>* is where people ask the community/@staff any questions about Hack Club.`
+      const communityDesc = `*<#C031AQUNKQS>* is where you'll find community-related announcements! :mega:`
+      const promotionsDesc = `*<#C0320HLTFDE>* is where you can promote events! :mega:`
+      const rankersDesc = `*<#C02BTU651FD>* is where you can rank! :mega:`
+
+      await inviteUserToChannel(app, body.user.id, 'C031456DCHL') // apac-hq
+      await inviteUserToChannel(app, body.user.id, 'C031AQUNKQS') // apac-community
+      await inviteUserToChannel(app, body.user.id, 'C0320HLTFDE') // apac-promotions
+      await inviteUserToChannel(app, body.user.id, 'C02BTU651FD') // rankers-office
+
+      await sendEphemeralMessage(app, 'C031456DCHL', hqDesc, body.user.id)
+      await sendEphemeralMessage(app, 'C0320HLTFDE', promotionsDesc, body.user.id)
+      await sendEphemeralMessage(app, 'C02BTU651FD', rankersDesc, body.user.id)
+      await sendEphemeralMessage(app, 'C031AQUNKQS', communityDesc, body.user.id)
+      
+      await sendMessage(app, body.channel.id, `Your next steps: start talking to the community! We're excited to meet you :partyparrot:`)
+      await sendMessage(app, body.channel.id, `I also highly recommend setting a profile picture. It makes you look a lot more like a real person :)`)
+      await sendMessage(app, body.channel.id, `I'm going to head out now — if you have any questions about Hack Club or Slack that I didn't answer, please ask in <#C031456DCHL>.`)
+      await sendCustomizedMessage(app, body.channel.id, `Toodles! :wave:`, 'https://cloud-hz5majdx9.vercel.app/moshed-2020-9-8-13-50-11.jpg')
+      await timeout(3000)
+      await sendSingleBlockMessage(app, body.channel.id, `(Btw, if you want to leave + archive this channel, click here)`, 'Leave channel', 'leave_channel')
+    }
     
     
   }));
