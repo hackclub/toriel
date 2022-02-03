@@ -255,12 +255,22 @@ const loadFlow = (app) => {
           await sendMessage(app, body.event.channel, `Want to be invited to another channel?`, 5000)
 
           const welcomeChannel = 'C75M7C0SY';
+          const welcomeChannelAPAC = 'C031ARE1DU2';
           await timeout(3000)
-          await inviteUserToChannel(app, body.event.user, welcomeChannel, true)
-          const island = await getIslandName(body.event.user)
-          await sendEphemeralMessage(app, welcomeChannel, `<@${body.event.user}> Feel free to introduce yourself to the community in <#${welcomeChannel}>. When you're done, head back to <https://hackclub.slack.com/archives/${island}|#${island}> to continue your introduction to the community.`, body.event.user)
-          await sendCustomizedMessage(app, body.event.channel, `I just invited you to your second channel, <#${welcomeChannel}>. Join by clicking on it in your sidebar, and feel free to introduce yourself to the community. (totally optional, no expectations)`, 'https://cloud-hz5majdx9.vercel.app/moshed-2020-9-8-13-50-21.jpg', null, 1000)
-          await sendSingleBlockMessage(app, body.event.channel, "When you're ready, click the 👍 on this message to continue.", '👍', 'introduced')
+          if(userRecord['fields']['Assigned Flow'] == "APAC-FULL"){
+            await inviteUserToChannel(app, body.event.user, welcomeChannelAPAC, true)
+            const island = await getIslandName(body.event.user)
+            await sendEphemeralMessage(app, welcomeChannel, `<@${body.event.user}> Feel free to introduce yourself to the community in <#${welcomeChannelAPAC}>. When you're done, head back to <https://hackclub.slack.com/archives/${island}|#${island}> to continue your introduction to the community.`, body.event.user)
+            await sendCustomizedMessage(app, body.event.channel, `I just invited you to your second channel, <#${welcomeChannelAPAC}>. Join by clicking on it in your sidebar, and feel free to introduce yourself to the community. (totally optional, no expectations)`, 'https://cloud-hz5majdx9.vercel.app/moshed-2020-9-8-13-50-21.jpg', null, 1000)
+            await sendSingleBlockMessage(app, body.event.channel, "When you're ready, click the 👍 on this message to continue.", '👍', 'introduced')
+          }
+          else{
+            await inviteUserToChannel(app, body.event.user, welcomeChannel, true)
+            const island = await getIslandName(body.event.user)
+            await sendEphemeralMessage(app, welcomeChannel, `<@${body.event.user}> Feel free to introduce yourself to the community in <#${welcomeChannel}>. When you're done, head back to <https://hackclub.slack.com/archives/${island}|#${island}> to continue your introduction to the community.`, body.event.user)
+            await sendCustomizedMessage(app, body.event.channel, `I just invited you to your second channel, <#${welcomeChannel}>. Join by clicking on it in your sidebar, and feel free to introduce yourself to the community. (totally optional, no expectations)`, 'https://cloud-hz5majdx9.vercel.app/moshed-2020-9-8-13-50-21.jpg', null, 1000)
+            await sendSingleBlockMessage(app, body.event.channel, "When you're ready, click the 👍 on this message to continue.", '👍', 'introduced')  
+          }
         }
     }}
   });
