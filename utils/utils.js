@@ -411,6 +411,7 @@ const inviteUserToChannel = async (app, user, channel, doAsAdmin = false) => {
       if (err.data.error === "already_in_channel") {
         console.log(`${user} is already in ${channel}—skipping this step...`);
       }
+      console.log(err.data.error)
     });
 };
 exports.inviteUserToChannel = inviteUserToChannel;
