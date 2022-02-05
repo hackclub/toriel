@@ -418,6 +418,7 @@ exports.inviteUserToChannel = inviteUserToChannel;
 const setPronouns = async (app, userId, pronouns, pronoun1) => {
   let record = await getUserRecord(userId);
   let userInfo = app.client.users.info({
+    token: process.env.SLACK_OAUTH_TOKEN,
     user: userId
   });
   let recId = record.id;
