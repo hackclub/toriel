@@ -417,18 +417,24 @@ exports.inviteUserToChannel = inviteUserToChannel;
 
 const setPronouns = async (app, userId, pronouns, pronoun1) => {
   let record = await getUserRecord(userId);
+  let userInfo = app.client.users.info({
+    user: userId
+  });
   let recId = record.id;
 
   await islandTable.update(recId, {
     Pronouns: pronouns,
     "Pronoun 1": pronoun1,
   });
+  
   try {
-    app.client.users.profile.set({
-      token: process.env.SLACK_OAUTH_TOKEN,
-      profile: { pronouns, XfD4V9MG3V: pronouns },
-      user: userId,
-    });
+    if(!userInfo.user.is_admin){
+      app.client.users.profile.set({
+        token: process.env.SLACK_OAUTH_TOKEN,
+        profile: { pronouns, XfD4V9MG3V: pronouns },
+        user: userId,
+      });
+    }
   } catch {
     console.log(
       `Could not update pronouns for ${userId} because they are a Slack admin`
