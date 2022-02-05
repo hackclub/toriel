@@ -695,7 +695,7 @@ const loadFlow = (app) => {
         const shipDesc = `*<#C0M8PUPU6>* is where people go to _ship_, or share, projects they've made. All posts in that are not part of a thread must be projects you've made, and must include a link or attachment. Check out the awesome projects people in the community have made!`;
         const codeDesc = `*<#C0EA9S0A0>* is where people go to ask technical questions about code. If you're stuck on a problem or need some guidance, this is the place to go. `;
         const communityDesc = `*<#C01D7AHKMPF>* is where you'll find community-related announcements! :mega:`;
-        const apacCommunityDesc = `*<#C01D7AHKMPF>* is a place for all APAC-hackers`;
+        const apacCommunityDesc = `*<#C031AQUNKQS>* is a place for all APAC-hackers`;
 
         // channel descriptions
         await sendMessage(
@@ -752,12 +752,12 @@ const loadFlow = (app) => {
         await inviteUserToChannel(app, body.user.id, "C01D7AHKMPF"); //community
         if (userRecord["fields"]["Assigned Flow"] == "APAC-MIX") {
           await inviteUserToChannel(app, body.user.id, "C031AQUNKQS"); //apac-community
-          await sendEphemeralMessage(
+          /* await sendEphemeralMessage(
             app,
             "C031AQUNKQS",
             apacCommunityDesc,
             body.user.id
-          );
+          ); */
         }
 
         await sendEphemeralMessage(app, "C0C78SG9L", hqDesc, body.user.id);
