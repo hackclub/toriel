@@ -38,7 +38,7 @@ const startTutorial = async (app, user, flow, restart) => {
     token: process.env.SLACK_BOT_TOKEN,
     user: user,
   });
-
+  /*
   const airtableQueryOptions = {
     maxRecords: 1,
     filterByFormula: `{Email Address} = '${userProfile.user.profile.email}'`,
@@ -55,7 +55,7 @@ const startTutorial = async (app, user, flow, restart) => {
       console.log("hi!");
       flow = "Jankathon";
     }
-  }
+  }*/
 
   if (restart) {
     let record = await getUserRecord(user);
