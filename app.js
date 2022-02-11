@@ -4,7 +4,7 @@ const AirtablePlus = require('airtable-plus')
 const express = require('express')
 const fetch = require('node-fetch')
 const axios = require('axios')
-const bugsnag = require('./utils/bugsnag')
+const { bugsnag } = require('./utils/bugsnag')
 
 bugsnag()
 
