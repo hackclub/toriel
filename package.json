@@ -10,6 +10,7 @@
   "author": "MatthewStanciu",
   "license": "MIT",
   "dependencies": {
+    "@bugsnag/js": "^7.16.1",
     "@slack/bolt": "^2.0.1",
     "airtable-plus": "^1.0.4",
     "axios": "^0.21.2",
