@@ -89,11 +89,16 @@ const defaultAdds = ['C0C78SG9L', 'C0EA9S0A0', 'C0266FRGV', 'C0M8PUPU6', 'C75M7C
   
   if ((body.message.subtype === 'channel_join' && body.message.text === `<@${body.message.user}> has joined the channel` && defaultAdds.includes(body.message.channel))
       || (body.message.channel === 'C01A6SCS14M' && body.message.user !== 'U012H797734')) {
-    await app.client.chat.delete({
-      token: process.env.SLACK_OAUTH_TOKEN,
-      channel: body.message.channel,
-      ts: body.message.event_ts
-    })
+    try{
+      await app.client.chat.delete({
+        token: process.env.SLACK_OAUTH_TOKEN,
+        channel: body.message.channel,
+        ts: body.message.event_ts
+      })
+    }
+    catch{
+      console.log("deleting things is broken!!")
+    }
   }
 })
 
