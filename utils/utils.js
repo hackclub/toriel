@@ -211,12 +211,17 @@ const sendCustomizedMessage = async (
 exports.sendCustomizedMessage = sendCustomizedMessage;
 
 const sendEphemeralMessage = async (app, channel, text, user) => {
-  return await app.client.chat.postEphemeral({
-    token: process.env.SLACK_BOT_TOKEN,
-    channel: channel,
-    text: text,
-    user: user,
-  });
+  try{
+    return await app.client.chat.postEphemeral({
+      token: process.env.SLACK_BOT_TOKEN,
+      channel: channel,
+      text: text,
+      user: user,
+    });
+  }
+  catch{
+    return { error: 'not in channel' }
+  }
 };
 exports.sendEphemeralMessage = sendEphemeralMessage;
 
