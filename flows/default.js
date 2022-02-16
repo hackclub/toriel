@@ -35,18 +35,23 @@ const {
 } = require("../utils/utils");
 
 async function defaultFilter(e) {
-  const userID =
-    e.body.user_id || (e.body.event ? e.body.event.user : e.body.user.id);
-  //console.log(userID)
-  const flowOptions = {
-    maxRecords: 1,
-    filterByFormula: `AND(Name = '${userID}', Flow = 'Default')`,
-  };
-  let data = await axios(
-    "https://api2.hackclub.com/v0.1/Tutorial%20Island/Tutorial%20Island?select=" +
-      JSON.stringify(flowOptions)
-  ).then((r) => r.data);
-  return data[0] != null;
+  try{
+    const userID =
+      e.body.user_id || (e.body.event ? e.body.event.user : e.body.user.id);
+    //console.log(userID)
+    const flowOptions = {
+      maxRecords: 1,
+      filterByFormula: `AND(Name = '${userID}', Flow = 'Default')`,
+    };
+    let data = await axios(
+      "https://api2.hackclub.com/v0.1/Tutorial%20Island/Tutorial%20Island?select=" +
+        JSON.stringify(flowOptions)
+    ).then((r) => r.data);
+    return data[0] != null;
+  }
+  catch{
+    return true
+  }
 }
 
 async function runInFlow(opts, func) {
