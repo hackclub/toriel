@@ -76,11 +76,18 @@ app.command('/clippy-channel', async ({ command, ack, respond }) => {
     const userId = command.text.split(' ')[0].split('|')[0].substring(2)
     console.log('user id', userId)
     const userRecord = await getUserRecord(userId)
-    
-    await respond({
-      text: `<@${userId}>'s Clippy channel is \`${userRecord.fields['Island Channel Name']}\`. \`https://app.slack.com/client/T0266FRGM/${userRecord.fields['Island Channel ID']}\``,
-      response_type: 'ephemeral'
-    })
+    try{
+      await respond({
+        text: `<@${userId}>'s Clippy channel is \`${userRecord.fields['Island Channel Name']}\`. \`https://app.slack.com/client/T0266FRGM/${userRecord.fields['Island Channel ID']}\``,
+        response_type: 'ephemeral'
+      })
+    }
+    catch{
+      await respond({
+        text: `I don't know, sorry mate.`,
+        response_type: 'ephemeral'
+      })
+    }
   }
 })
 
