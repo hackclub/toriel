@@ -533,9 +533,11 @@ exports.setPreviouslyCompletedTutorial = setPreviouslyCompletedTutorial;
 
 const setFlow = async (userId, flow) => {
   let userRecord = await getUserRecord(userId);
-  await islandTable.update(userRecord.id, {
-    Flow: flow,
-  });
+  if(typeof userRecord != "undefined"){
+    await islandTable.update(userRecord.id, {
+      Flow: flow,
+    });
+  }
 };
 exports.setFlow = setFlow;
 
