@@ -10,14 +10,20 @@ const { generateIslandName, getUserRecord, islandTable,
   sendDoubleBlockMessage, setFlow } = require('../utils/utils')
 
 async function somFilter(e) {
-  const userID = e.body.user_id || (e.body.event ? e.body.event.user : e.body.user.id)
-  //console.log(userID)
-  const options = {
-    maxRecords: 1,
-    filterByFormula: `AND(Name = '${userID}', Flow = 'Summer of Making')`
+  try{
+
+    const userID = e.body.user_id || (e.body.event ? e.body.event.user : e.body.user.id)
+    //console.log(userID)
+    const options = {
+      maxRecords: 1,
+      filterByFormula: `AND(Name = '${userID}', Flow = 'Summer of Making')`
+    }
+    let data = await axios('https://api2.hackclub.com/v0.1/Tutorial%20Island/Tutorial%20Island?select=' + JSON.stringify(options)).then(r => r.data)
+    return (data[0] != null)
   }
-  let data = await axios('https://api2.hackclub.com/v0.1/Tutorial%20Island/Tutorial%20Island?select=' + JSON.stringify(options)).then(r => r.data)
-  return (data[0] != null)
+  catch{
+    return false
+  }
 }
 
 async function runInFlow(opts, func) {
