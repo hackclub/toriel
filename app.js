@@ -143,14 +143,19 @@ app.action('leave_confirm', async ({ ack, body }) => {
 // args: promotedId, promoterId
 receiver.app.use(express.json())
 receiver.app.post('/promote', async (req, res) => {
-  if (req.body.key != process.env.ORPHEUS_KEY) return res.status(403).send('Only Orpheus can make this request!')
-  const userId = req.body.promotedId
-  const promoterId = req.body.promoterId
-  const userRecord = await getUserRecord(userId)
-  const islandId = userRecord.fields['Island Channel ID']
+  try{
+    if (req.body.key != process.env.ORPHEUS_KEY) return res.status(403).send('Only Orpheus can make this request!')
+    const userId = req.body.promotedId
+    const promoterId = req.body.promoterId
+    const userRecord = await getUserRecord(userId)
+    const islandId = userRecord.fields['Island Channel ID']
 
-  sendSingleBlockMessage(app, islandId, `<@${userId}> :wave: Hey there! You've just been promoted to a full user by <@${promoterId}>. That means you have access to all of Hack Club's hundreds of channels instead of only the 4 you were added to.\n\nTo unlock the Hack Club community, click the :star2: below!`, ':star2:', 'promoted')
-  res.status(200).end()
+    sendSingleBlockMessage(app, islandId, `<@${userId}> :wave: Hey there! You've just been promoted to a full user by <@${promoterId}>. That means you have access to all of Hack Club's hundreds of channels instead of only the 4 you were added to.\n\nTo unlock the Hack Club community, click the :star2: below!`, ':star2:', 'promoted')
+    res.status(200).end()
+  }
+  catch{
+    console.log('failed!')
+  }
 });
 
 app.action('promoted', async ({ ack, body }) => {
