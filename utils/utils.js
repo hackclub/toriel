@@ -442,7 +442,8 @@ const setPronouns = async (app, userId, pronouns, pronoun1) => {
         user: userId,
       });
     }
-  } catch {
+  } catch(error) {
+    console.log(error)
     console.log(
       `Could not update pronouns for ${userId} because they are a Slack admin`
     );
