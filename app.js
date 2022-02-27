@@ -1,16 +1,12 @@
 require("dotenv").config();
 const { App, ExpressReceiver } = require("@slack/bolt");
-const AirtablePlus = require("airtable-plus");
 const express = require("express");
 const fetch = require("node-fetch");
-const axios = require("axios");
 const { bugsnag } = require("./utils/bugsnag");
 
 bugsnag();
 
 const {
-  getIslandId,
-  sendEphemeralMessage,
   updateInteractiveMessage,
   sendSingleBlockMessage,
   startTutorial,
@@ -18,7 +14,6 @@ const {
   getUserRecord,
   inviteUserToChannel,
   sendMessage,
-  updateSingleBlockMessage,
   getPronouns,
   sendToWelcomeCommittee,
 } = require("./utils/utils");
@@ -40,10 +35,6 @@ require("fs")
     require("./flows/" + file).loadFlow(app);
   });
 
-app.event("team_join", async (body) => {
-  await startTutorial(app, body.event.user.id, "default");
-});
-
 async function restart({ command, ack }) {
   await ack();
   if (command.text === "") {
@@ -55,7 +46,12 @@ async function restart({ command, ack }) {
   }
 }
 
+app.event("team_join", async (body) => {
+  await startTutorial(app, body.event.user.id, "default");
+});
+
 app.command("/dev-restart", restart); // for dev app
+
 app.command("/restart", restart); // for production app
 
 app.command("/clippy-channel", async ({ command, ack, respond }) => {
@@ -92,7 +88,6 @@ app.event("message", async (body) => {
     "C01504DCLVD",
     "C01D7AHKMPF",
   ];
-
   if (
     (body.message.subtype === "channel_join" &&
       body.message.text === `<@${body.message.user}> has joined the channel` &&
@@ -145,6 +140,7 @@ app.action("leave_channel", async ({ ack, body }) => {
     10
   );
 });
+
 app.action("leave_confirm", async ({ ack, body }) => {
   ack();
   await updateInteractiveMessage(
@@ -153,11 +149,53 @@ app.action("leave_confirm", async ({ ack, body }) => {
     body.channel.id,
     `Okay! Bye :wave:`
   );
-
   await app.client.conversations.archive({
     token: process.env.SLACK_OAUTH_TOKEN,
     channel: body.channel.id,
   });
+});
+
+app.action("promoted", async ({ ack, body }) => {
+  ack();
+  try {
+    await updateInteractiveMessage(
+      app,
+      body.message.ts,
+      body.channel.id,
+      ":star2:"
+    );
+  } catch (error) {
+    console.log("A fishy error I found: " + error);
+  }
+  await sendMessage(
+    app,
+    body.channel.id,
+    `Woohoo! Welcome to Hack Club! :yay::orpheus::snootslide:`,
+    1000
+  );
+  await sendMessage(
+    app,
+    body.channel.id,
+    `I just invited you to the community's default channels. But click on this message to see a bunch of other cool channels you can join!`
+  );
+  await inviteUserToChannel(app, body.user.id, "C0C78SG9L"); //hq
+  await inviteUserToChannel(app, body.user.id, "C0266FRGV"); //lounge
+  await inviteUserToChannel(app, body.user.id, "C0M8PUPU6"); //ship
+  await inviteUserToChannel(app, body.user.id, "C0EA9S0A0"); //code
+  const userRecord = await getUserRecord(body.user.id);
+  const reasonJoined = userRecord.fields["What brings them?"];
+  sendToWelcomeCommittee(app, body.user.id, reasonJoined, true);
+  const pronouns = await getPronouns(body.user.id);
+  if (
+    pronouns.pronouns === "they/them/theirs" ||
+    pronouns.pronouns === "she/her/hers"
+  ) {
+    await sendMessage(
+      app,
+      body.channel.id,
+      `By the way, I also recommend checking out <#CFZMXJ3FB>—it’s a channel for women/femme/non-binary people in Hack Club! :orpheus::sparkling_heart:`
+    );
+  }
 });
 
 // Orpheus POSTS to this endpoint with the user ID of the promoted user and the ID of the promoter
@@ -185,86 +223,14 @@ receiver.app.post("/promote", async (req, res) => {
   }
 });
 
-app.action("promoted", async ({ ack, body }) => {
-  ack();
-  try {
-    await updateInteractiveMessage(
-      app,
-      body.message.ts,
-      body.channel.id,
-      ":star2:"
-    );
-  } catch (error) {
-    console.log("A fishy error I found: " + error);
-  }
-  await sendMessage(
-    app,
-    body.channel.id,
-    `Woohoo! Welcome to Hack Club! :yay::orpheus::snootslide:`,
-    1000
-  );
-  await sendMessage(
-    app,
-    body.channel.id,
-    `I just invited you to the community's default channels. But click on this message to see a bunch of other cool channels you can join!`
-  );
-
-  await inviteUserToChannel(app, body.user.id, "C0C78SG9L"); //hq
-  await inviteUserToChannel(app, body.user.id, "C0266FRGV"); //lounge
-  await inviteUserToChannel(app, body.user.id, "C0M8PUPU6"); //ship
-  await inviteUserToChannel(app, body.user.id, "C0EA9S0A0"); //code
-
-  /*await sendMessage(app,
-    body.channel.id,
-    `<#C013AGZKYCS> – Get to know the community by answering a question every day!
-<#C0NP503L7> - Upcoming events
-<#C6LHL48G2> - Game development
-<#C0DCUUH7E> - Share your favorite songs & discover new music
-<#CA3UH038Q> - Talk to others in the community!
-<#C90686D0T> - Talk about LGBTQ+ things!
-<#CCW6Q86UF> - :appleinc:
-<#C1C3K2RQV> - Learn about design!
-<#CCW8U2LBC> - :google:
-<#CDLBHGUQN> - Photos of cats!
-<#CDJV1CXC2> - Photos of dogs!
-<#C14D3AQTT> - A public log of Hack Club's sent packages
-<#CBX54ACPJ> - Share your photos!
-<#CC78UKWAC> - :jenga_sleep:
-<#C8P6DHA3W> - Don't enter if you're hungry!
-<#C010SJJH1PT> - Learn about cooking!
-<#CDJMS683D> - Count to a million, one at a time.
-<#CDN99BE9L> - Talk about Movies & TV!`,
-    10,
-    inviteMessage.message.ts
-  )*/
-
-  const userRecord = await getUserRecord(body.user.id);
-  const reasonJoined = userRecord.fields["What brings them?"];
-  sendToWelcomeCommittee(app, body.user.id, reasonJoined, true);
-
-  const pronouns = await getPronouns(body.user.id);
-  if (
-    pronouns.pronouns === "they/them/theirs" ||
-    pronouns.pronouns === "she/her/hers"
-  ) {
-    await sendMessage(
-      app,
-      body.channel.id,
-      `By the way, I also recommend checking out <#CFZMXJ3FB>—it’s a channel for women/femme/non-binary people in Hack Club! :orpheus::sparkling_heart:`
-    );
-  }
-});
-
 (async () => {
   const port = process.env.PORT || 3000;
   await app.start(port);
   console.log(`⚡️ Bolt app is running on port ${port}!`);
-
   let latestCommitMsg = "¯\\_(ツ)_/¯";
   await fetch("https://api.github.com/repos/hackclub/clippy/commits/main")
     .then((r) => r.json())
     .then((d) => (latestCommitMsg = d.commit.message));
-
   const message = `It looks like I'm alive again! Here's what I'm up to now: *${latestCommitMsg}*`;
   await sendMessage(app, "C0P5NE354", message, 10);
 })();
