@@ -147,7 +147,7 @@ app.event("member_joined_channel", async (body) => {
   }
 });
 
-app.action("mimmiggie", async ({ ack, body }) => {
+app.action("previously_pressed", async ({ ack, body }) => {
   ack();
 });
 

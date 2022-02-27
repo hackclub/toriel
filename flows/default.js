@@ -80,9 +80,6 @@ const loadFlow = (app) => {
     if (prevCompleted) {
       await sendMessage(app, body.channel.id, `A few quick questions:`);
     } else {
-      /* await sendMessage(app, body.channel.id, `First, the free stuff I promised:`)
-      const gpMessage = await sendMessage(app, body.channel.id, `<@UH50T81A6> give <@${body.user.id}> 20gp for free stuff!!!`, 1000)
-      await sendMessage(app, body.channel.id, 'You can check your balance at any time by typing `@banker balance`.', 10, gpMessage.message.ts)*/
       await setPreviouslyCompletedTutorial(body.user.id);
       await sendMessage(
         app,
@@ -187,7 +184,7 @@ const loadFlow = (app) => {
         body.channel.id,
         `What are your pronouns? (how you want to be referred to by others)`,
         `she/her/hers`,
-        `mimmiggie`
+        `previously_pressed`
       );
       await sendMessage(
         app,
@@ -209,7 +206,7 @@ const loadFlow = (app) => {
         body.channel.id,
         `What are your pronouns? (how you want to be referred to by others)`,
         `he/him/his`,
-        `mimmiggie`
+        `previously_pressed`
       );
       await sendMessage(
         app,
@@ -230,7 +227,7 @@ const loadFlow = (app) => {
         body.channel.id,
         `What are your pronouns? (how you want to be referred to by others)`,
         `they/them/theirs`,
-        `mimmiggie`
+        `previously_pressed`
       );
       await sendMessage(
         app,
@@ -250,7 +247,7 @@ const loadFlow = (app) => {
         body.channel.id,
         `What are your pronouns? (how you want to be referred to by others)`,
         `something else`,
-        `mimmiggie`
+        `previously_pressed`
       );
       await sendMessage(
         app,
@@ -270,7 +267,7 @@ const loadFlow = (app) => {
         body.channel.id,
         `Which continent do you currently live in?`,
         `Asia`,
-        `mimmiggie`
+        `previously_pressed`
       );
       sendHsQuestion(body.channel.id);
     })
@@ -286,7 +283,7 @@ const loadFlow = (app) => {
         body.channel.id,
         `Which continent do you currently live in?`,
         `Africa`,
-        `mimmiggie`
+        `previously_pressed`
       );
       sendHsQuestion(body.channel.id);
     })
@@ -302,7 +299,7 @@ const loadFlow = (app) => {
         body.channel.id,
         `Which continent do you currently live in?`,
         `The Americas`,
-        `mimmiggie`
+        `previously_pressed`
       );
       sendHsQuestion(body.channel.id);
     })
@@ -318,7 +315,7 @@ const loadFlow = (app) => {
         body.channel.id,
         `Which continent do you currently live in?`,
         `Europe`,
-        `mimmiggie`
+        `previously_pressed`
       );
       sendHsQuestion(body.channel.id);
     })
@@ -334,7 +331,7 @@ const loadFlow = (app) => {
         body.channel.id,
         `Which continent do you currently live in?`,
         `Oceania`,
-        `mimmiggie`
+        `previously_pressed`
       );
       sendHsQuestion(body.channel.id);
     })
@@ -350,7 +347,7 @@ const loadFlow = (app) => {
         body.channel.id,
         `Are you currently a high school student? (it's OK if you're not)`,
         `Yep!`,
-        `mimmiggie`
+        `previously_pressed`
       );
       await sendMessage(
         app,
@@ -377,7 +374,7 @@ const loadFlow = (app) => {
         body.channel.id,
         `Are you currently a high school student? (it's OK if you're not)`,
         `No`,
-        `mimmiggie`
+        `previously_pressed`
       );
       if (hsCallResponse.fields["Regional Flow"] == "APAC") {
         await sendMessage(
