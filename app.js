@@ -9,21 +9,17 @@ const { bugsnag } = require("./utils/bugsnag");
 bugsnag();
 
 const {
-  hasPushedButton,
-  hasCompletedTutorial,
   getIslandId,
   sendEphemeralMessage,
   updateInteractiveMessage,
   sendSingleBlockMessage,
   startTutorial,
-  isBot,
   setFlow,
   getUserRecord,
   inviteUserToChannel,
   sendMessage,
   updateSingleBlockMessage,
   getPronouns,
-  getWhereFrom,
   sendToWelcomeCommittee,
 } = require("./utils/utils");
 
@@ -46,26 +42,6 @@ require("fs")
 
 app.event("team_join", async (body) => {
   await startTutorial(app, body.event.user.id, "default");
-  // const bot = await isBot(app, body.event.user.id)
-  // if (bot) {
-  //   return
-  // }
-  // let userProfile = await app.client.users.info({
-  //   token: process.env.SLACK_BOT_TOKEN,
-  //   user: body.event.user.id
-  // })
-  // console.log(userProfile)
-  // const somOptions = {
-  //   maxRecords: 1,
-  //   filterByFormula: `Email = '${userProfile.user.profile.email}'`
-  // }
-  // let somData = await axios(`https://api2.hackclub.com/v0.1/Pre-register/Applications?authKey=${process.env.AIRTABLE_API_KEY}&select=${JSON.stringify(somOptions)}&meta=true`).then(r => r.data)
-  // console.log(somData)
-  // if (somData.response[0] == null) {
-  //   await startTutorial(app, body.event.user.id, 'default')
-  // } else {
-  //   await startTutorial(app, body.event.user.id, 'som')
-  // }
 });
 
 async function restart({ command, ack }) {
@@ -91,7 +67,6 @@ app.command("/clippy-channel", async ({ command, ack, respond }) => {
     });
   } else {
     const userId = command.text.split(" ")[0].split("|")[0].substring(2);
-    console.log("user id", userId);
     const userRecord = await getUserRecord(userId);
     try {
       await respond({
@@ -131,8 +106,9 @@ app.event("message", async (body) => {
         channel: body.message.channel,
         ts: body.message.event_ts,
       });
-    } catch {
-      console.log("deleting things is broken!!");
+    } catch (error) {
+      console.log("Deleting messages has failed:");
+      console.log(error);
     }
   }
 });
@@ -203,8 +179,9 @@ receiver.app.post("/promote", async (req, res) => {
       "promoted"
     );
     res.status(200).end();
-  } catch {
-    console.log("failed!");
+  } catch (error) {
+    console.log("Promoting user failed:");
+    console.log(error);
   }
 });
 

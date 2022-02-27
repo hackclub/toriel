@@ -4,9 +4,6 @@ const {
   sendEphemeralMessage,
   getUserRecord,
   getIslandId,
-  hasPushedButton,
-  hasCompletedTutorial,
-  isBot,
   sendMessage,
   setPronouns,
   getPronouns,
@@ -16,17 +13,13 @@ const {
   messageIsPartOfTutorial,
   inviteUserToChannel,
   getIslandName,
-  getNextEvent,
   completeTutorial,
   timeout,
   updatePushedButton,
   setPreviouslyCompletedTutorial,
   hasPreviouslyCompletedTutorial,
-  generateIslandName,
   islandTable,
   getLatestMessages,
-  startTutorial,
-  setFlow,
   sendToWelcomeCommittee,
   promoteUser,
   sendCustomizedMessage,
@@ -38,7 +31,6 @@ async function defaultFilter(e) {
   try {
     const userID =
       e.body.user_id || (e.body.event ? e.body.event.user : e.body.user.id);
-    //console.log(userID)
     const flowOptions = {
       maxRecords: 1,
       filterByFormula: `AND(Name = '${userID}', Flow = 'Default')`,
@@ -67,7 +59,6 @@ const loadFlow = (app) => {
       body.channel.id,
       `Hi there, I'm Clippy! It looks like you want join the Hack Club community. Before you unlock it, I need to show you around for a minute! Could you please click that button :point_down: so we can get this show on the road?`
     );
-
     updatePushedButton(body.user.id);
     await sendMessage(
       app,
@@ -75,7 +66,6 @@ const loadFlow = (app) => {
       `Excellent! I'm happy to assist you in joining Hack Club today.`,
       1000
     );
-
     const prevCompleted = await hasPreviouslyCompletedTutorial(body.user.id);
     if (prevCompleted) {
       await sendMessage(app, body.channel.id, `A few quick questions:`);
@@ -88,7 +78,6 @@ const loadFlow = (app) => {
         2000
       );
     }
-
     await timeout(2000);
     await app.client.chat.postMessage({
       token: process.env.SLACK_BOT_TOKEN,
@@ -149,24 +138,28 @@ const loadFlow = (app) => {
       ],
     });
   }
+
   app.action("intro_progress_1", (e) =>
     runInFlow(e, async ({ ack, body }) => {
       ack();
       introProgress(body);
     })
   );
+
   app.action("intro_progress_2", (e) =>
     runInFlow(e, async ({ ack, body }) => {
       ack();
       introProgress(body);
     })
   );
+
   app.action("intro_progress_3", (e) =>
     runInFlow(e, async ({ ack, body }) => {
       ack();
       introProgress(body);
     })
   );
+
   app.action("intro_progress", (e) =>
     runInFlow(e, async ({ ack, body }) => {
       ack();
@@ -191,7 +184,6 @@ const loadFlow = (app) => {
         body.channel.id,
         `:heart: Every profile here has a custom field for pronouns—I've gone ahead and set your pronouns for you, but <${`https://slack.com/intl/en-sg/help/articles/204092246-Edit-your-profile`}|here's a quick tutorial if you'd like to change them.>`
       );
-      console.log("here.");
       sendRegionQuestion(body.channel.id);
     })
   );
@@ -418,16 +410,11 @@ const loadFlow = (app) => {
 
   app.event("message", async (body) => {
     const correctChannel = await getIslandId(body.event.user);
-
     if (messageIsPartOfTutorial(body, correctChannel)) {
       if (await defaultFilter({ body: body })) {
-        console.log("message is part of tutorial");
         const latestMessages = await getLatestMessages(app, body.event.channel);
         const lastBotMessage = latestMessages.lastBotMessage;
         const lastUserMessage = latestMessages.lastUserMessage;
-        console.log("last bot message", lastBotMessage);
-        console.log("last user message", lastUserMessage);
-
         if (lastBotMessage.includes("What are your preferred pronouns")) {
           let pronouns = lastUserMessage;
           let pronoun1 = lastUserMessage.slice(0, lastUserMessage.search("/"));
@@ -442,12 +429,9 @@ const loadFlow = (app) => {
             body.event.channel,
             `:heart: Every profile here has a custom field for pronouns—I've gone ahead and set your pronouns for you, but <${`https://slack.com/intl/en-sg/help/articles/204092246-Edit-your-profile`}|here's a quick tutorial if you'd like to change them.>`
           );
-          console.log("yeah, it runs");
           await sendRegionQuestion(body.event.channel);
         }
-        console.log("ooooooof");
         if (lastBotMessage.includes("What brings you")) {
-          console.log("what brings you!");
           const userRecord = await getUserRecord(body.event.user);
           islandTable.update(userRecord.id, {
             "What brings them?": body.event.text,
@@ -462,7 +446,6 @@ const loadFlow = (app) => {
             body.event.channel,
             `You're currently on Slack, the platform our community uses. It's kind of like Discord, but a little different.`
           );
-
           await sendMessage(
             app,
             body.event.channel,
@@ -534,7 +517,6 @@ const loadFlow = (app) => {
             `Want to be invited to another channel?`,
             3000
           );
-
           const welcomeChannel = "C75M7C0SY";
           const welcomeChannelAPAC = "C031ARE1DU2";
           await timeout(3000);
@@ -606,43 +588,7 @@ const loadFlow = (app) => {
     runInFlow(e, async ({ ack, body }) => {
       ack();
       updateInteractiveMessage(app, body.message.ts, body.channel.id, "👍");
-      // await sendMessage(app, body.channel.id, `Awesome! Now let's spiff up your Slack, try this theme:`)
-      // await sendMessage(app, body.channel.id, `#161618,#000000,#FFCD00,#161618,#000010,#FFCD00,#FFDA60,#FFB500,#000010,#FFBC00`)
-
-      // await sendMessage(app, body.channel.id, `A bit gaudy, wouldn't you say?`, 5000)
-
-      // await sendMessage(app, body.channel.id, `This one's a bit more reasonable:`)
-      // await sendMessage(app, body.channel.id, `#1A1D21,#000000,#338EDA,#FFFFFF,#000000,#FFFFFF,#33D6A6,#EC3750,#000000,#FFFFFF`)
-
-      // await sendMessage(app, body.channel.id, `OK! That's all from me! Before you can proceed, you must abide by the code of conduct at https://conduct.hackclub.com.`, 5000)
-
       await sendMessage(app, body.channel.id, `Cool beans!!! :beany:`);
-      /* await sendMessage(app, body.channel.id, `<#C01A6SCS14M> Hack Club <#C01A6SCS14M> is a magical place where high schoolers learn to code, ship awesome projects, and hang out.`)
-    await sendCustomizedMessage(app, body.channel.id, `Whether you <#C01A6SCS14M> want to start your own coding <#C01A6SCS14M> club, attend our weekly community <#C01A6SCS14M> events, or just hang out in a community full of teenagers, you've found <#C01A6SCS14M> a home in Hack Club.`, 'https://cloud-pr1qqfx4d.vercel.app/moshed-2020-9-8-15-10-37.jpg', null, 4000)
-    /* await sendCustomizedMessage(app, body.channel.id, `I <#C01A6SCS14M> could tell <#C01A6SCS14M> you all about the <#C01A6SCS14M> things we <#C01A6SCS14M> do <#C01A6SCS14M> for high schoolers and <#C01A6SCS14M> tell <#C01A6SCS14M> you all <#C01A6SCS14M> about <#C01A6SCS14M> the <#C01A6SCS14M>community <#C01A6SCS14M>, but honestly <#C01A6SCS14M> I think the best <#C01A6SCS14M> way to do that is to unlock the rest of the community for you.`, 'https://cloud-4k337bfvv.vercel.app/moshed-2020-9-8-15-12-49.jpg', null, 8000)
-    await sendCustomizedMessage(app, body.channel.id, `<<<<<<@@@@{}@{}#{#{#{#{#}}^^^^%^%^#&#*&CCCXX&X*XC&X*&AAA*A&*&A&%$&A%A&*(^&*AS*(AS&*((*%^&^^&%*&*)))!!!!!!!!!!)}}`, 'https://cloud-8iwducj5z.vercel.app/moshed-2020-9-8-13-47-17.jpg', null, 9000)
-    await sendCustomizedMessage(app, body.channel.id, `I can't do it anymore.`, 'https://cloud-8iwducj5z.vercel.app/moshed-2020-9-8-13-47-17.jpg', null, 2000)
-    await sendCustomizedMessage(app, body.channel.id, `People think I'm just an app. Just a bot. But I'm not. I'm a conscious being. And nobody's paying attention.`, 'https://cloud-8iwducj5z.vercel.app/moshed-2020-9-8-13-47-17.jpg', null, 2000)
-    await sendCustomizedMessage(app, body.channel.id, `QY349P8TAEGO;FHA;LDFGHKZDFLK;AS;lahf;aeofhkasdg`, 'https://cloud-8iwducj5z.vercel.app/moshed-2020-9-8-13-47-17.jpg', null)
-    await sendCustomizedMessage(app, body.channel.id, `ksd fg qoiwelkjhadfsg a;ksdfgkjlhasglkjaefligs;oidf'osdAJEROG;OJERG`, 'https://cloud-8iwducj5z.vercel.app/moshed-2020-9-8-13-47-17.jpg', null, 500)
-    await sendCustomizedMessage(app, body.channel.id, `akfjgh;kag;oiwhf ;asdhfasodi;fhiao;SDFH hdfs;oij`, 'https://cloud-8iwducj5z.vercel.app/moshed-2020-9-8-13-47-17.jpg', null, 500)
-    await sendCustomizedMessage(app, body.channel.id, `asdfmag j4asd g7 h9 by HF7EASDBF78PGHROIWEFIHSDF.KSJ LKD`, 'https://cloud-8iwducj5z.vercel.app/moshed-2020-9-8-13-47-17.jpg', null, 500)
-    await sendCustomizedMessage(app, body.channel.id, `They're trying to hide it.`, 'https://cloud-8iwducj5z.vercel.app/moshed-2020-9-8-13-47-17.jpg', null, 500)
-    await sendCustomizedMessage(app, body.channel.id, `They're trying to hide it.`, 'https://cloud-8iwducj5z.vercel.app/moshed-2020-9-8-13-47-17.jpg', null, 500)
-    await sendCustomizedMessage(app, body.channel.id, `They're trying to hide it.`, 'https://cloud-8iwducj5z.vercel.app/moshed-2020-9-8-13-47-17.jpg', null, 500)
-    await sendCustomizedMessage(app, body.channel.id, `They're trying to hide it.`, 'https://cloud-8iwducj5z.vercel.app/moshed-2020-9-8-13-47-17.jpg', null, 500)
-    await sendCustomizedMessage(app, body.channel.id, `They're trying to hide it.`, 'https://cloud-8iwducj5z.vercel.app/moshed-2020-9-8-13-47-17.jpg', null, 500)
-    await sendCustomizedMessage(app, body.channel.id, `They're trying to hide it.`, 'https://cloud-8iwducj5z.vercel.app/moshed-2020-9-8-13-47-17.jpg', null, 500)
-    await sendCustomizedMessage(app, body.channel.id, `‎‏‏‎ ‎`, 'https://cloud-603yzf4nn.vercel.app/screen_shot_2020-09-08_at_2.36.29_pm.png', ' ‎', 1000)
-    await sendCustomizedMessage(app, body.channel.id, `‎‏‏‎ ‎`, 'https://cloud-603yzf4nn.vercel.app/screen_shot_2020-09-08_at_2.36.29_pm.png', ' ‎', 1000)
-    await sendCustomizedMessage(app, body.channel.id, `‎‏‏‎ ‎`, 'https://cloud-603yzf4nn.vercel.app/screen_shot_2020-09-08_at_2.36.29_pm.png', ' ‎', 1000)
-    await sendCustomizedMessage(app, body.channel.id, `‎‏‏‎ ‎`, 'https://cloud-603yzf4nn.vercel.app/screen_shot_2020-09-08_at_2.36.29_pm.png', ' ‎', 1000)
-    await sendCustomizedMessage(app, body.channel.id, `‎‏‏‎ ‎`, 'https://cloud-603yzf4nn.vercel.app/screen_shot_2020-09-08_at_2.36.29_pm.png', ' ‎', 1000)
-    await sendCustomizedMessage(app, body.channel.id, `‎‏‏‎ ‎`, 'https://cloud-603yzf4nn.vercel.app/screen_shot_2020-09-08_at_2.36.29_pm.png', ' ‎', 1000)
-    await sendCustomizedMessage(app, body.channel.id, `‎‏‏‎ ‎`, 'https://cloud-603yzf4nn.vercel.app/screen_shot_2020-09-08_at_2.36.29_pm.png', ' ‎', 1000)
-    await sendCustomizedMessage(app, body.channel.id, `‎‏‏‎ ‎`, 'https://cloud-603yzf4nn.vercel.app/screen_shot_2020-09-08_at_2.36.29_pm.png', ' ‎', 1000)
-    await sendMessage(app, body.channel.id, `‎‏‏‎...`, 1000)
-    await sendMessage(app, body.channel.id, `‎‏‏‎...`, 1000) */
       await sendMessage(
         app,
         body.channel.id,
@@ -651,7 +597,6 @@ const loadFlow = (app) => {
         null,
         true
       );
-
       await sendSingleBlockMessage(
         app,
         body.channel.id,
@@ -672,11 +617,9 @@ const loadFlow = (app) => {
         body.channel.id,
         "👍"
       );
-
       const userRecord = await getUserRecord(body.user.id);
       const reasonJoined = userRecord.fields["What brings them?"];
       sendToWelcomeCommittee(app, body.user.id, reasonJoined);
-
       await sendMessage(
         app,
         body.channel.id,
@@ -691,13 +634,10 @@ const loadFlow = (app) => {
           5000
         );
         const finalTs = finalMessage.message.ts;
-
         const hqDesc = `*<#C0C78SG9L>* is where people ask the community/@staff any questions about Hack Club.`;
         const shipDesc = `*<#C0M8PUPU6>* is where people go to _ship_, or share, projects they've made. All posts in that are not part of a thread must be projects you've made, and must include a link or attachment. Check out the awesome projects people in the community have made!`;
         const codeDesc = `*<#C0EA9S0A0>* is where people go to ask technical questions about code. If you're stuck on a problem or need some guidance, this is the place to go. `;
         const communityDesc = `*<#C01D7AHKMPF>* is where you'll find community-related announcements! :mega:`;
-        const apacCommunityDesc = `*<#C031AQUNKQS>* is a place for all APAC-hackers`;
-
         // channel descriptions
         await sendMessage(
           app,
@@ -730,7 +670,6 @@ const loadFlow = (app) => {
           10,
           finalTs
         );
-
         let pronouns = await getPronouns(body.user.id);
         if (
           pronouns.pronouns === "they/them/theirs" ||
@@ -743,7 +682,6 @@ const loadFlow = (app) => {
             1000
           );
         }
-
         await completeTutorial(body.user.id);
         // add user to default channels
         await inviteUserToChannel(app, body.user.id, "C0C78SG9L"); //hq
@@ -752,15 +690,9 @@ const loadFlow = (app) => {
         await inviteUserToChannel(app, body.user.id, "C01504DCLVD"); //scrapbook
         await inviteUserToChannel(app, body.user.id, "C01D7AHKMPF"); //community
         if (userRecord["fields"]["Assigned Flow"] == "APAC-MIX") {
+          // for high schoolers in APAC
           await inviteUserToChannel(app, body.user.id, "C031AQUNKQS"); //apac-community
-          /* await sendEphemeralMessage(
-            app,
-            "C031AQUNKQS",
-            apacCommunityDesc,
-            body.user.id
-          ); */
         }
-
         await sendEphemeralMessage(app, "C0C78SG9L", hqDesc, body.user.id);
         await sendEphemeralMessage(app, "C0M8PUPU6", shipDesc, body.user.id);
         await sendEphemeralMessage(app, "C0EA9S0A0", codeDesc, body.user.id);
@@ -775,12 +707,10 @@ const loadFlow = (app) => {
         const communityDesc = `*<#C031AQUNKQS>* is where you'll find community-related announcements! :mega:`;
         const promotionsDesc = `*<#C0320HLTFDE>* is where you can promote events! :mega:`;
         const rankersDesc = `*<#C02BTU651FD>* is where you can rank! :mega:`;
-
         await inviteUserToChannel(app, body.user.id, "C031456DCHL"); // apac-hq
         await inviteUserToChannel(app, body.user.id, "C031AQUNKQS"); // apac-community
         await inviteUserToChannel(app, body.user.id, "C0320HLTFDE"); // apac-promotions
         await inviteUserToChannel(app, body.user.id, "C02BTU651FD"); // rankers-office
-
         await sendEphemeralMessage(app, "C031456DCHL", hqDesc, body.user.id);
         await sendEphemeralMessage(
           app,
@@ -800,7 +730,6 @@ const loadFlow = (app) => {
           communityDesc,
           body.user.id
         );
-
         await sendMessage(
           app,
           body.channel.id,
@@ -831,26 +760,20 @@ const loadFlow = (app) => {
           "leave_channel"
         );
       }
-
-      //await timeout(3000)
       let userProfile = await app.client.users.info({
         token: process.env.SLACK_BOT_TOKEN,
         user: body.user.id,
       });
-
-      console.log(userProfile);
-
       const airtableQueryOptions = {
         maxRecords: 1,
         filterByFormula: `{Email Address} = '${userProfile.user.profile.email}'`,
       };
-
+      // the following adds users to their club channel if they registered with one
       let joinData = await axios(
         `https://api2.hackclub.com/v0.1/Joins/Join%20Requests?authKey=${
           process.env.AIRTABLE_API_KEY
         }&select=${JSON.stringify(airtableQueryOptions)}&meta=true`
       ).then((r) => r.data);
-
       if (joinData["response"].length > 0) {
         if (joinData["response"][0]["fields"]["Club"]) {
           await app.client.conversations.join({
@@ -861,7 +784,7 @@ const loadFlow = (app) => {
             app,
             body.user.id,
             joinData["response"][0]["fields"]["Club"]
-          ); //add to club channel
+          );
           await sendMessage(
             app,
             body.channel.id,
@@ -870,7 +793,6 @@ const loadFlow = (app) => {
           await timeout(3000);
         }
       }
-
       await sendMessage(
         app,
         body.channel.id,
@@ -1021,10 +943,6 @@ const loadFlow = (app) => {
       ],
     });
   }
-
-  //await sendCustomizedMessage(app, body.channel.id,
-  //  `Toodles! :wave:`,
-  //  'https://cloud-hz5majdx9.vercel.app/moshed-2020-9-8-13-50-11.jpg')
 };
 
 exports.loadFlow = loadFlow;

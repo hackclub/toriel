@@ -5,7 +5,6 @@ const fetch = require("node-fetch");
 const FormData = require("form-data");
 const GithubSlugger = require("github-slugger");
 const slugger = new GithubSlugger();
-const axios = require("axios");
 
 const islandTable = new AirtablePlus({
   apiKey: process.env.AIRTABLE_API_KEY,
@@ -44,27 +43,24 @@ const startTutorial = async (app, user, flow, restart) => {
     });
   }
   const channelId = newChannel.channel.id;
-  
+
   /*
+  const axios = require("axios");
   let userProfile = await app.client.users.info({
     token: process.env.SLACK_BOT_TOKEN,
     user: user,
   });
-
   const airtableQueryOptions = {
     maxRecords: 1,
     filterByFormula: `{Email Address} = '${userProfile.user.profile.email}'`,
   };
-
   let joinData = await axios(
     `https://api2.hackclub.com/v0.1/Joins/Join%20Requests?authKey=${
       process.env.AIRTABLE_API_KEY
     }&select=${JSON.stringify(airtableQueryOptions)}&meta=true`
   ).then((r) => r.data);
-
   if (joinData["response"].length > 0) {
     if (joinData["response"][0]["fields"]["Reason"] == "Alt Flow") {
-      console.log("hi!");
       flow = "Alt Flow";
     }
   }*/
@@ -101,7 +97,6 @@ const startTutorial = async (app, user, flow, restart) => {
     });
   }
   console.log(`New tutorial channel created: ${channelId}`);
-
   await app.client.conversations
     .invite({
       token: process.env.SLACK_BOT_TOKEN,
@@ -114,24 +109,16 @@ const startTutorial = async (app, user, flow, restart) => {
     channel: channelId,
     users: "U012FPRJEVB", //Clippy Admin
   });
-  /*await app.client.conversations.invite({
-    token: process.env.SLACK_BOT_TOKEN,
-    channel: channelId,
-    users: 'UH50T81A6' //banker
-  })*/
-
   await app.client.conversations.setTopic({
     token: process.env.SLACK_BOT_TOKEN,
     channel: channelId,
     topic: `Welcome to Hack Club! :wave: Unlock the community by completing this tutorial.`,
   });
-
   await app.client.chat.postMessage({
     token: process.env.SLACK_BOT_TOKEN,
     channel: channelId,
     blocks: defaultIntro,
   });
-
   await timeout(30000);
   let pushedButton = await hasPushedButton(user);
   if (!pushedButton) {
@@ -149,7 +136,6 @@ const sendToWelcomeCommittee = async (app, userId, text, summer) => {
   let userPronouns = await getPronouns(userId);
   let pronouns = userPronouns.pronouns;
   let pronoun1 = userPronouns.pronoun1;
-
   if (summer) {
     await sendCustomizedMessage(
       app,
@@ -253,7 +239,6 @@ const getLatestMessages = async (app, channelId) => {
   );
   const lastBotMessage = botHistory[0].text;
   const lastUserMessage = history.messages[0].text;
-
   return {
     lastBotMessage: lastBotMessage,
     lastUserMessage: lastUserMessage,
@@ -416,7 +401,6 @@ const inviteUserToChannel = async (app, user, channel, doAsAdmin = false) => {
   const token = doAsAdmin
     ? process.env.SLACK_OAUTH_TOKEN
     : process.env.SLACK_BOT_TOKEN;
-
   await app.client.conversations
     .invite({
       token: token,
@@ -439,12 +423,10 @@ const setPronouns = async (app, userId, pronouns, pronoun1) => {
     user: userId,
   });
   let recId = record.id;
-
   await islandTable.update(recId, {
     Pronouns: pronouns,
     "Pronoun 1": pronoun1,
   });
-
   try {
     if (!userInfo.user?.is_admin) {
       app.client.users.profile.set({
@@ -454,10 +436,10 @@ const setPronouns = async (app, userId, pronouns, pronoun1) => {
       });
     }
   } catch (error) {
-    console.log(error);
     console.log(
-      `Could not update pronouns for ${userId} because they are a Slack admin`
+      `Could not update pronouns for ${userId} (likely due them being a Slack admin):`
     );
+    console.log(error);
   }
 };
 exports.setPronouns = setPronouns;
@@ -465,7 +447,6 @@ exports.setPronouns = setPronouns;
 const setRegion = async (app, userId, region) => {
   let record = await getUserRecord(userId);
   let recId = record.id;
-
   await islandTable.update(recId, {
     "Regional Flow": region,
   });
@@ -475,7 +456,6 @@ exports.setRegion = setRegion;
 const setHS = async (app, userId, hs) => {
   let record = await getUserRecord(userId);
   let recId = record.id;
-
   return await islandTable.update(recId, {
     "High School": hs,
   });
@@ -493,39 +473,6 @@ const getPronouns = async (userId) => {
 };
 exports.getPronouns = getPronouns;
 
-const setWhereFrom = async (app, userId, whereFrom, whereFrom1) => {
-  let record = await getUserRecord(userId);
-  let recId = record.id;
-
-  await islandTable.update(recId, {
-    whereFrom: whereFrom,
-    whereFrom1: whereFrom1,
-  });
-  try {
-    app.client.users.profile.set({
-      token: process.env.SLACK_OAUTH_TOKEN,
-      profile: { XfD4V9MG3V: whereFrom },
-      user: userId,
-    });
-  } catch {
-    console.log(
-      `Could not update where from for ${userId} because they are a Slack admin`
-    );
-  }
-};
-exports.setWhereFrom = setWhereFrom;
-
-const getWhereFrom = async (userId) => {
-  let userRecord = await getUserRecord(userId);
-  let whereFrom = userRecord.fields["whereFrom"];
-  let whereFrom1 = userRecord.fields["whereFrom1"];
-  return {
-    whereFrom: whereFrom,
-    whereFrom1: whereFrom1,
-  };
-};
-exports.getWhereFrom = getWhereFrom;
-
 const hasPreviouslyCompletedTutorial = async (userId) => {
   let userRecord = await getUserRecord(userId);
   let completed = userRecord.fields["Has previously completed tutorial"];
@@ -536,7 +483,6 @@ exports.hasPreviouslyCompletedTutorial = hasPreviouslyCompletedTutorial;
 const setPreviouslyCompletedTutorial = async (userId) => {
   let userRecord = await getUserRecord(userId);
   let recId = userRecord.id;
-
   islandTable.update(recId, {
     "Has previously completed tutorial": true,
   });
@@ -556,7 +502,6 @@ exports.setFlow = setFlow;
 const updatePushedButton = async (userId) => {
   let record = await getUserRecord(userId);
   let recId = record.id;
-
   islandTable.update(recId, {
     "Pushed first button": true,
   });
@@ -575,24 +520,6 @@ const hasPushedButton = async (userId) => {
   return record.fields["Pushed first button"];
 };
 exports.hasPushedButton = hasPushedButton;
-
-const hasCompletedTutorial = async (userId) => {
-  let record = await getUserRecord(userId);
-  if (typeof record === "undefined") return true;
-  return (
-    record.fields["Has completed tutorial"] || record.fields["Club leader"]
-  );
-};
-exports.hasCompletedTutorial = hasCompletedTutorial;
-
-const isBot = async (app, userId) => {
-  const user = await app.client.users.info({
-    token: process.env.SLACK_OAUTH_TOKEN,
-    user: userId,
-  });
-  return user.user.is_bot;
-};
-exports.isBot = isBot;
 
 const getUserRecord = async (userId) => {
   try {
@@ -618,31 +545,6 @@ const checkIslandNameTaken = async (islandName) => {
 };
 exports.checkIslandNameTaken = checkIslandNameTaken;
 
-const getNextEvent = async () => {
-  try {
-    let record = (
-      await eventsTable.read({
-        view: "Future Events",
-        maxRecords: 1,
-      })
-    )[0];
-
-    let eventUrl = `https://events.hackclub.com/${slugger.slug(
-      record.fields["Title"]
-    )}`;
-
-    return {
-      name: record.fields["Title"],
-      day: record.fields["Date (formatted)"],
-      time: record.fields["Time (formatted)"],
-      url: eventUrl,
-    };
-  } catch {
-    return null;
-  }
-};
-exports.getNextEvent = getNextEvent;
-
 // couple important things to note here:
 //
 // current channel names look like "4-lyres-tutorial"
@@ -659,26 +561,22 @@ exports.getNextEvent = getNextEvent;
 // confusion, which is why a method that generates less permutations was
 // chosen. this will have to be adjusted in the future when hack club gets tens
 // of thousands more students on the slack.
+
 const generateIslandName = async () => {
   const { objects, predicates, teams, collections } = friendlyWords;
   const words = [...objects, ...predicates, ...teams, ...collections];
-
   // random number between 2 and 9
   const randomNum = Math.floor(Math.random() * 8) + 2;
   const randomWord = words[Math.floor(Math.random() * words.length)];
-
   // "tendencys" -> "tendencies"
   const pluralizedWord = pluralize(randomWord, randomNum);
-
   // start channel name with a number so it shows at the top of the slack list
   const channel = `${randomNum}-${pluralizedWord}-tutorial`;
   const pretty = `${randomNum} ${capitalizeFirstLetter(
     pluralizedWord
   )} Tutorial`;
-
   const taken = await checkIslandNameTaken(channel);
   if (taken) return generateIslandName();
-
   return {
     channel: channel,
     pretty: pretty,
@@ -696,7 +594,6 @@ const promoteUser = async (user) => {
       method: "POST",
     })
   ).json();
-
   if (userProfile.user.is_restricted || userProfile.user.is_ultra_restricted) {
     return new Promise((resolve, reject) => {
       const form = new FormData();
@@ -710,7 +607,6 @@ const promoteUser = async (user) => {
         }
       )
         .then((res) => {
-          console.log(res);
           resolve(res);
         })
         .catch((err) => reject(err));
