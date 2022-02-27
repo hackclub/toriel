@@ -160,7 +160,12 @@ receiver.app.post('/promote', async (req, res) => {
 
 app.action('promoted', async ({ ack, body }) => {
   ack()
-  await updateInteractiveMessage(app, body.message.ts, body.channel.id, ':star2:')
+  try{
+    await updateInteractiveMessage(app, body.message.ts, body.channel.id, ':star2:')
+  }
+  catch (error){
+    console.log("A fishy error I found: " + error)
+  }
   await sendMessage(app, body.channel.id, `Woohoo! Welcome to Hack Club! :yay::orpheus::snootslide:`, 1000)
   const inviteMessage = await sendMessage(app, body.channel.id, `I just invited you to the community's default channels. But click on this message to see a bunch of other cool channels you can join!`)
 

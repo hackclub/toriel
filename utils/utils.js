@@ -26,13 +26,24 @@ exports.eventsTable = eventsTable;
 
 const startTutorial = async (app, user, flow, restart) => {
   flow = "Default";
-  const islandName = await generateIslandName();
-  const newChannel = await app.client.conversations.create({
-    token: process.env.SLACK_BOT_TOKEN,
-    name: islandName.channel,
-    is_private: true,
-    user_ids: process.env.BOT_USER_ID,
-  });
+  let islandName = await generateIslandName();
+  let newChannel
+  try {
+    newChannel = await app.client.conversations.create({
+      token: process.env.SLACK_BOT_TOKEN,
+      name: islandName.channel,
+      is_private: true,
+      user_ids: process.env.BOT_USER_ID,
+    });
+  } catch (error) {
+    islandName.channel = islandName.channel + "-" + Math.round(new Date().getTime() / 1000)
+    newChannel = await app.client.conversations.create({
+      token: process.env.SLACK_BOT_TOKEN,
+      name: islandName.channel,
+      is_private: true,
+      user_ids: process.env.BOT_USER_ID,
+    });
+  }
   const channelId = newChannel.channel.id;
   let userProfile = await app.client.users.info({
     token: process.env.SLACK_BOT_TOKEN,
