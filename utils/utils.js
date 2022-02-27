@@ -25,7 +25,7 @@ exports.eventsTable = eventsTable;
 const startTutorial = async (app, user, flow, restart) => {
   flow = "Default";
   let islandName = await generateIslandName();
-  let newChannel
+  let newChannel;
   try {
     newChannel = await app.client.conversations.create({
       token: process.env.SLACK_BOT_TOKEN,
@@ -34,7 +34,8 @@ const startTutorial = async (app, user, flow, restart) => {
       user_ids: process.env.BOT_USER_ID,
     });
   } catch (error) {
-    islandName.channel = islandName.channel + "-" + Math.round(new Date().getTime() / 1000)
+    islandName.channel =
+      islandName.channel + "-" + Math.round(new Date().getTime() / 1000);
     newChannel = await app.client.conversations.create({
       token: process.env.SLACK_BOT_TOKEN,
       name: islandName.channel,
@@ -43,11 +44,13 @@ const startTutorial = async (app, user, flow, restart) => {
     });
   }
   const channelId = newChannel.channel.id;
+  
+  /*
   let userProfile = await app.client.users.info({
     token: process.env.SLACK_BOT_TOKEN,
     user: user,
   });
-  /*
+
   const airtableQueryOptions = {
     maxRecords: 1,
     filterByFormula: `{Email Address} = '${userProfile.user.profile.email}'`,
@@ -220,16 +223,15 @@ const sendCustomizedMessage = async (
 exports.sendCustomizedMessage = sendCustomizedMessage;
 
 const sendEphemeralMessage = async (app, channel, text, user) => {
-  try{
+  try {
     return await app.client.chat.postEphemeral({
       token: process.env.SLACK_BOT_TOKEN,
       channel: channel,
       text: text,
       user: user,
     });
-  }
-  catch{
-    return { error: 'not in channel' }
+  } catch {
+    return { error: "not in channel" };
   }
 };
 exports.sendEphemeralMessage = sendEphemeralMessage;
@@ -425,7 +427,7 @@ const inviteUserToChannel = async (app, user, channel, doAsAdmin = false) => {
       if (err.data.error === "already_in_channel") {
         console.log(`${user} is already in ${channel}—skipping this step...`);
       }
-      console.log(err.data.error)
+      console.log(err.data.error);
     });
 };
 exports.inviteUserToChannel = inviteUserToChannel;
@@ -434,7 +436,7 @@ const setPronouns = async (app, userId, pronouns, pronoun1) => {
   let record = await getUserRecord(userId);
   let userInfo = app.client.users.info({
     token: process.env.SLACK_OAUTH_TOKEN,
-    user: userId
+    user: userId,
   });
   let recId = record.id;
 
@@ -442,17 +444,17 @@ const setPronouns = async (app, userId, pronouns, pronoun1) => {
     Pronouns: pronouns,
     "Pronoun 1": pronoun1,
   });
-  
+
   try {
-    if(!userInfo.user?.is_admin){
+    if (!userInfo.user?.is_admin) {
       app.client.users.profile.set({
         token: process.env.SLACK_OAUTH_TOKEN,
         profile: { pronouns, XfD4V9MG3V: pronouns },
         user: userId,
       });
     }
-  } catch(error) {
-    console.log(error)
+  } catch (error) {
+    console.log(error);
     console.log(
       `Could not update pronouns for ${userId} because they are a Slack admin`
     );
@@ -543,7 +545,7 @@ exports.setPreviouslyCompletedTutorial = setPreviouslyCompletedTutorial;
 
 const setFlow = async (userId, flow) => {
   let userRecord = await getUserRecord(userId);
-  if(typeof userRecord != "undefined"){
+  if (typeof userRecord != "undefined") {
     await islandTable.update(userRecord.id, {
       Flow: flow,
     });
