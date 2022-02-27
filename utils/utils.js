@@ -5,6 +5,7 @@ const fetch = require("node-fetch");
 const FormData = require("form-data");
 const GithubSlugger = require("github-slugger");
 const slugger = new GithubSlugger();
+const { defaultIntro } = require("./intros");
 
 const islandTable = new AirtablePlus({
   apiKey: process.env.AIRTABLE_API_KEY,
