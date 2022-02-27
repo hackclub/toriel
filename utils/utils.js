@@ -7,8 +7,6 @@ const GithubSlugger = require("github-slugger");
 const slugger = new GithubSlugger();
 const axios = require("axios");
 
-const { defaultIntro, jankathonIntro } = require("./intros");
-
 const islandTable = new AirtablePlus({
   apiKey: process.env.AIRTABLE_API_KEY,
   baseID: "appYGt7P3MtotTotg",
@@ -62,9 +60,9 @@ const startTutorial = async (app, user, flow, restart) => {
   ).then((r) => r.data);
 
   if (joinData["response"].length > 0) {
-    if (joinData["response"][0]["fields"]["Reason"] == "Jankathon") {
+    if (joinData["response"][0]["fields"]["Reason"] == "Alt Flow") {
       console.log("hi!");
-      flow = "Jankathon";
+      flow = "Alt Flow";
     }
   }*/
 
@@ -128,7 +126,7 @@ const startTutorial = async (app, user, flow, restart) => {
   await app.client.chat.postMessage({
     token: process.env.SLACK_BOT_TOKEN,
     channel: channelId,
-    blocks: flow == "Default" ? defaultIntro : jankathonIntro,
+    blocks: defaultIntro,
   });
 
   await timeout(30000);
