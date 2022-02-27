@@ -435,7 +435,7 @@ const setPronouns = async (app, userId, pronouns, pronoun1) => {
   });
   
   try {
-    if(!userInfo.user.is_admin){
+    if(!userInfo.user?.is_admin){
       app.client.users.profile.set({
         token: process.env.SLACK_OAUTH_TOKEN,
         profile: { pronouns, XfD4V9MG3V: pronouns },
