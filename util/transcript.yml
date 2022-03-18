@@ -6,6 +6,7 @@ selfUserID: U036UQD2893
 channels:
   cave: C0P5NE354 # this is botspam while testing
   botSpam: C0P5NE354
+cave-join: I detect you have just joined, <@${this.user}>
 command:
   not-found: I'm not sure how to do that, my child. (Slash command not found)
   cell:

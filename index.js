@@ -6,7 +6,21 @@ const app = new App({
   signingSecret: process.env.SLACK_SIGNING_SECRET
 })
 
-app.command('/toriel-call2', require('./commands/call'))
+app.event('member_joined_channel', async (args) => {
+  const { channel } = args.event
+  switch (channel) {
+    case transcript('channels.cave'):
+      const { joinInteraction } = require("./interactions/join")
+      await joinInteraction(args)
+      break;
+  
+    default:
+      console.log(`Ignoring join in ${channel}`)
+      break;
+  }
+})
+
+app.command('/toriel-call', require('./commands/call'))
 app.command(/\/.*/, async (args) => {
   const { ack, payload, respond } = args
   const { command, text } = payload
