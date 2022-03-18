@@ -1,5 +1,12 @@
 display_information:
   name: TORIEL
+  description: What a nice lady. She seems kinda lonely.
+  background_color: "#160f1a"
+  long_description: "Just a lil' greeter bot to direct new members in the Hack Club slack channel and collect some analytics data for that process.\r
+
+    \r
+
+    For staff: This is a WIP bot. Reach out to @msw with questions and comments."
 features:
   bot_user:
     display_name: TORIEL
