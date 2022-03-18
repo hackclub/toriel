@@ -79,14 +79,12 @@ avatar:
 
 startup:
   avatar: https://cloud-fy6rskqqp-hack-club-bot.vercel.app/0delta.png
-  message: _${this.t('startup.lines')}, ... It fills you with determination._
+  message: _${this.t('startup.lines')}... it fills you with determination._
   lines:
     - seeing the bots posting logs into <#${this.t('channels.bot-spam')}>
     - seeing all the messages posted in <#${this.t('channels.lounge')}>
     - knowing that one day the mole in <#${this.t('channels.whack-a-mode')}> might come out of his hole for good
-  happy: Good morning, my child!
-  default: Server is up and running, my child.
-  grumpy: '...'
+    - knowing that despite everything, it's still you
 
 themes:
   - "#2E3440,#3B4252,#88C0D0,#2E3440,#3B4252,#D8DEE9,#A3BE8C,#81A1C1" # nord
