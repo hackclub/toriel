@@ -1,5 +1,4 @@
 const { App } = require('@slack/bolt')
-const { sleep } = require('./util/sleep')
 const { transcript } = require('./util/transcript')
 
 const app = new App({
@@ -64,10 +63,6 @@ async function botInfo() {
 app.start(process.env.PORT || 3000).then(async () => {
   console.log(transcript('startupLog'))
 
-  if (process.env.NODE_ENV === 'production') {
-    await require('./interactions/startup')()
-  }
-  // check if in #cave channel
-  // console.log(await botInfo())
-  // console.log(await botInfo())
+  const { startupInteraction } = require('./interactions/startup')
+  await startupInteraction(app)
 })
