@@ -1,6 +1,6 @@
 {
-  "name": "clippy",
-  "version": "1.0.0",
+  "name": "TORIEL",
+  "version": "0.1.0",
   "description": "Hack Club's welcomer bot. Welcomes new members to the community and keeps bad people out",
   "main": "index.js",
   "scripts": {
