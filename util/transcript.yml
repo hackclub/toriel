@@ -1,0 +1,37 @@
+errors:
+  general: errors.general
+  transcript: errors.transcript
+startupLog: I'm awake, my child
+selfUserID: U036UQD2893
+channels:
+  cave: C0P5NE354 # this is botspam while testing
+  botSpam: C0P5NE354
+command:
+  not-found: I'm not sure how to do that, my child. (Slash command not found)
+  cell:
+    - |
+      📞 This is <@${this.t('selfUserID')}>.
+      You only wanted to say hello...? Well then.
+      'Hello!'
+      I hope that suffices. Hee hee.
+    - |
+      📞 This is <@${this.t('selfUserID')}>.
+      You wanted to say hello again?
+      'Salutations!'
+      Is that enough?
+    - |
+      📞 This is <@${this.t('selfUserID')}>.
+      Are you bored?
+      I should have given <https://hackclub.github.io/reading-list/|a book> to you.
+      My apologies.
+      Why not user your imagination to divert yourself?
+    - |
+      📞 This is <@${this.t('selfUserID')}>.
+      Hello, my child.
+      Sorry, I do not have much to say.
+      It was nice to hear your voice, though.
+    - |
+      📞 This is <@${this.t('selfUserID')}>.
+      You want to know more about me?
+      Well, I am afraid there is not much to say.
+      I am just a silly little lady who wants to help everyone!
