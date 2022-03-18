@@ -1,26 +1,26 @@
-const { App } = require("@slack/bolt")
-const { transcript } = require("./util/transcript")
+const { App } = require('@slack/bolt')
+const { sleep } = require('./util/sleep')
+const { transcript } = require('./util/transcript')
 
 const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
-  signingSecret: process.env.SLACK_SIGNING_SECRET
+  signingSecret: process.env.SLACK_SIGNING_SECRET,
 })
 
 app.event('member_joined_channel', async (args) => {
   const { channel } = args.event
   switch (channel) {
     case transcript('channels.cave'):
-      const { joinInteraction } = require("./interactions/join")
+      const { joinInteraction } = require('./interactions/join')
       await joinInteraction(args)
-      break;
-  
+      break
+
     default:
       console.log(`Ignoring join in ${channel}`)
-      break;
+      break
   }
 })
 
-app.command('/toriel-call', require('./commands/call'))
 app.command(/\/.*/, async (args) => {
   const { ack, payload, respond } = args
   const { command, text } = payload
@@ -30,38 +30,43 @@ app.command(/\/.*/, async (args) => {
   await respond({
     blocks: [
       {
-        type: "context",
+        type: 'context',
         elements: [
           {
-            type: "mrkdwn",
-            text: `${command} ${text}`
-          }
-        ]
-      }
-    ]
+            type: 'mrkdwn',
+            text: `${command} ${text}`,
+          },
+        ],
+      },
+    ],
   })
 
   switch (command) {
     case '/toriel-call':
       await require(`./commands/call`)(args)
-      break;
-  
+      break
+
     default:
       await require('./commands/not-found')(args)
-      break;
+      break
   }
 })
 
 var botSelfCache
 async function botInfo() {
-  return botSelfCache ? botSelfCache : (botSelfCache = await app.client.bots.info({
-    token: process.env.SLACK_BOT_TOKEN,
-  }))
+  return botSelfCache
+    ? botSelfCache
+    : (botSelfCache = await app.client.bots.info({
+        token: process.env.SLACK_BOT_TOKEN,
+      }))
 }
 
 app.start(process.env.PORT || 3000).then(async () => {
   console.log(transcript('startupLog'))
-  
+
+  if (process.env.NODE_ENV === 'production') {
+    await require('./interactions/startup')()
+  }
   // check if in #cave channel
   // console.log(await botInfo())
   // console.log(await botInfo())

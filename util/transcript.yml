@@ -1,12 +1,33 @@
 errors:
   general: errors.general
   transcript: errors.transcript
+
 startupLog: I'm awake, my child
+
 selfUserID: U036UQD2893
+
 channels:
-  cave: C0P5NE354 # this is botspam while testing
-  botSpam: C0P5NE354
-cave-join: I detect you have just joined, <@${this.user}>
+  cave: C0P5NE354 # set to botspam while testing
+  bot-spam: C0P5NE354
+  wordle: C02TWKX227J
+  whack-a-mole: C01TW2CAK55
+  uno-games: C01ABQB8S6A
+  slack-themes: CKKLW54QG
+
+cave-join: |
+            > Oh hello... I don't think I recognize you.
+            > ...you must be new in town.
+            > you may call me <@${this.t('selfUserID')}>! i have tea and butterscotch pie cooling off, please come over.
+            
+            > i just sent you a dm, you can tell by the :ping: to the left
+            
+            > (grumpy) ah, looks like that other bot is also messaging you. go ahead and ignore the other ping
+
+house:
+  start: |
+        (neutral) Hello my child, you may stay here with me for as long as you want.
+        (sad) But I imagine you’d like to venture forward, as many before you have done…
+
 command:
   not-found: I'm not sure how to do that, my child. (Slash command not found)
   cell:
@@ -23,6 +44,12 @@ command:
     - |
       📞 This is <@${this.t('selfUserID')}>.
       Are you bored?
+      I should have given you some <https://hackclub.slack.com/messages/${this.t('channels.wordle')}|games> <https://hackclub.slack.com/messages/${this.t('channels.whack-a-mole')}|to> <https://hackclub.slack.com/messages/${this.t('channels.uno-games')}|play>.
+      My apologies.
+      Why not user your imagination to divert yourself?
+    - |
+      📞 This is <@${this.t('selfUserID')}>.
+      Are you bored?
       I should have given <https://hackclub.github.io/reading-list/|a book> to you.
       My apologies.
       Why not user your imagination to divert yourself?
@@ -36,3 +63,27 @@ command:
       You want to know more about me?
       Well, I am afraid there is not much to say.
       I am just a silly little lady who wants to help everyone!
+    - |
+      📞 This is <@${this.t('selfUserID')}>.
+      Are you bored?
+      We could paint the walls at my house.
+      Or, if you prefer another color, you can find one for yourself in <#${this.t('channels.slack-themes')}>
+
+avatar:
+  happy: https://cloud-ml320gimw-hack-club-bot.vercel.app/0happy.png
+  default: https://cloud-ml320gimw-hack-club-bot.vercel.app/1default.png
+  grumpy: https://cloud-ml320gimw-hack-club-bot.vercel.app/2grumpy.png
+  sans: https://cloud-8cdibgmg9-hack-club-bot.vercel.app/0sans.png
+
+startup:
+  happy: Good morning, my child!
+  default: Server is up and running, my child.
+  grumpy: '...'
+
+themes:
+  - "#2E3440,#3B4252,#88C0D0,#2E3440,#3B4252,#D8DEE9,#A3BE8C,#81A1C1" # nord
+  - "#002635,#00384D,#F08E48,#E6E6DC,#00384D,#B7CFF9,#00FFFF,#FF5A67" # https://rigel.netlify.app/#terminal
+  - "#1F2036,#7986CB,#FE528C,#FFFFFF,#606BA2,#FFFFFF,#2DEBAE,#FE528C,#7986CB,#FFFFFF"
+  - "#B22130,#E42D40,#E82C3F,#FFFFFF,#CE2334,#FFFFFF,#94E864,#B22130,#B22130,#FFFFFF" # red
+  - "#161618,#000000,#FFCD00,#161618,#000010,#FFCD00,#FFDA60,#FFB500,#000010,#FFBC00" # gold
+  - "#130F40,#0E0B01,#37ABD2,#130F40,#342E73,#37ABD2,#FFFFFF,#FF5252,#37ABD2,#0E0B01" # blue
