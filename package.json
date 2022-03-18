@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
-    "dev": "npx nodemon app.js"
+    "dev": "npx nodemon app.js",
+    "fmt": "npx prettier --write *.js"
   },
   "author": "MatthewStanciu",
   "license": "MIT",
