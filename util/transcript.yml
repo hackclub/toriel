@@ -69,6 +69,8 @@ command:
       We could paint the walls at my house.
       Or, if you prefer another color, you can find one for yourself in <#${this.t('channels.slack-themes')}>
 
+# Avatars not working? make sure your bot's default avatar is set
+# https://github.com/slackapi/hubot-slack/issues/187#issuecomment-158983331
 avatar:
   happy: https://cloud-ml320gimw-hack-club-bot.vercel.app/0happy.png
   default: https://cloud-ml320gimw-hack-club-bot.vercel.app/1default.png
