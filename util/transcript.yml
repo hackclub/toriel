@@ -88,6 +88,8 @@ startup:
     - seeing all the messages posted in <#${this.t('channels.lounge')}>
     - knowing that one day the mole in <#${this.t('channels.whack-a-mole')}> might come out of his hole for good
     - knowing that despite everything, it's still you
+    - seeing the fish go "wahoo"
+    - knowing that one day bank might be open sourced
 
 themes:
   - "#2E3440,#3B4252,#88C0D0,#2E3440,#3B4252,#D8DEE9,#A3BE8C,#81A1C1" # nord
