@@ -94,6 +94,7 @@ startup:
     - knowing that despite everything, it's still you
     - seeing the fish go "wahoo"
     - knowing that one day bank might be open sourced
+    - knowing that one day you might <https://github.com/hackclub/clippy/edit/toriel/util/transcript.yml|add your own tutoriel-bot startup message>
 
 themes:
   - "#2E3440,#3B4252,#88C0D0,#2E3440,#3B4252,#D8DEE9,#A3BE8C,#81A1C1" # nord
