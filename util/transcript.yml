@@ -13,6 +13,7 @@ channels:
   whack-a-mole: C01TW2CAK55
   uno-games: C01ABQB8S6A
   slack-themes: CKKLW54QG
+  tetris: C01AHTH4UAV
 
 cave-join: |
             > Oh hello... I don't think I recognize you.
@@ -24,9 +25,8 @@ cave-join: |
             > (grumpy) ah, looks like that other bot is also messaging you. go ahead and ignore the other ping
 
 house:
-  start: |
-        (neutral) Hello my child, you may stay here with me for as long as you want.
-        (sad) But I imagine you’d like to venture forward, as many before you have done…
+  hello: Hello my child, you may stay here with me for as long as you want.
+  venture: But I imagine you’d like to venture forward, as many before you have done…
 
 command:
   not-found: I'm not sure how to do that, my child. (Slash command not found)
@@ -75,6 +75,7 @@ avatar:
   happy: https://cloud-ml320gimw-hack-club-bot.vercel.app/0happy.png
   default: https://cloud-ml320gimw-hack-club-bot.vercel.app/1default.png
   grumpy: https://cloud-ml320gimw-hack-club-bot.vercel.app/2grumpy.png
+  sad: https://cloud-80hmm9kkv-hack-club-bot.vercel.app/0sad.png
   sans: https://cloud-8cdibgmg9-hack-club-bot.vercel.app/0sans.png
 
 startup:
@@ -83,7 +84,7 @@ startup:
   lines:
     - seeing the bots posting logs into <#${this.t('channels.bot-spam')}>
     - seeing all the messages posted in <#${this.t('channels.lounge')}>
-    - knowing that one day the mole in <#${this.t('channels.whack-a-mode')}> might come out of his hole for good
+    - knowing that one day the mole in <#${this.t('channels.whack-a-mole')}> might come out of his hole for good
     - knowing that despite everything, it's still you
 
 themes:

@@ -3,18 +3,23 @@ display_information:
   description: What a nice lady. She seems kinda lonely.
   background_color: "#160f1a"
   long_description: "Just a lil' greeter bot to direct new members in the Hack Club slack channel and collect some analytics data for that process.\r
-
     \r
-
+    You think if you call her she might have something to say (/toriel-call).
+    \r
+    \r
     For staff: This is a WIP bot. Reach out to @msw with questions and comments."
 features:
   bot_user:
     display_name: TORIEL
     always_online: false
   slash_commands:
-    - command: /toriel-call
+    - command: /toriel-restart
       url: https://max-devbot.ngrok.io/slack/events
       description: Testing toriel bot
+      should_escape: false
+    - command: /toriel-call
+      url: https://max-devbot.ngrok.io/slack/events
+      description: Chat with toriel
       should_escape: false
 oauth_config:
   scopes:

@@ -6,15 +6,24 @@ async function join(args) {
   const { user, channel } = payload
   await client.chat.postEphemeral({
     text: transcript('cave-join', { user }),
-    channel,
+    channel: transcript('channels.cave'),
     user,
   })
 
-  await sleep(3 * 1000)
+  await sleep(1000)
 
   await client.chat.postMessage({
-    text: transcript('house.start'),
-    channel: user, // this will send as a DM
+    text: transcript('house.hello'),
+    icon_url: transcript('avatar.default'),
+    channel: user,
+  })
+
+  await sleep(1000)
+
+  await client.chat.postMessage({
+    text: transcript('house.venture'),
+    icon_url: transcript('avatar.sad'),
+    channel: user,
   })
 }
 module.exports = { joinInteraction: join }

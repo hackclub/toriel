@@ -41,12 +41,16 @@ app.command(/\/.*/, async (args) => {
   })
 
   switch (command) {
+    case '/toriel-restart':
+      await require(`./commands/restart`)(args, app)
+      break
+
     case '/toriel-call':
-      await require(`./commands/call`)(args)
+      await require(`./commands/call`)(args, app)
       break
 
     default:
-      await require('./commands/not-found')(args)
+      await require('./commands/not-found')(args, app)
       break
   }
 })
