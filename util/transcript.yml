@@ -8,12 +8,14 @@ selfUserID: U036UQD2893
 
 channels:
   cave: C0P5NE354 # set to botspam while testing
+  the-basement: C037TG53X9U
   bot-spam: C0P5NE354
   wordle: C02TWKX227J
   whack-a-mole: C01TW2CAK55
   uno-games: C01ABQB8S6A
   slack-themes: CKKLW54QG
   tetris: C01AHTH4UAV
+  lounge: C0266FRGV
 
 cave-join: |
             > Oh hello... I don't think I recognize you.

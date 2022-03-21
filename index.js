@@ -67,6 +67,9 @@ async function botInfo() {
 app.start(process.env.PORT || 3000).then(async () => {
   console.log(transcript('startupLog'))
 
+  const { ensureSlackChannels } = require('./interactions/ensure-channels')
+  await ensureSlackChannels(app)
+
   const { startupInteraction } = require('./interactions/startup')
   await startupInteraction(app)
 })
