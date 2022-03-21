@@ -3,8 +3,12 @@ const { transcript } = require("../util/transcript")
 
 async function restart(args) {
   console.log('running here')
-  const { payload, client } = args
+  const { payload, client, respond } = args
   const { user_id } = payload
+
+  respond({
+    text: "restarting..."
+  })
 
   console.log({
     payload,
