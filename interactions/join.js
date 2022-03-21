@@ -14,7 +14,7 @@ async function join(args) {
 
   await client.chat.postMessage({
     text: transcript('house.hello'),
-    icon_url: transcript('avatar.default'),
+    // icon_url: transcript('avatar.default'),
     channel: user,
   })
 
@@ -22,7 +22,24 @@ async function join(args) {
 
   await client.chat.postMessage({
     text: transcript('house.venture'),
-    icon_url: transcript('avatar.sad'),
+    // icon_url: transcript('avatar.sad'),
+    channel: user,
+  })
+
+  await client.chat.postMessage({
+    text: transcript('house.basement'),
+    blocks: [
+      {
+        type: 'context',
+        elements: [
+          {
+            type: 'mrkdwn',
+            text: transcript('house.basement'),
+          },
+        ],
+      },
+    ],
+    // icon_url: transcript('avatar.sad'),
     channel: user,
   })
 }

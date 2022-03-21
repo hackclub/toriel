@@ -26,9 +26,13 @@ cave-join: |
             
             > (grumpy) ah, looks like that other bot is also messaging you. go ahead and ignore the other ping
 
+basement-join: |
+                You don't want to stay?
+
 house:
   hello: Hello my child, you may stay here with me for as long as you want.
   venture: But I imagine you’d like to venture forward, as many before you have done…
+  basement: Whatever you do, please don't leave through <#${this.t('channels.the-basement')}>
 
 command:
   not-found: I'm not sure how to do that, my child. (Slash command not found)

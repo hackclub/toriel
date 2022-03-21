@@ -14,6 +14,11 @@ app.event('member_joined_channel', async (args) => {
       await joinInteraction(args)
       break
 
+    case transcript('channels.the-basement'):
+      const { joinBasementInteraction } = require('./interactions/join-basement')
+      await joinBasementInteraction(args)
+      break
+
     default:
       console.log(`Ignoring join in ${channel}`)
       break
