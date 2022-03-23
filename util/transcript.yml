@@ -17,6 +17,7 @@ channels:
   tetris: C01AHTH4UAV
   lounge: C0266FRGV
   haikus: C036GP78EC8
+  commons: C021CQCHP09
 
 cave-join: |
             > Oh hello... I don't think I recognize you.
@@ -93,6 +94,7 @@ startup:
     - seeing all the messages posted in <#${this.t('channels.lounge')}>
     - knowing that one day the mole in <#${this.t('channels.whack-a-mole')}> might come out of his hole for good
     - seeing all the haikus in <#${this.t('channels.haikus')}>
+    - seeing all the fish in the <#$(this.t('channels.commons')}>
     - knowing that despite everything, it's still you
     - seeing the fish go "wahoo"
     - seeing the squid go "hooray"
