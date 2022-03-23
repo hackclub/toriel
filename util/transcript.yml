@@ -16,6 +16,7 @@ channels:
   slack-themes: CKKLW54QG
   tetris: C01AHTH4UAV
   lounge: C0266FRGV
+  haikus: C036GP78EC8
 
 cave-join: |
             > Oh hello... I don't think I recognize you.
@@ -91,8 +92,10 @@ startup:
     - seeing the bots posting logs into <#${this.t('channels.bot-spam')}>
     - seeing all the messages posted in <#${this.t('channels.lounge')}>
     - knowing that one day the mole in <#${this.t('channels.whack-a-mole')}> might come out of his hole for good
+    - seeing all the haikus in <#${this.t('channels.haikus')}>
     - knowing that despite everything, it's still you
     - seeing the fish go "wahoo"
+    - seeing the squid go "hooray"
     - knowing that one day bank might be open sourced
     - knowing that one day you might <https://github.com/hackclub/clippy/edit/toriel/util/transcript.yml|add your own tutoriel-bot startup message>
 
@@ -103,3 +106,4 @@ themes:
   - "#B22130,#E42D40,#E82C3F,#FFFFFF,#CE2334,#FFFFFF,#94E864,#B22130,#B22130,#FFFFFF" # red
   - "#161618,#000000,#FFCD00,#161618,#000010,#FFCD00,#FFDA60,#FFB500,#000010,#FFBC00" # gold
   - "#130F40,#0E0B01,#37ABD2,#130F40,#342E73,#37ABD2,#FFFFFF,#FF5252,#37ABD2,#0E0B01" # blue
+  - "#282828,#3C3836,#98971A,#FBF1C7,#3E313C,#EBDBB2,#B8BB26,#FB4934" # gruvbox
