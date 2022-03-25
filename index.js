@@ -165,6 +165,9 @@ app.start(process.env.PORT || 3000).then(async () => {
   const { ensureSlackChannels } = require('./interactions/ensure-channels')
   await ensureSlackChannels(app)
 
+  const { ensureBasementMessage } = require('./interactions/ensure-basement-message')
+  await ensureBasementMessage(app)
+
   const { startupInteraction } = require('./interactions/startup')
   await startupInteraction(app)
 

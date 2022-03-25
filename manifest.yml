@@ -25,8 +25,9 @@ oauth_config:
       - commands
       - groups:read
       - im:write
-      - users:read
       - mpim:write
+      - users:read
+      - channels:history
 settings:
   event_subscriptions:
     request_url: https://max-devbot.ngrok.io/slack/events
