@@ -16,6 +16,35 @@ channels:
   slack-themes: CKKLW54QG
   tetris: C01AHTH4UAV
   lounge: C0266FRGV
+block:
+  single-button:
+    type: actions
+    elements:
+      - type: button
+        text:
+          type: plain_text
+          text: ${this.text}
+        value: ${this.value}
+room-button-blocks:
+  type: actions
+  elements:
+  - type: button
+    text:
+      type: plain_text
+      text: "Kitchen \U0001F370"
+    value: kitchen_button
+  - type: button
+    text:
+      type: plain_text
+      text: "Bedroom \U0001F6CF"
+    value: bedroom_button
+    action_id: bedroom_button
+  - type: button
+    text:
+      type: plain_text
+      text: "Basement \U0001F6AA"
+    value: basement_button
+    # url: https://google.com
 
 cave-join: |
             > Oh hello... I don't think I recognize you.
@@ -26,13 +55,31 @@ cave-join: |
             
             > (grumpy) ah, looks like that other bot is also messaging you. go ahead and ignore the other ping
 
-basement-join: |
-                You don't want to stay?
+basement-join: You don't want to stay?
 
 house:
   hello: Hello my child, you may stay here with me for as long as you want.
   venture: But I imagine you’d like to venture forward, as many before you have done…
-  basement: Whatever you do, please don't leave through <#${this.t('channels.the-basement')}>
+  beforeGo: Oh, but we don't have to get into that right now. Let's find something fun to keep you busy. Would you like to help me paint the house?
+  theme: |
+    Maybe you'll like these colors?
+    ${this.t('themes')}
+    You can find more in <#${this.t('channels.slack-themes')}>
+  coc: |
+    _You open a book in the library_
+    > The tenants of the Slack (Abridged 12th ed.) Orpheus et al.
+    > Thou shan't be a dick
+    > Thou shaln't advertise or spam
+    > Thou shall spread the positive vibes
+    _You close the book at put it back on the shelf. You're not sure what you expected._
+    _As you place it back on the shelf you see a link on the binding of the book: https://conduct.hackclub.com._
+  game: |
+    Ah, you're already done reading!?
+    No, of course it's not a problem, my child. I just wasn't expecting you to go through it so quickly.
+    You have free range in the house, just please don't open the door to <#${this.t('channels.the-basement')}>
+    Maybe you can occupy yourself with one of the boardgames we have in the living room?
+    I personally enjoy <#${this.t('channels.whack-a-mole')}> and <#${this.t('channels.tetris')}>
+  basement: Whatever you do, please don't open the door to <#${this.t('channels.the-basement')}>
 
 command:
   not-found: I'm not sure how to do that, my child. (Slash command not found)
@@ -83,6 +130,7 @@ avatar:
   grumpy: https://cloud-ml320gimw-hack-club-bot.vercel.app/2grumpy.png
   sad: https://cloud-80hmm9kkv-hack-club-bot.vercel.app/0sad.png
   sans: https://cloud-8cdibgmg9-hack-club-bot.vercel.app/0sans.png
+  log: https://cloud-fy6rskqqp-hack-club-bot.vercel.app/0delta.png
 
 startup:
   avatar: https://cloud-fy6rskqqp-hack-club-bot.vercel.app/0delta.png
