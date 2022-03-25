@@ -1,4 +1,4 @@
-const { joinInteraction } = require("../interactions/join")
+const { joinInteraction } = require("../interactions/join-cave")
 const { transcript } = require("../util/transcript")
 
 async function restart(args) {
@@ -14,14 +14,12 @@ async function restart(args) {
     payload,
     text: 'restarting...',
     channel: user_id,
-    username: 'TUTORIEL',
-    icon_url: transcript('startup.avatar')
+    // icon_url: transcript('startup.avatar')
   })
   await client.chat.postMessage({
     text: 'restarting...',
     channel: user_id,
-    username: 'TUTORIEL',
-    icon_url: transcript('startup.avatar')
+    // icon_url: transcript('startup.avatar')
   })
 
   const joinArgs = args

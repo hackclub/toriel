@@ -1,4 +1,6 @@
 const { App } = require('@slack/bolt')
+const { inviteUser } = require('./util/invite-user')
+const { inviteUserToChannel } = require('./util/invite-user-to-channel')
 const { transcript } = require('./util/transcript')
 
 const app = new App({
@@ -10,7 +12,7 @@ app.event('member_joined_channel', async (args) => {
   const { channel } = args.event
   switch (channel) {
     case transcript('channels.cave'):
-      const { joinInteraction } = require('./interactions/join')
+      const { joinInteraction } = require('./interactions/join-cave')
       await joinInteraction(args)
       break
 
@@ -25,7 +27,7 @@ app.event('member_joined_channel', async (args) => {
   }
 })
 
-app.command(/\/.*/, async (args) => {
+app.command(/.*?/, async (args) => {
   const { ack, payload, respond } = args
   const { command, text } = payload
 
@@ -60,6 +62,94 @@ app.command(/\/.*/, async (args) => {
   }
 })
 
+app.action(/.*?/, async (args) => {
+  const { ack, respond, payload, client, body } = args
+  // const { user } = body
+  const user = body.user.id
+  // const { user, channel } = payload
+
+  await ack()
+
+  switch (payload.value) {
+    // case 'bedroom_button':
+    //   await respond({
+    //     replace_original: true,
+    //     text: transcript("buttons.bedroom")
+    //   })
+    //   break
+    // case 'kitchen_button':
+    //   await respond({
+    //     replace_original: true,
+    //     text: transcript("buttons.kitchen")
+    //   })
+    //   break
+    // case 'basement_button':
+    //   await respond({
+    //     replace_original: true,
+    //     text: transcript("buttons.basement")
+    //   })
+    //   break
+  
+    case 'theme_complete':
+      await respond({
+        replace_original: true,
+        text: "✅ Done with themes"
+      })
+      await client.chat.postMessage({
+        text: transcript('house.coc'),
+        unfurl_links: false,
+        unfurl_media: false,
+        channel: user,
+        // icon_url: transcript('avatar.default'),
+      })
+      await client.chat.postMessage({
+        blocks: [transcript('block.single-button', {text: "Continue", value: "coc_complete"})],
+        channel: user,
+      })
+      break
+    case 'coc_complete':
+      await respond({
+        replace_original: true,
+        text: "✅ Done with CoC"
+      })
+      await client.chat.postMessage({
+        text: transcript('house.game'),
+        unfurl_links: false,
+        unfurl_media: false,
+        channel: user,
+      })
+      await Promise.all([
+        inviteUserToChannel(client, user, transcript('channels.tetris'), true),
+        inviteUserToChannel(client, user, transcript('channels.whack-a-mole'), true),
+        inviteUserToChannel(client, user, transcript('channels.the-basement'), true)
+      ])
+      await client.chat.postMessage({
+        blocks: [transcript('block.single-button', {text: "Continue", value: "game_complete"})],
+        channel: user,
+      })
+      break
+
+    default:
+      await respond({
+        replace_original: false,
+        text: transcript("errors.not-found")
+      })
+      console.log({args})
+      break
+  }
+})
+
+// app.action({action_id: 'kitchen_button'}, async ({ body, ack, say, respond }) => {
+//   console.log('button_click')
+//   // Acknowledge the action
+//   await ack()
+//   // await say(`<@${body.user.id}> clicked the button`)
+//   await respond({
+//     replace_original: true,
+//     text: `<@${body.user.id}> clicked the button`
+//   })
+// })
+
 var botSelfCache
 async function botInfo() {
   return botSelfCache
@@ -77,4 +167,6 @@ app.start(process.env.PORT || 3000).then(async () => {
 
   const { startupInteraction } = require('./interactions/startup')
   await startupInteraction(app)
+
+  // inviteUser('c8oe7n@hack.af')
 })

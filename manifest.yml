@@ -24,14 +24,18 @@ oauth_config:
       - chat:write
       - commands
       - groups:read
-      - users:read
       - im:write
+      - users:read
+      - mpim:write
 settings:
   event_subscriptions:
     request_url: https://max-devbot.ngrok.io/slack/events
     bot_events:
       - app_mention
       - member_joined_channel
+  interactivity:
+    is_enabled: true
+    request_url: https://max-devbot.ngrok.io/slack/events
   org_deploy_enabled: false
   socket_mode_enabled: false
   token_rotation_enabled: false
