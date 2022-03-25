@@ -5,7 +5,9 @@ async function startup(app) {
     text: transcript('startup.message'),
     channel: transcript('channels.bot-spam'),
     username: 'TUTORIEL',
-    icon_url: transcript('startup.avatar')
+    icon_url: transcript('startup.avatar'),
+    unfurl_links: false,
+    unfurl_media: false,
   })
   // await app.client.chat.postMessage({
   //   text: '`cinnamon and butterscotch pie up and running on port 3000`',
