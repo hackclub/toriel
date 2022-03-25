@@ -100,6 +100,7 @@ startup:
     - seeing the squid go "hooray"
     - knowing that one day bank might be open sourced
     - knowing that one day you might <https://github.com/hackclub/clippy/edit/toriel/util/transcript.yml|add your own tutoriel-bot startup message>
+    - knowing that one day you might <https://clb.li/conf|hear people TALK>
 
 themes:
   - "#2E3440,#3B4252,#88C0D0,#2E3440,#3B4252,#D8DEE9,#A3BE8C,#81A1C1" # nord
