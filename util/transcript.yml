@@ -143,7 +143,7 @@ startup:
     - seeing all the messages posted in <#${this.t('channels.lounge')}>
     - knowing that one day the mole in <#${this.t('channels.whack-a-mole')}> might come out of his hole for good
     - seeing all the haikus in <#${this.t('channels.haikus')}>
-    - knowing that there are fish in the <#$(this.t('channels.commons')}>
+    - knowing that there are fish in the <#${this.t('channels.commons')}>
     - knowing that despite everything, it's still you
     - seeing the fish go "wahoo"
     - seeing the squid go "hooray"
