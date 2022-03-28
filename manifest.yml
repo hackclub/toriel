@@ -13,11 +13,11 @@ features:
     - command: /toriel-restart
       url: https://max-devbot.ngrok.io/slack/events
       description: Testing toriel bot
-      should_escape: false
+      should_escape: true
     - command: /toriel-call
       url: https://max-devbot.ngrok.io/slack/events
       description: Chat with toriel
-      should_escape: false
+      should_escape: true
 oauth_config:
   scopes:
     bot:
