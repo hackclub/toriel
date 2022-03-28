@@ -198,9 +198,9 @@ app.start(process.env.PORT || 3000).then(async () => {
 
   /* DEVELOPMENT UTILITIES */
   const { setupBasementChannel } = require('./setup/basement-channel')
-  // await setupCaveChannel(app)
-  const { setupCaveChannel } = require('./setup/cave-channel')
   // await setupBasementChannel(app)
+  const { setupCaveChannel } = require('./setup/cave-channel')
+  // await setupCaveChannel(app)
 
   const { inviteUser } = require('./util/invite-user')
   // inviteUser('29yu8w@hack.af')
