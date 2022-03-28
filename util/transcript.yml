@@ -49,6 +49,8 @@ room-button-blocks:
     value: basement_button
     # url: https://google.com
 
+cave-intro: while wandering through the forest, you've stumbled down the entrance of a cave. it looks too high to climb back out.
+
 cave-join: |
             > Oh hello... I don't think I recognize you.
             > ...you must be new in town.
@@ -159,3 +161,12 @@ themes:
   - "#161618,#000000,#FFCD00,#161618,#000010,#FFCD00,#FFDA60,#FFB500,#000010,#FFBC00" # gold
   - "#130F40,#0E0B01,#37ABD2,#130F40,#342E73,#37ABD2,#FFFFFF,#FF5252,#37ABD2,#0E0B01" # blue
   - "#282828,#3C3836,#98971A,#FBF1C7,#3E313C,#EBDBB2,#B8BB26,#FB4934" # gruvbox
+
+# Slack is very picky about audio files– i've only found uploads and previews to work consistently with m4a files
+files:
+  # home-audio: https://cloud-qx6qgax5b-hack-club-bot.vercel.app/00play_me-home_audio.mp3
+  home-audio: https://cloud-hz3xqrwce-hack-club-bot.vercel.app/0output.m4a
+  cave-image: https://cloud-o67g3jvnt-hack-club-bot.vercel.app/0chara_sprite_intro.png
+  cave-audio: https://cloud-hz3xqrwce-hack-club-bot.vercel.app/0output.m4a # placeholder file
+  basement-image: https://cloud-5jkq6o18t-hack-club-bot.vercel.app/0barrier.gif
+  basement-audio: https://cloud-85ttfz0qb-hack-club-bot.vercel.app/0undertale_ost_-_073_-_the_choice__c4wv5m9jpao_.m4a

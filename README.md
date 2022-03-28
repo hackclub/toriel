@@ -1,0 +1,13 @@
+- [x] Setup messages in cave channel
+    - image
+    - text
+    - audio
+- [x] Ephemeral message in cave channel
+- [x] Messages in DM for CoC
+<!-- - [ ] Joining basement channel -->
+- [x] Setup basement channel
+    - image
+    - text
+    - audio
+    - button
+- [ ] Setting up basement to actually open
