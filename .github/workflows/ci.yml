@@ -3,14 +3,12 @@ on: [push, pull_request]
 jobs:
   yamllint:
     name: YAML Lint
-    jobs:
-      delivery:
-        runs-on: ubuntu-latest
-        steps:
-        - name: Check out code
-          uses: actions/checkout@master
-        - name: Run yamllint
-          uses: actionshub/yamllint@master
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@master
+      - name: Run yamllint
+        uses: actionshub/yamllint@master
   prettier:
     name: Prettier
     runs-on: ubuntu-latest
