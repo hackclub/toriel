@@ -1,0 +1,14 @@
+name: CI
+on: [push]
+jobs:
+  prettier:
+    name: Prettier
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Run prettier
+        uses: actionsx/prettier@v2
+        with:
+          # Prettier CLI arguments
+          args: --check "**/*.js"
