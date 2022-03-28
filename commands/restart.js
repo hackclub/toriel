@@ -12,7 +12,7 @@ async function restart(args) {
   const foundUser = userMatches ? userMatches[1] : null
   if (foundUser && foundUser != '') {
     const callingUser = await client.users.info({
-      user: user_id
+      user: user_id,
     })
 
     if (callingUser.user.is_admin || callingUser.user.is_owner) {
