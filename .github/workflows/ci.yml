@@ -1,14 +1,31 @@
+---
 name: CI
-on: [push, pull_request]
+
+'on': 
+  pull_request: true
+  push:
+    branches:
+      - main
+
 jobs:
   yamllint:
     name: YAML Lint
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
-        uses: actions/checkout@master
+        uses: actions/checkout@v2
       - name: Run yamllint
         uses: actionshub/yamllint@main
+
+  mdl:
+    name: Markdown Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Run Markdown Lint
+        uses: actionshub/markdownlint@main
+
   prettier:
     name: Prettier
     runs-on: ubuntu-latest
