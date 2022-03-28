@@ -25,6 +25,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Run Markdown Lint
         uses: actionshub/markdownlint@main
+        with:
+          filesToIgnoreRegex: '((old|node_modules)\/.*)'
 
   prettier:
     name: Prettier
