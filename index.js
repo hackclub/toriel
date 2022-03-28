@@ -1,8 +1,5 @@
 require("dotenv").config();
 const { App } = require('@slack/bolt')
-const { setupBasementChannel } = require('./setup/basement-channel')
-const { setupCaveChannel } = require('./setup/cave-channel')
-const { inviteUser } = require('./util/invite-user')
 const { inviteUserToChannel } = require('./util/invite-user-to-channel')
 const { transcript } = require('./util/transcript')
 
@@ -172,11 +169,15 @@ app.start(process.env.PORT || 3000).then(async () => {
   const { ensureBasementMessage } = require('./interactions/ensure-basement-message')
   await ensureBasementMessage(app)
 
-  // const { startupInteraction } = require('./interactions/startup')
-  // await startupInteraction(app)
+  const { startupInteraction } = require('./interactions/startup')
+  await startupInteraction(app)
 
-  // inviteUser('29yu8w@hack.af')
-
+  /* DEVELOPMENT UTILITIES */
+  const { setupBasementChannel } = require('./setup/basement-channel')
   // await setupCaveChannel(app)
+  const { setupCaveChannel } = require('./setup/cave-channel')
   // await setupBasementChannel(app)
+
+  const { inviteUser } = require('./util/invite-user')
+  // inviteUser('29yu8w@hack.af')
 })
