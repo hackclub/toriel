@@ -1,3 +1,5 @@
+# This file is the Slack Manifest file
+# READMORE: https://api.slack.com/reference/manifests
 display_information:
   name: TORIEL
   description: What a nice lady. She seems kinda lonely.
