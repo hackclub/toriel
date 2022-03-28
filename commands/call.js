@@ -1,5 +1,5 @@
-const { sleep } = require("../util/sleep")
-const { transcript } = require("../util/transcript")
+const { sleep } = require('../util/sleep')
+const { transcript } = require('../util/transcript')
 
 async function call({ respond }) {
   const messageToSend = transcript('command.cell')
@@ -8,7 +8,7 @@ async function call({ respond }) {
     let line = messageLines[i]
     await sleep(line.length * 15)
     await respond({
-      text: line
+      text: line,
     })
   }
 }

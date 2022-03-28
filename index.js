@@ -1,4 +1,4 @@
-require("dotenv").config();
+require('dotenv').config()
 const { App } = require('@slack/bolt')
 const { inviteUserToChannel } = require('./util/invite-user-to-channel')
 const { transcript } = require('./util/transcript')
@@ -18,7 +18,9 @@ app.event('member_joined_channel', async (args) => {
       break
 
     case transcript('channels.the-basement'):
-      const { joinBasementInteraction } = require('./interactions/join-basement')
+      const {
+        joinBasementInteraction,
+      } = require('./interactions/join-basement')
       await joinBasementInteraction(args)
       break
 
@@ -90,11 +92,11 @@ app.action(/.*?/, async (args) => {
     //     text: transcript("buttons.basement")
     //   })
     //   break
-  
+
     case 'theme_complete':
       await respond({
         replace_original: true,
-        text: "✅ Done with themes"
+        text: '✅ Done with themes',
       })
       await client.chat.postMessage({
         text: transcript('house.coc'),
@@ -104,14 +106,19 @@ app.action(/.*?/, async (args) => {
         // icon_url: transcript('avatar.default'),
       })
       await client.chat.postMessage({
-        blocks: [transcript('block.single-button', {text: "Continue", value: "coc_complete"})],
+        blocks: [
+          transcript('block.single-button', {
+            text: 'Continue',
+            value: 'coc_complete',
+          }),
+        ],
         channel: user,
       })
       break
     case 'coc_complete':
       await respond({
         replace_original: true,
-        text: "✅ Done with CoC"
+        text: '✅ Done with CoC',
       })
       await client.chat.postMessage({
         text: transcript('house.game'),
@@ -121,11 +128,26 @@ app.action(/.*?/, async (args) => {
       })
       await Promise.all([
         inviteUserToChannel(client, user, transcript('channels.tetris'), true),
-        inviteUserToChannel(client, user, transcript('channels.whack-a-mole'), true),
-        inviteUserToChannel(client, user, transcript('channels.the-basement'), true)
+        inviteUserToChannel(
+          client,
+          user,
+          transcript('channels.whack-a-mole'),
+          true
+        ),
+        inviteUserToChannel(
+          client,
+          user,
+          transcript('channels.the-basement'),
+          true
+        ),
       ])
       await client.chat.postMessage({
-        blocks: [transcript('block.single-button', {text: "Continue", value: "game_complete"})],
+        blocks: [
+          transcript('block.single-button', {
+            text: 'Continue',
+            value: 'game_complete',
+          }),
+        ],
         channel: user,
       })
       break
@@ -133,9 +155,9 @@ app.action(/.*?/, async (args) => {
     default:
       await respond({
         replace_original: false,
-        text: transcript("errors.not-found")
+        text: transcript('errors.not-found'),
       })
-      console.log({args})
+      console.log({ args })
       break
   }
 })
@@ -166,7 +188,9 @@ app.start(process.env.PORT || 3000).then(async () => {
   const { ensureSlackChannels } = require('./interactions/ensure-channels')
   await ensureSlackChannels(app)
 
-  const { ensureBasementMessage } = require('./interactions/ensure-basement-message')
+  const {
+    ensureBasementMessage,
+  } = require('./interactions/ensure-basement-message')
   await ensureBasementMessage(app)
 
   const { startupInteraction } = require('./interactions/startup')

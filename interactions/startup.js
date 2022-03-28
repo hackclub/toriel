@@ -1,4 +1,4 @@
-const { transcript } = require("../util/transcript")
+const { transcript } = require('../util/transcript')
 
 async function startup(app) {
   await app.client.chat.postMessage({

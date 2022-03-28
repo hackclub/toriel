@@ -1,16 +1,16 @@
-const { transcript } = require("../util/transcript")
+const { transcript } = require('../util/transcript')
 
 async function ensureChannels(args) {
   const { client } = args
   const data = await client.users.conversations()
-  const currentChannelIDs = data.channels.map(c => c.id)
+  const currentChannelIDs = data.channels.map((c) => c.id)
   const testChannelIDs = [
     transcript('channels.the-basement'),
     transcript('channels.bot-spam'),
   ]
 
   let missingChannels = []
-  testChannelIDs.forEach(testID => {
+  testChannelIDs.forEach((testID) => {
     let found = currentChannelIDs.indexOf(testID) > -1
     if (!found) {
       missingChannels.push(testID)

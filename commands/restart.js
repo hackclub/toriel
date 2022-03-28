@@ -1,5 +1,5 @@
-const { joinInteraction } = require("../interactions/join-cave")
-const { transcript } = require("../util/transcript")
+const { joinInteraction } = require('../interactions/join-cave')
+const { transcript } = require('../util/transcript')
 
 async function restart(args) {
   console.log('running here')
@@ -7,7 +7,7 @@ async function restart(args) {
   const { user_id } = payload
 
   respond({
-    text: "restarting..."
+    text: 'restarting...',
   })
 
   console.log({

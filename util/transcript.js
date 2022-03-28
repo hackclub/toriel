@@ -36,7 +36,7 @@ const replaceErrors = (key, value) => {
   // from https://stackoverflow.com/a/18391400
   if (value instanceof Error) {
     const error = {}
-    Object.getOwnPropertyNames(value).forEach(key => {
+    Object.getOwnPropertyNames(value).forEach((key) => {
       error[key] = value[key]
     })
     return error
@@ -66,7 +66,7 @@ const transcript = (search, vars) => {
   }
   return hydrateObj(dehydratedTarget, vars)
 }
-module.exports = {transcript}
+module.exports = { transcript }
 const hydrateObj = (obj, vars = {}) => {
   if (obj == null) {
     return null
@@ -75,10 +75,10 @@ const hydrateObj = (obj, vars = {}) => {
     return evalTranscript(obj, vars)
   }
   if (Array.isArray(obj)) {
-    return obj.map(o => hydrateObj(o, vars))
+    return obj.map((o) => hydrateObj(o, vars))
   }
   if (typeof obj === 'object') {
-    Object.keys(obj).forEach(key => {
+    Object.keys(obj).forEach((key) => {
       obj[key] = hydrateObj(obj[key], vars)
     })
     return obj

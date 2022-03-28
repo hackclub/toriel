@@ -1,7 +1,7 @@
 // the user joins #the-cave, the starter channel
-const { inviteUserToChannel } = require("../util/invite-user-to-channel");
-const { sleep } = require("../util/sleep");
-const { transcript } = require("../util/transcript");
+const { inviteUserToChannel } = require('../util/invite-user-to-channel')
+const { sleep } = require('../util/sleep')
+const { transcript } = require('../util/transcript')
 
 async function join(args) {
   const { client, payload } = args
@@ -33,7 +33,12 @@ async function join(args) {
     channel: user,
   })
 
-  await inviteUserToChannel(client, user, transcript('channels.slack-themes'), true)
+  await inviteUserToChannel(
+    client,
+    user,
+    transcript('channels.slack-themes'),
+    true
+  )
   await sleep(1000)
 
   await client.chat.postMessage({
@@ -43,7 +48,12 @@ async function join(args) {
   })
 
   await client.chat.postMessage({
-    blocks: [transcript('block.single-button', {text: "Continue", value: "theme_complete"})],
+    blocks: [
+      transcript('block.single-button', {
+        text: 'Continue',
+        value: 'theme_complete',
+      }),
+    ],
     // icon_url: transcript('avatar.log'),
     channel: user,
   })
