@@ -14,12 +14,13 @@
     - button
 <!-- - [ ] Setting up basement to actually open -->
 - [ ] Remove basement from flow
-- [ ] Add legacy tokens
+- [ ] Add legacy tokens (blocking on getting a legacy token)
     - [ ] Use legacy tokens on invite
+    - Check if https://api.slack.com/scim is an alternative
 - [ ] Setup cave channel
     - [ ] Default messages
-    - [ ] Public
-    - [ ] New messages aren't allowed
+    - [x] Public
+    - [x] New messages aren't allowed
 
 # Tu toriel
 
