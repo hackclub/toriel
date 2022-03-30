@@ -2,6 +2,7 @@ require('dotenv').config()
 const { App } = require('@slack/bolt')
 const { inviteUserToChannel } = require('./util/invite-user-to-channel')
 const { transcript } = require('./util/transcript')
+const { upgradeUser } = require('./util/upgrade-user')
 
 const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
@@ -111,7 +112,7 @@ app.action(/.*?/, async (args) => {
       await client.chat.postMessage({
         blocks: [
           transcript('block.single-button', {
-            text: 'Continue',
+            text: "I'm done reading this book",
             value: 'coc_complete',
           }),
         ],
@@ -121,38 +122,79 @@ app.action(/.*?/, async (args) => {
     case 'coc_complete':
       await respond({
         replace_original: true,
-        text: '✅ Done with CoC',
+        text: '✅ Done with reading the Code of Conduct in the library',
       })
+      // await client.chat.postMessage({
+      //   text: transcript('house.game'),
+      //   unfurl_links: false,
+      //   unfurl_media: false,
+      //   channel: user,
+      // })
+      // await client.chat.postMessage({
+      //   text: transcript('house.leave'),
+      //   channel: user
+      // })
+      // await Promise.all([
+      //   inviteUserToChannel(client, user, transcript('channels.tetris'), true),
+      //   inviteUserToChannel(
+      //     client,
+      //     user,
+      //     transcript('channels.whack-a-mole'),
+      //     true
+      //   ),
+      // ])
       await client.chat.postMessage({
-        text: transcript('house.game'),
-        unfurl_links: false,
-        unfurl_media: false,
-        channel: user,
-      })
-      await Promise.all([
-        inviteUserToChannel(client, user, transcript('channels.tetris'), true),
-        inviteUserToChannel(
-          client,
-          user,
-          transcript('channels.whack-a-mole'),
-          true
-        ),
-        inviteUserToChannel(
-          client,
-          user,
-          transcript('channels.the-basement'),
-          true
-        ),
-      ])
-      await client.chat.postMessage({
+        text: transcript('house.leave'),
         blocks: [
+          transcript('block.text', { text: transcript('house.leave') }),
           transcript('block.single-button', {
             text: 'Continue',
-            value: 'game_complete',
+            value: 'house_leave',
           }),
         ],
         channel: user,
       })
+      break
+    case 'house_leave':
+      await Promise.all([
+        upgradeUser({ user, client: app.client }),
+        respond({
+          replace_original: true,
+          text: `✅ You left TORIEL's house and stepped in to town...`,
+        }),
+      ])
+      await Promise.all([
+        inviteUserToChannel(app.client, user, transcript('channel.lounge')),
+        inviteUserToChannel(app.client, user, transcript('channel.code')),
+        inviteUserToChannel(app.client, user, transcript('channel.hack-night')),
+        inviteUserToChannel(
+          app.client,
+          user,
+          transcript('channel.question-of-the-day')
+        ),
+        inviteUserToChannel(
+          app.client,
+          user,
+          transcript('channel.poll-of-the-day')
+        ),
+        inviteUserToChannel(
+          app.client,
+          user,
+          transcript('channel.confessions')
+        ),
+        inviteUserToChannel(
+          app.client,
+          user,
+          transcript('channel.neighborhood')
+        ),
+        inviteUserToChannel(app.client, user, transcript('channel.ship')),
+        inviteUserToChannel(app.client, user, transcript('channel.scrapbook')),
+        inviteUserToChannel(
+          app.client,
+          user,
+          transcript('channel.count-to-a-million')
+        ),
+      ])
       break
 
     default:

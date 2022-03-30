@@ -90,10 +90,9 @@ house:
   game: |
     Ah, you're already done reading!?
     No, of course it's not a problem, my child. I just wasn't expecting you to go through it so quickly.
-    You have free range in the house, just please don't open the door to <#${this.t('channels.the-basement')}>
     Maybe you can occupy yourself with one of the boardgames we have in the living room?
     I personally enjoy <#${this.t('channels.whack-a-mole')}> and <#${this.t('channels.tetris')}>
-  basement: Whatever you do, please don't open the door to <#${this.t('channels.the-basement')}>
+  leave: I understand you want to leave the house to venture into town. Are you sure you really want to continue, my child?
 
 command:
   not-found: I'm not sure how to do that, my child. (Slash command not found)
