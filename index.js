@@ -9,6 +9,25 @@ const app = new App({
   signingSecret: process.env.SLACK_SIGNING_SECRET,
 })
 
+app.event('message', async (args) => {
+  // begin the firehose
+  const { body } = args
+  const { event } = body
+  const { type, subtype, channel, ts } = event
+  if (type=="message" && channel == transcript('channels.cave')) {
+    console.log(`Attempting to remove ${subtype} message in #cave channel`)
+    try {
+      args.client.chat.delete({
+        token: process.env.SLACK_LEGACY_TOKEN, // sudo
+        channel,
+        ts,
+      })
+    } catch (e) {
+      console.warn(e)
+    }
+  }
+})
+
 app.event('member_joined_channel', async (args) => {
   const { channel } = args.event
   switch (channel) {
