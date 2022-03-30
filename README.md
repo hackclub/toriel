@@ -12,7 +12,14 @@
     - text
     - audio
     - button
-- [ ] Setting up basement to actually open
+<!-- - [ ] Setting up basement to actually open -->
+- [ ] Remove basement from flow
+- [ ] Add legacy tokens
+    - [ ] Use legacy tokens on invite
+- [ ] Setup cave channel
+    - [ ] Default messages
+    - [ ] Public
+    - [ ] New messages aren't allowed
 
 # Tu toriel
 

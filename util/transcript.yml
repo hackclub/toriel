@@ -60,7 +60,9 @@ cave-join: |
             
             > (grumpy) ah, looks like that other bot is also messaging you. go ahead and ignore the other ping
 
-basement-join: You don't want to stay?
+basement-join: You don't want to stay? I understand, my child. You are looking for something more.
+basement-join-2: I hope you find what you're looking for out there.
+basement-join-3: Here, take this cellphone. You can call me anytime you're feeling lonely or just need to chat with someone \`/toriel-call\`.
 
 house:
   hello: Hello my child, you may stay here with me for as long as you want.
