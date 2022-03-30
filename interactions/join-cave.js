@@ -10,15 +10,17 @@ async function joinCaveInteraction(args) {
   await Promise.all([
     client.chat.postMessage({
       channel: user,
-      blocks: [{
-        "type": "divider"
-      }]
+      blocks: [
+        {
+          type: 'divider',
+        },
+      ],
     }),
     client.chat.postEphemeral({
       text: transcript('cave-join', { user }),
       channel: transcript('channels.cave'),
       user,
-    })
+    }),
   ])
 
   await Promise.all([
@@ -27,7 +29,7 @@ async function joinCaveInteraction(args) {
       text: transcript('house.hello'),
       // icon_url: transcript('avatar.default'),
       channel: user,
-    })
+    }),
   ])
 
   await sleep(3000)
@@ -44,7 +46,7 @@ async function joinCaveInteraction(args) {
       text: transcript('house.beforeGo'),
       // icon_url: transcript('avatar.default'),
       channel: user,
-    })
+    }),
   ])
 
   await Promise.all([
@@ -58,7 +60,7 @@ async function joinCaveInteraction(args) {
       user,
       transcript('channels.slack-themes'),
       true
-    )
+    ),
   ])
 
   await Promise.all([
@@ -66,7 +68,7 @@ async function joinCaveInteraction(args) {
     client.chat.postMessage({
       text: transcript('house.theme-invite'),
       channel: user,
-    })
+    }),
   ])
 
   await client.chat.postMessage({
