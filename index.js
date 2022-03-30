@@ -3,7 +3,6 @@ const { App } = require('@slack/bolt')
 const { inviteUserToChannel } = require('./util/invite-user-to-channel')
 const { transcript } = require('./util/transcript')
 
-// console.log({hello: process.env.SLACK_BOT_TOKEN})
 const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
   signingSecret: process.env.SLACK_SIGNING_SECRET,
@@ -93,24 +92,6 @@ app.action(/.*?/, async (args) => {
   await ack()
 
   switch (payload.value) {
-    // case 'bedroom_button':
-    //   await respond({
-    //     replace_original: true,
-    //     text: transcript("buttons.bedroom")
-    //   })
-    //   break
-    // case 'kitchen_button':
-    //   await respond({
-    //     replace_original: true,
-    //     text: transcript("buttons.kitchen")
-    //   })
-    //   break
-    // case 'basement_button':
-    //   await respond({
-    //     replace_original: true,
-    //     text: transcript("buttons.basement")
-    //   })
-    //   break
 
     case 'theme_complete':
       await respond({
@@ -181,17 +162,6 @@ app.action(/.*?/, async (args) => {
   }
 })
 
-// app.action({action_id: 'kitchen_button'}, async ({ body, ack, say, respond }) => {
-//   console.log('button_click')
-//   // Acknowledge the action
-//   await ack()
-//   // await say(`<@${body.user.id}> clicked the button`)
-//   await respond({
-//     replace_original: true,
-//     text: `<@${body.user.id}> clicked the button`
-//   })
-// })
-
 var botSelfCache
 async function botInfo() {
   return botSelfCache
@@ -222,5 +192,4 @@ app.start(process.env.PORT || 3000).then(async () => {
   // await setupCaveChannel(app)
 
   const { inviteUser } = require('./util/invite-user')
-  // inviteUser('29yu8w@hack.af')
 })
