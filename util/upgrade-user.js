@@ -1,6 +1,6 @@
 const { transcript } = require('./transcript')
 
-async function upgradeUser(user, client) {
+async function upgradeUser(client, user) {
   const userProfile = await client.users.info({ user })
   const { team_id } = userProfile.user
 

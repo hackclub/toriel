@@ -8,6 +8,17 @@ async function ensureChannels(args) {
     transcript('channels.cave'),
     transcript('channels.the-basement'),
     transcript('channels.bot-spam'),
+    // default channels:
+    transcript('channels.lounge'),
+    transcript('channels.code'),
+    transcript('channels.hack-night'),
+    transcript('channels.question-of-the-day'),
+    transcript('channels.poll-of-the-day'),
+    transcript('channels.confessions'),
+    transcript('channels.neighborhood'),
+    transcript('channels.ship'),
+    transcript('channels.scrapbook'),
+    transcript('channels.counttoamillion'),
   ]
 
   let missingChannels = []

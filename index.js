@@ -156,45 +156,44 @@ app.action(/.*?/, async (args) => {
       })
       break
     case 'house_leave':
+      // await upgradeUser(app.client, user),
       await Promise.all([
-        upgradeUser({ user, client: app.client }),
-        respond({
-          replace_original: true,
-          text: `✅ You left TORIEL's house and stepped in to town...`,
-        }),
-      ])
-      await Promise.all([
-        inviteUserToChannel(app.client, user, transcript('channel.lounge')),
-        inviteUserToChannel(app.client, user, transcript('channel.code')),
-        inviteUserToChannel(app.client, user, transcript('channel.hack-night')),
+        inviteUserToChannel(app.client, user, transcript('channels.lounge')),
+        inviteUserToChannel(app.client, user, transcript('channels.code')),
+        inviteUserToChannel(app.client, user, transcript('channels.hack-night')),
         inviteUserToChannel(
           app.client,
           user,
-          transcript('channel.question-of-the-day')
+          transcript('channels.question-of-the-day')
         ),
         inviteUserToChannel(
           app.client,
           user,
-          transcript('channel.poll-of-the-day')
+          transcript('channels.poll-of-the-day')
         ),
         inviteUserToChannel(
           app.client,
           user,
-          transcript('channel.confessions')
+          transcript('channels.confessions')
         ),
         inviteUserToChannel(
           app.client,
           user,
-          transcript('channel.neighborhood')
+          transcript('channels.neighborhood')
         ),
-        inviteUserToChannel(app.client, user, transcript('channel.ship')),
-        inviteUserToChannel(app.client, user, transcript('channel.scrapbook')),
+        inviteUserToChannel(app.client, user, transcript('channels.ship')),
+        inviteUserToChannel(app.client, user, transcript('channels.scrapbook')),
         inviteUserToChannel(
           app.client,
           user,
-          transcript('channel.count-to-a-million')
+          transcript('channels.counttoamillion')
         ),
       ])
+
+      await respond({
+        replace_original: true,
+        text: `✅ You left TORIEL's house and stepped in to town...`,
+      })
       break
 
     default:
@@ -237,4 +236,5 @@ app.start(process.env.PORT || 3000).then(async () => {
   // await setupCaveChannel(app)
 
   const { inviteUser } = require('./util/invite-user')
+  // inviteUser('7mjgf1@hack.af')
 })
