@@ -6,7 +6,7 @@ async function call({ respond }) {
   const messageLines = messageToSend.split('\n')
   for (let i = 0; i < messageLines.length; i++) {
     let line = messageLines[i]
-    if (line != "") {
+    if (line != '') {
       await sleep(line.length * 15)
 
       await respond({

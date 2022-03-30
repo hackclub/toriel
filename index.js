@@ -13,7 +13,7 @@ app.event('message', async (args) => {
   const { body } = args
   const { event } = body
   const { type, subtype, channel, ts } = event
-  if (type=="message" && channel == transcript('channels.cave')) {
+  if (type == 'message' && channel == transcript('channels.cave')) {
     console.log(`Attempting to remove ${subtype} message in #cave channel`)
     try {
       args.client.chat.delete({
@@ -92,7 +92,6 @@ app.action(/.*?/, async (args) => {
   await ack()
 
   switch (payload.value) {
-
     case 'theme_complete':
       await respond({
         replace_original: true,
