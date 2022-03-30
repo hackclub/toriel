@@ -27,6 +27,7 @@ async function postMessage(client) {
   client.chat.postMessage({
     channel: transcript('channels.cave'),
     text: transcript('cave-intro'),
+    icon_url: transcript('avatar.log'),
   })
 }
 
