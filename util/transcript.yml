@@ -74,7 +74,7 @@ house:
   theme: |
     Maybe you'll like one of these colors?
     ${this.t('themes').array.sort((a, b)=> (0.5 - Math.random())).slice(0,3).join('\n')}
-    You can find more in <#${this.t('channels.slack-themes')}>
+  theme-invite: You can find more in <#${this.t('channels.slack-themes')}>
   coc: |
     _You open a book in the library_
     > The tenants of the Slack (Abridged 12th ed.) Orpheus et al.
