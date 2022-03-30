@@ -4,8 +4,8 @@ const { transcript } = require('../util/transcript')
 async function setupCaveChannel(args) {
   const { client } = args
   await postImage(client)
-  await postMessage(client)
   await postAudio(client)
+  await postMessage(client)
 }
 
 async function postImage(client) {
@@ -28,6 +28,13 @@ async function postMessage(client) {
     channel: transcript('channels.cave'),
     text: transcript('cave-intro'),
     icon_url: transcript('avatar.log'),
+    blocks: [
+      transcript('block.text', { text: transcript('cave-intro') }),
+      transcript('block.single-button', {
+        text: 'Call for help',
+        value: 'cave_start',
+      }),
+    ],
   })
 }
 

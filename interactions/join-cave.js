@@ -3,7 +3,7 @@ const { inviteUserToChannel } = require('../util/invite-user-to-channel')
 const { sleep } = require('../util/sleep')
 const { transcript } = require('../util/transcript')
 
-async function join(args) {
+async function joinCaveInteraction(args) {
   const { client, payload } = args
   const { user, channel } = payload
   await client.chat.postEphemeral({
@@ -75,4 +75,4 @@ async function join(args) {
   //   channel: user,
   // })
 }
-module.exports = { joinInteraction: join }
+module.exports = { joinCaveInteraction }

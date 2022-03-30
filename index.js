@@ -31,8 +31,8 @@ app.event('member_joined_channel', async (args) => {
   const { channel } = args.event
   switch (channel) {
     case transcript('channels.cave'):
-      const { joinInteraction } = require('./interactions/join-cave')
-      await joinInteraction(args)
+      const { joinCaveInteraction } = require('./interactions/join-cave')
+      await joinCaveInteraction(args)
       break
 
     case transcript('channels.the-basement'):
@@ -92,6 +92,10 @@ app.action(/.*?/, async (args) => {
   await ack()
 
   switch (payload.value) {
+    case 'cave_start':
+      const { joinCaveInteraction } = require('./interactions/join-cave')
+      await joinCaveInteraction({ ...args, payload: { user } })
+      break
     case 'theme_complete':
       await respond({
         replace_original: true,

@@ -17,8 +17,8 @@
 - [ ] Add legacy tokens (blocking on getting a legacy token)
     - [ ] Use legacy tokens on invite
     - Check if https://api.slack.com/scim is an alternative
-- [ ] Setup cave channel
-    - [ ] Default messages
+- [x] Setup cave channel
+    - [x] Default messages
     - [x] Public
     - [x] New messages aren't allowed
 
