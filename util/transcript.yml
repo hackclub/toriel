@@ -78,9 +78,13 @@ house:
   coc: |
     _You open a book in the library_
     > The tenants of the Slack (Abridged 12th ed.) Orpheus et al.
-    > Thou shan't be a dick
-    > Thou shaln't advertise or spam
-    > Thou shall spread the positive vibes
+
+    > Treat everyone with respect and kindness.
+    > Be thoughtful in how you communicate.
+    > Don't be destructive or inflammatory.
+    > If you encounter an issue, please mail conduct@hackclub.com.
+    > Above all else, please follow the *<https://hackclub.com/conduct/#hacker-values|Hacker Values>*.
+
     _You close the book at put it back on the shelf. You're not sure what you expected._
     _As you place it back on the shelf you see a link on the binding of the book: https://conduct.hackclub.com._
   game: |
