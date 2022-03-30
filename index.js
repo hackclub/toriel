@@ -15,15 +15,15 @@ app.event('message', async (args) => {
   const { type, subtype, channel, ts } = event
   if (type == 'message' && channel == transcript('channels.cave')) {
     console.log(`Attempting to remove ${subtype} message in #cave channel`)
-    try {
-      args.client.chat.delete({
+    await args.client.chat
+      .delete({
         token: process.env.SLACK_LEGACY_TOKEN, // sudo
         channel,
         ts,
       })
-    } catch (e) {
-      console.warn(e)
-    }
+      .catch((e) => {
+        console.warn(e)
+      })
   }
 })
 
