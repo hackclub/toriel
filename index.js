@@ -156,7 +156,8 @@ app.action(/.*?/, async (args) => {
       })
       break
     case 'house_leave':
-      // await upgradeUser(app.client, user),
+      await upgradeUser(app.client, user)
+
       const defaultChannels = [
         'code',
         'confessions',

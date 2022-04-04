@@ -6,13 +6,11 @@
     - audio
 - [x] Ephemeral message in cave channel
 - [x] Messages in DM for CoC
-<!-- - [ ] Joining basement channel -->
 - [x] Setup basement channel
     - image
     - text
     - audio
     - button
-<!-- - [ ] Setting up basement to actually open -->
 - [ ] Remove basement from flow
 - [ ] Add legacy tokens (blocking on getting a legacy token)
     - [ ] Use legacy tokens on invite
@@ -21,6 +19,9 @@
     - [x] Default messages
     - [x] Public
     - [x] New messages aren't allowed
+- [ ] Disable old clippy flow
+- [x] Fix bug where user is not promoted
+- [ ] Fix bug where user is DM'ed twice on starting flow
 
 # Tu toriel
 
