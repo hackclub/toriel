@@ -29,26 +29,27 @@ app.event('message', async (args) => {
   }
 })
 
-app.event('member_joined_channel', async (args) => {
-  const { channel } = args.event
-  switch (channel) {
-    // case transcript('channels.cave'):
-    //   const { joinCaveInteraction } = require('./interactions/join-cave')
-    //   await joinCaveInteraction(args)
-    //   break
+// app.event('member_joined_channel', async (args) => {
+//   const { channel } = args.event
+//   console.log(`User ${args.event.user} just joined channel ${channel}`)
+//   switch (channel) {
+//     // case transcript('channels.cave'):
+//     //   const { joinCaveInteraction } = require('./interactions/join-cave')
+//     //   await joinCaveInteraction(args)
+//     //   break
 
-    case transcript('channels.the-basement'):
-      const {
-        joinBasementInteraction,
-      } = require('./interactions/join-basement')
-      await joinBasementInteraction(args)
-      break
+//     case transcript('channels.the-basement'):
+//       const {
+//         joinBasementInteraction,
+//       } = require('./interactions/join-basement')
+//       await joinBasementInteraction(args)
+//       break
 
-    default:
-      console.log(`Ignoring join in ${channel}`)
-      break
-  }
-})
+//     default:
+//       console.log(`Ignoring join in ${channel}`)
+//       break
+//   }
+// })
 
 app.command(/.*?/, async (args) => {
   const { ack, payload, respond } = args
