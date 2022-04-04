@@ -31,10 +31,10 @@ app.event('message', async (args) => {
 app.event('member_joined_channel', async (args) => {
   const { channel } = args.event
   switch (channel) {
-    case transcript('channels.cave'):
-      const { joinCaveInteraction } = require('./interactions/join-cave')
-      await joinCaveInteraction(args)
-      break
+    // case transcript('channels.cave'):
+    //   const { joinCaveInteraction } = require('./interactions/join-cave')
+    //   await joinCaveInteraction(args)
+    //   break
 
     case transcript('channels.the-basement'):
       const {

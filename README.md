@@ -21,7 +21,7 @@
     - [x] New messages aren't allowed
 - [ ] Disable old clippy flow
 - [x] Fix bug where user is not promoted
-- [ ] Fix bug where user is DM'ed twice on starting flow
+- [x] Fix bug where user is DM'ed twice on starting flow
 
 # Tu toriel
 
