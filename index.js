@@ -12,12 +12,26 @@ const app = new App({
 
 app.event('message', async (args) => {
   // begin the firehose
-  const { body } = args
+  const { body, client } = args
   const { event } = body
-  const { type, subtype, channel, ts } = event
+  const { type, subtype, user, channel, ts, text } = event
+
+  if (
+    text.toLowerCase().includes('toriel') ||
+    text.includes(transcript('selfUserID'))
+  ) {
+    console.log('i was mentioned!')
+    mirrorMessage(client, {
+      message: text,
+      user,
+      channel,
+      type,
+    })
+  }
+
   if (type == 'message' && channel == transcript('channels.cave')) {
     console.log(`Attempting to remove ${subtype} message in #cave channel`)
-    await args.client.chat
+    await client.chat
       .delete({
         token: process.env.SLACK_LEGACY_TOKEN, // sudo
         channel,

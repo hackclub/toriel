@@ -22,10 +22,10 @@
 - [ ] Disable old clippy flow
 - [x] Fix bug where user is not promoted
 - [x] Fix bug where user is DM'ed twice on starting flow
-- [ ] Setup #toriels-diary channel
+- [x] Setup #toriels-diary channel
     - [x] slash commands
     - [x] buttons
-    - [ ] messages, mentions, etc.
+    - [x] messages, mentions, etc.
 
 # Tu toriel
 
