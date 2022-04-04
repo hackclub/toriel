@@ -97,6 +97,13 @@ app.action(/.*?/, async (args) => {
   const { ack, respond, payload, client, body } = args
   const user = body.user.id
 
+  mirrorMessage(client, {
+    message: `_<@${user}> clicked '${payload.text.text}'_`,
+    user: user,
+    channel: body.container.channel_id,
+    type: body.type,
+  })
+
   await ack()
 
   switch (payload.value) {

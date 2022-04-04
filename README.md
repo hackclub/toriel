@@ -24,7 +24,7 @@
 - [x] Fix bug where user is DM'ed twice on starting flow
 - [ ] Setup #toriels-diary channel
     - [x] slash commands
-    - [ ] buttons
+    - [x] buttons
     - [ ] messages, mentions, etc.
 
 # Tu toriel
