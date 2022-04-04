@@ -1,6 +1,7 @@
 require('dotenv').config()
 const { App } = require('@slack/bolt')
 const { inviteUserToChannel } = require('./util/invite-user-to-channel')
+const { mirrorMessage } = require('./util/mirror-message')
 const { transcript } = require('./util/transcript')
 const { upgradeUser } = require('./util/upgrade-user')
 
@@ -51,7 +52,14 @@ app.event('member_joined_channel', async (args) => {
 
 app.command(/.*?/, async (args) => {
   const { ack, payload, respond } = args
-  const { command, text } = payload
+  const { command, text, user_id, channel_id } = payload
+
+  mirrorMessage(app.client, {
+    message: `${command} ${text}`,
+    user: user_id,
+    channel: channel_id,
+    type: 'slash-command'
+  })
 
   await ack()
 

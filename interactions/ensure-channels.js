@@ -5,6 +5,7 @@ async function ensureChannels(args) {
   const data = await client.users.conversations()
   const currentChannelIDs = data.channels.map((c) => c.id)
   const testChannelIDs = [
+    transcript('channels.toriels-diary'),
     transcript('channels.cave'),
     transcript('channels.the-basement'),
     transcript('channels.bot-spam'),
