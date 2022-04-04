@@ -59,7 +59,7 @@ app.command(/.*?/, async (args) => {
     message: `${command} ${text}`,
     user: user_id,
     channel: channel_id,
-    type: 'slash-command'
+    type: 'slash-command',
   })
 
   await ack()
