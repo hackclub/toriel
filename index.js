@@ -95,9 +95,7 @@ app.command(/.*?/, async (args) => {
 
 app.action(/.*?/, async (args) => {
   const { ack, respond, payload, client, body } = args
-  // const { user } = body
   const user = body.user.id
-  // const { user, channel } = payload
 
   await ack()
 
@@ -133,25 +131,6 @@ app.action(/.*?/, async (args) => {
         replace_original: true,
         text: '✅ Done with reading the Code of Conduct in the library',
       })
-      // await client.chat.postMessage({
-      //   text: transcript('house.game'),
-      //   unfurl_links: false,
-      //   unfurl_media: false,
-      //   channel: user,
-      // })
-      // await client.chat.postMessage({
-      //   text: transcript('house.leave'),
-      //   channel: user
-      // })
-      // await Promise.all([
-      //   inviteUserToChannel(client, user, transcript('channels.tetris'), true),
-      //   inviteUserToChannel(
-      //     client,
-      //     user,
-      //     transcript('channels.whack-a-mole'),
-      //     true
-      //   ),
-      // ])
       await client.chat.postMessage({
         text: transcript('house.leave'),
         blocks: [
