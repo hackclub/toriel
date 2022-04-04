@@ -26,9 +26,7 @@ async function upgradeUser(client, user) {
       method: 'POST',
       body: form,
     }
-  )
-    .then(resolve)
-    .catch(reject)
+  ).catch((e) => console.log(e))
 }
 
 module.exports = { upgradeUser }
