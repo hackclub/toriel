@@ -157,38 +157,25 @@ app.action(/.*?/, async (args) => {
       break
     case 'house_leave':
       // await upgradeUser(app.client, user),
-      await Promise.all([
-        inviteUserToChannel(app.client, user, transcript('channels.lounge')),
-        inviteUserToChannel(app.client, user, transcript('channels.code')),
-        inviteUserToChannel(app.client, user, transcript('channels.hack-night')),
-        inviteUserToChannel(
-          app.client,
-          user,
-          transcript('channels.question-of-the-day')
-        ),
-        inviteUserToChannel(
-          app.client,
-          user,
-          transcript('channels.poll-of-the-day')
-        ),
-        inviteUserToChannel(
-          app.client,
-          user,
-          transcript('channels.confessions')
-        ),
-        inviteUserToChannel(
-          app.client,
-          user,
-          transcript('channels.neighborhood')
-        ),
-        inviteUserToChannel(app.client, user, transcript('channels.ship')),
-        inviteUserToChannel(app.client, user, transcript('channels.scrapbook')),
-        inviteUserToChannel(
-          app.client,
-          user,
-          transcript('channels.counttoamillion')
-        ),
-      ])
+      const defaultChannels = [
+        'code',
+        'confessions',
+        'counttoamillion',
+        'hack-night',
+        'hq',
+        'lounge',
+        'neighborhood',
+        'pasture',
+        'poll-of-the-day',
+        'question-of-the-day',
+        'scrapbook',
+        'ship',
+      ]
+      await Promise.all(
+        defaultChannels.map((c) =>
+          inviteUserToChannel(app.client, user, transcript(`channels.${c}`))
+        )
+      )
 
       await respond({
         replace_original: true,

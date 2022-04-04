@@ -7,26 +7,28 @@ startupLog: I'm awake, my child
 selfUserID: U036UQD2893
 
 channels:
-  cave: C039PAG1AV7
-  the-basement: C037TG53X9U
   bot-spam: C0P5NE354
-  wordle: C02TWKX227J
-  whack-a-mole: C01TW2CAK55
-  uno-games: C01ABQB8S6A
+  cave: C039PAG1AV7
+  code: C0EA9S0A0
+  commons: C021CQCHP09
+  confessions: CNMU9L92Q
+  counttoamillion: CDJMS683D
+  hack-night: C0JDWKJVA
+  haikus: C036GP78EC8
+  hq: C0C78SG9L
+  lounge: C0266FRGV
+  neighborhood: C01AS1YEM8A
+  pasture: C01PF39CVAS
+  poll-of-the-day: C01U8UCHZC1
+  question-of-the-day: C013AGZKYCS
+  scrapbook: C01504DCLVD
+  ship: C0M8PUPU6
   slack-themes: CKKLW54QG
   tetris: C01AHTH4UAV
-  lounge: C0266FRGV
-  code: C0EA9S0A0
-  hack-night: C0JDWKJVA
-  question-of-the-day: C013AGZKYCS
-  poll-of-the-day: C01U8UCHZC1
-  confessions: CNMU9L92Q
-  neighborhood: C01AS1YEM8A
-  ship: C0M8PUPU6
-  scrapbook: C01504DCLVD
-  counttoamillion: CDJMS683D
-  haikus: C036GP78EC8
-  commons: C021CQCHP09
+  the-basement: C037TG53X9U
+  uno-games: C01ABQB8S6A
+  whack-a-mole: C01TW2CAK55
+  wordle: C02TWKX227J
 
 block:
   text:
