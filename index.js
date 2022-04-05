@@ -17,8 +17,8 @@ app.event('message', async (args) => {
   const { type, subtype, user, channel, ts, text } = event
 
   if (
-    text.toLowerCase().includes('toriel') ||
-    text.includes(transcript('selfUserID'))
+    text?.toLowerCase()?.includes('toriel') ||
+    text?.includes(transcript('selfUserID'))
   ) {
     console.log('i was mentioned!')
     mirrorMessage(client, {
