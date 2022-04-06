@@ -1,4 +1,5 @@
 const fetch = require('node-fetch')
+const { prisma } = require('../db')
 const { transcript } = require('./transcript')
 
 async function inviteUser(email) {
@@ -21,7 +22,20 @@ async function inviteUser(email) {
     'resend=true',
   ].join('&')
   const url = `https://slack.com/api/users.admin.invite?${params}`
-  return await fetch(url, { method: 'POST' }).then((r) => r.json())
+  const slackResponse = await fetch(url, { method: 'POST' }).then((r) => r.json())
+  if (slackResponse.ok) {
+    await prisma.invite.create({
+      data: {
+        email: email,
+        user_agent: 'test',
+        ip_address: 'test',
+        high_school: true,
+        welcome_message: 'test',
+        continent: 'AFRICA',
+      }
+    })
+  }
+  return slackResponse
 }
 
 module.exports = { inviteUser }

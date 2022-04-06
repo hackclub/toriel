@@ -27,13 +27,12 @@ receiver.router.post('/slack-invite', async (req, res) => {
   if (!req.headers.authorization) {
     return res.status(403).json({ error: 'No credentials sent!' })
   }
-  if (req.headers.authorization != `Bearer ${AUTH_TOKEN}`) {
+  if (req.headers.authorization != `Bearer ${process.env.AUTH_TOKEN}`) {
     return res.status(403).json({ error: 'Invalid credentials sent!' })
   }
 
   const email = req?.body?.email
-  const result = {}
-  result.email = email
+  const result = { email }
   if (email) {
     const { ok, error } = await inviteUser(email)
     result.ok = ok

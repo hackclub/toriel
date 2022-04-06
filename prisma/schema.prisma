@@ -1,0 +1,34 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  // If this timesout with error code p1001:
+  // https://lifesaver.codes/answer/error-p1001-can-t-reach-database-server-at-aws-rds-mysql-5652
+  url      = env("DATABASE_URL")
+  // https://www.prisma.io/docs/concepts/components/prisma-migrate/shadow-database#cloud-hosted-shadow-databases-must-be-created-manually
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+enum Continent {
+  AFRICA
+  ASIA
+  AUSTRALIA
+  EUROPE
+  NORTH_AMERICA
+  SOUTH_AMERICA
+}
+
+model Invite {
+  id  String  @id @default(uuid())
+  email String
+  ip_address  String
+  user_agent  String
+  high_school Boolean
+  welcome_message String
+  continent Continent
+}
