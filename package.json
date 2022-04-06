@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js",
-    "dev": "npx nodemon app.js",
+    "start": "node index.js",
+    "dev": "npx nodemon index.js",
     "fmt": "npx prettier --write '**/*.js'"
   },
-  "author": "MatthewStanciu",
+  "authors": ["MaxWofford", "MatthewStanciu"],
   "license": "MIT",
   "dependencies": {
     "@bugsnag/js": "^7.16.1",
