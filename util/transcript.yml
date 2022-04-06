@@ -125,7 +125,7 @@ command:
     - |
       📞 This is <@${this.t('selfUserID')}>.
       Are you bored?
-      We could paint the walls at my house ${this.t('themes')}
+      We could paint the walls at my house ${this.t('themes.array')}
       Or, if you prefer another color, you can find one for yourself in <#${this.t('channels.slack-themes')}>
 
 # Avatars not working? make sure your bot's default avatar is set
