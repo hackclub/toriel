@@ -25,18 +25,16 @@ async function inviteUser(email) {
   const slackResponse = await fetch(url, { method: 'POST' }).then((r) =>
     r.json()
   )
-  if (slackResponse.ok) {
-    await prisma.invite.create({
-      data: {
-        email: email,
-        user_agent: 'test',
-        ip_address: 'test',
-        high_school: true,
-        welcome_message: 'test',
-        continent: 'AFRICA',
-      },
-    })
-  }
+  await prisma.invite.create({
+    data: {
+      email: email,
+      user_agent: 'test',
+      ip_address: 'test',
+      high_school: true,
+      welcome_message: 'test',
+      continent: 'AFRICA',
+    },
+  })
   return slackResponse
 }
 

@@ -25,7 +25,7 @@ enum Continent {
 
 model Invite {
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @updatedAt @default(now())
   id  String  @id @default(uuid())
   email String
   ip_address  String
