@@ -43,28 +43,6 @@ app.event('message', async (args) => {
   }
 })
 
-// app.event('member_joined_channel', async (args) => {
-//   const { channel } = args.event
-//   console.log(`User ${args.event.user} just joined channel ${channel}`)
-//   switch (channel) {
-//     // case transcript('channels.cave'):
-//     //   const { joinCaveInteraction } = require('./interactions/join-cave')
-//     //   await joinCaveInteraction(args)
-//     //   break
-
-//     case transcript('channels.the-basement'):
-//       const {
-//         joinBasementInteraction,
-//       } = require('./interactions/join-basement')
-//       await joinBasementInteraction(args)
-//       break
-
-//     default:
-//       console.log(`Ignoring join in ${channel}`)
-//       break
-//   }
-// })
-
 app.command(/.*?/, async (args) => {
   const { ack, payload, respond } = args
   const { command, text, user_id, channel_id } = payload
@@ -203,32 +181,16 @@ app.action(/.*?/, async (args) => {
   }
 })
 
-var botSelfCache
-async function botInfo() {
-  return botSelfCache
-    ? botSelfCache
-    : (botSelfCache = await app.client.bots.info({
-        token: process.env.SLACK_BOT_TOKEN,
-      }))
-}
-
 app.start(process.env.PORT || 3000).then(async () => {
   console.log(transcript('startupLog'))
 
   const { ensureSlackChannels } = require('./interactions/ensure-channels')
   await ensureSlackChannels(app)
 
-  const {
-    ensureBasementMessage,
-  } = require('./interactions/ensure-basement-message')
-  await ensureBasementMessage(app)
-
   const { startupInteraction } = require('./interactions/startup')
   await startupInteraction(app)
 
   /* DEVELOPMENT UTILITIES */
-  const { setupBasementChannel } = require('./setup/basement-channel')
-  // await setupBasementChannel(app)
   const { setupCaveChannel } = require('./setup/cave-channel')
   // await setupCaveChannel(app)
 

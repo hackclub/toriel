@@ -11,7 +11,7 @@
     - text
     - audio
     - button
-- [ ] Remove basement from flow
+- [x] Remove basement from flow
 - [ ] Add legacy tokens (blocking on getting a legacy token)
     - [ ] Use legacy tokens on invite
     - Check if https://api.slack.com/scim is an alternative
