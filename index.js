@@ -213,8 +213,10 @@ app.start(process.env.PORT || 3000).then(async () => {
   const { ensureSlackChannels } = require('./interactions/ensure-channels')
   await ensureSlackChannels(app)
 
-  const { startupInteraction } = require('./interactions/startup')
-  await startupInteraction(app)
+  if (process.env.NODE_ENV === 'production') {
+    const { startupInteraction } = require('./interactions/startup')
+    await startupInteraction(app)
+  }
 
   /* DEVELOPMENT UTILITIES */
   const { setupCaveChannel } = require('./setup/cave-channel')
