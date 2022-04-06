@@ -24,7 +24,13 @@ receiver.router.get('/ping', (req, res) => {
 })
 
 receiver.router.post('/slack-invite', async (req, res) => {
-  // TODO: protect this with authentication
+  if (!req.headers.authorization) {
+    return res.status(403).json({ error: 'No credentials sent!' })
+  }
+  if (req.headers.authorization != `Bearer ${AUTH_TOKEN}`) {
+    return res.status(403).json({ error: 'Invalid credentials sent!' })
+  }
+
   const email = req?.body?.email
   const result = {}
   result.email = email
