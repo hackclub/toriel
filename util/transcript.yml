@@ -1,0 +1,194 @@
+errors:
+  general: errors.general
+  transcript: errors.transcript
+
+startupLog: I'm awake, my child
+
+selfUserID: U036UQD2893
+
+channels:
+  bot-spam: C0P5NE354
+  cave: C039PAG1AV7
+  code: C0EA9S0A0
+  commons: C021CQCHP09
+  confessions: CNMU9L92Q
+  counttoamillion: CDJMS683D
+  hack-night: C0JDWKJVA
+  haikus: C036GP78EC8
+  hq: C0C78SG9L
+  lounge: C0266FRGV
+  neighborhood: C01AS1YEM8A
+  pasture: C01PF39CVAS
+  poll-of-the-day: C01U8UCHZC1
+  question-of-the-day: C013AGZKYCS
+  scrapbook: C01504DCLVD
+  ship: C0M8PUPU6
+  slack-themes: CKKLW54QG
+  tetris: C01AHTH4UAV
+  the-basement: C037TG53X9U
+  toriels-diary: C03APMU234G
+  uno-games: C01ABQB8S6A
+  whack-a-mole: C01TW2CAK55
+  wordle: C02TWKX227J
+
+block:
+  text:
+    type: section
+    text:
+      type: "mrkdwn"
+      text: ${this.text}
+  single-button:
+    type: actions
+    elements:
+      - type: button
+        text:
+          type: plain_text
+          text: ${this.text}
+        value: ${this.value}
+room-button-blocks:
+  type: actions
+  elements:
+  - type: button
+    text:
+      type: plain_text
+      text: "Kitchen \U0001F370"
+    value: kitchen_button
+  - type: button
+    text:
+      type: plain_text
+      text: "Bedroom \U0001F6CF"
+    value: bedroom_button
+    action_id: bedroom_button
+  - type: button
+    text:
+      type: plain_text
+      text: "Basement \U0001F6AA"
+    value: basement_button
+    # url: https://google.com
+
+cave-intro: while wandering through the forest, you've stumbled down the entrance of a cave. it looks too high to climb back out.
+
+cave-join: |
+  Oh hello... I don't think I recognize you.
+  ...you must be new in town.
+  you may call me <@${this.t('selfUserID')}>! i have tea and butterscotch pie cooling off, please come over.
+  
+  i just sent you a dm, you can tell by the :ping: to the left
+
+basement-join: You don't want to stay? I understand, my child. You are looking for something more.
+basement-join-2: I hope you find what you're looking for out there.
+basement-join-3: Here, take this cellphone. You can call me anytime you're feeling lonely or just need to chat with someone \`/toriel-call\`.
+
+house:
+  hello: Hello my child, you may stay here with me for as long as you want.
+  venture: But I imagine you’d like to venture forward, as many before you have done…
+  beforeGo: Oh, but we don't have to get into that right now. Let's find something fun to keep you busy. Would you like to help me paint the house?
+  theme: |
+    Maybe you'll like one of these colors?
+    ${this.t('themes').array.sort((a, b)=> (0.5 - Math.random())).slice(0,3).join('\n')}
+  theme-invite: You can find more in <#${this.t('channels.slack-themes')}>
+  coc: |
+    _You open a book in the library_
+    > The tenants of the Slack (Abridged 12th ed.) Orpheus et al.
+
+    > Treat everyone with respect and kindness.
+    > Be thoughtful in how you communicate.
+    > Don't be destructive or inflammatory.
+    > If you encounter an issue, please mail conduct@hackclub.com.
+    > Above all else, please follow the *<https://hackclub.com/conduct/#hacker-values|Hacker Values>*.
+
+    _You close the book at put it back on the shelf. You're not sure what you expected._
+    _As you place it back on the shelf you see a link on the binding of the book: https://conduct.hackclub.com._
+  game: |
+    Ah, you're already done reading!?
+    No, of course it's not a problem, my child. I just wasn't expecting you to go through it so quickly.
+    Maybe you can occupy yourself with one of the boardgames we have in the living room?
+    I personally enjoy <#${this.t('channels.whack-a-mole')}> and <#${this.t('channels.tetris')}>
+  leave: I understand you want to leave the house to venture into town. Are you sure you really want to continue, my child?
+
+command:
+  not-found: I'm not sure how to do that, my child. (Slash command not found)
+  cell:
+    - |
+      📞 This is <@${this.t('selfUserID')}>.
+      You only wanted to say hello...? Well then.
+      'Hello!'
+      I hope that suffices. Hee hee.
+    - |
+      📞 This is <@${this.t('selfUserID')}>.
+      You wanted to say hello again?
+      'Salutations!'
+      Is that enough?
+    - |
+      📞 This is <@${this.t('selfUserID')}>.
+      Are you bored?
+      I should have given you some <https://hackclub.slack.com/messages/${this.t('channels.wordle')}|games> <https://hackclub.slack.com/messages/${this.t('channels.whack-a-mole')}|to> <https://hackclub.slack.com/messages/${this.t('channels.uno-games')}|play>.
+      My apologies.
+      Why not user your imagination to divert yourself?
+    - |
+      📞 This is <@${this.t('selfUserID')}>.
+      Are you bored?
+      I should have given <https://hackclub.github.io/reading-list/|a book> to you.
+      My apologies.
+      Why not user your imagination to divert yourself?
+    - |
+      📞 This is <@${this.t('selfUserID')}>.
+      Hello, my child.
+      Sorry, I do not have much to say.
+      It was nice to hear your voice, though.
+    - |
+      📞 This is <@${this.t('selfUserID')}>.
+      You want to know more about me?
+      Well, I am afraid there is not much to say.
+      I am just a silly little lady who wants to help everyone!
+    - |
+      📞 This is <@${this.t('selfUserID')}>.
+      Are you bored?
+      We could paint the walls at my house ${this.t('themes')}
+      Or, if you prefer another color, you can find one for yourself in <#${this.t('channels.slack-themes')}>
+
+# Avatars not working? make sure your bot's default avatar is set
+# https://github.com/slackapi/hubot-slack/issues/187#issuecomment-158983331
+avatar:
+  happy: https://cloud-ml320gimw-hack-club-bot.vercel.app/0happy.png
+  default: https://cloud-ml320gimw-hack-club-bot.vercel.app/1default.png
+  grumpy: https://cloud-ml320gimw-hack-club-bot.vercel.app/2grumpy.png
+  sad: https://cloud-80hmm9kkv-hack-club-bot.vercel.app/0sad.png
+  sans: https://cloud-8cdibgmg9-hack-club-bot.vercel.app/0sans.png
+  log: https://cloud-fy6rskqqp-hack-club-bot.vercel.app/0delta.png
+
+startup:
+  avatar: https://cloud-fy6rskqqp-hack-club-bot.vercel.app/0delta.png
+  message: _${this.t('startup.lines')}... it fills you with determination._
+  lines:
+    - seeing the bots posting logs into <#${this.t('channels.bot-spam')}>
+    - seeing all the messages posted in <#${this.t('channels.lounge')}>
+    - knowing that one day the mole in <#${this.t('channels.whack-a-mole')}> might come out of his hole for good
+    - seeing all the haikus in <#${this.t('channels.haikus')}>
+    - knowing that there are fish in the <#${this.t('channels.commons')}>
+    - knowing that despite everything, it's still you
+    - seeing the fish go "wahoo"
+    - seeing the squid go "hooray"
+    - knowing that one day bank might be open sourced
+    - knowing that one day you might <https://github.com/hackclub/clippy/edit/toriel/util/transcript.yml|add your own tutoriel-bot startup message>
+    - knowing that one day you might <https://clb.li/conf|hear people TALK>
+    - knowing that one day <#${this.t('channels.counttoamillion')}> might reach a million
+
+themes:
+  array:
+    - "#2E3440,#3B4252,#88C0D0,#2E3440,#3B4252,#D8DEE9,#A3BE8C,#81A1C1" # nord
+    - "#002635,#00384D,#F08E48,#E6E6DC,#00384D,#B7CFF9,#00FFFF,#FF5A67" # https://rigel.netlify.app/#terminal
+    - "#1F2036,#7986CB,#FE528C,#FFFFFF,#606BA2,#FFFFFF,#2DEBAE,#FE528C,#7986CB,#FFFFFF"
+    - "#B22130,#E42D40,#E82C3F,#FFFFFF,#CE2334,#FFFFFF,#94E864,#B22130,#B22130,#FFFFFF" # red
+    - "#161618,#000000,#FFCD00,#161618,#000010,#FFCD00,#FFDA60,#FFB500,#000010,#FFBC00" # gold
+    - "#130F40,#0E0B01,#37ABD2,#130F40,#342E73,#37ABD2,#FFFFFF,#FF5252,#37ABD2,#0E0B01" # blue
+    - "#282828,#3C3836,#98971A,#FBF1C7,#3E313C,#EBDBB2,#B8BB26,#FB4934" # gruvbox
+
+# Slack is very picky about audio files– i've only found uploads and previews to work consistently with m4a files
+files:
+  # home-audio: https://cloud-qx6qgax5b-hack-club-bot.vercel.app/00play_me-home_audio.mp3
+  home-audio: https://cloud-hz3xqrwce-hack-club-bot.vercel.app/0output.m4a
+  cave-image: https://cloud-45c5n1f77-hack-club.vercel.app/0ezgif.com-gif-maker.gif
+  cave-audio: https://cloud-6qf4crf13-hack-club.vercel.app/3undertale_ost_-_001_-_once_upon_a_time-s7rrgf5ve_e.m4a
+  basement-image: https://cloud-5jkq6o18t-hack-club-bot.vercel.app/0barrier.gif
+  basement-audio: https://cloud-85ttfz0qb-hack-club-bot.vercel.app/0undertale_ost_-_073_-_the_choice__c4wv5m9jpao_.m4a
