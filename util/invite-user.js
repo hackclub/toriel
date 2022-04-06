@@ -1,5 +1,3 @@
-// for testing: send me an email and I'll invite them to slack with all the right settings
-
 const fetch = require('node-fetch')
 const { transcript } = require('./transcript')
 
