@@ -1,13 +1,21 @@
 require('dotenv').config()
-const { App } = require('@slack/bolt')
+const { App, ExpressReceiver } = require('@slack/bolt')
 const { inviteUserToChannel } = require('./util/invite-user-to-channel')
 const { mirrorMessage } = require('./util/mirror-message')
 const { transcript } = require('./util/transcript')
 const { upgradeUser } = require('./util/upgrade-user')
 
+const receiver = new ExpressReceiver({ signingSecret: process.env.SLACK_SIGNING_SECRET })
+
 const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
   signingSecret: process.env.SLACK_SIGNING_SECRET,
+  receiver,
+})
+
+receiver.router.get('/ping', (req, res) => {
+  // You're working with an express req and res now.
+  res.json({pong: true})
 })
 
 app.event('message', async (args) => {
