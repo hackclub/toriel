@@ -30,6 +30,7 @@ channels:
   uno-games: C01ABQB8S6A
   whack-a-mole: C01TW2CAK55
   wordle: C02TWKX227J
+  welcome-committee: GLFAEL1SL
 
 block:
   text:
@@ -81,6 +82,10 @@ house:
     Maybe you can occupy yourself with one of the boardgames we have in the living room?
     I personally enjoy <#${this.t('channels.whack-a-mole')}> and <#${this.t('channels.tetris')}>
   leave: I understand you want to leave the house to venture into town. Are you sure you really want to continue, my child?
+
+welcome-committee: |
+  <@${this.user}> (${this.hs && 'a high schooler '}in ${this.continent.toLowerCase()}) just became a full user in the Slack! Here's why they joined:
+  ${this.message.split('\n').map(line => '> '+line)}
 
 command:
   not-found: I'm not sure how to do that, my child. (Slash command not found)

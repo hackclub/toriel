@@ -6,6 +6,7 @@ const { transcript } = require('./util/transcript')
 const { upgradeUser } = require('./util/upgrade-user')
 const { inviteUser } = require('./util/invite-user')
 const express = require('express')
+const { postWelcomeCommittee } = require('./interactions/post-welcome-committee')
 
 const receiver = new ExpressReceiver({
   signingSecret: process.env.SLACK_SIGNING_SECRET,
@@ -190,16 +191,17 @@ app.action(/.*?/, async (args) => {
         'scrapbook',
         'ship',
       ]
-      await Promise.all(
-        defaultChannels.map((c) =>
+      await Promise.all([
+        ...defaultChannels.map((c) =>
           inviteUserToChannel(app.client, user, transcript(`channels.${c}`))
-        )
-      )
+        ),
+        respond({
+          replace_original: true,
+          text: `✅ You left TORIEL's house and stepped in to town...`,
+        }),
+        postWelcomeCommittee(app.client, user)
+      ])
 
-      await respond({
-        replace_original: true,
-        text: `✅ You left TORIEL's house and stepped in to town...`,
-      })
       break
 
     default:
