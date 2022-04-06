@@ -27,8 +27,8 @@ receiver.router.post('/slack-invite', async (req, res) => {
   // TODO: protect this with authentication
   const email = req?.body?.email
   const result = {}
+  result.email = email
   if (email) {
-    result.email = email
     const { ok, error } = await inviteUser(email)
     result.ok = ok
     result.error = error
