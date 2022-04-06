@@ -4,10 +4,13 @@ const { inviteUserToChannel } = require('./util/invite-user-to-channel')
 const { mirrorMessage } = require('./util/mirror-message')
 const { transcript } = require('./util/transcript')
 const { upgradeUser } = require('./util/upgrade-user')
+const { inviteUser } = require('./util/invite-user')
+const express = require('express')
 
 const receiver = new ExpressReceiver({
   signingSecret: process.env.SLACK_SIGNING_SECRET,
 })
+receiver.router.use(express.json())
 
 const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
@@ -18,6 +21,19 @@ const app = new App({
 receiver.router.get('/ping', (req, res) => {
   // You're working with an express req and res now.
   res.json({ pong: true })
+})
+
+receiver.router.post('/slack-invite', async (req, res) => {
+  // TODO: protect this with authentication
+  const email = req?.body?.email
+  const result = {}
+  if (email) {
+    result.email = email
+    const { ok, error } = await inviteUser(email)
+    result.ok = ok
+    result.error = error
+  }
+  res.json(result)
 })
 
 app.event('message', async (args) => {

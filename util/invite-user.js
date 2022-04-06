@@ -23,9 +23,7 @@ async function inviteUser(email) {
     'resend=true',
   ].join('&')
   const url = `https://slack.com/api/users.admin.invite?${params}`
-  await fetch(url, { method: 'POST' })
-    .then((r) => r.json())
-    .then((r) => console.log('Slack response', r))
+  return await fetch(url, { method: 'POST' }).then((r) => r.json())
 }
 
 module.exports = { inviteUser }
