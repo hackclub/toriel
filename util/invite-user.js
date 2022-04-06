@@ -22,7 +22,9 @@ async function inviteUser(email) {
     'resend=true',
   ].join('&')
   const url = `https://slack.com/api/users.admin.invite?${params}`
-  const slackResponse = await fetch(url, { method: 'POST' }).then((r) => r.json())
+  const slackResponse = await fetch(url, { method: 'POST' }).then((r) =>
+    r.json()
+  )
   if (slackResponse.ok) {
     await prisma.invite.create({
       data: {
@@ -32,7 +34,7 @@ async function inviteUser(email) {
         high_school: true,
         welcome_message: 'test',
         continent: 'AFRICA',
-      }
+      },
     })
   }
   return slackResponse

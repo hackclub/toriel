@@ -5,8 +5,10 @@ const { mirrorMessage } = require('./util/mirror-message')
 const { transcript } = require('./util/transcript')
 const { upgradeUser } = require('./util/upgrade-user')
 const { inviteUser } = require('./util/invite-user')
+const {
+  postWelcomeCommittee,
+} = require('./interactions/post-welcome-committee')
 const express = require('express')
-const { postWelcomeCommittee } = require('./interactions/post-welcome-committee')
 
 const receiver = new ExpressReceiver({
   signingSecret: process.env.SLACK_SIGNING_SECRET,
@@ -79,41 +81,45 @@ app.command(/.*?/, async (args) => {
   const { ack, payload, respond } = args
   const { command, text, user_id, channel_id } = payload
 
-  mirrorMessage(app.client, {
-    message: `${command} ${text}`,
-    user: user_id,
-    channel: channel_id,
-    type: 'slash-command',
-  })
+  try {
+    mirrorMessage(app.client, {
+      message: `${command} ${text}`,
+      user: user_id,
+      channel: channel_id,
+      type: 'slash-command',
+    })
 
-  await ack()
+    await ack()
 
-  await respond({
-    blocks: [
-      {
-        type: 'context',
-        elements: [
-          {
-            type: 'mrkdwn',
-            text: `${command} ${text}`,
-          },
-        ],
-      },
-    ],
-  })
+    await respond({
+      blocks: [
+        {
+          type: 'context',
+          elements: [
+            {
+              type: 'mrkdwn',
+              text: `${command} ${text}`,
+            },
+          ],
+        },
+      ],
+    })
 
-  switch (command) {
-    case '/toriel-restart':
-      await require(`./commands/restart`)(args, app)
-      break
+    switch (command) {
+      case '/toriel-restart':
+        await require(`./commands/restart`)(args, app)
+        break
 
-    case '/toriel-call':
-      await require(`./commands/call`)(args, app)
-      break
+      case '/toriel-call':
+        await require(`./commands/call`)(args, app)
+        break
 
-    default:
-      await require('./commands/not-found')(args, app)
-      break
+      default:
+        await require('./commands/not-found')(args, app)
+        break
+    }
+  } catch (e) {
+    console.error(e)
   }
 })
 
@@ -199,7 +205,7 @@ app.action(/.*?/, async (args) => {
           replace_original: true,
           text: `✅ You left TORIEL's house and stepped in to town...`,
         }),
-        postWelcomeCommittee(app.client, user)
+        postWelcomeCommittee(app.client, user),
       ])
 
       break
