@@ -8,14 +8,6 @@ async function joinCaveInteraction(args) {
   const { user, channel } = payload
 
   await Promise.all([
-    client.chat.postMessage({
-      channel: user,
-      blocks: [
-        {
-          type: 'divider',
-        },
-      ],
-    }),
     client.chat.postEphemeral({
       text: transcript('cave-join', { user }),
       channel: transcript('channels.cave'),
