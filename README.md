@@ -4,6 +4,8 @@ _Just a lil' ol greeter bot to direct new members joining the Hack Club Slack. Y
 
 ![Toriel DMing you about how to change Slack themes](https://cloud-nk3pf3qvy-hack-club-bot.vercel.app/2screen_shot_2022-04-07_at_11.06.08.png)
 
+_Toriel is a fork of [Clippy](https://github.com/hackclub/clippy)._
+
 ## Running locally
 
 Contributions are encouraged and welcome!
