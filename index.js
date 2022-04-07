@@ -26,21 +26,26 @@ receiver.router.get('/ping', (req, res) => {
 })
 
 receiver.router.post('/slack-invite', async (req, res) => {
-  if (!req.headers.authorization) {
-    return res.status(403).json({ error: 'No credentials sent!' })
-  }
-  if (req.headers.authorization != `Bearer ${process.env.AUTH_TOKEN}`) {
-    return res.status(403).json({ error: 'Invalid credentials sent!' })
-  }
+  try {
+    if (!req.headers.authorization) {
+      return res.status(403).json({ error: 'No credentials sent!' })
+    }
+    if (req.headers.authorization != `Bearer ${process.env.AUTH_TOKEN}`) {
+      return res.status(403).json({ error: 'Invalid credentials sent!' })
+    }
 
-  const email = req?.body?.email
-  const result = { email }
-  if (email) {
-    const { ok, error } = await inviteUser(req.body)
-    result.ok = ok
-    result.error = error
+    const email = req?.body?.email
+    const result = { email }
+    if (email) {
+      const { ok, error } = await inviteUser(req.body)
+      result.ok = ok
+      result.error = error
+    }
+    res.json(result)
+  } catch (e) {
+    console.log(e)
+    res.status(500).json({ ok: false, error: 'a fatal error occurred' })
   }
-  res.json(result)
 })
 
 app.event('message', async (args) => {
