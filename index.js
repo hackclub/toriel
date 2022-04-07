@@ -22,7 +22,6 @@ const app = new App({
 })
 
 receiver.router.get('/ping', (req, res) => {
-  // You're working with an express req and res now.
   res.json({ pong: true })
 })
 
