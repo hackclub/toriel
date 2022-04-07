@@ -9,6 +9,7 @@ const {
   postWelcomeCommittee,
 } = require('./interactions/post-welcome-committee')
 const express = require('express')
+const { prisma } = require('./db')
 
 const receiver = new ExpressReceiver({
   signingSecret: process.env.SLACK_SIGNING_SECRET,
@@ -25,7 +26,23 @@ receiver.router.get('/ping', (req, res) => {
   res.json({ pong: true })
 })
 
+receiver.router.get('/slack-tutorial/:user', async (req, res) => {
+  // this endpoint is hit by @clippy in the Slack to check if @toriel is handling the onboarding
+  // if we return false, @clippy will step in and onboard the user
+  const { user } = req.params
+  const slackuser = await app.client.users.info({ user })
+  const email = slackuser?.user?.profile?.email
+  const invite = await prisma.invite.findFirst({
+    where: { email },
+    orderBy: { createdAt: 'desc' },
+  })
+  res.json({
+    invite: Boolean(invite)
+  })
+})
+
 receiver.router.post('/slack-invite', async (req, res) => {
+  // this endpoint is hit by the form on hackclub.com/slack
   try {
     if (!req.headers.authorization) {
       return res.status(403).json({ error: 'No credentials sent!' })
