@@ -1,3 +1,8 @@
+type-of-pie:
+  - cinnamon
+  - butterscotch
+  - cinnamon and butterscotch
+
 errors:
   general: errors.general
   transcript: errors.transcript
@@ -154,6 +159,7 @@ startup:
     - knowing that one day you might <https://github.com/hackclub/clippy/edit/toriel/util/transcript.yml|add your own tutoriel-bot startup message>
     - knowing that one day you might <https://clb.li/conf|hear people TALK>
     - knowing that one day <#${this.t('channels.counttoamillion')}> might reach a million
+    - smelling the ${this.t('type-of-pie')} pie coming out of the oven
 
 themes:
   array:
