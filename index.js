@@ -37,7 +37,7 @@ receiver.router.post('/slack-invite', async (req, res) => {
   const email = req?.body?.email
   const result = { email }
   if (email) {
-    const { ok, error } = await inviteUser(email)
+    const { ok, error } = await inviteUser(req.body)
     result.ok = ok
     result.error = error
   }

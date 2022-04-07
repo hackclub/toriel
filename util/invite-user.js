@@ -2,14 +2,29 @@ const fetch = require('node-fetch')
 const { prisma } = require('../db')
 const { transcript } = require('./transcript')
 
-async function inviteUser(email) {
+async function inviteUser({email, ip, continent, teen, reason, userAgent}) {
+  await prisma.invite.create({
+    data: {
+      email: email,
+      user_agent: userAgent,
+      ip_address: ip,
+      high_school: teen, // we actually just care if they're a teenager, so middle school is included in high school
+      welcome_message: reason, // record their reason for joining the slack as their welcome message
+      continent: continent.toUpperCase().replace(/\w/g, '_'),
+    },
+  })
+
   const channels = [transcript('channels.cave')]
   const customMessage =
     'While wandering through a forest, you stumble upon a cave...'
 
-  // @msw this is an undocumented Slack endpoint, not to be confused with
-  // https://api.slack.com/methods/admin.users.invite. The SLACK_LEGACY_TOKEN is
-  // a `xoxp` deprecated legacy token, which can no longer be generated:
+  // This is a private api method found in https://github.com/ErikKalkoken/slackApiDoc/blob/master/users.admin.invite.md
+  // I only got a successful response by putting all the args in URL params
+  // Giving JSON body DID NOT WORK when testing locally
+  // —@MaxWofford
+
+  // The SLACK_LEGACY_TOKEN is a `xoxp` deprecated legacy token, which can no
+  // longer be generated:
   // https://api.slack.com/legacy/custom-integrations/legacy-tokens
 
   const params = [
@@ -25,16 +40,6 @@ async function inviteUser(email) {
   const slackResponse = await fetch(url, { method: 'POST' }).then((r) =>
     r.json()
   )
-  await prisma.invite.create({
-    data: {
-      email: email,
-      user_agent: 'test',
-      ip_address: 'test',
-      high_school: true,
-      welcome_message: 'test',
-      continent: 'AFRICA',
-    },
-  })
   return slackResponse
 }
 
