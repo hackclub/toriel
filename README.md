@@ -28,7 +28,9 @@ In order to run Toriel locally, you'll need to [join the Hack Club Slack](https:
 
 **Formatting** is important, please run `npm run fmt` on contribution.
 
-## Working tasks
+<details>
+  <summary>Working tasks</summary>
+
 _This section is just from @MaxWofford– go ahead and ignore_
 
 - [x] Setup messages in cave channel
@@ -50,10 +52,12 @@ _This section is just from @MaxWofford– go ahead and ignore_
     - [x] Default messages
     - [x] Public
     - [x] New messages aren't allowed
-- [ ] Disable old clippy flow
+- [x] Disable old clippy flow
 - [x] Fix bug where user is not promoted
 - [x] Fix bug where user is DM'ed twice on starting flow
 - [x] Setup #toriels-diary channel
     - [x] slash commands
     - [x] buttons
     - [x] messages, mentions, etc.
+
+</details>
