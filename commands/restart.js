@@ -30,7 +30,9 @@ async function restart(args) {
     }
   } else {
     respond({
-      text: `resetting your tutorial... head to <#${transcript('channels.cave')}>`,
+      text: `resetting your tutorial... head to <#${transcript(
+        'channels.cave'
+      )}>`,
     })
   }
 

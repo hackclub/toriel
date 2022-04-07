@@ -2,7 +2,7 @@ const fetch = require('node-fetch')
 const { prisma } = require('../db')
 const { transcript } = require('./transcript')
 
-async function inviteUser({email, ip, continent, teen, reason, userAgent}) {
+async function inviteUser({ email, ip, continent, teen, reason, userAgent }) {
   await prisma.invite.create({
     data: {
       email: email,
