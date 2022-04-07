@@ -22,6 +22,10 @@ const app = new App({
   receiver,
 })
 
+receiver.router.get('/', (req, res) => {
+  res.redirect('https://github.com/hackclub/toriel')
+})
+
 receiver.router.get('/ping', (req, res) => {
   res.json({ pong: true })
 })
