@@ -1,6 +1,6 @@
 # Toriel
 
-_ Just a lil' ol greeter bot to direct new members joining the Hack Club Slack. You wonder what she might say..._
+_Just a lil' ol greeter bot to direct new members joining the Hack Club Slack. You wonder what she might say..._
 
 ![Toriel DMing you about how to change Slack themes](https://cloud-nk3pf3qvy-hack-club-bot.vercel.app/2screen_shot_2022-04-07_at_11.06.08.png)
 
