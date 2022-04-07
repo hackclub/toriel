@@ -29,7 +29,6 @@ receiver.router.get('/ping', (req, res) => {
 receiver.router.get('/slack-tutorial/:user', async (req, res) => {
   // this endpoint is hit by @clippy in the Slack to check if @toriel is handling the onboarding
   // if we return false, @clippy will step in and onboard the user
-  console.log({params: req.params})
   const { user } = req.params
   const slackuser = await app.client.users.info({ user })
   const email = slackuser?.user?.profile?.email
@@ -38,7 +37,7 @@ receiver.router.get('/slack-tutorial/:user', async (req, res) => {
     orderBy: { createdAt: 'desc' },
   })
   res.json({
-    invite: Boolean(invite)
+    invite: Boolean(invite),
   })
 })
 
