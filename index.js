@@ -36,6 +36,7 @@ receiver.router.get('/slack-tutorial/:user', async (req, res) => {
     where: { email },
     orderBy: { createdAt: 'desc' },
   })
+  console.log({invite: Boolean(invite)})
   res.json({
     invite: Boolean(invite),
   })
