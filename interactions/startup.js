@@ -1,7 +1,8 @@
+const { client } = require('../app')
 const { transcript } = require('../util/transcript')
 
-async function startup(app) {
-  await app.client.chat.postMessage({
+async function startup() {
+  await client.chat.postMessage({
     text: transcript('startup.message'),
     channel: transcript('channels.bot-spam'),
     username: 'TUTORIEL',

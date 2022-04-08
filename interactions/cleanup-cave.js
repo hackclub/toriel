@@ -1,6 +1,7 @@
+const { client } = require('../app')
 const { transcript } = require('../util/transcript')
 
-async function cleanupCaveChannel({ client }, dryRun = true) {
+async function cleanupCaveChannel(dryRun = true) {
   const channel = transcript('channels.cave')
   const data = await client.conversations.history({
     channel,

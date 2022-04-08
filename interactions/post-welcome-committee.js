@@ -1,7 +1,8 @@
 const { prisma } = require('../db')
 const { transcript } = require('../util/transcript')
+const { client } = require('../app')
 
-async function postWelcomeCommittee(client, user) {
+async function postWelcomeCommittee(user) {
   try {
     const slackuser = await client.users.info({ user })
     const email = slackuser?.user?.profile?.email

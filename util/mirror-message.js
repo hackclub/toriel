@@ -1,6 +1,7 @@
 const { transcript } = require('./transcript')
+const { client } = require('../app')
 
-async function mirrorMessage(client, { message, user, channel, type }) {
+async function mirrorMessage({ message, user, channel, type }) {
   try {
     const context = `a ${type} from <@${user}> in <#${channel}>`
     await client.chat.postMessage({

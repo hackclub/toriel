@@ -1,7 +1,7 @@
+const { client } = require('../app')
 const { transcript } = require('../util/transcript')
 
-async function ensureChannels(args) {
-  const { client } = args
+async function ensureChannels() {
   const data = await client.users.conversations()
   const currentChannelIDs = data.channels.map((c) => c.id)
   const testChannelIDs = [

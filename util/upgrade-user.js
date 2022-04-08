@@ -1,7 +1,8 @@
 const FormData = require('form-data')
 const fetch = require('node-fetch')
+const { client } = require('../app')
 
-async function upgradeUser(client, user) {
+async function upgradeUser(user) {
   const userProfile = await client.users.info({ user })
   const { team_id } = userProfile.user
 

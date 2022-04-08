@@ -1,4 +1,6 @@
-async function inviteUserToChannel(client, user, channel, doAsAdmin = false) {
+const { client } = require('../app')
+
+async function inviteUserToChannel(user, channel, doAsAdmin = false) {
   console.log('inviting', user, 'to', channel)
 
   const token = doAsAdmin

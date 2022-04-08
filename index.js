@@ -1,74 +1,28 @@
 require('dotenv').config()
-const { App, ExpressReceiver } = require('@slack/bolt')
 const { inviteUserToChannel } = require('./util/invite-user-to-channel')
 const { mirrorMessage } = require('./util/mirror-message')
 const { transcript } = require('./util/transcript')
 const { upgradeUser } = require('./util/upgrade-user')
-const { inviteUser } = require('./util/invite-user')
 const {
   postWelcomeCommittee,
 } = require('./interactions/post-welcome-committee')
 const express = require('express')
-const { prisma } = require('./db')
 
-const receiver = new ExpressReceiver({
-  signingSecret: process.env.SLACK_SIGNING_SECRET,
-})
+const { app } = require('./app.js')
+const { receiver } = require('./express-receiver')
+
 receiver.router.use(express.json())
 
-const app = new App({
-  token: process.env.SLACK_BOT_TOKEN,
-  signingSecret: process.env.SLACK_SIGNING_SECRET,
-  receiver,
-})
+receiver.router.get('/', require('./endpoints/index'))
 
-receiver.router.get('/', (req, res) => {
-  res.redirect('https://github.com/hackclub/toriel')
-})
+receiver.router.get('/ping', require('./endpoints/ping'))
 
-receiver.router.get('/ping', (req, res) => {
-  res.json({ pong: true })
-})
+receiver.router.get(
+  '/slack-tutorial/:user',
+  require('./endpoints/slack-tutorial')
+)
 
-receiver.router.get('/slack-tutorial/:user', async (req, res) => {
-  // this endpoint is hit by @clippy in the Slack to check if @toriel is handling the onboarding
-  // if we return false, @clippy will step in and onboard the user
-  const { user } = req.params
-  const slackuser = await app.client.users.info({ user })
-  const email = slackuser?.user?.profile?.email
-  const invite = await prisma.invite.findFirst({
-    where: { email },
-    orderBy: { createdAt: 'desc' },
-  })
-  console.log({ invite: Boolean(invite) })
-  res.json({
-    invite: Boolean(invite),
-  })
-})
-
-receiver.router.post('/slack-invite', async (req, res) => {
-  // this endpoint is hit by the form on hackclub.com/slack
-  try {
-    if (!req.headers.authorization) {
-      return res.status(403).json({ error: 'No credentials sent!' })
-    }
-    if (req.headers.authorization != `Bearer ${process.env.AUTH_TOKEN}`) {
-      return res.status(403).json({ error: 'Invalid credentials sent!' })
-    }
-
-    const email = req?.body?.email
-    const result = { email }
-    if (email) {
-      const { ok, error } = await inviteUser(req.body)
-      result.ok = ok
-      result.error = error
-    }
-    res.json(result)
-  } catch (e) {
-    console.log(e)
-    res.status(500).json({ ok: false, error: 'a fatal error occurred' })
-  }
-})
+receiver.router.post('/slack-invite', require('./endpoints/slack-invite'))
 
 app.event('message', async (args) => {
   // begin the firehose
@@ -80,8 +34,7 @@ app.event('message', async (args) => {
     text?.toLowerCase()?.includes('toriel') ||
     text?.includes(transcript('selfUserID'))
   ) {
-    console.log('i was mentioned!')
-    mirrorMessage(client, {
+    mirrorMessage({
       message: text,
       user,
       channel,
@@ -108,7 +61,7 @@ app.command(/.*?/, async (args) => {
   const { command, text, user_id, channel_id } = payload
 
   try {
-    mirrorMessage(app.client, {
+    mirrorMessage({
       message: `${command} ${text}`,
       user: user_id,
       channel: channel_id,
@@ -133,15 +86,15 @@ app.command(/.*?/, async (args) => {
 
     switch (command) {
       case '/toriel-restart':
-        await require(`./commands/restart`)(args, app)
+        await require(`./commands/restart`)(args)
         break
 
       case '/toriel-call':
-        await require(`./commands/call`)(args, app)
+        await require(`./commands/call`)(args)
         break
 
       default:
-        await require('./commands/not-found')(args, app)
+        await require('./commands/not-found')(args)
         break
     }
   } catch (e) {
@@ -153,7 +106,7 @@ app.action(/.*?/, async (args) => {
   const { ack, respond, payload, client, body } = args
   const user = body.user.id
 
-  mirrorMessage(client, {
+  mirrorMessage({
     message: `_<@${user}> clicked '${payload.text.text}'_`,
     user: user,
     channel: body.container.channel_id,
@@ -207,7 +160,7 @@ app.action(/.*?/, async (args) => {
       })
       break
     case 'house_leave':
-      await upgradeUser(app.client, user)
+      await upgradeUser(user)
 
       const defaultChannels = [
         'code',
@@ -225,13 +178,13 @@ app.action(/.*?/, async (args) => {
       ]
       await Promise.all([
         ...defaultChannels.map((c) =>
-          inviteUserToChannel(app.client, user, transcript(`channels.${c}`))
+          inviteUserToChannel(user, transcript(`channels.${c}`))
         ),
         respond({
           replace_original: true,
           text: `✅ You left TORIEL's house and stepped in to town...`,
         }),
-        postWelcomeCommittee(app.client, user),
+        postWelcomeCommittee(user),
       ])
 
       break
@@ -250,17 +203,19 @@ app.start(process.env.PORT || 3000).then(async () => {
   console.log(transcript('startupLog'))
 
   const { ensureSlackChannels } = require('./interactions/ensure-channels')
-  await ensureSlackChannels(app)
+  await ensureSlackChannels()
 
   const { cleanupCaveChannel } = require('./interactions/cleanup-cave')
-  await cleanupCaveChannel(app)
+  await cleanupCaveChannel()
 
   if (process.env.NODE_ENV === 'production') {
     const { startupInteraction } = require('./interactions/startup')
-    await startupInteraction(app)
+    await startupInteraction()
   }
 
   /* DEVELOPMENT UTILITIES (uncomment to use) */
   const { setupCaveChannel } = require('./setup/cave-channel')
   // await setupCaveChannel(app)
 })
+
+module.exports = { app }
