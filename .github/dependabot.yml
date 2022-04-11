@@ -11,4 +11,4 @@ updates:
       interval: "weekly"
     ignore:
       - dependency-name: "node-fetch"
-        update-types: ["version-update:semvar-major"]
+        update-types: ["version-update:semver-major"]
