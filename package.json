@@ -17,7 +17,7 @@
   "dependencies": {
     "@prisma/client": "^3.12.0",
     "@slack/bolt": "^3.11.0",
-    "axios": "^0.21.2",
+    "axios": "^0.26.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "form-data": "^4.0.0",
