@@ -1,3 +1,5 @@
+const { inviteUser } = require('../util/invite-user')
+
 module.exports = async function slackInvite(req, res) {
   // this endpoint is hit by the form on hackclub.com/slack
   try {
