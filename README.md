@@ -19,7 +19,7 @@ In order to run Toriel locally, you'll need to [join the Hack Club Slack](https:
     `npm install`
 4. Create `.env` file
     - `touch .env`
-    - Ask @msw for the `.env` file contents
+    - Send a message mentioning `@creds` in [Hack Club's Slack](https://hackclub.com/slack/) asking for the `.env` file
 5. Start server
     `npm run dev`
 6. Forward your local server to ngrok
