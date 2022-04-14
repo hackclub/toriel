@@ -196,11 +196,13 @@ app.action(/.*?/, async (args) => {
         // Everyone else...
         channelsToInvite = defaultChannels
       }
-      
+
       await Promise.all([
-        Promise.all(channelsToInvite.map((c) =>
-          inviteUserToChannel(user, transcript(`channels.${c}`))
-        )),
+        Promise.all(
+          channelsToInvite.map((c) =>
+            inviteUserToChannel(user, transcript(`channels.${c}`))
+          )
+        ),
         respond({
           replace_original: true,
           text: `✅ You left TORIEL's house and stepped in to town...`,

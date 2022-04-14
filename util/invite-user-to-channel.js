@@ -1,6 +1,11 @@
 const { client } = require('../app')
 
-async function inviteUserToChannel(user, channel, doAsAdmin = false, notInChannel = false) {
+async function inviteUserToChannel(
+  user,
+  channel,
+  doAsAdmin = false,
+  notInChannel = false
+) {
   console.log('inviting', user, 'to', channel)
 
   if (notInChannel) {
@@ -21,7 +26,7 @@ async function inviteUserToChannel(user, channel, doAsAdmin = false, notInChanne
         console.log(`${user} is already in ${channel}—skipping this step...`)
       }
       if (!notInChannel && error.data.error === 'not_in_channel') {
-        return await inviteUserToChannel(user, channel, doAsAdmin, true)
+        return inviteUserToChannel(user, channel, doAsAdmin, true)
       }
       console.log(err.data.error)
     })
