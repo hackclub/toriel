@@ -10,6 +10,7 @@ const express = require('express')
 
 const { app } = require('./app.js')
 const { receiver } = require('./express-receiver')
+const { getInvite } = require('./util/get-invite')
 
 receiver.router.use(express.json())
 
@@ -160,7 +161,34 @@ app.action(/.*?/, async (args) => {
       })
       break
     case 'house_leave':
-      await upgradeUser(user)
+      await Promise.all([
+        upgradeUser(user),
+        getInvite({ user })
+          .then((invite) => {
+            if (invite?.continent == 'ASIA' && invite?.high_school) {
+              // A high schooler in APAC
+              return defaultChannels.concat(apacChannels)
+            }
+            if (invite?.continent == 'ASIA' && !invite?.high_school) {
+              // A college or adult in APAC
+              return apacChannels
+            }
+            // Everyone else...
+            return defaultChannels
+          })
+          .then((channels) => {
+            return Promise.all([
+              ...channels.map((c) =>
+                inviteUserToChannel(user, transcript(`channels.${c}`))
+              ),
+              respond({
+                replace_original: true,
+                text: `✅ You left TORIEL's house and stepped in to town...`,
+              }),
+              postWelcomeCommittee(user),
+            ])
+          }),
+      ])
 
       const defaultChannels = [
         'code',
@@ -182,35 +210,8 @@ app.action(/.*?/, async (args) => {
         'apac-community',
         'apac-hack-night',
       ]
-      const slackuser = await client.users.info({ user })
-      const email = slackuser?.user?.profile?.email
-      const invite = await prisma.invite.findFirst({
-        where: { email },
-        orderBy: { createdAt: 'desc' },
-      })
+      const invite = await getInvite({ user })
       let channelsToInvite = []
-      if (!invite) {
-        // this is probably a user testing /toriel-restart
-        channelsToInvite = defaultChannels
-      } else if (invite.continent == 'ASIA') {
-        // APAC flow
-        channelsToInvite = apacChannels
-        if (invite.high_school) {
-          channelsToInvite = defaultChannels.concat(apacChannels)
-        }
-      } else {
-        channelsToInvite = defaultChannels
-      }
-      await Promise.all([
-        ...channelsToInvite.map((c) =>
-          inviteUserToChannel(user, transcript(`channels.${c}`))
-        ),
-        respond({
-          replace_original: true,
-          text: `✅ You left TORIEL's house and stepped in to town...`,
-        }),
-        postWelcomeCommittee(user),
-      ])
 
       break
 
