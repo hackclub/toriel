@@ -11,6 +11,7 @@ const express = require('express')
 const { app } = require('./app.js')
 const { receiver } = require('./express-receiver')
 const { getInvite } = require('./util/get-invite')
+const { sleep } = require('./util/sleep')
 
 receiver.router.use(express.json())
 
@@ -161,6 +162,8 @@ app.action(/.*?/, async (args) => {
       })
       break
     case 'house_leave':
+      await upgradeUser(user)
+      await sleep(1000) // timeout to prevent race-condition during channel invites
       const defaultChannels = [
         'code',
         'confessions',
@@ -181,33 +184,28 @@ app.action(/.*?/, async (args) => {
         'apac-community',
         'apac-hack-night',
       ]
+      const invite = await getInvite({ user })
+      let channelsToInvite = []
+      if (invite?.continent == 'ASIA' && invite?.high_school) {
+        // A high schooler in APAC
+        channelsToInvite = defaultChannels.concat(apacChannels)
+      } else if (invite?.continent == 'ASIA' && !invite?.high_school) {
+        // A college or adult in APAC
+        channelsToInvite = apacChannels
+      } else {
+        // Everyone else...
+        channelsToInvite = defaultChannels
+      }
+      
       await Promise.all([
-        upgradeUser(user),
-        getInvite({ user })
-          .then((invite) => {
-            if (invite?.continent == 'ASIA' && invite?.high_school) {
-              // A high schooler in APAC
-              return defaultChannels.concat(apacChannels)
-            }
-            if (invite?.continent == 'ASIA' && !invite?.high_school) {
-              // A college or adult in APAC
-              return apacChannels
-            }
-            // Everyone else...
-            return defaultChannels
-          })
-          .then((channels) => {
-            return Promise.all([
-              ...channels.map((c) =>
-                inviteUserToChannel(user, transcript(`channels.${c}`))
-              ),
-              respond({
-                replace_original: true,
-                text: `✅ You left TORIEL's house and stepped in to town...`,
-              }),
-              postWelcomeCommittee(user),
-            ])
-          }),
+        Promise.all(channelsToInvite.map((c) =>
+          inviteUserToChannel(user, transcript(`channels.${c}`))
+        )),
+        respond({
+          replace_original: true,
+          text: `✅ You left TORIEL's house and stepped in to town...`,
+        }),
+        postWelcomeCommittee(user),
       ])
       break
 
