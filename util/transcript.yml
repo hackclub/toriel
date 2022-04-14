@@ -12,6 +12,10 @@ startupLog: I'm awake, my child
 selfUserID: U036UQD2893
 
 channels:
+  apac-community: C031AQUNKQS
+  apac-hack-night: C033K5QA6JU
+  apac-hq: C031456DCHL
+  apac-lounge: C031ARY1F27
   bot-spam: C0P5NE354
   cave: C039PAG1AV7
   code: C0EA9S0A0
@@ -33,9 +37,9 @@ channels:
   the-basement: C037TG53X9U
   toriels-diary: C03APMU234G
   uno-games: C01ABQB8S6A
+  welcome-committee: GLFAEL1SL
   whack-a-mole: C01TW2CAK55
   wordle: C02TWKX227J
-  welcome-committee: GLFAEL1SL
 
 block:
   text:
