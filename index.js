@@ -161,6 +161,26 @@ app.action(/.*?/, async (args) => {
       })
       break
     case 'house_leave':
+      const defaultChannels = [
+        'code',
+        'confessions',
+        'counttoamillion',
+        'hack-night',
+        'hq',
+        'lounge',
+        'neighborhood',
+        'pasture',
+        'poll-of-the-day',
+        'question-of-the-day',
+        'scrapbook',
+        'ship',
+      ]
+      const apacChannels = [
+        'apac-lounge',
+        'apac-hq',
+        'apac-community',
+        'apac-hack-night',
+      ]
       await Promise.all([
         upgradeUser(user),
         getInvite({ user })
@@ -189,30 +209,6 @@ app.action(/.*?/, async (args) => {
             ])
           }),
       ])
-
-      const defaultChannels = [
-        'code',
-        'confessions',
-        'counttoamillion',
-        'hack-night',
-        'hq',
-        'lounge',
-        'neighborhood',
-        'pasture',
-        'poll-of-the-day',
-        'question-of-the-day',
-        'scrapbook',
-        'ship',
-      ]
-      const apacChannels = [
-        'apac-lounge',
-        'apac-hq',
-        'apac-community',
-        'apac-hack-night',
-      ]
-      const invite = await getInvite({ user })
-      let channelsToInvite = []
-
       break
 
     default:
