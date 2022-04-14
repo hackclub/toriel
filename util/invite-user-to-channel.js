@@ -28,7 +28,7 @@ async function inviteUserToChannel(
       if (!notInChannel && error.data.error === 'not_in_channel') {
         return inviteUserToChannel(user, channel, doAsAdmin, true)
       }
-      console.log(err.data.error)
+      console.log(err.data.error, 'while inviting', user, 'to', channel)
     })
 }
 
