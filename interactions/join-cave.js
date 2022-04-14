@@ -47,11 +47,7 @@ async function joinCaveInteraction(args) {
       // icon_url: transcript('avatar.default'),
       channel: user,
     }),
-    inviteUserToChannel(
-      user,
-      transcript('channels.slack-themes'),
-      true
-    ),
+    inviteUserToChannel(user, transcript('channels.slack-themes'), true),
   ])
 
   await Promise.all([
