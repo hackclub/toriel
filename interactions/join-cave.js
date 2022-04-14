@@ -48,7 +48,6 @@ async function joinCaveInteraction(args) {
       channel: user,
     }),
     inviteUserToChannel(
-      client,
       user,
       transcript('channels.slack-themes'),
       true
