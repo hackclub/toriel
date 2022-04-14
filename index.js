@@ -176,8 +176,33 @@ app.action(/.*?/, async (args) => {
         'scrapbook',
         'ship',
       ]
+      const apacChannels = [
+        'apac-lounge',
+        'apac-hq',
+        'apac-community',
+        'apac-hack-night',
+      ]
+      const slackuser = await client.users.info({ user })
+      const email = slackuser?.user?.profile?.email
+      const invite = await prisma.invite.findFirst({
+        where: { email },
+        orderBy: { createdAt: 'desc' },
+      })
+      let channelsToInvite = []
+      if (!invite) {
+        // this is probably a user testing /toriel-restart
+        channelsToInvite = defaultChannels
+      } else if (invite.continent == 'ASIA') {
+        // APAC flow
+        channelsToInvite = apacChannels
+        if (invite.high_school) {
+          channelsToInvite = defaultChannels.concat(apacChannels)
+        }
+      } else {
+        channelsToInvite = defaultChannels
+      }
       await Promise.all([
-        ...defaultChannels.map((c) =>
+        ...channelsToInvite.map((c) =>
           inviteUserToChannel(user, transcript(`channels.${c}`))
         ),
         respond({
