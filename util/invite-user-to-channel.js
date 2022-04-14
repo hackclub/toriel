@@ -25,7 +25,7 @@ async function inviteUserToChannel(
       if (err.data.error === 'already_in_channel') {
         console.log(`${user} is already in ${channel}—skipping this step...`)
       }
-      if (!notInChannel && error.data.error === 'not_in_channel') {
+      if (!notInChannel && err.data.error === 'not_in_channel') {
         return inviteUserToChannel(user, channel, doAsAdmin, true)
       }
       console.log(err.data.error, 'while inviting', user, 'to', channel)
