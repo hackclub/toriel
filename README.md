@@ -24,7 +24,10 @@ In order to run Toriel locally, you'll need to [join the Hack Club Slack](https:
     `npm run dev`
 6. Forward your local server to ngrok
     `ngrok http 3000`
-7. Update the Slack settings in the manifest.yml to use your ngrok URL
+7. If you are creating your own Slack app to test with, update the settings in the manifest.yml
+    - Change the slash command and event endpoints from https://toriel.hackclub.com to your ngrok URL.
+    - Change the app and bot name from `TORIEL` to something that doesn't start with `T` (ex. `msw-dev-toriel`). This prevents Slack's auto-suggestions from confusing new users.
+    - Change the slash commands from `/toriel-COMMAND` to something that doesn't start with `t` (ex. `/toriel-restart` -> `/msw-dev-restart`).
 
 **Formatting** is important, please run `npm run fmt` on contribution.
 
