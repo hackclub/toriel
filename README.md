@@ -13,7 +13,7 @@ Contributions are encouraged and welcome!
 In order to run Toriel locally, you'll need to [join the Hack Club Slack](https://hackclub.com/slack). From there, ask @msw to be added to the Toriel app on Slack.
 
 1. Clone this repository
-    `git clone https://github.com/hackclub/clippy && cd clippy`
+    `git clone https://github.com/hackclub/toriel && cd toriel`
 2. Install [ngrok](https://dashboard.ngrok.com/get-started/setup) (if you haven't already)
 3. Install dependencies
     `npm install`
