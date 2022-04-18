@@ -72,8 +72,7 @@ In order to run Toriel locally, you'll need to [join the Hack Club Slack](https:
 14. Run `npm run dev` again and also reinstall your app to the workspace (under Basic Information)
      ![Screenshot of reinstall your app page](https://cloud-8uduk6deq-hack-club-bot.vercel.app/0screenshot_2022-04-18_at_9.38.48_pm.png)
 
-If you run into an error, read the message and if it says `Toriel is not invited to these channels:` or `channel_not_found` just invite your bot to that channel (you can check the channel with its id by referring back to transcript.yml)
-
+If you run into an error, read the message and it says `Toriel is not invited to these channels:` or `channel_not_found` just invite your bot to that channel (you can check the channel with its id by referring back to transcript.yml). If that channel is private, you can create a new private channel as its substitute but remember to change the references too. Ex. `#toriels-diary` is a private channel so you can create `#msw-toriels-diary`, add it to [transcript.yml](/util/transcript.yml), and change all `{channels.toriels-diary}` to `{channels.msw-toriels-diary}`.    
 
 > note: you have to reupdate the ngrok URL on the slack app manifest and verify the URL each time to restart the server (the ngrok URL changes)
 
