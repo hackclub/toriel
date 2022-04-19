@@ -10,7 +10,7 @@ _Toriel is a fork of [Clippy](https://github.com/hackclub/clippy)._
 
 Contributions are encouraged and welcome!
 
-In order to run Toriel locally, you'll need to [join the Hack Club Slack](https://hackclub.com/slack). From there, ask @msw to be added to the Toriel app on Slack.
+In order to run Toriel locally, you'll need to [join the Hack Club Slack](https://hackclub.com/slack). From there, ask @creds to be added to the Toriel app on Slack.
 
 1. Clone this repository
     `git clone https://github.com/hackclub/toriel && cd toriel`
