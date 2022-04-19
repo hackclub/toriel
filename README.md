@@ -24,11 +24,11 @@ In order to run Toriel locally, you'll need to [join the Hack Club Slack](https:
     `npm run dev`
 6. Forward your local server to ngrok
     `ngrok http 3000`
-7. Update the settings in the manifest.yml
+7. Update the settings in the [manifest.yml](https://github.com/hackclub/toriel/blob/main/manifest.yml)
     - Change the slash command and event endpoints by replacing `https://toriel.hackclub.com` with your ngrok URL
        - You can find your ngrok URL in the terminal where you ran `ngrok http 3000`. It would look similar to this (your ngrok URL will be different):
        ![Screenshot of ngrok running](https://cloud-mt3q3pxrm-hack-club-bot.vercel.app/0ngrok.png)
-       - Take this URL and replace it with all `https://toriel.hackclub.com/slack/events` URLs (line 14, 18, 39, and 46). Include  `/slack/events` so your new URLs would be `your-ngrok-URL/slack/events`.
+       - Take this URL and replace it with all `https://toriel.hackclub.com/slack/events` URLs (the [first slash command url](https://github.com/hackclub/toriel/blob/922eb46862a472bc36d90a45cdb804741ff60d2e/manifest.yml#L14), [second slash command url](https://github.com/hackclub/toriel/blob/922eb46862a472bc36d90a45cdb804741ff60d2e/manifest.yml#L18), [event url](https://github.com/hackclub/toriel/blob/922eb46862a472bc36d90a45cdb804741ff60d2e/manifest.yml#L39), and [interactivity url](https://github.com/hackclub/toriel/blob/922eb46862a472bc36d90a45cdb804741ff60d2e/manifest.yml#L46). Include  `/slack/events` so your new URLs would be `your-ngrok-URL/slack/events`.
     - Change the app and bot name from `TORIEL` to something that doesn't start with `T` (ex. `msw-dev-toriel`). This prevents Slack's auto-suggestions from confusing new users.
     ![Screenshot of where to change name](https://cloud-mrhdyhr0u-hack-club-bot.vercel.app/0name.png)
     - Change the slash commands from `/toriel-COMMAND` to something that doesn't start with `t` (ex. `/toriel-restart` -> `/msw-dev-restart`).
