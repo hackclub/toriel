@@ -41,10 +41,8 @@ In order to run Toriel locally, you'll need to [join the Hack Club Slack](https:
      - Select "from an [app manifest](https://api.slack.com/reference/manifests)"
      ![Screenshot of slack app options](https://cloud-kqknb2w6y-hack-club-bot.vercel.app/0screenshot_2022-04-18_at_6.15.25_pm.png)
      When prompted, make sure you select the Hack Club Workspace (you might need to sign in).
-     - Open the App Manifest tab in the sidebar
-     ![Screenshot of where app manifest is](https://cloud-6w8u156gf-hack-club-bot.vercel.app/0bar.png)
-     - Copy and paste your edited [manifest.yml](manifest.yml) into the manifest on the slack app. It should look something like this:
-     ![Screenshot of the app manifest](https://cloud-1vgwo5g1o-hack-club-bot.vercel.app/0screenshot_2022-04-18_at_6.40.00_pm.png)
+     - On the next modal, replace the demo manifest with your edited [manifest.yml](manifest.yml)
+     ![Screenshot of manifest modal](https://user-images.githubusercontent.com/621904/164060319-e79851ac-f29b-463e-a32b-9bc5968ce8db.png)
 10. Click "Install to Workspace" under the "Basic Information" tab in the settings bar
     ![Screenshot of installing to workspace](https://user-images.githubusercontent.com/621904/164061251-2f7fc9ef-3c07-482d-83f7-86f5798d77ad.png)
 11. Edit the env variables in [.env](.env) file.   
