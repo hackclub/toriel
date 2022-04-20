@@ -31,7 +31,7 @@ async function restart(args) {
   } else {
     respond({
       text: `resetting your tutorial... head to <#${transcript(
-        'channels.jessicard-test'
+        'channels.cave'
       )}>`,
     })
   }
@@ -43,7 +43,7 @@ async function restart(args) {
   })
 
   const joinArgs = args
-  joinArgs.payload.channel = transcript('channels.jessicard-test')
+  joinArgs.payload.channel = transcript('channels.cave')
   joinArgs.payload.user = userToReset
   joinCaveInteraction(args)
 }

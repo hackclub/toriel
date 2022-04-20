@@ -1,21 +1,21 @@
 # This file is the Slack Manifest file
 # READMORE: https://api.slack.com/reference/manifests
 display_information:
-  name: TORIEL
+  name: jessicard-toriel
   description: What a nice lady. She seems kinda lonely.
   background_color: "#160f1a"
   long_description: "Just a lil' greeter bot to direct new members in the Hack Club slack channel and collect some analytics data for that process.\r \r You think if you call her she might have something to say (/toriel-call). \r \r For staff: This is a WIP bot. Reach out to @msw with questions and comments."
 features:
   bot_user:
-    display_name: TORIEL
+    display_name: jessicard-toriel
     always_online: true
   slash_commands:
-    - command: /toriel-restart
-      url: https://toriel.hackclub.com/slack/events
+    - command: /jessicard-toriel-restart
+      url: https://87bc-73-68-194-110.ngrok.io/slack/events
       description: Testing toriel bot
       should_escape: true
-    - command: /toriel-call
-      url: https://toriel.hackclub.com/slack/events
+    - command: /jessicard-toriel-call
+      url: https://87bc-73-68-194-110.ngrok.io/slack/events
       description: Chat with toriel
       should_escape: true
 oauth_config:
@@ -25,26 +25,27 @@ oauth_config:
       - channels:history
       - channels:manage
       - channels:read
+      - channels:join
       - chat:write
       - commands
       - files:write
+      - groups:read
       # groups:history not used in production
       - groups:history
-      - groups:read
       - im:write
       - mpim:write
       - users:read
       - users:read.email
 settings:
   event_subscriptions:
-    request_url: https://toriel.hackclub.com/slack/events
+    request_url: https://87bc-73-68-194-110.ngrok.io/slack/events
     bot_events:
       - app_mention
       - member_joined_channel
       - message.channels
   interactivity:
     is_enabled: true
-    request_url: https://toriel.hackclub.com/slack/events
+    request_url: https://87bc-73-68-194-110.ngrok.io/slack/events
   org_deploy_enabled: false
   socket_mode_enabled: false
   token_rotation_enabled: false

@@ -66,8 +66,8 @@ In order to run Toriel locally, you'll need to [join the Hack Club Slack](https:
        msw-test-cave: CDF1A5EG865
        ```
        > IMPORTANT: you might need access to these channels later on ex. to add a [new user to channels](/util/invite-user.js) which means not giving your bot access now could break the app.
-14. Replace all `channels.jessicard-test` with `channels.name-of-your-private-channel` 
-     - As `{channels.jessicard-test}` refers to `#in-the-cave`, we need to replace it with the private channel (ex. `{channels.msw-test-cave}`) that you created for your bot
+14. Replace all `channels.cave` with `channels.name-of-your-private-channel` 
+     - As `{channels.cave}` refers to `#in-the-cave`, we need to replace it with the private channel (ex. `{channels.msw-test-cave}`) that you created for your bot
 15. Run `npm run dev` again and also reinstall your app to the workspace (under Basic Information)
      ![Screenshot of reinstall your app page](https://cloud-8uduk6deq-hack-club-bot.vercel.app/0screenshot_2022-04-18_at_9.38.48_pm.png)
 

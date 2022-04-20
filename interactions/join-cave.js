@@ -10,7 +10,7 @@ async function joinCaveInteraction(args) {
   await Promise.all([
     client.chat.postEphemeral({
       text: transcript('cave-join', { user }),
-      channel: transcript('channels.jessicard-test'),
+      channel: transcript('channels.cave'),
       user,
     }),
   ])
