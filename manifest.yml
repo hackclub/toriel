@@ -29,8 +29,7 @@ oauth_config:
       - chat:write
       - commands
       - files:write
-      # groups:history not used in production
-      - groups:history
+      - groups:history # not used in prod… useful when developing locally & using a private group as the #cave channel
       - groups:read
       - im:write
       - mpim:write
