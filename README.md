@@ -50,7 +50,7 @@ In order to run Toriel locally, you'll need to [join the Hack Club Slack](https:
      SLACK_SIGNING_SECRET=SIGNING_SECRET
      SLACK_BOT_TOKEN=Bot_User_OAuth_Token
      ```
-     where `SIGNING_SECRET` is your app's Signing Secret which you can find by clicking on "Basic Information" in the settings bar and scrolling down (click show to and copy it)
+     where `SIGNING_SECRET` is your app's Signing Secret, which you can find by clicking on "Basic Information" in the settings bar and scrolling down (click show to and copy it)
          ![Screenshot of where to click show and copy the signing secret](https://cloud-j9zzknpea-hack-club-bot.vercel.app/0screenshot_2022-04-18_at_6.49.53_pm.png)
      and `Bot_User_OAuth_Token` is found under "OAuth & Permissions" (You will need click "Install to Workspace" before you can view the token)
      ![Screenshot of where the token is](https://cloud-twxncowk1-hack-club-bot.vercel.app/0screenshot_2022-04-18_at_7.00.44_pm.png)
@@ -58,21 +58,27 @@ In order to run Toriel locally, you'll need to [join the Hack Club Slack](https:
      - Invite your bot to that channel (you can @mention it to add)
 13. Edit [transcript.yml](/util/transcript.yml)
      - The key:value pairs under `channels:` represent `channel-name:channel-id` and these are referred to elsewhere in the codebase with `{channels.channel-name}`
+     
      ![Screenshot of channel list](https://cloud-5prq93r05-hack-club-bot.vercel.app/0screenshot_2022-04-18_at_9.12.10_pm.png)
-     - You can get the channel id by opening the channel and clicking on the channel name in the top left. Scroll down the modal and you should see it (it's in the bottom left)
-     - Hence, you should add your own bot to these channels **or** you can delete channels you can comment out channels you don't need for now with `#` and just add your bot to channels you do want it to join. 
-     - Also, you want to add your own private channel here. ex. if your channel is `msw-test-cave` with the channel id `CDF1A5EG865` you would add 
+     - You can add your own bot to these channels for testing **or** you can delete or comment out channels you don't need for testing
+
+
+        > IMPORTANT: you might need access to these channels later on, like to add a [new user to channels](/util/invite-user.js), which means not giving your bot access now could break the app.
+
+
+     - Add your own private channel to the channel list. For example, if your channel is `msw-test-cave` with the channel id `CDF1A5EG865`, you would add: 
        ```
        msw-test-cave: CDF1A5EG865
        ```
-       > IMPORTANT: you might need access to these channels later on ex. to add a [new user to channels](/util/invite-user.js) which means not giving your bot access now could break the app.
-14. Replace all `channels.cave` with `channels.name-of-your-private-channel` 
+     - You can find the channel ID by opening the channel and clicking on the channel name in the top left. Scroll down the modal and you should see it in the bottom left corner
+     ![Screenshot of channel ID](https://user-images.githubusercontent.com/621904/164070484-d3d4f57a-546f-4d60-b800-7c052a3bcbcf.png)
+14. Do a global find and replace in the codebase to update `channels.cave` to `channels.name-of-your-private-channel`
      - As `{channels.cave}` refers to `#in-the-cave`, we need to replace it with the private channel (ex. `{channels.msw-test-cave}`) that you created for your bot
 15. Run `npm run dev` again and also reinstall your app to the workspace (under Basic Information)
      ![Screenshot of reinstall your app page](https://cloud-8uduk6deq-hack-club-bot.vercel.app/0screenshot_2022-04-18_at_9.38.48_pm.png)
 
-If you run into an error, read the message and it says `Toriel is not invited to these channels:` or `channel_not_found` just invite your bot to that channel (you can check the channel with its id by referring back to transcript.yml). If that channel is private, you can create a new private channel as its substitute but remember to change the references too. Ex. `#toriels-diary` is a private channel so you can create `#msw-toriels-diary`, add it to [transcript.yml](/util/transcript.yml), and change all `{channels.toriels-diary}` to `{channels.msw-toriels-diary}`.    
+If you run into an error where the message reads `Toriel is not invited to these channels` or `channel_not_found`, just invite your bot to that channel (you can check the channel with its ID by referring back to [transcript.yml](/util/transcript.yml). If the channel is private, you can create a new private channel as its substitute, but remember to update the references in the code. Ex. `#toriels-diary` is a private channel, so you can create `#msw-toriels-diary`, add it to [transcript.yml](/util/transcript.yml), and change all `{channels.toriels-diary}` to `{channels.msw-toriels-diary}`.    
 
-> note: you have to reupdate the ngrok URL on the slack app manifest and verify the URL each time to restart the server (the ngrok URL changes)
+_Note: you have to re-update the ngrok URL on the Slack app manifest and verify the URL each time to restart the server, since the ngrok URL changes_
 
 **Formatting** is important, please run `npm run fmt` on contribution.
