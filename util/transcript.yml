@@ -40,6 +40,7 @@ channels:
   welcome-committee: GLFAEL1SL
   whack-a-mole: C01TW2CAK55
   wordle: C02TWKX227J
+  jessicard-test: C03700NMTGQ
 
 block:
   text:
@@ -62,7 +63,7 @@ cave-join: |
   Oh hello... I don't think I recognize you.
   ...you must be new in town.
   you may call me <@${this.t('selfUserID')}>! i have tea and butterscotch pie cooling off, please come over.
-  
+
   i just sent you a dm, you can tell by the :ping: to the left
 
 house:

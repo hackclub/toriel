@@ -44,7 +44,7 @@ app.event('message', async (args) => {
     })
   }
 
-  if (type == 'message' && channel == transcript('channels.cave')) {
+  if (type == 'message' && channel == transcript('channels.jessicard-test')) {
     console.log(`Attempting to remove ${subtype} message in #cave channel`)
     await client.chat
       .delete({
@@ -87,11 +87,11 @@ app.command(/.*?/, async (args) => {
     })
 
     switch (command) {
-      case '/toriel-restart':
+      case '/jessicard-toriel-restart':
         await require(`./commands/restart`)(args)
         break
 
-      case '/toriel-call':
+      case '/jessicard-toriel-call':
         await require(`./commands/call`)(args)
         break
 
