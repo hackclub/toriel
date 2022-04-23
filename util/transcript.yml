@@ -93,7 +93,7 @@ house:
   leave: I understand you want to leave the house to venture into town. Are you sure you really want to continue, my child?
 
 welcome-committee: |
-  <@${this.user}> (${this.hs && 'a high schooler '}in ${this.continent.toLowerCase()}) just became a full user in the Slack! Here's why they joined:
+  <@${this.user}> (${this.hs ? 'a high schooler' : 'an adult'} in ${this.continent.toLowerCase()}) just became a full user in the Slack! Here's why they joined:
   ${this.message.split('\n').map(line => '> '+line)}
 
 command:
