@@ -13,7 +13,7 @@ async function postWelcomeCommittee(user) {
     const message =
       invite?.['welcome_message'] || "I'm using the /toriel-restart command"
     const continent = invite?.['continent'] || 'DEFAULT_CONTINENT'
-    const hs = invite?.['high_school'] || true
+    const hs = invite ? invite.high_school : true
     await client.chat.postMessage({
       channel: transcript('channels.welcome-committee'),
       text: transcript('welcome-committee', {
