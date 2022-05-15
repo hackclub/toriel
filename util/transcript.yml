@@ -136,6 +136,11 @@ command:
       Are you bored?
       We could paint the walls at my house ${this.t('themes.array')}
       Or, if you prefer another color, you can find one for yourself in <#${this.t('channels.slack-themes')}>
+    - |
+      📞 This is <@${this.t('selfUserID')}>.
+      Are you bored?
+      We could catch snails in the garden later.
+      They make a wonderful pie.
 
 # Avatars not working? make sure your bot's default avatar is set
 # https://github.com/slackapi/hubot-slack/issues/187#issuecomment-158983331
