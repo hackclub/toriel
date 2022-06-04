@@ -84,7 +84,11 @@ app.event('message', async (args) => {
     return transcript(`channels.${e}`)
   }) // map all default channels into ids as channel prop is given as id
 
-  if (subtype === "channel_join" && text === `<@${user}> has joined the channel` && defaultAddsId.includes(channel)) {
+  if (
+    subtype === 'channel_join' &&
+    text === `<@${user}> has joined the channel` &&
+    defaultAddsId.includes(channel)
+  ) {
     console.log('Deleting "user has joined" message')
     await client.chat
       .delete({
