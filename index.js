@@ -26,6 +26,27 @@ receiver.router.get(
 
 receiver.router.post('/slack-invite', require('./endpoints/slack-invite'))
 
+const defaultChannels = [
+  'code',
+  'confessions',
+  'counttoamillion',
+  'hack-night',
+  'hq',
+  'lounge',
+  'neighborhood',
+  'pasture',
+  'poll-of-the-day',
+  'question-of-the-day',
+  'scrapbook',
+  'ship',
+]
+const apacChannels = [
+  'apac-lounge',
+  'apac-hq',
+  'apac-community',
+  'apac-hack-night',
+]
+
 app.event('message', async (args) => {
   // begin the firehose
   const { body, client } = args
@@ -56,6 +77,25 @@ app.event('message', async (args) => {
         console.warn(e)
       })
   }
+
+  defaultAdds = defaultChannels.concat(apacChannels) // add all default channels into new array
+
+  defaultAddsId = defaultAdds.map((e) => {
+    return transcript(`channels.${e}`)
+  }) // map all default channels into ids as channel prop is given as id
+
+  if (subtype === "channel_join" && text === `<@${user}> has joined the channel` && defaultAddsId.includes(channel)) {
+    console.log('Deleting "user has joined" message')
+    await client.chat
+      .delete({
+        token: process.env.SLACK_LEGACY_TOKEN, // sudo
+        channel,
+        ts,
+      })
+      .catch((e) => {
+        console.warn(e)
+      })
+  } // delete "user has joined" message if it is sent in one of the default channels that TORIEL adds new members to
 })
 
 app.command(/.*?/, async (args) => {
@@ -164,26 +204,6 @@ app.action(/.*?/, async (args) => {
     case 'house_leave':
       await upgradeUser(user)
       await sleep(1000) // timeout to prevent race-condition during channel invites
-      const defaultChannels = [
-        'code',
-        'confessions',
-        'counttoamillion',
-        'hack-night',
-        'hq',
-        'lounge',
-        'neighborhood',
-        'pasture',
-        'poll-of-the-day',
-        'question-of-the-day',
-        'scrapbook',
-        'ship',
-      ]
-      const apacChannels = [
-        'apac-lounge',
-        'apac-hq',
-        'apac-community',
-        'apac-hack-night',
-      ]
       const invite = await getInvite({ user })
       let channelsToInvite = []
       if (invite?.continent == 'ASIA' && invite?.high_school) {
