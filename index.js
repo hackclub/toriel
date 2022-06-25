@@ -67,7 +67,6 @@ app.event('message', async (args) => {
 
   const protectedChannels = [
     transcript('channels.cave'),
-    transcript('channels.the-path'),
   ]
   if (type == 'message' && protectedChannels.includes(channel)) {
     console.log(`Attempting to remove ${subtype} message in #cave channel`)
