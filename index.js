@@ -236,6 +236,11 @@ app.action(/.*?/, async (args) => {
         }),
         postWelcomeCommittee(user),
       ])
+      
+      await client.chat.postMessage({
+        text: "Go forth! Announce your presence in <#C0266FRGV>, and tell the villagers of your past creations in <#C0M8PUPU6> or <#C01504DCLVD>.",
+        channel: user,
+      })
       break
 
     default:
