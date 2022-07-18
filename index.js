@@ -65,9 +65,7 @@ app.event('message', async (args) => {
     })
   }
 
-  const protectedChannels = [
-    transcript('channels.cave'),
-  ]
+  const protectedChannels = [transcript('channels.cave')]
   if (type == 'message' && protectedChannels.includes(channel)) {
     console.log(`Attempting to remove ${subtype} message in #cave channel`)
     await client.chat
@@ -236,6 +234,11 @@ app.action(/.*?/, async (args) => {
         }),
         postWelcomeCommittee(user),
       ])
+
+      await client.chat.postMessage({
+        text: 'Go forth! Announce your presence in <#C0266FRGV>, and tell the villagers of your past creations in <#C0M8PUPU6> or <#C01504DCLVD>.',
+        channel: user,
+      })
       break
 
     default:
