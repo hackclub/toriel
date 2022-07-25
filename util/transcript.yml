@@ -11,13 +11,16 @@ startupLog: I'm awake, my child
 
 selfUserID: U036UQD2893
 
+# TODO some channels changed for testing pls change back
 channels:
+  8-ball: C03DNGQA6SY
   apac-community: C031AQUNKQS
   apac-hack-night: C033K5QA6JU
   apac-hq: C031456DCHL
   apac-lounge: C031ARY1F27
   bot-spam: C0P5NE354
-  cave: C039PAG1AV7
+  # cave: C039PAG1AV7
+  cave: C03QA4U6954
   code: C0EA9S0A0
   commons: C021CQCHP09
   confessions: CNMU9L92Q
@@ -29,15 +32,17 @@ channels:
   neighborhood: C01AS1YEM8A
   pasture: C01PF39CVAS
   poll-of-the-day: C01U8UCHZC1
+  present: C01GPEL6CGM
   question-of-the-day: C013AGZKYCS
   scrapbook: C01504DCLVD
   ship: C0M8PUPU6
   slack-themes: CKKLW54QG
-  tetris: C01AHTH4UAV
   the-basement: C037TG53X9U
-  toriels-diary: C03APMU234G
+  # toriels-diary: C03APMU234G
+  toriels-diary: C03QA4U6954
   uno-games: C01ABQB8S6A
-  welcome-committee: GLFAEL1SL
+  # welcome-committee: GLFAEL1SL
+  welcome-committee: C03QA4U6954
   whack-a-mole: C01TW2CAK55
   wordle: C02TWKX227J
 
@@ -45,8 +50,12 @@ block:
   text:
     type: section
     text:
-      type: "mrkdwn"
+      type: 'mrkdwn'
       text: ${this.text}
+  image:
+    type: image
+    image_url: ${this.url}
+    alt_text: ${this.altText}
   single-button:
     type: actions
     elements:
@@ -55,49 +64,76 @@ block:
           type: plain_text
           text: ${this.text}
         value: ${this.value}
+  double-button:
+    type: actions
+    elements:
+      - type: button
+        text:
+          type: plain_text
+          text: ${this[0].text}
+        value: ${this[0].value}
+      - type: button
+        text:
+          type: plain_text
+          text: ${this[1].text}
+        value: ${this[1].value}
 
 cave-intro: while wandering through the forest, you've stumbled down the entrance of a cave. it looks too high to climb back out.
 
 cave-join: |
-  Oh hello... I don't think I recognize you.
-  ...you must be new in town.
-  you may call me <@${this.t('selfUserID')}>! i have tea and butterscotch pie cooling off, please come over.
-  
-  i just sent you a dm, you can tell by the :ping: to the left
+  oh hello... i don't think i recognize you; you must be new in town.
+  you may call me <@${this.t('selfUserID')}>! i have tea and butterscotch pie cooling off... please come over.
+
+  i just sent you a dm! you can tell by the :ping: to the left.
 
 house:
-  hello: Hello my child, you may stay here with me for as long as you want.
-  venture: But I imagine you’d like to venture forward, as many before you have done…
-  beforeGo: Oh, but we don't have to get into that right now. Let's find something fun to keep you busy. Would you like to help me paint the house?
-  theme: |
-    Maybe you'll like one of these colors?
-    ${this.t('themes').array.sort((a, b)=> (0.5 - Math.random())).slice(0,3).join('\n')}
-  theme-invite: You can find more in <#${this.t('channels.slack-themes')}>
   coc: |
-    _You open a book in the library_
+    hello, my child. please take some tea to calm your nerves.
+    i must ask that you read this before proceeding:
+
+    _TORIEL points to a page in a book laid out in front of you_
     > The tenants of the Slack (Abridged 12th ed.) Orpheus et al.
 
     > Treat everyone with respect and kindness.
     > Be thoughtful in how you communicate.
-    > Don't be destructive or inflammatory.
-    > If you encounter an issue, please mail conduct@hackclub.com.
+    > Don't advertise outside of <#${this.t('channels.present')}>.
     > Above all else, please follow the *<https://hackclub.com/conduct/#hacker-values|Hacker Values>*.
 
-    _You close the book and put it back on the shelf. You're not sure what you expected._
-    _As you place it back on the shelf you see a link on the binding of the book: https://conduct.hackclub.com._
-  game: |
-    Ah, you're already done reading!?
-    No, of course it's not a problem, my child. I just wasn't expecting you to go through it so quickly.
-    Maybe you can occupy yourself with one of the boardgames we have in the living room?
-    I personally enjoy <#${this.t('channels.whack-a-mole')}> and <#${this.t('channels.tetris')}>
-  leave: I understand you want to leave the house to venture into town. Are you sure you really want to continue, my child?
+    _as you close the book, you see a link on its binding: https://conduct.hackclub.com._
+
+    do you agree to abide by these terms?
+  profile: |
+    and with that — welcome to hack club, an incredible community of teenage programmers across the world! hack clubbers have shipped apps with millions of users, interviewed <https://www.youtube.com/watch?v=gw3vyFZ4oeU|youtubers like 3blue1brown> and <https://www.youtube.com/watch?v=riru9OzScwk|builders like elon musk>, and work together every day to <https://github.com/hackclub/some-assembly-required|ship> <https://github.com/quackduck/devzat|projects> in some of the channels i'll add you to in a few minutes.
+
+    your next step is to *fill out your slack profile*. you could:
+
+    - link your website
+    - link your github, gitlab or sourcehut
+    - list some of your interests
+    - set your profile picture
+
+    to do this, click on your profile picture here, then click _Profile_:
+  profile-image: https://cloud-k7p71rmrd-hack-club-bot.vercel.app/0screen_shot_2022-07-21_at_08.01.48.png
+  profile-alt-text: a screenshot of the button leading to the user menu
+  club-leader: |
+    are you joining the slack because you're either currently running or considering running a hack club at your school?
+
+    (it's ok if not — this is so i can direct you to the right channels)
+  added-to-channels: |
+    i've now added you to some channels you might like. feel free to explore — but if you don't know where to start, perhaps you'll find one of my suggestions useful:
+
+    > ${this.suggestion}
+
+club-leader:
+  text: 'a new club leader has joined: <@${this.user}>'
+  notifiee: U03M1H014CX
 
 welcome-committee: |
   <@${this.user}> (${this.hs ? 'a high schooler' : 'an adult'} in ${this.continent.toLowerCase()}) just became a full user in the Slack! Here's why they joined:
   ${this.message.split('\n').map(line => '> '+line)}
 
 command:
-  not-found: I'm not sure how to do that, my child. (Slash command not found)
+  not-found: i'm not sure how to do that, my child. (slash command not found)
   cell:
     - |
       📞 This is <@${this.t('selfUserID')}>.
@@ -172,13 +208,13 @@ startup:
 
 themes:
   array:
-    - "#2E3440,#3B4252,#88C0D0,#2E3440,#3B4252,#D8DEE9,#A3BE8C,#81A1C1" # nord
-    - "#002635,#00384D,#F08E48,#E6E6DC,#00384D,#B7CFF9,#00FFFF,#FF5A67" # https://rigel.netlify.app/#terminal
-    - "#1F2036,#7986CB,#FE528C,#FFFFFF,#606BA2,#FFFFFF,#2DEBAE,#FE528C,#7986CB,#FFFFFF"
-    - "#B22130,#E42D40,#E82C3F,#FFFFFF,#CE2334,#FFFFFF,#94E864,#B22130,#B22130,#FFFFFF" # red
-    - "#161618,#000000,#FFCD00,#161618,#000010,#FFCD00,#FFDA60,#FFB500,#000010,#FFBC00" # gold
-    - "#130F40,#0E0B01,#37ABD2,#130F40,#342E73,#37ABD2,#FFFFFF,#FF5252,#37ABD2,#0E0B01" # blue
-    - "#282828,#3C3836,#98971A,#FBF1C7,#3E313C,#EBDBB2,#B8BB26,#FB4934" # gruvbox
+    - '#2E3440,#3B4252,#88C0D0,#2E3440,#3B4252,#D8DEE9,#A3BE8C,#81A1C1' # nord
+    - '#002635,#00384D,#F08E48,#E6E6DC,#00384D,#B7CFF9,#00FFFF,#FF5A67' # https://rigel.netlify.app/#terminal
+    - '#1F2036,#7986CB,#FE528C,#FFFFFF,#606BA2,#FFFFFF,#2DEBAE,#FE528C,#7986CB,#FFFFFF'
+    - '#B22130,#E42D40,#E82C3F,#FFFFFF,#CE2334,#FFFFFF,#94E864,#B22130,#B22130,#FFFFFF' # red
+    - '#161618,#000000,#FFCD00,#161618,#000010,#FFCD00,#FFDA60,#FFB500,#000010,#FFBC00' # gold
+    - '#130F40,#0E0B01,#37ABD2,#130F40,#342E73,#37ABD2,#FFFFFF,#FF5252,#37ABD2,#0E0B01' # blue
+    - '#282828,#3C3836,#98971A,#FBF1C7,#3E313C,#EBDBB2,#B8BB26,#FB4934' # gruvbox
 
 # Slack is very picky about audio files– i've only found uploads and previews to work consistently with m4a files
 files:
