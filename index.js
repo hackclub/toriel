@@ -187,11 +187,11 @@ app.command(/.*?/, async (args) => {
     })
 
     switch (command) {
-      case '/evil-toriel-restart':
+      case '/toriel-restart':
         await require(`./commands/restart`)(args)
         break
 
-      case '/evil-toriel-call':
+      case '/toriel-call':
         await require(`./commands/call`)(args)
         break
 
