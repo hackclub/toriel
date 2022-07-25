@@ -12,7 +12,7 @@ const { app, client } = require('./app.js')
 const { receiver } = require('./express-receiver')
 const { getInvite } = require('./util/get-invite')
 const { sleep } = require('./util/sleep')
-const { prisma } = require('@prisma/client')
+const { prisma } = require('./db')
 
 receiver.router.use(express.json())
 
@@ -156,14 +156,6 @@ const addToChannels = async (user) => {
     ],
     channel: user,
   })
-  try {
-    await prisma.user.create({ user, atc: message.ts })
-  } catch (e) {
-    await prisma.user.update({
-      where: { user },
-      data: { atc: message.ts },
-    })
-  }
 }
 
 app.command(/.*?/, async (args) => {
@@ -262,6 +254,10 @@ app.action(/.*?/, async (args) => {
       })
       break
     case 'club_leader_yes':
+      await prisma.user.update({
+        where: { user_id: user },
+        data: { club_leader: true },
+      })
       await client.chat.postMessage({
         text: transcript('club-leader.text'),
         channel: transcript('club-leader.notifiee'),
@@ -269,10 +265,13 @@ app.action(/.*?/, async (args) => {
       await addToChannels(user)
       break
     case 'club_leader_no':
+      await prisma.user.update({
+        where: { user_id: user },
+        data: { club_leader: false },
+      })
       await addToChannels(user)
       break
     case 'reroll':
-      const ts = prisma.user.findUnique({ where: { user } }).atc
       const suggestion = getSuggestion()
       await respond({
         replace_original: true,

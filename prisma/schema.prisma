@@ -36,6 +36,6 @@ model Invite {
 }
 
 model User {
-  user String @unique
-  atc  String
+  user_id     String   @id
+  club_leader Boolean?
 }

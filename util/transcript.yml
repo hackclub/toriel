@@ -11,7 +11,6 @@ startupLog: I'm awake, my child
 
 selfUserID: U036UQD2893
 
-# TODO some channels changed for testing pls change back
 channels:
   8-ball: C03DNGQA6SY
   apac-community: C031AQUNKQS
@@ -19,8 +18,7 @@ channels:
   apac-hq: C031456DCHL
   apac-lounge: C031ARY1F27
   bot-spam: C0P5NE354
-  # cave: C039PAG1AV7
-  cave: C03QA4U6954
+  cave: C039PAG1AV7
   code: C0EA9S0A0
   commons: C021CQCHP09
   confessions: CNMU9L92Q
@@ -38,11 +36,9 @@ channels:
   ship: C0M8PUPU6
   slack-themes: CKKLW54QG
   the-basement: C037TG53X9U
-  # toriels-diary: C03APMU234G
-  toriels-diary: C03QA4U6954
+  toriels-diary: C03APMU234G
   uno-games: C01ABQB8S6A
-  # welcome-committee: GLFAEL1SL
-  welcome-committee: C03QA4U6954
+  welcome-committee: GLFAEL1SL
   whack-a-mole: C01TW2CAK55
   wordle: C02TWKX227J
 
@@ -126,7 +122,7 @@ house:
 
 club-leader:
   text: 'a new club leader has joined: <@${this.user}>'
-  notifiee: U03M1H014CX
+  notifiee: U03M1H014CX # Holly
 
 welcome-committee: |
   <@${this.user}> (${this.hs ? 'a high schooler' : 'an adult'} in ${this.continent.toLowerCase()}) just became a full user in the Slack! Here's why they joined:

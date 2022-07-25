@@ -2,10 +2,13 @@
 const { inviteUserToChannel } = require('../util/invite-user-to-channel')
 const { sleep } = require('../util/sleep')
 const { transcript } = require('../util/transcript')
+const { prisma } = require('../db')
 
 async function joinCaveInteraction(args) {
   const { client, payload } = args
   const { user, channel } = payload
+
+  await prisma.user.create({ data: { user_id: user } })
 
   await Promise.all([
     client.chat.postEphemeral({
