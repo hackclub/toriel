@@ -8,10 +8,11 @@ const {
 } = require('./interactions/post-welcome-committee')
 const express = require('express')
 
-const { app } = require('./app.js')
+const { app, client } = require('./app.js')
 const { receiver } = require('./express-receiver')
 const { getInvite } = require('./util/get-invite')
 const { sleep } = require('./util/sleep')
+const { prisma } = require('./db')
 
 receiver.router.use(express.json())
 
@@ -27,18 +28,17 @@ receiver.router.get(
 receiver.router.post('/slack-invite', require('./endpoints/slack-invite'))
 
 const defaultChannels = [
+  'lounge',
+  'scrapbook',
+  'ship',
+  'hq',
+  'neighbourhood',
+  '8-ball',
   'code',
   'confessions',
   'counttoamillion',
   'hack-night',
-  'hq',
-  'lounge',
-  'neighborhood',
-  'pasture',
-  'poll-of-the-day',
   'question-of-the-day',
-  'scrapbook',
-  'ship',
 ]
 const apacChannels = [
   'apac-lounge',
@@ -46,6 +46,24 @@ const apacChannels = [
   'apac-community',
   'apac-hack-night',
 ]
+
+const getSuggestion = () => {
+  const suggestions = [
+    `tell us how you're doing in <#${transcript('channels.lounge')}>`,
+    `post your proudest ship in <#${transcript('channels.ship')}>`,
+    `post a project you're currently working on in <#${transcript(
+      'channels.scrapbook'
+    )}>`,
+    `post the next number in <#${transcript('channels.counttoamillion')}>`,
+    `answer the latest question in <#${transcript(
+      'channels.question-of-the-day'
+    )}>`,
+    `ask 8-ball your fortune for the coming week in <#${transcript(
+      'channels.8-ball'
+    )}>`,
+  ]
+  return suggestions[Math.floor(Math.random() * suggestions.length)]
+}
 
 app.event('message', async (args) => {
   // begin the firehose
@@ -102,6 +120,43 @@ app.event('message', async (args) => {
       })
   } // delete "user has joined" message if it is sent in one of the default channels that TORIEL adds new members to
 })
+
+const addToChannels = async (user) => {
+  await sleep(1000) // timeout to prevent race-condition during channel invites
+  const invite = await getInvite({ user })
+  let channelsToInvite = []
+  if (invite?.continent == 'ASIA') {
+    // APAC
+    channelsToInvite = defaultChannels.concat(apacChannels)
+  } else {
+    // Everyone else...
+    channelsToInvite = defaultChannels
+  }
+
+  await Promise.all([
+    Promise.all(
+      channelsToInvite.map((c) =>
+        inviteUserToChannel(user, transcript(`channels.${c}`))
+      )
+    ),
+    postWelcomeCommittee(user),
+  ])
+
+  const suggestion = getSuggestion()
+  const message = await client.chat.postMessage({
+    text: transcript('house.added-to-channels', { suggestion }),
+    blocks: [
+      transcript('block.text', {
+        text: transcript('house.added-to-channels', { suggestion }),
+      }),
+      transcript('block.single-button', {
+        text: 'reroll',
+        value: 'reroll',
+      }),
+    ],
+    channel: user,
+  })
+}
 
 app.command(/.*?/, async (args) => {
   const { ack, payload, respond } = args
@@ -167,80 +222,71 @@ app.action(/.*?/, async (args) => {
       const { joinCaveInteraction } = require('./interactions/join-cave')
       await joinCaveInteraction({ ...args, payload: { user } })
       break
-    case 'theme_complete':
-      await respond({
-        replace_original: true,
-        text: '✅ Done with themes',
-      })
-      await client.chat.postMessage({
-        text: transcript('house.coc'),
-        unfurl_links: false,
-        unfurl_media: false,
-        channel: user,
-        // icon_url: transcript('avatar.default'),
-      })
-      await client.chat.postMessage({
-        blocks: [
-          transcript('block.single-button', {
-            text: "I'm done reading this book",
-            value: 'coc_complete',
-          }),
-        ],
-        channel: user,
-      })
-      break
     case 'coc_complete':
-      await respond({
-        replace_original: true,
-        text: '✅ Done with reading the Code of Conduct in the library',
-      })
+      await upgradeUser(user)
       await client.chat.postMessage({
-        text: transcript('house.leave'),
+        text: transcript('house.profile'),
         blocks: [
-          transcript('block.text', { text: transcript('house.leave') }),
+          transcript('block.text', { text: transcript('house.profile') }),
+          transcript('block.image', {
+            url: transcript('house.profile-image'),
+            altText: transcript('house.profile-alt-text'),
+          }),
           transcript('block.single-button', {
-            text: 'Continue',
-            value: 'house_leave',
+            text: "i've filled out my profile",
+            value: 'profile_complete',
           }),
         ],
         channel: user,
       })
       break
-    case 'house_leave':
-      await upgradeUser(user)
-      await sleep(1000) // timeout to prevent race-condition during channel invites
-      const invite = await getInvite({ user })
-      let channelsToInvite = []
-      if (invite?.continent == 'ASIA' && invite?.high_school) {
-        // A high schooler in APAC
-        channelsToInvite = defaultChannels.concat(apacChannels)
-      } else if (invite?.continent == 'ASIA' && !invite?.high_school) {
-        // A college or adult in APAC
-        channelsToInvite = apacChannels
-      } else {
-        // Everyone else...
-        channelsToInvite = defaultChannels
-      }
-
-      await Promise.all([
-        Promise.all(
-          channelsToInvite.map((c) =>
-            inviteUserToChannel(user, transcript(`channels.${c}`))
-          )
-        ),
-        respond({
-          replace_original: true,
-          text: `✅ You left TORIEL's house and stepped in to town...`,
-        }),
-        postWelcomeCommittee(user),
-      ])
-
+    case 'profile_complete':
       await client.chat.postMessage({
-        text: 'Go forth! Announce your presence in <#C0266FRGV>, and tell the villagers of your past creations in <#C0M8PUPU6> or <#C01504DCLVD>.',
+        text: transcript('house.checkClubLeader'),
+        blocks: [
+          transcript('block.text', { text: transcript('house.club-leader') }),
+          transcript('block.double-button', [
+            { text: 'yes', value: 'club_leader_yes' },
+            { text: 'no', value: 'club_leader_no' },
+          ]),
+        ],
         channel: user,
       })
       break
-
+    case 'club_leader_yes':
+      await prisma.user.update({
+        where: { user_id: user },
+        data: { club_leader: true },
+      })
+      await client.chat.postMessage({
+        text: transcript('club-leader.text'),
+        channel: transcript('club-leader.notifiee'),
+      })
+      await addToChannels(user)
+      break
+    case 'club_leader_no':
+      await prisma.user.update({
+        where: { user_id: user },
+        data: { club_leader: false },
+      })
+      await addToChannels(user)
+      break
+    case 'reroll':
+      const suggestion = getSuggestion()
+      await respond({
+        replace_original: true,
+        text: transcript('house.added-to-channels', { suggestion }),
+        blocks: [
+          transcript('block.text', {
+            text: transcript('house.added-to-channels', { suggestion }),
+          }),
+          transcript('block.single-button', {
+            text: 'reroll',
+            value: 'reroll',
+          }),
+        ],
+      })
+      break
     default:
       await respond({
         replace_original: false,

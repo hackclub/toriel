@@ -14,12 +14,15 @@ async function ensureChannels() {
     transcript('channels.code'),
     transcript('channels.hack-night'),
     transcript('channels.question-of-the-day'),
-    transcript('channels.poll-of-the-day'),
     transcript('channels.confessions'),
     transcript('channels.neighborhood'),
     transcript('channels.ship'),
     transcript('channels.scrapbook'),
     transcript('channels.counttoamillion'),
+    transcript('channels.leaders'),
+    transcript('channels.hq'),
+    transcript('channels.8-ball'),
+    transcript('channels.leaders'),
   ]
 
   let missingChannels = []

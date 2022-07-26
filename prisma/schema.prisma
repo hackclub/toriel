@@ -6,10 +6,10 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider          = "postgresql"
   // If this timesout with error code p1001:
   // https://lifesaver.codes/answer/error-p1001-can-t-reach-database-server-at-aws-rds-mysql-5652
-  url      = env("DATABASE_URL")
+  url               = env("DATABASE_URL")
   // https://www.prisma.io/docs/concepts/components/prisma-migrate/shadow-database#cloud-hosted-shadow-databases-must-be-created-manually
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
@@ -24,13 +24,18 @@ enum Continent {
 }
 
 model Invite {
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt @default(now())
-  id  String  @id @default(uuid())
-  email String
-  ip_address  String
-  user_agent  String
-  high_school Boolean
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @default(now()) @updatedAt
+  id              String    @id @default(uuid())
+  email           String
+  ip_address      String
+  user_agent      String
+  high_school     Boolean
   welcome_message String
-  continent Continent
+  continent       Continent
+}
+
+model User {
+  user_id     String   @id
+  club_leader Boolean?
 }
