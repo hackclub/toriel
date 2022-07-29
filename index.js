@@ -122,6 +122,8 @@ app.event('message', async (args) => {
 })
 
 const addToChannels = async (user) => {
+  await upgradeUser(user)
+
   await sleep(1000) // timeout to prevent race-condition during channel invites
   const invite = await getInvite({ user })
   let channelsToInvite = []
@@ -223,7 +225,6 @@ app.action(/.*?/, async (args) => {
       await joinCaveInteraction({ ...args, payload: { user } })
       break
     case 'coc_complete':
-      await upgradeUser(user)
       await client.chat.postMessage({
         text: transcript('house.profile'),
         blocks: [
