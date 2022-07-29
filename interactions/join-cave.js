@@ -8,7 +8,8 @@ async function joinCaveInteraction(args) {
   const { client, payload } = args
   const { user, channel } = payload
 
-  await prisma.user.create({ data: { user_id: user } })
+  try { await prisma.user.create({ data: { user_id: user } }) }
+  catch (e) { if (e.code !== 'P2002') throw e }
 
   await Promise.all([
     client.chat.postEphemeral({
