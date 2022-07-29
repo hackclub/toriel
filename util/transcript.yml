@@ -30,7 +30,6 @@ channels:
   neighborhood: C01AS1YEM8A
   pasture: C01PF39CVAS
   poll-of-the-day: C01U8UCHZC1
-  present: C01GPEL6CGM
   question-of-the-day: C013AGZKYCS
   scrapbook: C01504DCLVD
   ship: C0M8PUPU6
@@ -92,7 +91,7 @@ house:
 
     > Treat everyone with respect and kindness.
     > Be thoughtful in how you communicate.
-    > Don't advertise outside of <#${this.t('channels.present')}>.
+    > Don't advertise outside of `#present`.
     > Above all else, please follow the *<https://hackclub.com/conduct/#hacker-values|Hacker Values>*.
 
     _as you close the book, you see a link on its binding: https://conduct.hackclub.com._
