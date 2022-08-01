@@ -165,10 +165,12 @@ const addToChannels = async (user) => {
     limit: 10,
   })
   const message = history.messages[Math.floor(Math.random() * 10)]
-  const link = (await client.chat.getPermalink({
-    channel: transcript('channels.ship'),
-    message_ts: message.ts,
-  })).permalink
+  const link = (
+    await client.chat.getPermalink({
+      channel: transcript('channels.ship'),
+      message_ts: message.ts,
+    })
+  ).permalink
   await client.chat.postMessage({
     text: transcript('house.projects', { link }),
     channel: user,
