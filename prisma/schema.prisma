@@ -33,6 +33,7 @@ model Invite {
   high_school     Boolean
   welcome_message String
   continent       Continent
+  user_id         String?
 }
 
 model User {

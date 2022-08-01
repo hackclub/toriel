@@ -18,4 +18,4 @@ async function getInvite({ user, email }) {
   return invite
 }
 
-module.exports = { getInvite }
+module.exports = { getEmailFromUser, getInvite }
