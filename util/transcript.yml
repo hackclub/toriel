@@ -128,6 +128,7 @@ club-leader:
 welcome-committee: |
   <@${this.user}> (${this.hs ? 'a high schooler' : 'an adult'} in ${this.continent.toLowerCase()}) just became a full user in the Slack! Here's why they joined:
   ${this.message.split('\n').map(line => '> '+line)}
+  React to this message to take ownership on reaching out.
 
 command:
   not-found: i'm not sure how to do that, my child. (slash command not found)
