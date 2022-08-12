@@ -22,7 +22,7 @@ async function ensureChannels() {
     transcript('channels.leaders'),
     transcript('channels.hq'),
     transcript('channels.8-ball'),
-    transcript('channels.leaders'),
+    transcript('channels.hackathon-organizers'),
   ]
 
   let missingChannels = []
