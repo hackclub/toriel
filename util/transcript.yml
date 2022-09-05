@@ -30,7 +30,6 @@ channels:
   neighborhood: C01AS1YEM8A
   pasture: C01PF39CVAS
   poll-of-the-day: C01U8UCHZC1
-  present: C01GPEL6CGM
   question-of-the-day: C013AGZKYCS
   scrapbook: C01504DCLVD
   ship: C0M8PUPU6
@@ -85,21 +84,21 @@ cave-join: |
 house:
   coc: |
     hello, my child. please take some tea to calm your nerves.
-    i must ask that you read this before proceeding:
+    i must ask that you read this before gaining access to the rest of the slack:
 
     _TORIEL points to a page in a book laid out in front of you_
-    > The tenants of the Slack (Abridged 12th ed.) Orpheus et al.
+    > The tenants of the Hack Club Slack (Abridged 12th ed.) Orpheus et al.
 
     > Treat everyone with respect and kindness.
     > Be thoughtful in how you communicate.
-    > Don't advertise outside of <#${this.t('channels.present')}>.
+    > Don't advertise outside of \`#​present\`.
     > Above all else, please follow the *<https://hackclub.com/conduct/#hacker-values|Hacker Values>*.
 
     _as you close the book, you see a link on its binding: https://conduct.hackclub.com._
 
-    do you agree to abide by these terms?
+    do you agree to abide by the code of conduct?
   profile: |
-    and with that — welcome to hack club, an incredible community of teenage programmers across the world! hack clubbers have shipped apps with millions of users, interviewed <https://www.youtube.com/watch?v=gw3vyFZ4oeU|youtubers like 3blue1brown> and <https://www.youtube.com/watch?v=riru9OzScwk|builders like elon musk>, and work together every day to <https://github.com/hackclub/some-assembly-required|ship> <https://github.com/quackduck/devzat|projects> in some of the channels i'll add you to in a few minutes.
+    and with that — welcome to hack club, an incredible community of teenage programmers across the world!
 
     your next step is to *fill out your slack profile*. you could:
 
@@ -108,8 +107,8 @@ house:
     - list some of your interests
     - set your profile picture
 
-    to do this, click on your profile picture here, then click _Profile_:
-  profile-image: https://cloud-k7p71rmrd-hack-club-bot.vercel.app/0screen_shot_2022-07-21_at_08.01.48.png
+    to do this, click on your profile picture in the upper right, then click _Profile_:
+  profile-image: https://cloud-7847qp310-hack-club-bot.vercel.app/0screen_shot_2022-08-01_at_08.23.55.png
   profile-alt-text: a screenshot of the button leading to the user menu
   club-leader: |
     are you joining the slack because you're either currently running or considering running a hack club at your school?
@@ -119,6 +118,8 @@ house:
     i've now added you to some channels you might like. feel free to explore — but if you don't know where to start, perhaps you'll find one of my suggestions useful:
 
     > ${this.suggestion}
+  projects: |
+    here's a recent project you might be interested in: ${this.link}
 
 club-leader:
   text: 'a new club leader has joined: <@${this.user}>'
@@ -127,6 +128,7 @@ club-leader:
 welcome-committee: |
   <@${this.user}> (${this.hs ? 'a high schooler' : 'an adult'} in ${this.continent.toLowerCase()}) just became a full user in the Slack! Here's why they joined:
   ${this.message.split('\n').map(line => '> '+line)}
+  React to this message to take ownership on reaching out.
 
 command:
   not-found: i'm not sure how to do that, my child. (slash command not found)

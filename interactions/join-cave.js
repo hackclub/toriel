@@ -1,14 +1,23 @@
 // the user joins #the-cave, the starter channel
-const { inviteUserToChannel } = require('../util/invite-user-to-channel')
 const { sleep } = require('../util/sleep')
 const { transcript } = require('../util/transcript')
 const { prisma } = require('../db')
+const { getEmailFromUser } = require('../util/get-invite')
 
 async function joinCaveInteraction(args) {
   const { client, payload } = args
-  const { user, channel } = payload
+  const { user } = payload
 
-  await prisma.user.create({ data: { user_id: user } })
+  try {
+    await prisma.user.create({ data: { user_id: user } })
+  } catch (e) {
+    if (e.code !== 'P2002') throw e
+  }
+
+  await prisma.invite.updateMany({
+    where: { email: await getEmailFromUser({ user }) },
+    data: { user_id: user },
+  })
 
   await Promise.all([
     client.chat.postEphemeral({

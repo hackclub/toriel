@@ -122,6 +122,8 @@ app.event('message', async (args) => {
 })
 
 const addToChannels = async (user) => {
+  await upgradeUser(user)
+
   await sleep(1000) // timeout to prevent race-condition during channel invites
   const invite = await getInvite({ user })
   let channelsToInvite = []
@@ -143,7 +145,7 @@ const addToChannels = async (user) => {
   ])
 
   const suggestion = getSuggestion()
-  const message = await client.chat.postMessage({
+  await client.chat.postMessage({
     text: transcript('house.added-to-channels', { suggestion }),
     blocks: [
       transcript('block.text', {
@@ -154,6 +156,23 @@ const addToChannels = async (user) => {
         value: 'reroll',
       }),
     ],
+    channel: user,
+  })
+
+  // TODO weigh by reactions or just do something else entirely
+  const history = await client.conversations.history({
+    channel: transcript('channels.ship'),
+    limit: 10,
+  })
+  const message = history.messages[Math.floor(Math.random() * 10)]
+  const link = (
+    await client.chat.getPermalink({
+      channel: transcript('channels.ship'),
+      message_ts: message.ts,
+    })
+  ).permalink
+  await client.chat.postMessage({
+    text: transcript('house.projects', { link }),
     channel: user,
   })
 }
@@ -223,7 +242,6 @@ app.action(/.*?/, async (args) => {
       await joinCaveInteraction({ ...args, payload: { user } })
       break
     case 'coc_complete':
-      await upgradeUser(user)
       await client.chat.postMessage({
         text: transcript('house.profile'),
         blocks: [
