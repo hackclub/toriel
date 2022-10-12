@@ -13,6 +13,7 @@ selfUserID: U036UQD2893
 
 channels:
   8-ball: C03DNGQA6SY
+  announcements: C0266FRGT
   apac-community: C031AQUNKQS
   apac-hack-night: C033K5QA6JU
   apac-hq: C031456DCHL
@@ -21,6 +22,7 @@ channels:
   cave: C039PAG1AV7
   code: C0EA9S0A0
   commons: C021CQCHP09
+  community: C01D7AHKMPF
   confessions: CNMU9L92Q
   counttoamillion: CDJMS683D
   gamedev: C6LHL48G2
@@ -132,7 +134,7 @@ house:
     • we’re giving scrapbook new life at <#${this.t('channels.scrapbook-dev')}>
     • <#${this.t('channels.sprig')}>: get a free game console by <https://sprig.hackclub.com|making a fun game>
 
-    to see the channels people are currently talking in, send /bunny as a message in any channel
+    to see the channels people are currently talking in, send `/bunny` as a message in any channel
 
     if that’s still too much, perhaps you’ll find one of my suggestions useful:
 

@@ -299,6 +299,7 @@ app.action(/.*?/, async (args) => {
             value: 'reroll',
           }),
         ],
+        unfurl_links: false,
       })
       break
     default:
