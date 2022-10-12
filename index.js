@@ -171,15 +171,6 @@ const addToChannels = async (user) => {
       message_ts: message.ts,
     })
   ).permalink
-  await client.chat.postMessage({
-    text: transcript('house.projects', { link }),
-    channel: user,
-  })
-  await sleep(1000)
-  await client.chat.postMessage({
-    text: transcript('house.assemble-video'),
-    channel: user,
-  })
 }
 
 app.command(/.*?/, async (args) => {

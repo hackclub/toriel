@@ -118,10 +118,6 @@ house:
     i've now added you to some channels you might like. feel free to explore — but if you don't know where to start, perhaps you'll find one of my suggestions useful:
 
     > ${this.suggestion}
-  projects: |
-    here's a recent project you might be interested in: ${this.link}
-  assemble-video: |
-    here's another cool thing that happened at hack club this summer: https://youtu.be/PnK4gzO6S3Q
 
 club-leader:
   text: 'a new club leader has joined: <@${this.user}>'
