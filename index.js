@@ -37,7 +37,8 @@ const defaultChannels = [
   'code',
   'confessions',
   'counttoamillion',
-  'hack-night',
+  'sprig',
+  'community',
   'question-of-the-day',
 ]
 const apacChannels = [
