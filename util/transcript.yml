@@ -134,7 +134,7 @@ house:
     • we’re giving scrapbook new life at <#${this.t('channels.scrapbook-dev')}>
     • <#${this.t('channels.sprig')}>: get a free game console by <https://sprig.hackclub.com|making a fun game>
 
-    to see the channels people are currently talking in, send `/bunny` as a message in any channel
+    to see the channels people are currently talking in, send \`/bunny\` as a message in any channel
 
     if that’s still too much, perhaps you’ll find one of my suggestions useful:
 
