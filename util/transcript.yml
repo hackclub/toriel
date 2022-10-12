@@ -117,9 +117,9 @@ house:
   added-to-channels: |
     i’ve now added you to some channels you might like; feel free to poke around. here’s an overview if you feel lost or overwhelmed:
 
-    <#${this.t('channels.announcements')}> <#${this.t('channels.community)}> <#${this.t('channels.hq)}> are the places where new activities and events are announced
+    <#${this.t('channels.announcements')}> <#${this.t('channels.community')}> <#${this.t('channels.hq')}> are the places where new activities and events are announced
 
-    <#${this.t('channels.scrapbook)}> <#${this.t('channels.ship)}> are the places to see what hack clubbers are making and to showcase your own projects
+    <#${this.t('channels.scrapbook')}> <#${this.t('channels.ship')}> are the places to see what hack clubbers are making and to showcase your own projects
 
     to meet hack clubbers running hackathons and get help running your own: <#${this.t('channels.hackathon-organizers')}>
 
