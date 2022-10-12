@@ -23,6 +23,8 @@ channels:
   commons: C021CQCHP09
   confessions: CNMU9L92Q
   counttoamillion: CDJMS683D
+  gamedev: C6LHL48G2
+  hackathon-organizers: C03QSGGCJN7
   hack-night: C0JDWKJVA
   haikus: C036GP78EC8
   hq: C0C78SG9L
@@ -32,8 +34,10 @@ channels:
   poll-of-the-day: C01U8UCHZC1
   question-of-the-day: C013AGZKYCS
   scrapbook: C01504DCLVD
+  scrapbook-dev: C035D6S6TFW
   ship: C0M8PUPU6
   slack-themes: CKKLW54QG
+  sprig: C02UN35M7LG
   the-basement: C037TG53X9U
   toriels-diary: C03APMU234G
   uno-games: C01ABQB8S6A
@@ -124,9 +128,9 @@ house:
     to meet hack clubbers running hackathons and get help running your own: <#${this.t('channels.hackathon-organizers')}>
 
     active hack club projects you can check out or help build:
-    - we’re building [sinerider](https://sinerider.hackclub.dev), a game about love and graphing, at <#${this.t('channels.gamedev')}>
-    - we’re giving scrapbook new life at <#${this.t('channels.scrapbook-dev')}>
-    - <#${this.t('channels.sprig')}: get a free game console by [making a fun game](https://sprig.hackclub.com)
+    • we’re building <https://sinerider.hackclub.dev|sinerider>, a game about love and graphing, at <#${this.t('channels.gamedev')}>
+    • we’re giving scrapbook new life at <#${this.t('channels.scrapbook-dev')}>
+    • <#${this.t('channels.sprig')}>: get a free game console by <https://sprig.hackclub.com|making a fun game>
 
     to see the channels people are currently talking in, send /bunny as a message in any channel
 
