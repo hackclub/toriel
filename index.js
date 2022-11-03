@@ -121,20 +121,15 @@ app.event('message', async (args) => {
   } // delete "user has joined" message if it is sent in one of the default channels that TORIEL adds new members to
 })
 
-const addToChannels = async (user) => {
+const addToChannels = async (user, epoch) => {
   await upgradeUser(user)
 
   await sleep(1000) // timeout to prevent race-condition during channel invites
   const invite = await getInvite({ user })
-  let channelsToInvite = []
-  if (invite?.continent == 'ASIA') {
-    // APAC
-    channelsToInvite = defaultChannels.concat(apacChannels)
-  } else {
-    // Everyone else...
-    channelsToInvite = defaultChannels
+  let channelsToInvite = defaultChannels
+  if (epoch) {
+    channelsToInvite.concat('epoch')
   }
-
   await Promise.all([
     Promise.all(
       channelsToInvite.map((c) =>
@@ -146,13 +141,19 @@ const addToChannels = async (user) => {
 
   const suggestion = getSuggestion()
   await client.chat.postMessage({
-    text: transcript('house.added-to-channels', { suggestion }),
+    text: transcript(
+      epoch ? 'house.added-to-channels' : 'house.added-to-channels-epoch',
+      { suggestion }
+    ),
     blocks: [
       transcript('block.text', {
-        text: transcript('house.added-to-channels', { suggestion }),
+        text: transcript(
+          !epoch ? 'house.added-to-channels' : 'house.added-to-channels-epoch',
+          { suggestion }
+        ),
       }),
       transcript('block.single-button', {
-        text: 'reroll',
+        text: !epoch ? 'reroll' : `I've introduced myself, what else can I do?`,
         value: 'reroll',
       }),
     ],
@@ -255,17 +256,32 @@ app.action(/.*?/, async (args) => {
       })
       break
     case 'profile_complete':
-      await client.chat.postMessage({
-        text: transcript('house.checkClubLeader'),
-        blocks: [
-          transcript('block.text', { text: transcript('house.club-leader') }),
-          transcript('block.double-button', [
-            { text: 'yes', value: 'club_leader_yes' },
-            { text: 'no', value: 'club_leader_no' },
-          ]),
-        ],
-        channel: user,
+      const slackuser = await client.users.info({ user })
+      const email = slackuser?.user?.profile?.email
+      const invite = await prisma.invite.findFirst({
+        where: { email },
+        orderBy: { createdAt: 'desc' },
       })
+      if (invite.message == "I'm going to Epoch!") {
+        await prisma.user.update({
+          where: { user_id: user },
+          data: { club_leader: false },
+        })
+        await addToChannels(user, true)
+        break
+      } else {
+        await client.chat.postMessage({
+          text: transcript('house.checkClubLeader'),
+          blocks: [
+            transcript('block.text', { text: transcript('house.club-leader') }),
+            transcript('block.double-button', [
+              { text: 'yes', value: 'club_leader_yes' },
+              { text: 'no', value: 'club_leader_no' },
+            ]),
+          ],
+          channel: user,
+        })
+      }
       break
     case 'club_leader_yes':
       await prisma.user.update({
