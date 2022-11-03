@@ -127,8 +127,8 @@ const addToChannels = async (user, epoch) => {
   await sleep(1000) // timeout to prevent race-condition during channel invites
   const invite = await getInvite({ user })
   let channelsToInvite = defaultChannels
-  if(epoch){
-    channelsToInvite.concat("epoch")
+  if (epoch) {
+    channelsToInvite.concat('epoch')
   }
   await Promise.all([
     Promise.all(
@@ -141,10 +141,16 @@ const addToChannels = async (user, epoch) => {
 
   const suggestion = getSuggestion()
   await client.chat.postMessage({
-    text: transcript( epoch ? 'house.added-to-channels' : 'house.added-to-channels-epoch', { suggestion }),
+    text: transcript(
+      epoch ? 'house.added-to-channels' : 'house.added-to-channels-epoch',
+      { suggestion }
+    ),
     blocks: [
       transcript('block.text', {
-        text: transcript(!epoch ? 'house.added-to-channels' : 'house.added-to-channels-epoch', { suggestion }),
+        text: transcript(
+          !epoch ? 'house.added-to-channels' : 'house.added-to-channels-epoch',
+          { suggestion }
+        ),
       }),
       transcript('block.single-button', {
         text: !epoch ? 'reroll' : `I've introduced myself, what else can I do?`,
@@ -256,15 +262,14 @@ app.action(/.*?/, async (args) => {
         where: { email },
         orderBy: { createdAt: 'desc' },
       })
-      if(invite.message == "I'm going to Epoch!"){
+      if (invite.message == "I'm going to Epoch!") {
         await prisma.user.update({
           where: { user_id: user },
           data: { club_leader: false },
         })
         await addToChannels(user, true)
         break
-      }
-      else {
+      } else {
         await client.chat.postMessage({
           text: transcript('house.checkClubLeader'),
           blocks: [
