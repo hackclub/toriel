@@ -128,7 +128,7 @@ const addToChannels = async (user, epoch) => {
   const invite = await getInvite({ user })
   let channelsToInvite = defaultChannels
   if (epoch) {
-    channelsToInvite.concat('epoch')
+    channelsToInvite.push('epoch')
   }
   await Promise.all([
     Promise.all(
