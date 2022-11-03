@@ -153,7 +153,7 @@ const addToChannels = async (user, epoch) => {
         ),
       }),
       transcript('block.single-button', {
-        text: !epoch ? 'reroll' : `I've introduced myself, what else can I do?`,
+        text: !epoch ? 'reroll' : `I've introduced myself...`,
         value: 'reroll',
       }),
     ],
