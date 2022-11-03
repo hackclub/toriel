@@ -257,6 +257,10 @@ app.action(/.*?/, async (args) => {
         orderBy: { createdAt: 'desc' },
       })
       if(invite.message == "I'm going to Epoch!"){
+        await prisma.user.update({
+          where: { user_id: user },
+          data: { club_leader: false },
+        })
         await addToChannels(user, true)
         break
       }
