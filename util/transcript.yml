@@ -141,24 +141,9 @@ house:
 
     > ${this.suggestion}
   added-to-channels-epoch: |
-    i’ve now added you to some channels you might like; feel free to poke around. here’s an overview if you feel lost or overwhelmed:
-
-    <#${this.t('channels.announcements')}> <#${this.t('channels.community')}> <#${this.t('channels.hq')}> are the places where new activities and events are announced
-
-    <#${this.t('channels.scrapbook')}> <#${this.t('channels.ship')}> are the places to see what hack clubbers are making and to showcase your own projects
-
-    to meet hack clubbers running hackathons and get help running your own: <#${this.t('channels.hackathon-organizers')}>
-
-    active hack club projects you can check out or help build:
-    • we’re building sinerider, a game about love and graphing, at <#${this.t('channels.gamedev')}>
-    • we’re giving scrapbook new life at <#${this.t('channels.scrapbook-dev')}>
-    • <#${this.t('channels.sprig')}>: get a free game console by <https://sprig.hackclub.com|making a fun game>
-
-    to see the channels people are currently talking in, send \`/bunny\` as a message in any channel
-
-    *to confirm your registration for epoch:*
-
-    > head to <#${this.t('channels.epoch')}> and introduce yourself!
+    <https://hack.af/epoch-welcome|welcome!> we're so excited to have you here for epoch; *to confirm your registration for epoch, head to <#${this.t('channels.epoch')}> and say hi!*
+    
+    i’ve also added you to some other channels you might like. feel free to poke around and get your fellow hackers! 
 
 club-leader:
   text: 'a new club leader has joined: <@${this.user}>'
