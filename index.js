@@ -239,23 +239,6 @@ app.action(/.*?/, async (args) => {
       await joinCaveInteraction({ ...args, payload: { user } })
       break
     case 'coc_complete':
-      await client.chat.postMessage({
-        text: transcript('house.profile'),
-        blocks: [
-          transcript('block.text', { text: transcript('house.profile') }),
-          transcript('block.image', {
-            url: transcript('house.profile-image'),
-            altText: transcript('house.profile-alt-text'),
-          }),
-          transcript('block.single-button', {
-            text: "i've filled out my profile",
-            value: 'profile_complete',
-          }),
-        ],
-        channel: user,
-      })
-      break
-    case 'profile_complete':
       const slackuser = await client.users.info({ user })
       const email = slackuser?.user?.profile?.email
       const invite = await prisma.invite.findFirst({
@@ -271,17 +254,34 @@ app.action(/.*?/, async (args) => {
         break
       } else {
         await client.chat.postMessage({
-          text: transcript('house.checkClubLeader'),
+          text: transcript('house.profile'),
           blocks: [
-            transcript('block.text', { text: transcript('house.club-leader') }),
-            transcript('block.double-button', [
-              { text: 'yes', value: 'club_leader_yes' },
-              { text: 'no', value: 'club_leader_no' },
-            ]),
+            transcript('block.text', { text: transcript('house.profile') }),
+            transcript('block.image', {
+              url: transcript('house.profile-image'),
+              altText: transcript('house.profile-alt-text'),
+            }),
+            transcript('block.single-button', {
+              text: "i've filled out my profile",
+              value: 'profile_complete',
+            }),
           ],
           channel: user,
         })
       }
+      break
+    case 'profile_complete':
+      await client.chat.postMessage({
+        text: transcript('house.checkClubLeader'),
+        blocks: [
+          transcript('block.text', { text: transcript('house.club-leader') }),
+          transcript('block.double-button', [
+            { text: 'yes', value: 'club_leader_yes' },
+            { text: 'no', value: 'club_leader_no' },
+          ]),
+        ],
+        channel: user,
+      })
       break
     case 'club_leader_yes':
       await prisma.user.update({
