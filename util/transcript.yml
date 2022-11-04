@@ -141,7 +141,7 @@ house:
 
     > ${this.suggestion}
   added-to-channels-epoch: |
-    <https://hack.af/epoch-welcome|welcome!> we're so excited to have you here for epoch; *to confirm your registration for epoch, head to <#${this.t('channels.epoch')}> and say hi!*
+    <https://hack.af/epoch-banner|welcome!> we're so excited to have you here for epoch; *to confirm your registration for epoch, head to <#${this.t('channels.epoch')}> and say hi!*
     
     i’ve also added you to some other channels you might like. feel free to poke around and get your fellow hackers! 
 
