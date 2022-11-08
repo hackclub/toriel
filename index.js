@@ -245,7 +245,7 @@ app.action(/.*?/, async (args) => {
         where: { email },
         orderBy: { createdAt: 'desc' },
       })
-      if (invite.welcome_message == "I'm going to Epoch!") {
+      if (invite?.welcome_message == "I'm going to Epoch!") {
         await prisma.user.update({
           where: { user_id: user },
           data: { club_leader: false },
