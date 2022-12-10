@@ -46,6 +46,7 @@ channels:
   toriels-diary: C03APMU234G
   uno-games: C01ABQB8S6A
   welcome-committee: GLFAEL1SL
+  welcome: C75M7C0SY
   whack-a-mole: C01TW2CAK55
   wordle: C02TWKX227J
 
@@ -137,6 +138,8 @@ house:
     • <#${this.t('channels.sprig')}>: get a free game console by <https://sprig.hackclub.com|making a fun game>
 
     to see the channels people are currently talking in, send \`/bunny\` as a message in any channel
+    
+    also, feel free to post an introduction in <#${this.t('channels.welcome')}> (don't worry, this is totally optional)!
 
     if that’s still too much, perhaps you’ll find one of my suggestions useful:
 
