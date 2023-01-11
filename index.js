@@ -231,7 +231,7 @@ app.event('app_mention', async ({ body, context, say }) => {
   try {
     const response = await inferResponse(body.text)
     await say(response)
-  } catch(e) {
+  } catch (e) {
     console.error(e)
   }
 })
