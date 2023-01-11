@@ -225,6 +225,9 @@ app.command(/.*?/, async (args) => {
 //   await say(`_Who's there?_`);
 // });
 app.event('app_mention', async ({ body, context, say }) => {
+  if (body.channel != transcript('channels.toriel-dev')) {
+    return
+  }
   try {
     const response = await inferResponse(body.text)
     await say(response)
