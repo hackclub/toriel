@@ -15,5 +15,5 @@ export async function inferResponse({ msg }) {
     prompt,
   })
 
-  return completion
+  return completion.data.choices[0].text
 }
