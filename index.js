@@ -13,6 +13,7 @@ const { receiver } = require('./express-receiver')
 const { getInvite } = require('./util/get-invite')
 const { sleep } = require('./util/sleep')
 const { prisma } = require('./db')
+const { inferResponse } = require('./util/gptchat')
 
 receiver.router.use(express.json())
 
@@ -218,6 +219,14 @@ app.command(/.*?/, async (args) => {
   } catch (e) {
     console.error(e)
   }
+})
+
+// app.message('', async ({ message, say }) => {
+//   await say(`_Who's there?_`);
+// });
+app.event("app_mention", async ({ body, context, say }) => {
+  const response = await inferResponse(body.text)
+  await say(response)
 })
 
 app.action(/.*?/, async (args) => {
