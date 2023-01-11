@@ -224,7 +224,7 @@ app.command(/.*?/, async (args) => {
 // app.message('', async ({ message, say }) => {
 //   await say(`_Who's there?_`);
 // });
-app.event("app_mention", async ({ body, context, say }) => {
+app.event('app_mention', async ({ body, context, say }) => {
   const response = await inferResponse(body.text)
   await say(response)
 })
