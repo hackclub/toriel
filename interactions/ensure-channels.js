@@ -9,6 +9,7 @@ async function ensureChannels() {
     transcript('channels.cave'),
     transcript('channels.the-basement'),
     transcript('channels.bot-spam'),
+    transcript('channels.toriel-dev'),
     // default channels:
     transcript('channels.lounge'),
     transcript('channels.code'),
