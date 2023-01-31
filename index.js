@@ -42,6 +42,8 @@ const defaultChannels = [
   'code',
   'confessions',
   'counttoamillion',
+  'sprig',
+  'community',
   'hack-night',
   'question-of-the-day',
 ]
