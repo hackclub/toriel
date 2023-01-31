@@ -4,7 +4,7 @@ const { transcript } = require('../util/transcript')
 const { prisma } = require('../db')
 const { getEmailFromUser } = require('../util/get-invite')
 
-module.exports = async function ping(req, res) {
+module.exports = async function startFromClippy(req, res) {
   const {  user_id } = req.query
   await Promise.all([
     client.chat.postEphemeral({
@@ -15,4 +15,3 @@ module.exports = async function ping(req, res) {
   ])
   res.json({ pong: true })
 }
-module.exports = { joinCaveInteraction }
