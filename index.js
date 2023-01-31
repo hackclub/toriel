@@ -21,6 +21,11 @@ receiver.router.get('/', require('./endpoints/index'))
 receiver.router.get('/ping', require('./endpoints/ping'))
 
 receiver.router.get(
+  '/start-from-clippy',
+  require('./endpoints/start-from-clippy')
+)
+
+receiver.router.get(
   '/slack-tutorial/:user',
   require('./endpoints/slack-tutorial')
 )
@@ -37,6 +42,8 @@ const defaultChannels = [
   'code',
   'confessions',
   'counttoamillion',
+  'sprig',
+  'community',
   'hack-night',
   'question-of-the-day',
 ]
@@ -60,6 +67,9 @@ const getSuggestion = () => {
     )}>`,
     `ask 8-ball your fortune for the coming week in <#${transcript(
       'channels.8-ball'
+    )}>`,
+    `talk to the friendly cow from the club farm in their <#${transcript(
+      'channels.pasture'
     )}>`,
   ]
   return suggestions[Math.floor(Math.random() * suggestions.length)]

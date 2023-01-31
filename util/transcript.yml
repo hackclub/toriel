@@ -2,6 +2,10 @@ type-of-pie:
   - cinnamon
   - butterscotch
   - cinnamon and butterscotch
+  - cinnamon
+  - butterscotch
+  - cinnamon and butterscotch
+  - snail # apparently a favorite of hers in Undertale
 
 errors:
   general: errors.general
@@ -83,11 +87,13 @@ block:
           text: ${this[1].text}
         value: ${this[1].value}
 
+announcements-to-cave: hello wanderer! head to <#${this.t('channels.cave')}> to continue your journey.
+
 cave-intro: while wandering through the forest, you've stumbled down the entrance of a cave. it looks too high to climb back out.
 
 cave-join: |
   oh hello... i don't think i recognize you; you must be new in town.
-  you may call me <@${this.t('selfUserID')}>! i have tea and butterscotch pie cooling off... please come over.
+  you may call me <@${this.t('selfUserID')}>! i have tea and a fresh ${this.t('type-of-pie')} pie cooling off... please come over.
 
   i just sent you a dm! you can tell by the :ping: to the left.
 
@@ -117,7 +123,7 @@ house:
     - list some of your interests
     - set your profile picture
 
-    to do this, click on your profile picture in the upper right, then click _Profile_:
+    to do this, click on your profile picture in the upper right, then click _Profile_, then click _Edit_ next to anything you'd like to add or change:
   profile-image: https://cloud-7847qp310-hack-club-bot.vercel.app/0screen_shot_2022-08-01_at_08.23.55.png
   profile-alt-text: a screenshot of the button leading to the user menu
   club-leader: |
@@ -139,7 +145,7 @@ house:
     • <#${this.t('channels.sprig')}>: get a free game console by <https://sprig.hackclub.com|making a fun game>
 
     to see the channels people are currently talking in, send \`/bunny\` as a message in any channel
-    
+
     also, feel free to post an introduction in <#${this.t('channels.welcome')}> (don't worry, this is totally optional)!
 
     if that’s still too much, perhaps you’ll find one of my suggestions useful:
@@ -147,8 +153,8 @@ house:
     > ${this.suggestion}
   added-to-channels-epoch: |
     <https://hack.af/epoch-banner|welcome!> we're so excited to have you here for epoch; *to confirm your registration for epoch, head to <#${this.t('channels.epoch')}> and say hi!*
-    
-    i’ve also added you to some other channels you might like. feel free to poke around and get your fellow hackers! 
+
+    i’ve also added you to some other channels you might like. feel free to poke around and get your fellow hackers!
 
 club-leader:
   text: 'a new club leader has joined: <@${this.user}>'
