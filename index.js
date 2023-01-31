@@ -66,6 +66,9 @@ const getSuggestion = () => {
     `ask 8-ball your fortune for the coming week in <#${transcript(
       'channels.8-ball'
     )}>`,
+    `talk to the friendly cow from the club farm in their <#${transcript(
+      'channels.pasture'
+    )}>`,
   ]
   return suggestions[Math.floor(Math.random() * suggestions.length)]
 }
