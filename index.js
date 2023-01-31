@@ -38,7 +38,7 @@ const defaultChannels = [
   'ship',
   'hq',
   'neighborhood',
-  // '8-ball', // inactive as of 2023-01-30
+  '8-ball',
   'code',
   'confessions',
   'counttoamillion',
@@ -63,9 +63,9 @@ const getSuggestion = () => {
     `answer the latest question in <#${transcript(
       'channels.question-of-the-day'
     )}>`,
-    // `ask 8-ball your fortune for the coming week in <#${transcript(
-    //   'channels.8-ball'
-    // )}>`,
+    `ask 8-ball your fortune for the coming week in <#${transcript(
+      'channels.8-ball'
+    )}>`,
     `talk to the friendly cow from the club farm in their <#${transcript(
       'channels.pasture'
     )}>`,
