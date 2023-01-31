@@ -2,6 +2,10 @@ type-of-pie:
   - cinnamon
   - butterscotch
   - cinnamon and butterscotch
+  - cinnamon
+  - butterscotch
+  - cinnamon and butterscotch
+  - snail # apparently a favorite of hers in Undertale
 
 errors:
   general: errors.general
@@ -89,7 +93,7 @@ cave-intro: while wandering through the forest, you've stumbled down the entranc
 
 cave-join: |
   oh hello... i don't think i recognize you; you must be new in town.
-  you may call me <@${this.t('selfUserID')}>! i have tea and butterscotch pie cooling off... please come over.
+  you may call me <@${this.t('selfUserID')}>! i have tea and a fresh ${this.t('type-of-pie')} pie cooling off... please come over.
 
   i just sent you a dm! you can tell by the :ping: to the left.
 
@@ -119,7 +123,7 @@ house:
     - list some of your interests
     - set your profile picture
 
-    to do this, click on your profile picture in the upper right, then click _Profile_:
+    to do this, click on your profile picture in the upper right, then click _Profile_, then click _Edit_ next to anything you'd like to add or change:
   profile-image: https://cloud-7847qp310-hack-club-bot.vercel.app/0screen_shot_2022-08-01_at_08.23.55.png
   profile-alt-text: a screenshot of the button leading to the user menu
   club-leader: |
