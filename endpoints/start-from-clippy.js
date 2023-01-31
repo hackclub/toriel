@@ -1,5 +1,6 @@
 // the user is directed to the cave
 const { transcript } = require('../util/transcript')
+const { client } = require('../app')
 
 module.exports = async function startFromClippy(req, res) {
   const { user_id } = req.query
