@@ -7,7 +7,7 @@ module.exports = async function startFromClippy(req, res) {
     client.chat.postEphemeral({
       text: transcript('announcements-to-cave'),
       channel: transcript('channels.announcements'),
-      user: user_id
+      user: user_id,
     }),
   ])
   res.json({ pong: true })

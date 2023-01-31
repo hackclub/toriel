@@ -20,7 +20,10 @@ receiver.router.get('/', require('./endpoints/index'))
 
 receiver.router.get('/ping', require('./endpoints/ping'))
 
-receiver.router.get('/start-from-clippy', require('./endpoints/start-from-clippy'))
+receiver.router.get(
+  '/start-from-clippy',
+  require('./endpoints/start-from-clippy')
+)
 
 receiver.router.get(
   '/slack-tutorial/:user',

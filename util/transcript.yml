@@ -83,7 +83,6 @@ block:
           text: ${this[1].text}
         value: ${this[1].value}
 
-
 announcements-to-cave: hello wanderer! head to <#${this.t('channels.cave')}> to continue your journey.
 
 cave-intro: while wandering through the forest, you've stumbled down the entrance of a cave. it looks too high to climb back out.
@@ -142,7 +141,7 @@ house:
     • <#${this.t('channels.sprig')}>: get a free game console by <https://sprig.hackclub.com|making a fun game>
 
     to see the channels people are currently talking in, send \`/bunny\` as a message in any channel
-    
+
     also, feel free to post an introduction in <#${this.t('channels.welcome')}> (don't worry, this is totally optional)!
 
     if that’s still too much, perhaps you’ll find one of my suggestions useful:
@@ -150,8 +149,8 @@ house:
     > ${this.suggestion}
   added-to-channels-epoch: |
     <https://hack.af/epoch-banner|welcome!> we're so excited to have you here for epoch; *to confirm your registration for epoch, head to <#${this.t('channels.epoch')}> and say hi!*
-    
-    i’ve also added you to some other channels you might like. feel free to poke around and get your fellow hackers! 
+
+    i’ve also added you to some other channels you might like. feel free to poke around and get your fellow hackers!
 
 club-leader:
   text: 'a new club leader has joined: <@${this.user}>'
