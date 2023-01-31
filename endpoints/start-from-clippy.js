@@ -12,7 +12,6 @@ module.exports = async function startFromClippy(req, res) {
         user: user_id,
       }),
     ])
-  }
-  catch (e) {}
+  } catch (e) {}
   res.json({ pong: true })
 }
