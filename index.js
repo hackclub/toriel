@@ -39,6 +39,7 @@ const defaultChannels = [
   'counttoamillion',
   'sprig',
   'community',
+  'hack-night',
   'question-of-the-day',
 ]
 const apacChannels = [
