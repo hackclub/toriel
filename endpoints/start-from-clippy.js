@@ -1,11 +1,8 @@
-// the user joins #the-cave, the starter channel
-const { sleep } = require('../util/sleep')
+// the user is directed to the cave
 const { transcript } = require('../util/transcript')
-const { prisma } = require('../db')
-const { getEmailFromUser } = require('../util/get-invite')
 
 module.exports = async function startFromClippy(req, res) {
-  const {  user_id } = req.query
+  const { user_id } = req.query
   await Promise.all([
     client.chat.postEphemeral({
       text: transcript('announcements-to-cave'),
