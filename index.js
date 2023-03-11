@@ -45,7 +45,7 @@ const defaultChannels = [
   'community',
   'hack-night',
   'welcome',
-  'hackathons'
+  'hackathons',
   'question-of-the-day',
 ]
 const apacChannels = [
