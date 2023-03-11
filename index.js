@@ -40,11 +40,12 @@ const defaultChannels = [
   'neighborhood',
   '8-ball',
   'code',
-  'confessions',
   'counttoamillion',
   'sprig',
   'community',
   'hack-night',
+  'welcome',
+  'hackathons',
   'question-of-the-day',
 ]
 const apacChannels = [
@@ -56,8 +57,8 @@ const apacChannels = [
 
 const getSuggestion = () => {
   const suggestions = [
-    `tell us how you're doing in <#${transcript('channels.lounge')}>`,
-    `post your proudest ship in <#${transcript('channels.ship')}>`,
+    `hang out in the <#${transcript('channels.lounge')}>`,
+    `post your ships in <#${transcript('channels.ship')}>`,
     `post a project you're currently working on in <#${transcript(
       'channels.scrapbook'
     )}>`,
