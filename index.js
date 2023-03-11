@@ -70,7 +70,7 @@ const getSuggestion = () => {
       'channels.8-ball'
     )}>`,
     `share a photo of your surroundings in <#${transcript(
-      `channels.surroundings`
+      'channels.surroundings'
     )}>`,
     `tell us what you're listening to in <#${transcript('channels.music')}>`,
   ]
