@@ -57,8 +57,8 @@ const apacChannels = [
 
 const getSuggestion = () => {
   const suggestions = [
-    `hang out in the <#${transcript('channels.lounge')}>`,
-    `post your ships in <#${transcript('channels.ship')}>`,
+    `tell us how you're doing in <#${transcript('channels.lounge')}>`,
+    `post your proudest ship in <#${transcript('channels.ship')}>`,
     `post a project you're currently working on in <#${transcript(
       'channels.scrapbook'
     )}>`,
@@ -69,9 +69,10 @@ const getSuggestion = () => {
     `ask 8-ball your fortune for the coming week in <#${transcript(
       'channels.8-ball'
     )}>`,
-    `talk to the friendly cow from the club farm in their <#${transcript(
-      'channels.pasture'
+    `share a photo of your surroundings in <#${transcript(
+      'channels.surroundings'
     )}>`,
+    `tell us what you're listening to in <#${transcript('channels.music')}>`,
   ]
   return suggestions[Math.floor(Math.random() * suggestions.length)]
 }
