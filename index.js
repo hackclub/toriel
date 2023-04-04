@@ -48,12 +48,6 @@ const defaultChannels = [
   'hackathons',
   'question-of-the-day',
 ]
-const apacChannels = [
-  'apac-lounge',
-  'apac-hq',
-  'apac-community',
-  'apac-hack-night',
-]
 
 const getSuggestion = () => {
   const suggestions = [
@@ -95,7 +89,7 @@ app.event('message', async (args) => {
     })
   }
 
-  const protectedChannels = [transcript('channels.cave')]
+  const protectedChannels = [transcript('channels.cave-a')]
   if (type == 'message' && protectedChannels.includes(channel)) {
     console.log(`Attempting to remove ${subtype} message in #cave channel`)
     await client.chat
@@ -215,11 +209,11 @@ app.command(/.*?/, async (args) => {
     })
 
     switch (command) {
-      case '/toriel-restart':
+      case '/arv-restart':
         await require(`./commands/restart`)(args)
         break
 
-      case '/toriel-call':
+      case '/arv-call':
         await require(`./commands/call`)(args)
         break
 
@@ -274,7 +268,7 @@ app.action(/.*?/, async (args) => {
               altText: transcript('house.profile-alt-text'),
             }),
             transcript('block.single-button', {
-              text: "i've filled out my profile",
+              text: "i've filled out my profile!",
               value: 'profile_complete',
             }),
           ],

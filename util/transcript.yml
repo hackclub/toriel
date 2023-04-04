@@ -57,6 +57,7 @@ channels:
   whack-a-mole: C01TW2CAK55
   wordle: C02TWKX227J
   toriel-dev: C02B7CWDD0E
+  cave-a: C051J9JR52R
 
 block:
   text:
@@ -90,7 +91,7 @@ block:
           text: ${this[1].text}
         value: ${this[1].value}
 
-announcements-to-cave: hello wanderer! head to <#${this.t('channels.cave')}> to continue your journey.
+announcements-to-cave: hello wanderer! head to <#${this.t('channels.cave-a')}> to continue your journey.
 
 cave-intro: while wandering through the forest, you've stumbled down the entrance of a cave. it looks too high to climb back out.
 

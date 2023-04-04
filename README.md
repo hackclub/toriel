@@ -28,7 +28,7 @@ In order to run Toriel locally, you'll need to [join the Hack Club Slack](https:
    - Change the slash command and event endpoints by replacing `https://toriel.hackclub.com` with your ngrok URL
      - You can find your ngrok URL in the terminal where you ran `ngrok http 3000`. It would look similar to this (your ngrok URL will be different):
        ![Screenshot of ngrok running](https://cloud-mt3q3pxrm-hack-club-bot.vercel.app/0ngrok.png)
-     - Take this URL and replace it with all `https://toriel.hackclub.com/slack/events` URLs (the [first slash command url](https://github.com/hackclub/toriel/blob/922eb46862a472bc36d90a45cdb804741ff60d2e/manifest.yml#L14), [second slash command url](https://github.com/hackclub/toriel/blob/922eb46862a472bc36d90a45cdb804741ff60d2e/manifest.yml#L18), [event url](https://github.com/hackclub/toriel/blob/922eb46862a472bc36d90a45cdb804741ff60d2e/manifest.yml#L39), and [interactivity url](https://github.com/hackclub/toriel/blob/922eb46862a472bc36d90a45cdb804741ff60d2e/manifest.yml#L46). Include `/slack/events` so your new URLs would be `your-ngrok-URL/slack/events`.
+     - Take this URL and replace it with all `https://to.underpass.clb.li/slack/events` URLs (the [first slash command url](https://github.com/hackclub/toriel/blob/922eb46862a472bc36d90a45cdb804741ff60d2e/manifest.yml#L14), [second slash command url](https://github.com/hackclub/toriel/blob/922eb46862a472bc36d90a45cdb804741ff60d2e/manifest.yml#L18), [event url](https://github.com/hackclub/toriel/blob/922eb46862a472bc36d90a45cdb804741ff60d2e/manifest.yml#L39), and [interactivity url](https://github.com/hackclub/toriel/blob/922eb46862a472bc36d90a45cdb804741ff60d2e/manifest.yml#L46). Include `/slack/events` so your new URLs would be `your-ngrok-URL/slack/events`.
    - Change the app and bot name from `TORIEL` to something that doesn't start with `T` (ex. `msw-dev-toriel`). This prevents Slack's auto-suggestions from confusing new users.
      ![Screenshot of where to change name](https://cloud-mrhdyhr0u-hack-club-bot.vercel.app/0name.png)
    - Change the slash commands from `/toriel-COMMAND` to something that doesn't start with `t` (ex. `/toriel-restart` -> `/msw-dev-restart`).
@@ -73,8 +73,8 @@ In order to run Toriel locally, you'll need to [join the Hack Club Slack](https:
     - You can find the channel ID by opening the channel and clicking on the channel name in the top left. Scroll down the modal and you should see it in the bottom left corner
       ![Screenshot of channel ID](https://user-images.githubusercontent.com/621904/164070484-d3d4f57a-546f-4d60-b800-7c052a3bcbcf.png)
 
-14. Do a global find and replace in the codebase to update `channels.cave` to `channels.name-of-your-private-channel`
-    - As `{channels.cave}` refers to `#in-the-cave`, we need to replace it with the private channel (ex. `{channels.msw-test-cave}`) that you created for your bot
+14. Do a global find and replace in the codebase to update `channels.cave-a` to `channels.name-of-your-private-channel`
+    - As `{channels.cave-a}` refers to `#in-the-cave`, we need to replace it with the private channel (ex. `{channels.msw-test-cave}`) that you created for your bot
 15. Run `npm run dev` again and also reinstall your app to the workspace (under Basic Information)
     ![Screenshot of reinstall your app page](https://cloud-8uduk6deq-hack-club-bot.vercel.app/0screenshot_2022-04-18_at_9.38.48_pm.png)
 

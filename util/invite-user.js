@@ -14,7 +14,7 @@ async function inviteUser({ email, ip, continent, teen, reason, userAgent }) {
     },
   })
 
-  const channels = [transcript('channels.cave')]
+  const channels = [transcript('channels.cave-a')]
   const customMessage =
     'While wandering through a forest, you stumble upon a cave...'
 
