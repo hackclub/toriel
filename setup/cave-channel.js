@@ -15,7 +15,7 @@ async function postImage() {
     responseType: 'stream',
   })
   const response = await client.files.upload({
-    channels: transcript('channels.cave-a-a'),
+    channels: transcript('channels.cave-a'),
     file: file.data,
     filename: 'you fall into a cave...',
     filetype: 'png',
@@ -24,7 +24,7 @@ async function postImage() {
 
 async function postMessage() {
   client.chat.postMessage({
-    channel: transcript('channels.cave-a-a'),
+    channel: transcript('channels.cave-a'),
     text: transcript('cave-intro'),
     icon_url: transcript('avatar.log'),
     blocks: [
@@ -43,9 +43,9 @@ async function postAudio() {
     url: transcript('files.cave-audio'),
     responseType: 'stream',
   })
-  console.log({ channel: transcript('channels.cave-a-a') })
+  console.log({ channel: transcript('channels.cave-a') })
   const response = await client.files.upload({
-    channels: transcript('channels.cave-a-a'),
+    channels: transcript('channels.cave-a'),
     file: file.data,
     filename: 'play me',
     filetype: 'm4a',
