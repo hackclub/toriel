@@ -47,6 +47,12 @@ const defaultChannels = [
   'welcome',
   'hackathons',
   'question-of-the-day',
+  'minecraft',
+  'apple'
+]
+
+const apacChannels = [
+  "minecraft"
 ]
 
 const getSuggestion = () => {
@@ -348,9 +354,9 @@ app.start(process.env.PORT || 3000).then(async () => {
     await startupInteraction()
   }
 
-  /* DEVELOPMENT UTILITIES (uncomment to use) */
+
   const { setupCaveChannel } = require('./setup/cave-channel')
-  // await setupCaveChannel(app)
+ await setupCaveChannel(app)
 })
 
 module.exports = { app }
