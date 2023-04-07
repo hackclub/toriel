@@ -48,12 +48,8 @@ const defaultChannels = [
   'hackathons',
   'question-of-the-day',
   'minecraft',
-  'apple'
+  'apple',
 ]
-
-const apacChannels = [
-  "minecraft"
-] // Find why removing this is breaking everything
 
 const getSuggestion = () => {
   const suggestions = [
@@ -108,8 +104,6 @@ app.event('message', async (args) => {
         console.warn(e)
       })
   }
-
-  defaultAdds = defaultChannels.concat(apacChannels) // add all default channels into new array
 
   defaultAddsId = defaultAdds.map((e) => {
     return transcript(`channels.${e}`)
@@ -354,9 +348,8 @@ app.start(process.env.PORT || 3000).then(async () => {
     await startupInteraction()
   }
 
-
   const { setupCaveChannel } = require('./setup/cave-channel')
- await setupCaveChannel(app)
+  await setupCaveChannel(app)
 })
 
 module.exports = { app }
