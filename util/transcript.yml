@@ -165,6 +165,9 @@ club-leader:
   text: 'a new club leader has joined: <@${this.user}>'
   notifiee: U03M1H014CX # Holly
 
+  hackathon: |
+  Do you want to be emailed for hackathons happening near you through hackathons.hackclub.com? 
+
 welcome-committee: |
   <@${this.user}> (${this.hs ? 'a high schooler' : 'an adult'} in ${this.continent.toLowerCase()}) just became a full user in the Slack! Here's why they joined:
   ${this.message.split('\n').map(line => '> '+line)}
