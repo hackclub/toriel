@@ -23,6 +23,7 @@ channels:
   code: C0EA9S0A0
   commons: C021CQCHP09
   community: C01D7AHKMPF
+  confessions: CNMU9L92Q
   counttoamillion: CDJMS683D
   epoch: C044SRZR8MB
   gamedev: C6LHL48G2
@@ -155,7 +156,7 @@ house:
     if that’s still too much, perhaps you’ll find one of my suggestions useful:
 
     > ${this.suggestion}
-  added-to-channels-epoch: |
+  added-to-channels-emoji: |
     <https://hack.af/epoch-banner|welcome!> we're so excited to have you here for epoch; *to confirm your registration for epoch, head to <#${this.t('channels.epoch')}> and say hi!*
 
     i’ve also added you to some other channels you might like. feel free to poke around and get your fellow hackers!
