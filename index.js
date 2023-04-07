@@ -53,7 +53,7 @@ const defaultChannels = [
 
 const apacChannels = [
   "minecraft"
-]
+] // Find why removing this is breaking everything
 
 const getSuggestion = () => {
   const suggestions = [
