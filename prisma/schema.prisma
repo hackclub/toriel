@@ -32,7 +32,7 @@ model Invite {
   user_agent      String
   high_school     Boolean
   welcome_message String
-  event           String    
+  event           String? 
   continent       Continent
   user_id         String?
 }
