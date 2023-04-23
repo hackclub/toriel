@@ -25,7 +25,7 @@ async function inviteUser({
 
   
 
-  const channels = [transcript('channels.arav-tor')]
+  const channels = [transcript('channels.cave')]
   const customMessage =
     'While wandering through a forest, you stumble upon a cave...'
 
