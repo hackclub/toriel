@@ -23,7 +23,7 @@ async function inviteUser({
     },
   })
 
-  console.log('test')
+  
 
   const channels = [transcript('channels.arav-tor')]
   const customMessage =
