@@ -19,11 +19,13 @@ async function inviteUser({
       high_school: teen, // we actually just care if they're a teenager, so middle school is included in high school
       welcome_message: reason, // record their reason for joining the slack as their welcome message
       continent: continent.toUpperCase().replace(/\W/g, '_'),
-      event: event || null
+      event: event || null,
     },
   })
 
-  const channels = [transcript('channels.cave')]
+  console.log('test')
+
+  const channels = [transcript('channels.arav-tor')]
   const customMessage =
     'While wandering through a forest, you stumble upon a cave...'
 
