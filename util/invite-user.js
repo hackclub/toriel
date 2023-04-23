@@ -2,7 +2,15 @@ const fetch = require('node-fetch')
 const { prisma } = require('../db')
 const { transcript } = require('./transcript')
 
-async function inviteUser({ email, ip, continent, teen, reason, userAgent }) {
+async function inviteUser({
+  email,
+  ip,
+  continent,
+  teen,
+  reason,
+  userAgent,
+  event,
+}) {
   await prisma.invite.create({
     data: {
       email: email,
@@ -11,6 +19,7 @@ async function inviteUser({ email, ip, continent, teen, reason, userAgent }) {
       high_school: teen, // we actually just care if they're a teenager, so middle school is included in high school
       welcome_message: reason, // record their reason for joining the slack as their welcome message
       continent: continent.toUpperCase().replace(/\W/g, '_'),
+      event: event || null, // This is a field that is only filled if someone signed up with ?event= query
     },
   })
 
