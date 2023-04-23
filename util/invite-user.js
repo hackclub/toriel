@@ -19,7 +19,7 @@ async function inviteUser({
       high_school: teen, // we actually just care if they're a teenager, so middle school is included in high school
       welcome_message: reason, // record their reason for joining the slack as their welcome message
       continent: continent.toUpperCase().replace(/\W/g, '_'),
-      event: event,
+      event: event || null
     },
   })
 
