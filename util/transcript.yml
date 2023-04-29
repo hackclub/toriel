@@ -58,6 +58,12 @@ channels:
   wordle: C02TWKX227J
   toriel-dev: C02B7CWDD0E
   angelhacks: C050R91GSF5
+  arv-tor: C054EE209T7
+  angelhacks-toronto: C051XV7CJLW
+  angelhacks-ba: C051MQSF970
+  angelhacks-la: C051DU6T71V
+  
+
 
 block:
   text:
@@ -91,7 +97,7 @@ block:
           text: ${this[1].text}
         value: ${this[1].value}
 
-announcements-to-cave: hello wanderer! head to <#${this.t('channels.cave')}> to continue your journey.
+announcements-to-cave: hello wanderer! head to <#${this.t('channels.arav-tor')}> to continue your journey.
 
 cave-intro: while wandering through the forest, you've stumbled down the entrance of a cave. it looks too high to climb back out.
 
