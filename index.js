@@ -133,14 +133,15 @@ app.event('message', async (args) => {
   } // delete "user has joined" message if it is sent in one of the default channels that TORIEL adds new members to
 })
 
-const addToChannels = async (user, epoch) => {
+const addToChannels = async (user, event, ref) => {
   await upgradeUser(user)
 
   await sleep(1000) // timeout to prevent race-condition during channel invites
   const invite = await getInvite({ user })
   let channelsToInvite = defaultChannels
-  if (epoch) {
-    channelsToInvite.push('epoch')
+  if (event) {
+    channelsToInvite.push(ref)
+    defaultChannels.push(ref)
   }
   await Promise.all([
     Promise.all(
@@ -153,19 +154,13 @@ const addToChannels = async (user, epoch) => {
 
   const suggestion = getSuggestion()
   await client.chat.postMessage({
-    text: transcript(
-      epoch ? 'house.added-to-channels' : 'house.added-to-channels-epoch',
-      { suggestion }
-    ),
+    text: transcript('house.added-to-channels', { suggestion }),
     blocks: [
       transcript('block.text', {
-        text: transcript(
-          !epoch ? 'house.added-to-channels' : 'house.added-to-channels-epoch',
-          { suggestion }
-        ),
+        text: transcript('house.added-to-channels', { suggestion }),
       }),
       transcript('block.single-button', {
-        text: !epoch ? 'reroll' : `I've introduced myself...`,
+        text: !event ? 'reroll' : `I've introduced myself...`,
         value: 'reroll',
       }),
     ],
@@ -215,11 +210,11 @@ app.command(/.*?/, async (args) => {
     })
 
     switch (command) {
-      case '/toriel-restart':
+      case '/a-restart':
         await require(`./commands/restart`)(args)
         break
 
-      case '/toriel-call':
+      case '/a-call':
         await require(`./commands/call`)(args)
         break
 
@@ -257,12 +252,13 @@ app.action(/.*?/, async (args) => {
         where: { email },
         orderBy: { createdAt: 'desc' },
       })
-      if (invite?.welcome_message == "I'm going to Epoch!") {
+      if (invite?.event) {
+        const ref = invite?.event
         await prisma.user.update({
           where: { user_id: user },
           data: { club_leader: false },
         })
-        await addToChannels(user, true)
+        await addToChannels(user, true, ref)
         break
       } else {
         await client.chat.postMessage({
