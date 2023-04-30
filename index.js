@@ -133,15 +133,15 @@ app.event('message', async (args) => {
   } // delete "user has joined" message if it is sent in one of the default channels that TORIEL adds new members to
 })
 
-const addToChannels = async (user, event, ref) => {
+const addToChannels = async (user, event) => {
   await upgradeUser(user)
 
   await sleep(1000) // timeout to prevent race-condition during channel invites
   const invite = await getInvite({ user })
   let channelsToInvite = defaultChannels
   if (event) {
-    channelsToInvite.push(ref)
-    defaultChannels.push(ref)
+    channelsToInvite.push(event)
+    defaultChannels.push(event)
   }
   await Promise.all([
     Promise.all(
@@ -253,12 +253,12 @@ app.action(/.*?/, async (args) => {
         orderBy: { createdAt: 'desc' },
       })
       if (invite?.event) {
-        const ref = invite?.event
+        const event = invite?.event
         await prisma.user.update({
           where: { user_id: user },
           data: { club_leader: false },
         })
-        await addToChannels(user, true, ref)
+        await addToChannels(user, event)
         break
       } else {
         await client.chat.postMessage({
