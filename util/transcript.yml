@@ -150,7 +150,7 @@ house:
     active hack club projects you can check out or help build:
     • we’re building <https://sinerider.hackclub.dev|sinerider>, a game about love and graphing, at <#${this.t('channels.gamedev')}>
     • help organize / attend the official hack club spring event run as angelhacks 3.0 x hackclub at <#${this.t('channels.angelhacks')}>
-    • we’re giving scrapbook new life at <#${this.t('channels.scrapbook-dev')}>
+    • Building a best-in-class VPN w/the maker of Apple's Shortcuts + a fabulous team of Hack Clubbers at <#${this.t('channels.burrow')}>
     • <#${this.t('channels.sprig')}>: get a free game console by <https://sprig.hackclub.com|making a fun game>
 
     to see the channels people are currently talking in, send \`/bunny\` as a message in any channel
