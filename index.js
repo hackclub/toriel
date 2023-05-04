@@ -69,8 +69,6 @@ const getSuggestion = () => {
     `ask 8-ball your fortune for the coming week in <#${transcript(
       'channels.8-ball'
     )}>`,
-    `Count to a million with other hack clubbers in <#${transcript(
-      'channels.counttoamillion')}>`,
     `share a photo of your surroundings in <#${transcript(
       'channels.surroundings'
     )}>`,
