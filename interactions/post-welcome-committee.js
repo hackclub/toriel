@@ -22,7 +22,7 @@ async function postWelcomeCommittee(user) {
         message,
         continent,
         hs,
-        event
+        event,
       }),
     })
   } catch (e) {
