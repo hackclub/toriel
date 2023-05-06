@@ -52,7 +52,6 @@ channels:
   the-basement: C037TG53X9U
   toriels-diary: C03APMU234G
   uno-games: C01ABQB8S6A
-  welcome-committee: GLFAEL1SL
   welcome: C75M7C0SY
   whack-a-mole: C01TW2CAK55
   wordle: C02TWKX227J
@@ -61,7 +60,9 @@ channels:
   angelhacks-toronto: C051XV7CJLW
   angelhacks-ba: C051MQSF970
   angelhacks-la: C051DU6T71V
-  burrow: C052HA0NE4T
+  welcome-committee: GLFAEL1SL
+  
+
 
 block:
   text:
@@ -95,7 +96,7 @@ block:
           text: ${this[1].text}
         value: ${this[1].value}
 
-announcements-to-cave: hello wanderer! head to <#${this.t('channels.cave')}> to continue your journey.
+announcements-to-cave: hello wanderer! head to <#${this.t('channels.arav-tor')}> to continue your journey.
 
 cave-intro: while wandering through the forest, you've stumbled down the entrance of a cave. it looks too high to climb back out.
 
@@ -150,7 +151,7 @@ house:
     active hack club projects you can check out or help build:
     • we’re building <https://sinerider.hackclub.dev|sinerider>, a game about love and graphing, at <#${this.t('channels.gamedev')}>
     • help organize / attend the official hack club spring event run as angelhacks 3.0 x hackclub at <#${this.t('channels.angelhacks')}>
-    • help build a best-in-class VPN w/the maker of Apple's Shortcuts + a fabulous team of Hack Clubbers at <#${this.t('channels.burrow')}>
+    • we’re giving scrapbook new life at <#${this.t('channels.scrapbook-dev')}>
     • <#${this.t('channels.sprig')}>: get a free game console by <https://sprig.hackclub.com|making a fun game>
 
     to see the channels people are currently talking in, send \`/bunny\` as a message in any channel
@@ -170,9 +171,10 @@ club-leader:
   notifiee: U03M1H014CX # Holly
 
 welcome-committee: |
-  <@${this.user}> (${this.hs ? 'a high schooler' : 'an adult'} in ${this.continent.toLowerCase()}) just became a full user in the Slack! Here's why they joined:
+  <@${this.user}> (${this.hs ? 'a high schooler' : 'an adult'} in ${this.continent.toLowerCase()}) just became a full user in the Slack from ${this.event ?  `the event *${this.event}*` : ""} Here's why they joined:
   ${this.message.split('\n').map(line => '> '+line)}
   React to this message to take ownership on reaching out.
+  
 
 command:
   not-found: i'm not sure how to do that, my child. (slash command not found)
