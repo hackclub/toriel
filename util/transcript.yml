@@ -171,7 +171,7 @@ club-leader:
   notifiee: U03M1H014CX # Holly
 
 welcome-committee: |
-  <@${this.user}> (${this.hs ? 'a high schooler' : 'an adult'} in ${this.continent.toLowerCase()}) just became a full user in the Slack ${this.event ?  `from the event *${this.event}*! ` : "!"} Here's why they joined:
+  <@${this.user}> (${this.hs ? 'a high schooler' : 'an adult'} in ${this.continent.toLowerCase()}) just became a full user in the Slack ${this.event ?  `from the event *${this.event}*! ` : "!"} \n Here's why they joined:
   ${this.message.split('\n').map(line => '> '+line)}
   React to this message to take ownership on reaching out.
   
