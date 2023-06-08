@@ -344,6 +344,9 @@ app.start(process.env.PORT || 3000).then(async () => {
 
   const { cleanupCaveChannel } = require('./interactions/cleanup-cave')
   await cleanupCaveChannel()
+  
+  const { cleanupHappeningsChannel } = require('./interactions/cleanup-happenings')
+  await cleanupHappeningsChannel()
 
   if (process.env.NODE_ENV === 'production') {
     const { startupInteraction } = require('./interactions/startup')
