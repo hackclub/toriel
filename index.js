@@ -47,6 +47,7 @@ const defaultChannels = [
   'welcome',
   'hackathons',
   'question-of-the-day',
+  'happenings'
 ]
 const apacChannels = [
   'apac-lounge',
