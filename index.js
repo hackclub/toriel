@@ -107,7 +107,7 @@ app.event('message', async (args) => {
 
 
 
-  defaultAddsId = defaultAdds.map((e) => {
+  defaultAddsId = defaultChannels.map((e) => {
     return transcript(`channels.${e}`)
   }) // map all default channels into ids as channel prop is given as id
 
