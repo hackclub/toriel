@@ -49,12 +49,7 @@ const defaultChannels = [
   'question-of-the-day',
   'happenings'
 ]
-const apacChannels = [
-  'apac-lounge',
-  'apac-hq',
-  'apac-community',
-  'apac-hack-night',
-]
+
 
 const getSuggestion = () => {
   const suggestions = [
@@ -110,7 +105,7 @@ app.event('message', async (args) => {
       })
   }
 
-  defaultAdds = defaultChannels.concat(apacChannels) // add all default channels into new array
+
 
   defaultAddsId = defaultAdds.map((e) => {
     return transcript(`channels.${e}`)
