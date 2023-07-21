@@ -2,6 +2,9 @@ const fetch = require('node-fetch')
 const { prisma } = require('../db')
 const { transcript } = require('./transcript')
 
+const { defaultInvite } = require('./invite-types/default')
+const { onboardInvite } = require('./invite-types/default')
+
 async function inviteUser({
   email,
   ip,
@@ -23,9 +26,11 @@ async function inviteUser({
     },
   })
 
-  const channels = [transcript('channels.cave')]
-  const customMessage =
-    'While wandering through a forest, you stumble upon a cave...'
+  let invite = defaultInvite
+  if (event == 'onboard') {
+    invite = onboardInvite
+  }
+  const { channels, customMessage } = invite
 
   // This is a private api method found in https://github.com/ErikKalkoken/slackApiDoc/blob/master/users.admin.invite.md
   // I only got a successful response by putting all the args in URL params
