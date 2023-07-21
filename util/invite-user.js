@@ -2,7 +2,7 @@ const fetch = require('node-fetch')
 const { prisma } = require('../db')
 
 const { defaultInvite } = require('./invite-types/default')
-const { onboardInvite } = require('./invite-types/default')
+const { onboardInvite } = require('./invite-types/onboard')
 
 async function inviteUser({
   email,
