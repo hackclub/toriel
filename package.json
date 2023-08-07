@@ -16,7 +16,7 @@
   "license": "MIT",
   "dependencies": {
     "@prisma/client": "^4.13.0",
-    "@slack/bolt": "^3.12.2",
+    "@slack/bolt": "^3.13.3",
     "axios": "^1.2.6",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
