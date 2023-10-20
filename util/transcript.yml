@@ -150,7 +150,6 @@ house:
     • we’re building <https://sinerider.hackclub.dev|sinerider>, a game about love and graphing, at <#${this.t('channels.gamedev')}>
     • get funding to build a circuit board at <#${this.t('channels.onboard')}>
     • <#${this.t('channels.sprig')}>: get a free game console by <https://sprig.hackclub.com|making a fun game>
-    and for all the latest happenings, check out <#${this.t('channels.happenings')}>, especially the weekly updates from our community team
 
     to see the channels people are currently talking in, send \`/bunny\` as a message in any channel
 
