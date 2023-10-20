@@ -147,10 +147,20 @@ const addToChannels = async (user, event) => {
 
   const suggestion = getSuggestion()
   await client.chat.postMessage({
-    text: transcript('house.added-to-channels', { suggestion }),
+    text: transcript('house.added-to-channels'),
     blocks: [
       transcript('block.text', {
-        text: transcript('house.added-to-channels', { suggestion }),
+        text: transcript('house.added-to-channels'),
+      })
+    ],
+    channel: user,
+  })
+  
+  await client.chat.postMessage({
+    text: transcript('house.things-to-do-hc', { suggestion }),
+    blocks: [
+      transcript('block.text', {
+        text: transcript('house.things-to-do-hc', { suggestion }),
       }),
       transcript('block.single-button', {
         text: !event ? 'reroll' : `I've introduced myself...`,
@@ -159,6 +169,8 @@ const addToChannels = async (user, event) => {
     ],
     channel: user,
   })
+  
+  
 
   // TODO weigh by reactions or just do something else entirely
   const history = await client.conversations.history({
