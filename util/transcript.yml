@@ -130,7 +130,7 @@ house:
   club-leader: |
     are you joining the slack because you're either currently running or considering running a hack club at your school?
 
-    (it's ok if not — this is so i can direct you to the right channels)
+    (it's ok if not — this is so i can direct you to the right channels)
   added-to-channels: |
     i’ve now added you to some channels you might like; feel free to poke around. here’s an overview if you feel lost or overwhelmed:
 
@@ -140,8 +140,7 @@ house:
 
     to meet hack clubbers running hackathons and get help running your own: <#${this.t('channels.hackathon-organizers')}>
 
-  things-to-do-hc: |
-   active hack club projects you can check out or help build:
+    active hack club projects you can check out or help build:
     • Keep updated with all the events & activtes happening inside the slack every week at <#${this.t('channels.happenings')}>
     • we’re building <https://sinerider.com|sinerider>, a game about love and graphing, at <#${this.t('channels.gamedev')}>
     • get funding to build a circuit board at <#${this.t('channels.onboard')}>
@@ -152,9 +151,8 @@ house:
     also, feel free to post an introduction in <#${this.t('channels.welcome')}> (don't worry, this is totally optional)!
 
     if that’s still too much, perhaps you’ll find one of my suggestions useful:
-    > ${this.suggestion}
 
-    
+    > ${this.suggestion}
   added-to-channels-epoch: |
     <https://hack.af/epoch-banner|welcome!> we're so excited to have you here for epoch; *to confirm your registration for epoch, head to <#${this.t('channels.epoch')}> and say hi!*
 
@@ -253,7 +251,7 @@ themes:
     - '#130F40,#0E0B01,#37ABD2,#130F40,#342E73,#37ABD2,#FFFFFF,#FF5252,#37ABD2,#0E0B01' # blue
     - '#282828,#3C3836,#98971A,#FBF1C7,#3E313C,#EBDBB2,#B8BB26,#FB4934' # gruvbox
 
-# Slack is very picky about audio files– i've only found uploads and previews to work consistently with m4a files
+# Slack is very picky about audio files– i've only found uploads and previews to work consistently with m4a files
 files:
   # home-audio: https://cloud-qx6qgax5b-hack-club-bot.vercel.app/00play_me-home_audio.mp3
   home-audio: https://cloud-hz3xqrwce-hack-club-bot.vercel.app/0output.m4a
