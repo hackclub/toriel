@@ -47,8 +47,9 @@ const defaultChannels = [
   'welcome',
   'hackathons',
   'question-of-the-day',
-  'happenings',
+  'happenings'
 ]
+
 
 const getSuggestion = () => {
   const suggestions = [
@@ -104,6 +105,8 @@ app.event('message', async (args) => {
       })
   }
 
+
+
   defaultAddsId = defaultChannels.map((e) => {
     return transcript(`channels.${e}`)
   }) // map all default channels into ids as channel prop is given as id
@@ -147,20 +150,10 @@ const addToChannels = async (user, event) => {
 
   const suggestion = getSuggestion()
   await client.chat.postMessage({
-    text: transcript('house.added-to-channels'),
+    text: transcript('house.added-to-channels', { suggestion }),
     blocks: [
       transcript('block.text', {
-        text: transcript('house.added-to-channels'),
-      })
-    ],
-    channel: user,
-  })
-  
-  await client.chat.postMessage({
-    text: transcript('house.things-to-do-hc', { suggestion }),
-    blocks: [
-      transcript('block.text', {
-        text: transcript('house.things-to-do-hc', { suggestion }),
+        text: transcript('house.added-to-channels', { suggestion }),
       }),
       transcript('block.single-button', {
         text: !event ? 'reroll' : `I've introduced myself...`,
@@ -169,8 +162,6 @@ const addToChannels = async (user, event) => {
     ],
     channel: user,
   })
-  
-  
 
   // TODO weigh by reactions or just do something else entirely
   const history = await client.conversations.history({
@@ -349,10 +340,8 @@ app.start(process.env.PORT || 3000).then(async () => {
 
   const { cleanupCaveChannel } = require('./interactions/cleanup-cave')
   await cleanupCaveChannel()
-
-  const {
-    cleanupHappeningsChannel,
-  } = require('./interactions/cleanup-happenings')
+  
+  const { cleanupHappeningsChannel } = require('./interactions/cleanup-happenings')
   await cleanupHappeningsChannel()
 
   if (process.env.NODE_ENV === 'production') {
@@ -366,4 +355,3 @@ app.start(process.env.PORT || 3000).then(async () => {
 })
 
 module.exports = { app }
-
