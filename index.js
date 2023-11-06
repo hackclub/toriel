@@ -35,19 +35,11 @@ receiver.router.post('/slack-invite', require('./endpoints/slack-invite'))
 const defaultChannels = [
   'lounge',
   'scrapbook',
+  'happenings',
   'ship',
-  'hq',
-  'neighborhood',
-  '8-ball',
   'code',
-  'counttoamillion',
-  'sprig',
-  'community',
-  'hack-night',
-  'welcome',
-  'hackathons',
-  'question-of-the-day',
-  'happenings'
+  'neighbourhood',
+  'welcome'
 ]
 
 
