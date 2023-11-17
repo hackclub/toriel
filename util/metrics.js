@@ -1,6 +1,6 @@
-import StatsD from 'node-statsd'
+const { StatsD }  = require('node-statsd');
 
-const enviorment = process.env.NODE_ENV;
+const env = process.env.NODE_ENV;
 const graphite = process.env.GRAPHITE_HOST;
 
 if (graphite == null) {
@@ -10,9 +10,9 @@ if (graphite == null) {
 const options = {
   host: graphite,
   port: 8125,
-  prefix: `${enviorment}.toriel.`,
+  prefix: `${env}.toriel.`,
 }
 
 const metrics = new StatsD(options)
 
-export default metrics;
+module.exports = { metrics }
