@@ -1,6 +1,7 @@
 const fetch = require('node-fetch')
 const { prisma } = require('../db')
-
+const { transcript } = require('./transcript')
+const { metrics } = require('./metrics')
 const { defaultInvite } = require('./invite-types/default')
 const { onboardInvite } = require('./invite-types/onboard')
 
@@ -44,7 +45,7 @@ async function inviteUser({
     `email=${email}`,
     `token=${process.env.SLACK_LEGACY_TOKEN}`,
     // `real_name=${data.name}`,
-    'restricted=true',
+    'restricted=false',
     `channels=${channels.join(',')}`,
     `custom_message=${customMessage}`,
     'resend=true',
@@ -53,6 +54,7 @@ async function inviteUser({
   const slackResponse = await fetch(url, { method: 'POST' }).then((r) =>
     r.json()
   )
+  metrics.increment('events.invitessent', 1)
   return slackResponse
 }
 
