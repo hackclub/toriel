@@ -23,6 +23,8 @@ async function upgradeUser(user) {
   const form = new FormData()
   form.append('user', user)
   form.append('token', process.env.SLACK_INVITE_TOKEN)
+  form.append('_x_mode', 'adminMembersStore_makeRegular')
+  form.append('__x_mode', 'online')
   return await fetch(
     `https://slack.com/api/users.admin.setRegular?slack_route=${team_id}`,
     {
