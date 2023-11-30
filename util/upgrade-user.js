@@ -14,6 +14,8 @@ async function upgradeUser(user) {
     return null
   }
 
+  console.log(`Attempting to upgrade user ${user}`)
+
   // @msw This endpoint is undocumented. It's usage and token were taken from
   // inspecting the network traffic while upgrading a user. The
   // SLACK_INVITE_TOKEN is a `xoxs` token that can be found in browsers.
