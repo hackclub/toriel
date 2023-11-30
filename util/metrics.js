@@ -1,10 +1,10 @@
-const { StatsD }  = require('node-statsd');
+const { StatsD } = require('node-statsd')
 
-const env = process.env.NODE_ENV;
-const graphite = process.env.GRAPHITE_HOST;
+const env = process.env.NODE_ENV
+const graphite = process.env.GRAPHITE_HOST
 
 if (graphite == null) {
-  throw new Error("Graphite is not working");
+  throw new Error('Graphite is not working')
 }
 
 const options = {
