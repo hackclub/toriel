@@ -39,9 +39,8 @@ const defaultChannels = [
   'ship',
   'code',
   'neighbourhood',
-  'welcome'
+  'welcome',
 ]
-
 
 const getSuggestion = () => {
   const suggestions = [
@@ -96,8 +95,6 @@ app.event('message', async (args) => {
         console.warn(e)
       })
   }
-
-
 
   defaultAddsId = defaultChannels.map((e) => {
     return transcript(`channels.${e}`)
@@ -332,8 +329,10 @@ app.start(process.env.PORT || 3000).then(async () => {
 
   const { cleanupCaveChannel } = require('./interactions/cleanup-cave')
   await cleanupCaveChannel()
-  
-  const { cleanupHappeningsChannel } = require('./interactions/cleanup-happenings')
+
+  const {
+    cleanupHappeningsChannel,
+  } = require('./interactions/cleanup-happenings')
   await cleanupHappeningsChannel()
 
   if (process.env.NODE_ENV === 'production') {
