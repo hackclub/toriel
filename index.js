@@ -2,7 +2,6 @@ require('dotenv').config()
 const { inviteUserToChannel } = require('./util/invite-user-to-channel')
 const { mirrorMessage } = require('./util/mirror-message')
 const { transcript } = require('./util/transcript')
-const { upgradeUser } = require('./util/upgrade-user')
 const {
   postWelcomeCommittee,
 } = require('./interactions/post-welcome-committee')
@@ -119,7 +118,6 @@ app.event('message', async (args) => {
 })
 
 const addToChannels = async (user, event) => {
-  await upgradeUser(user)
 
   await sleep(1000) // timeout to prevent race-condition during channel invites
   const invite = await getInvite({ user })
@@ -340,9 +338,6 @@ app.start(process.env.PORT || 3000).then(async () => {
     await startupInteraction()
   }
 
-  /* DEVELOPMENT UTILITIES (uncomment to use) */
-  const { setupCaveChannel } = require('./setup/cave-channel')
-   await setupCaveChannel(app)
-})
+
 
 module.exports = { app }

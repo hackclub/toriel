@@ -92,8 +92,10 @@ block:
 announcements-to-cave: hello wanderer! head to <#${this.t('channels.cave')}> to continue your journey.
 
 cave-intro: |
-while wandering through the forest, you've stumbled down the entrance of a cave. it looks too high to climb back out.
-(if you're stuck, ask for help in #waiting-room)
+  while wandering through the forest, you've stumbled down the entrance of a cave. it looks too high to climb back out.
+  You also find a note asking you to post in #waiting-room if you need help!
+
+cave-intro: while wandering through the forest, you've stumbled down the entrance of a cave. it looks too high to climb back out.
 
 
 cave-join: |

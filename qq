@@ -1,0 +1,2266 @@
+[33mcommit 9bbf60c42479ac55a03138a6360446571870960d[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Arav <arav.1tb@gmail.com>
+Date:   Sat Dec 9 23:49:06 2023 -0500
+
+    revert
+
+[33mcommit 8a899d36dacc0b0f7b1507c106d04b60e8c422be[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Thu Dec 7 12:18:12 2023 -0500
+
+    Update index.js
+
+[33mcommit f215248747c066ef7e622f2b7b71a5683af019f7[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Tue Dec 5 16:23:06 2023 -0500
+
+    Update index.js
+
+[33mcommit ee0f598cd9dbe0184eb10eb59215a7d0cd6eca49[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Thu Nov 30 12:11:15 2023 -0500
+
+    Update transcript.yml
+
+[33mcommit c536d858b6ac2f648af948751337456b1f2f8103[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Thu Nov 30 12:08:56 2023 -0500
+
+    have startup message in toriel-diary
+
+[33mcommit bde7d4fd1fe50e170e1ea28527d28ab0652600f1[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Thu Nov 30 12:04:41 2023 -0500
+
+    Delete util/metrics.js
+
+[33mcommit 94982bbcac690b69f5c444e8e2a102e38200b100[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Thu Nov 30 11:53:59 2023 -0500
+
+    remove upgrade user ref
+
+[33mcommit 40f0ccdd4ed0a675b61613271acdfbf6b736513e[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Thu Nov 30 11:53:04 2023 -0500
+
+    Update invite-user.js
+
+[33mcommit 8076f4cf46f327ca37aaf2ec30fc7bb62901a451[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Thu Nov 30 11:51:12 2023 -0500
+
+    Update index.js
+
+[33mcommit 570ee05454fca8e96c4bba9b151aa35e6a4b441c[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Thu Nov 30 11:50:29 2023 -0500
+
+    add waiting room message
+
+[33mcommit 07c4ac36bb5cede42df23e96b2c816727d6c4db4[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Thu Nov 30 11:49:31 2023 -0500
+
+    add waiting room to transcript
+
+[33mcommit daadc4181265438d0d6886c7765fa06ff90a45e3[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Thu Nov 30 11:05:22 2023 -0500
+
+    add waiting room
+
+[33mcommit 3ba76fdab25ec5515ea6f7225d605fb89776cf3a[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Thu Nov 30 10:32:47 2023 -0500
+
+    Create hcb.js
+
+[33mcommit 43592b56ff9c838a83a0932c702e7d80271a161f[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Thu Nov 30 10:30:27 2023 -0500
+
+    make invites full users
+
+[33mcommit fe09da61c236300aeb50894d5dbbb58b89549a1b[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Thu Nov 30 00:19:07 2023 -0500
+
+    Update metrics.js
+
+[33mcommit 07a3d0a5c184890bc2ac0798178af7abeeac7acc[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Thu Nov 30 00:18:52 2023 -0500
+
+    prettier
+
+[33mcommit b7a081c16eff9f515ec98d3bfda7511d22bd7d76[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Thu Nov 30 00:16:31 2023 -0500
+
+    Update upgrade-user.js
+
+[33mcommit 0e2713a63deae9c1a57763e68c976b534c2585b1[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Thu Nov 30 00:13:34 2023 -0500
+
+    try something new
+
+[33mcommit 290acf0b5737e198036e68401ad13fae22865282[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Wed Nov 29 22:53:18 2023 -0600
+
+    Add message when attempting to upgrade user
+
+[33mcommit 964767005cdd7cf4f29a09c6bff3a2799fcba30f[m
+Author: Jack <35432552+JackkoCodes@users.noreply.github.com>
+Date:   Wed Nov 22 18:34:50 2023 -0500
+
+    fix neighbourhood reference
+
+[33mcommit f68ada2393b2f2a33351cbbccbd93198839e5638[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Fri Nov 17 18:09:11 2023 -0500
+
+    fix eport
+
+[33mcommit a25d11f629bb3a527232213b99ed3dc7942fff30[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Thu Nov 16 20:16:30 2023 -0500
+
+    Create metrics.js
+
+[33mcommit 9a1907ba465b356b77176cf2b67c60cf1f71b4e6[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Mon Nov 6 11:03:41 2023 -0500
+
+    change copy to reflect new default channel list
+
+[33mcommit c4cd060ff887f92d3e31e8a2e86dba06ae6df392[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Mon Nov 6 11:00:09 2023 -0500
+
+    change default channels
+
+[33mcommit 8989dd3eb598fa9aa26fc7627132b309315018b4[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Fri Oct 20 20:17:04 2023 -0400
+
+    revert
+
+[33mcommit f70038c4442de05d4b50e2d7834422676cc01923[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Fri Oct 20 20:15:47 2023 -0400
+
+    revert
+
+[33mcommit 844c428df0555a7a559e64845157a20f5b4b772a[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Fri Oct 20 19:54:10 2023 -0400
+
+    Update index.js
+
+[33mcommit f07aab8d7b9651ba0dc30c596054714f010c4c8d[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Fri Oct 20 19:51:41 2023 -0400
+
+    Update index.js
+
+[33mcommit 0024940e000a8095ad6f5d9839cb94e0f99ccffd[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Fri Oct 20 19:44:21 2023 -0400
+
+    split into 2 messages
+
+[33mcommit 801180b8f7d29d25e7f9d0b58cccdb00d4ea330a[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Fri Oct 20 19:40:58 2023 -0400
+
+    remove channels id no longer in use
+
+[33mcommit 221ce90b9fb5befb2dc7165b49cd0e84cecd50bf[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Fri Oct 20 19:40:19 2023 -0400
+
+    change sinerider name
+
+[33mcommit 23332e793ce9ae099b3e6809b85bdc3279c3c608[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Fri Oct 20 18:58:37 2023 -0400
+
+    remove extra line
+
+[33mcommit 754037110f5936cca820f1465d839639988bb894[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Fri Oct 20 18:57:21 2023 -0400
+
+    community -> #happenings
+
+[33mcommit 7deddd81727a18ca5fdb446cc77949df08cb1db7[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Fri Oct 20 18:45:58 2023 -0400
+
+    add rework doc
+
+[33mcommit cb13c71e542293b3808d496b95d4a19f1530ac82[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Fri Jul 21 14:47:53 2023 -0400
+
+    change invite type for onboard to onboard.js
+
+[33mcommit 064c6e3f04b028871831aac70be8829446f1f7f1[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Fri Jul 21 14:22:42 2023 -0400
+
+    Fix missing transcript import
+
+[33mcommit ab6261711607c7f593d0d159c6fb99858ab3595c[m
+Author: Sam Poder <sam.r.poder@gmail.com>
+Date:   Fri Jul 21 13:58:51 2023 -0400
+
+    Fix Prettier
+
+[33mcommit c9738cecc2000c305991c6498e4874fbf6c46056[m
+Merge: 72438ce ae45f84
+Author: Max Wofford <max@maxwofford.com>
+Date:   Fri Jul 21 13:57:44 2023 -0400
+
+    Merge pull request #149 from hackclub/onboard-invite-flow
+
+[33mcommit ae45f84bfab2f8560389fb503aa6ef4e4d387ad4[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Fri Jul 21 11:01:38 2023 -0400
+
+    Add custom invite flow for onboard
+
+[33mcommit 72438ce794a81e5616ab924a846773d5c1026748[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Tue Jul 4 18:38:15 2023 -0400
+
+    add happenings to list of activte projects!
+
+[33mcommit 5aee0ff5ce24e2ac09013776836b8b0fa10e5982[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Tue Jul 4 16:46:40 2023 -0400
+
+    Update index.js
+
+[33mcommit 3a1b3caeef4870800f3fcb72860161219bb1287b[m
+Merge: 0d39977 5a8ed32
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Tue Jul 4 16:34:42 2023 -0400
+
+    Merge pull request #145 from hackclub/apac
+
+[33mcommit 5a8ed32e42ffe01de7409de1d37ce14d8ba9b81f[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Tue Jul 4 16:34:12 2023 -0400
+
+    remove apac channels from transcript
+
+[33mcommit ae999dbe846e3545609a013e15bdf2ae835808cf[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Tue Jul 4 16:33:43 2023 -0400
+
+    remove apac refs from index.js
+
+[33mcommit 0d399778036bbb6574433cae731e23b3ed912d8e[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Sun Jun 11 16:21:57 2023 -0400
+
+    Add #happenings to default channels
+
+[33mcommit e8dcb979629d09fa2b67690c27234f7fdbdc2338[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Thu Jun 8 17:55:28 2023 -0400
+
+    Update index.js
+
+[33mcommit 0539738d043d09134facde61dc7ac587a70d3ed1[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Thu Jun 8 17:53:27 2023 -0400
+
+    Update cleanup-happenings.js
+
+[33mcommit bdb46e82ffa049e5d1c6256b7b32a262f40220ab[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Thu Jun 8 17:49:41 2023 -0400
+
+    Create cleanup-happenings.js
+
+[33mcommit bd4c9cd62facf79f2e7b0e49606ac38bc78281f7[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Thu Jun 8 17:45:03 2023 -0400
+
+    add new channel to transcript
+
+[33mcommit fb577baef6e96fd972f520a0a738f4cae015f576[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Thu Jun 8 17:15:43 2023 -0400
+
+    this somehow made toriel crash?
+
+[33mcommit e8ee964be9c596975e5330b83de0a9a46ba2777a[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Thu Jun 8 17:10:39 2023 -0400
+
+    make file for cleanup script for #happening
+
+[33mcommit fdf7005ca62499ed67a1dad19a69e04db1c0aab2[m
+Merge: c3e884e 7abb3f2
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Thu Jun 1 13:36:17 2023 -0400
+
+    Merge pull request #137 from ajs256/patch-1
+    
+    Update the "active projects" section of transcript
+
+[33mcommit 7abb3f2be9101e6497162ef1f300d9e0ac011dd7[m
+Author: Alex <67526318+ajs256@users.noreply.github.com>
+Date:   Thu Jun 1 10:33:27 2023 -0700
+
+    Update the "active projects" section of transcript
+
+[33mcommit c3e884ea1d37ed909e1094fa1531bf840766f9de[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Tue May 30 23:03:25 2023 -0400
+
+    make onboard work with ?event query
+
+[33mcommit 4616cb29968d033983761988fae10c8bad4f1cc2[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Fri May 19 15:20:34 2023 -0400
+
+    make ?event query work for outernet
+
+[33mcommit 23765af8e985490e2674e0e326c923090c1b8061[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Mon May 15 20:16:25 2023 -0400
+
+    Add line break to welcome msg
+
+[33mcommit 1482c60cfac1fd884589c645241e246a1340e372[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Sat May 13 17:36:21 2023 -0400
+
+    Update post-welcome-committee.js
+
+[33mcommit 4b27e37932d48505ed55d24a1d02959295aecf82[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Sat May 6 13:21:39 2023 -0400
+
+    fix ternary operator
+
+[33mcommit a6d01ed176c3ebdeb5d0d847861a0df9f869dc49[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Sat May 6 13:04:53 2023 -0400
+
+    Update post-welcome-committee.js
+
+[33mcommit ad78b4ae2d409fffbb565ba881b8a4f0953828e3[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Sat May 6 11:58:57 2023 -0400
+
+    new try for msg
+
+[33mcommit fc7d0194861107be4ce8958dd38e98262fbd2aab[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Sat May 6 11:54:41 2023 -0400
+
+    Update transcript.yml
+
+[33mcommit a0a03be8aab881803d2d5d42bb7e00796f5ac1aa[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Sat May 6 11:51:48 2023 -0400
+
+    Update transcript.yml
+
+[33mcommit 1ddc0315ac1290d936112eb9f95983ef59f9f0ab[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Sat May 6 11:46:04 2023 -0400
+
+    formating error attempt 2 fix
+
+[33mcommit 3b59d37654e8474d84da64e07d1a1984dc69bea9[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Sat May 6 11:43:52 2023 -0400
+
+    formatting mistake fixed
+
+[33mcommit 25bafc135f85471071bbf9a37b98a86af1ca76fd[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Sat May 6 11:41:04 2023 -0400
+
+    cave
+
+[33mcommit d3c4d988a73d868ec19a414c4a0eeafde9009254[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Sat May 6 11:38:27 2023 -0400
+
+    npm run fmt
+
+[33mcommit 33883e6ab9078b71fe395282092206a3de8fc89f[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Sat May 6 11:37:08 2023 -0400
+
+    Add new welcome message for events 2/2
+
+[33mcommit 97822a256214d2d1be207ba472a0356ead68c625[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Sat May 6 11:36:10 2023 -0400
+
+    Add new welcome message for events 1/2
+
+[33mcommit bf4e961e03444252f77e0286baac476300447f78[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Wed May 3 20:02:24 2023 -0400
+
+    revert add count to a million
+
+[33mcommit 042868ada54aa152b11911028791b1f3127bbc1c[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Wed May 3 20:00:35 2023 -0400
+
+    add count to a million to suggestions
+
+[33mcommit 4d3ca763d44e96eb1727e18b3258212190a20274[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Wed May 3 15:38:00 2023 -0400
+
+    fix burrow copy
+
+[33mcommit ede0854e05d01865b3f46960ae90c7188ddab73f[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Wed May 3 15:36:22 2023 -0400
+
+    add burrow to active projects + remove scrapbook vq
+
+[33mcommit 72b48eaf7522eb2d78b899b865b836a9f952dc8e[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Wed May 3 15:30:11 2023 -0400
+
+    Add burrow to the transcript file
+
+[33mcommit 4c62574be130d65d119ec6523229f387c9f49684[m[33m ([m[1;31morigin/events-welcome-flow[m[33m)[m
+Merge: 7ab7b4f bff5496
+Author: Sam Poder <sam@hackclub.com>
+Date:   Sun Apr 30 12:05:00 2023 +0800
+
+    Merge pull request #128 from AravNarula/main
+    
+    Add the second part of the ?event query to toriel
+
+[33mcommit bff5496677c8cee407cb2d5b2966ae48d78e904e[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Sat Apr 29 23:13:02 2023 -0400
+
+    get rid of ref
+
+[33mcommit 191db2e48219e95e0fb6f584b1f7949d7acc5424[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Sat Apr 29 23:08:43 2023 -0400
+
+    Update util/transcript.yml
+    
+    Co-authored-by: Sam Poder <sam.r.poder@gmail.com>
+
+[33mcommit e676037ad392304e2f8241519933f4dd917bed47[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Sat Apr 29 23:08:32 2023 -0400
+
+    Update util/transcript.yml
+    
+    Co-authored-by: Sam Poder <sam.r.poder@gmail.com>
+
+[33mcommit 4b50a49e19a5b641a1b0c1b66f2c43b507b8426c[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Sat Apr 29 23:08:24 2023 -0400
+
+    Update util/transcript.yml
+    
+    Co-authored-by: Sam Poder <sam.r.poder@gmail.com>
+
+[33mcommit b6e5dcc69c4ce0f2ccf5677b2e6a501a6063d752[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Sat Apr 29 16:58:10 2023 -0400
+
+    fix command names
+
+[33mcommit 3cd449ec8bd751e9b0b5534bb09fa641541b60da[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Sat Apr 29 16:56:29 2023 -0400
+
+    Add event invite system
+
+[33mcommit cfbab032abe4e17c73464bb4b0b8305bcbf04840[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Sat Apr 29 16:47:02 2023 -0400
+
+    Add Angelhacks Channels to transcript
+
+[33mcommit 7ab7b4ff36d26367fd36047b16eb2d9e3a4e13b5[m
+Merge: cdfa80b 1f30862
+Author: Sam Poder <sam@hackclub.com>
+Date:   Mon Apr 24 07:30:31 2023 +0800
+
+    Merge pull request #127 from tregsthedev/patch-4
+    
+    Add event field if exists from user signup
+
+[33mcommit 1f308625021cb9ec9f4e9adca13e5cd00044b080[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Sun Apr 23 19:25:03 2023 -0400
+
+    format
+
+[33mcommit 4e8eda7c56c19e22b4b0780c31d97e71ecedbaad[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Sun Apr 23 19:24:40 2023 -0400
+
+    Add a comment explaning what event is
+
+[33mcommit a4cb74805a1454f4dc694991065bcf34679508fb[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Sun Apr 23 19:23:57 2023 -0400
+
+    remove my testing channel
+
+[33mcommit 2c0b054f0ed480ef44e861e470ef2005393171f3[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Sun Apr 23 19:23:32 2023 -0400
+
+    remove test console log
+
+[33mcommit fe70f40a95781aaac91dc5d6e23a56f96152821a[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Sun Apr 23 19:23:04 2023 -0400
+
+    format!
+
+[33mcommit 699bf915bee46a0f943d76d42d8c90283d0a06f1[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Sun Apr 23 19:21:59 2023 -0400
+
+    add null option
+
+[33mcommit 408d2c550a7b707426c57c19268b9f8b81365234[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Sun Apr 23 17:11:15 2023 -0400
+
+    forgot to format
+
+[33mcommit 6a286f9306e221c256509aedb9323e920ccf6553[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Sun Apr 23 17:09:48 2023 -0400
+
+    Add event field if exists from user signup
+
+[33mcommit cdfa80b340dec3b239fe9b71334b6fe523ffaf63[m
+Author: Sam Poder <39828164+sampoder@users.noreply.github.com>
+Date:   Sat Apr 22 23:34:31 2023 +0800
+
+    DEPLOY!
+
+[33mcommit cd2534869c2f9fde53142276d7f3f3041fcd3c03[m
+Merge: 0be19c6 be44d7f
+Author: Sam Poder <sam@hackclub.com>
+Date:   Sat Apr 22 23:29:31 2023 +0800
+
+    Merge pull request #125 from tregsthedev/patch-2
+    
+    Add Event to Schema
+
+[33mcommit be44d7f3defebd86b25f302756b97e2a4da9246d[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Fri Apr 21 22:12:34 2023 -0400
+
+    Try to fix error
+
+[33mcommit c59c5d63ac205129776413cba31d5e9de9f0bab6[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Fri Apr 21 22:10:26 2023 -0400
+
+    Make it Optional
+
+[33mcommit 05dc8b8ada81f4f854a0a5540f37f0af86936d0c[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Fri Apr 21 20:31:10 2023 -0400
+
+    Add Event to Schema
+
+[33mcommit 0be19c65b820f68114b92150d751a356353cd9dc[m
+Merge: 5fd41f9 4147edb
+Author: Max Wofford <max@maxwofford.com>
+Date:   Sat Apr 8 19:24:01 2023 -0400
+
+    Merge pull request #122 from tregsthedev/patch-1
+
+[33mcommit 4147edbb10ac3af3ca66660c415643ea68fc4c06[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Sat Apr 8 00:11:26 2023 -0400
+
+    Add angelhacks to transcript
+
+[33mcommit 936af705e57472f79e2c3a5ae7bf9b83f9217b2b[m
+Author: Arav Narula <arav.1tb@gmail.com>
+Date:   Fri Apr 7 11:27:22 2023 -0400
+
+    add angelhacks id
+
+[33mcommit 5fd41f9ac8c46e0c3890afddf3208f3db9c6e1e6[m
+Merge: 7167c68 7bd5457
+Author: Ella <git@ella.cx>
+Date:   Thu Mar 23 10:56:11 2023 -0400
+
+    Merge pull request #117 from hackclub/exu/suggestions
+
+[33mcommit 7bd5457a83cad2a64f85c2a326f4a5c3b22eb18a[m
+Author: Ella <git@ella.cx>
+Date:   Sat Mar 11 18:20:11 2023 -0500
+
+    Fix quotes
+
+[33mcommit 3ca96f4816bbb7cbe24824f5cc07f94b35efe1c3[m
+Author: Ella <git@ella.cx>
+Date:   Sat Mar 11 18:18:16 2023 -0500
+
+    Add some more suggestions
+
+[33mcommit 7167c684c98e3639653a42c1f875428d769ed2be[m
+Merge: 654c0de a6b0c14
+Author: Ella <git@ella.cx>
+Date:   Sat Mar 11 18:04:49 2023 -0500
+
+    Merge pull request #116 from hackclub/karamassie-patch-1
+
+[33mcommit a6b0c14a8f30477d7ffb0255fe93bed8e3ff1545[m
+Author: Ella <git@ella.cx>
+Date:   Sat Mar 11 18:04:08 2023 -0500
+
+    Add missing comma and hackathons to transcript
+
+[33mcommit a708012cf1f87e184695ca0cd7760444f63fb922[m
+Author: kara <99233707+karamassie@users.noreply.github.com>
+Date:   Sat Mar 11 17:31:00 2023 -0500
+
+    channels_suggest
+    
+    just tweaking a couple of the suggested channels
+
+[33mcommit 654c0de89e36fa7a5ca875850ecc2219c3947ca2[m
+Merge: f188a6f fce151e
+Author: Sam Poder <sam@hackclub.com>
+Date:   Tue Jan 31 11:28:39 2023 +0800
+
+    Merge pull request #94 from hackclub/dependabot/npm_and_yarn/slack/bolt-3.12.2
+    
+    Bump @slack/bolt from 3.12.1 to 3.12.2
+
+[33mcommit fce151efbccc165fb2a74f23310fac98f9a1be9b[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Tue Jan 31 03:28:33 2023 +0000
+
+    Bump @slack/bolt from 3.12.1 to 3.12.2
+    
+    Bumps [@slack/bolt](https://github.com/slackapi/bolt) from 3.12.1 to 3.12.2.
+    - [Release notes](https://github.com/slackapi/bolt/releases)
+    - [Commits](https://github.com/slackapi/bolt/compare/@slack/bolt@3.12.1...@slack/bolt@3.12.2)
+    
+    ---
+    updated-dependencies:
+    - dependency-name: "@slack/bolt"
+      dependency-type: direct:production
+      update-type: version-update:semver-patch
+    ...
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit f188a6f5081f99028c1c3d90a735a2fdf8c7b5d6[m
+Merge: e0d43d2 6542b09
+Author: Sam Poder <sam@hackclub.com>
+Date:   Tue Jan 31 11:28:30 2023 +0800
+
+    Merge pull request #103 from hackclub/dependabot/npm_and_yarn/prisma-4.9.0
+    
+    Bump prisma from 4.7.1 to 4.9.0
+
+[33mcommit e0d43d20843b555497b7f14dc4290bdc6f7a5dfd[m
+Merge: 833260f 7f6095d
+Author: Sam Poder <sam@hackclub.com>
+Date:   Tue Jan 31 11:28:20 2023 +0800
+
+    Merge pull request #104 from hackclub/dependabot/npm_and_yarn/prisma/client-4.9.0
+    
+    Bump @prisma/client from 4.7.1 to 4.9.0
+
+[33mcommit 7f6095d05f8e987727bb991e13e0335e4a811120[m
+Merge: eec0893 833260f
+Author: Sam Poder <sam@hackclub.com>
+Date:   Tue Jan 31 11:28:14 2023 +0800
+
+    Merge branch 'main' into dependabot/npm_and_yarn/prisma/client-4.9.0
+
+[33mcommit 833260f0f1844da9b4dcef18b4627c2bebce5cb7[m
+Merge: f545c57 1dd48a5
+Author: Sam Poder <sam@hackclub.com>
+Date:   Tue Jan 31 11:27:48 2023 +0800
+
+    Merge pull request #106 from hackclub/dependabot/npm_and_yarn/axios-1.2.6
+    
+    Bump axios from 1.2.1 to 1.2.6
+
+[33mcommit 6542b095ed2285b51b82eea3fdf82124c8f951e1[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Tue Jan 31 03:23:19 2023 +0000
+
+    Bump prisma from 4.7.1 to 4.9.0
+    
+    Bumps [prisma](https://github.com/prisma/prisma/tree/HEAD/packages/cli) from 4.7.1 to 4.9.0.
+    - [Release notes](https://github.com/prisma/prisma/releases)
+    - [Commits](https://github.com/prisma/prisma/commits/4.9.0/packages/cli)
+    
+    ---
+    updated-dependencies:
+    - dependency-name: prisma
+      dependency-type: direct:development
+      update-type: version-update:semver-minor
+    ...
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit f545c572f78a2c41f3712b22916421fd5da3df94[m
+Merge: 110c9c9 929eb03
+Author: Sam Poder <sam@hackclub.com>
+Date:   Tue Jan 31 11:22:31 2023 +0800
+
+    Merge pull request #102 from hackclub/dependabot/npm_and_yarn/node-fetch-2.6.8
+    
+    Bump node-fetch from 2.6.7 to 2.6.8
+
+[33mcommit 110c9c9f814388f4af36b89fc676087db629c88e[m
+Merge: 428a66f 6647c4c
+Author: Sam Poder <sam@hackclub.com>
+Date:   Tue Jan 31 11:21:48 2023 +0800
+
+    Merge pull request #81 from hackclub/update-default-channels
+    
+    Update default channels
+
+[33mcommit 6647c4cc1661b641c125abf16835017e5562de4a[m[33m ([m[1;31morigin/update-default-channels[m[33m)[m
+Author: Sam Poder <sam@hackclub.com>
+Date:   Tue Jan 31 11:21:33 2023 +0800
+
+    Update index.js
+    
+    Co-authored-by: Ella <git@ella.cx>
+
+[33mcommit 428a66fabadfa99a9575f42472dde7766246a909[m
+Merge: 1db8114 f6f526b
+Author: Sam Poder <sam@hackclub.com>
+Date:   Tue Jan 31 11:20:12 2023 +0800
+
+    Merge pull request #107 from ajs256/ajs256-add-sprinkles
+    
+    Add some fun sprinkles
+
+[33mcommit f6f526b7a4a22905e76b94e1633e3b28d4d981fd[m
+Author: Alex Sirota <67526318+ajs256@users.noreply.github.com>
+Date:   Mon Jan 30 18:52:05 2023 -0800
+
+    re-add references to 8-ball
+
+[33mcommit 0b76c8542bd8bc850e39fcf77656e0b4c2728c6f[m
+Author: Alex Sirota <67526318+ajs256@users.noreply.github.com>
+Date:   Mon Jan 30 18:47:30 2023 -0800
+
+    Add some sprinkles
+    
+    - remove #8-ball from default channels and suggestions
+    - add #pasture as a suggestion
+    - clarify profile editing directions
+    - add more pie
+
+[33mcommit 1db811448a6dd5b3f1b01404676e1a316fc149b3[m
+Author: Sam Poder <39828164+sampoder@users.noreply.github.com>
+Date:   Tue Jan 31 10:21:43 2023 +0800
+
+    Update start-from-clippy.js
+
+[33mcommit 46ef3473e2e204503080e44a8160b5715c4d0809[m
+Author: Sam Poder <sam@hackclub.com>
+Date:   Tue Jan 31 10:19:53 2023 +0800
+
+    Try / Catch
+
+[33mcommit 53d68498086d2fac45070d7f3075385763ec72e7[m
+Author: Sam Poder <sam@hackclub.com>
+Date:   Tue Jan 31 10:16:30 2023 +0800
+
+    Update start-from-clippy.js
+
+[33mcommit 6dd40cac608c54d6f212ccb0401a0e55f9b7c912[m
+Author: Sam Poder <39828164+sampoder@users.noreply.github.com>
+Date:   Tue Jan 31 10:15:42 2023 +0800
+
+    Prettier!
+
+[33mcommit 6f6b005d5b47951cbf5ec2ca3c51b4560db0c2dc[m
+Author: Sam Poder <sam@hackclub.com>
+Date:   Tue Jan 31 10:14:20 2023 +0800
+
+    Add router for `start-from-clippy`
+
+[33mcommit 519bbe26ad578cd5f18445e096c89bc89ae640f3[m
+Author: Sam Poder <sam@hackclub.com>
+Date:   Tue Jan 31 10:11:22 2023 +0800
+
+    Update start-from-clippy.js
+
+[33mcommit a02bb8e447aa589f588445ff6227fc5090b31295[m
+Author: Sam Poder <sam@hackclub.com>
+Date:   Tue Jan 31 10:09:28 2023 +0800
+
+    Update start-from-clippy.js
+
+[33mcommit c30c6738ebbdaac7a3b0255d1d98dd06588d03cd[m
+Author: Sam Poder <sam@hackclub.com>
+Date:   Tue Jan 31 10:07:11 2023 +0800
+
+    Create start-from-clippy.js
+
+[33mcommit f77e8d917f19914f103c200da275f54b2d4d1c4b[m
+Author: Sam Poder <sam@hackclub.com>
+Date:   Tue Jan 31 10:07:00 2023 +0800
+
+    Add `announcements-to-cave`
+
+[33mcommit 1dd48a50e82a01d292fb3372bf0bd5dc76ba49e1[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Mon Jan 30 08:07:47 2023 +0000
+
+    Bump axios from 1.2.1 to 1.2.6
+    
+    Bumps [axios](https://github.com/axios/axios) from 1.2.1 to 1.2.6.
+    - [Release notes](https://github.com/axios/axios/releases)
+    - [Changelog](https://github.com/axios/axios/blob/v1.x/CHANGELOG.md)
+    - [Commits](https://github.com/axios/axios/compare/v1.2.1...v1.2.6)
+    
+    ---
+    updated-dependencies:
+    - dependency-name: axios
+      dependency-type: direct:production
+      update-type: version-update:semver-patch
+    ...
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit eec0893dc8aa3c0351a5a56d138ed6a7597393cd[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Mon Jan 23 08:07:34 2023 +0000
+
+    Bump @prisma/client from 4.7.1 to 4.9.0
+    
+    Bumps [@prisma/client](https://github.com/prisma/prisma/tree/HEAD/packages/client) from 4.7.1 to 4.9.0.
+    - [Release notes](https://github.com/prisma/prisma/releases)
+    - [Commits](https://github.com/prisma/prisma/commits/4.9.0/packages/client)
+    
+    ---
+    updated-dependencies:
+    - dependency-name: "@prisma/client"
+      dependency-type: direct:production
+      update-type: version-update:semver-minor
+    ...
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit 929eb03345204cb3080b17b642b15841f4f2540c[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Mon Jan 16 08:05:41 2023 +0000
+
+    Bump node-fetch from 2.6.7 to 2.6.8
+    
+    Bumps [node-fetch](https://github.com/node-fetch/node-fetch) from 2.6.7 to 2.6.8.
+    - [Release notes](https://github.com/node-fetch/node-fetch/releases)
+    - [Commits](https://github.com/node-fetch/node-fetch/compare/v2.6.7...v2.6.8)
+    
+    ---
+    updated-dependencies:
+    - dependency-name: node-fetch
+      dependency-type: direct:production
+      update-type: version-update:semver-patch
+    ...
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit 6cbb5872df24bf9ba5bd6c715464bb4e1588c601[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Wed Jan 11 16:10:30 2023 -0500
+
+    Ensure toriel is in toriel dev channel
+
+[33mcommit b5249abf3f43dcf323bd803d6abc093ba01ba4be[m
+Merge: 7d74cf3 e49f68c
+Author: Sam Poder <sam@hackclub.com>
+Date:   Sat Dec 10 09:05:09 2022 +0800
+
+    Merge pull request #93 from hackclub/dependabot/npm_and_yarn/axios-1.2.1
+    
+    Bump axios from 0.27.2 to 1.2.1
+
+[33mcommit e49f68c5b6dc293d974b20fafd18fdab58460b9a[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Sat Dec 10 00:43:12 2022 +0000
+
+    Bump axios from 0.27.2 to 1.2.1
+    
+    Bumps [axios](https://github.com/axios/axios) from 0.27.2 to 1.2.1.
+    - [Release notes](https://github.com/axios/axios/releases)
+    - [Changelog](https://github.com/axios/axios/blob/v1.x/CHANGELOG.md)
+    - [Commits](https://github.com/axios/axios/compare/v0.27.2...v1.2.1)
+    
+    ---
+    updated-dependencies:
+    - dependency-name: axios
+      dependency-type: direct:production
+      update-type: version-update:semver-major
+    ...
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit 7d74cf3c8c3560edccda297cd8f793975336d23d[m
+Merge: 9e62cd3 9449b6d
+Author: Sam Poder <sam@hackclub.com>
+Date:   Sat Dec 10 08:42:44 2022 +0800
+
+    Merge pull request #78 from hackclub/dependabot/npm_and_yarn/dotenv-16.0.3
+    
+    Bump dotenv from 16.0.2 to 16.0.3
+
+[33mcommit 9449b6d7055c0e632ff0a070dff309bd53d10022[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Sat Dec 10 00:42:31 2022 +0000
+
+    Bump dotenv from 16.0.2 to 16.0.3
+    
+    Bumps [dotenv](https://github.com/motdotla/dotenv) from 16.0.2 to 16.0.3.
+    - [Release notes](https://github.com/motdotla/dotenv/releases)
+    - [Changelog](https://github.com/motdotla/dotenv/blob/master/CHANGELOG.md)
+    - [Commits](https://github.com/motdotla/dotenv/compare/v16.0.2...v16.0.3)
+    
+    ---
+    updated-dependencies:
+    - dependency-name: dotenv
+      dependency-type: direct:production
+      update-type: version-update:semver-patch
+    ...
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit 9e62cd34a82793dad12aca096d2f4fb9331bd1b1[m
+Merge: 19a8562 7fa21d1
+Author: Sam Poder <sam@hackclub.com>
+Date:   Sat Dec 10 08:41:54 2022 +0800
+
+    Merge pull request #80 from hackclub/dependabot/npm_and_yarn/express-4.18.2
+    
+    Bump express from 4.18.1 to 4.18.2
+
+[33mcommit 7fa21d1932e7590be24503ea522d675f5c6165fb[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Sat Dec 10 00:40:59 2022 +0000
+
+    Bump express from 4.18.1 to 4.18.2
+    
+    Bumps [express](https://github.com/expressjs/express) from 4.18.1 to 4.18.2.
+    - [Release notes](https://github.com/expressjs/express/releases)
+    - [Changelog](https://github.com/expressjs/express/blob/master/History.md)
+    - [Commits](https://github.com/expressjs/express/compare/4.18.1...4.18.2)
+    
+    ---
+    updated-dependencies:
+    - dependency-name: express
+      dependency-type: direct:production
+      update-type: version-update:semver-patch
+    ...
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit 19a85626e307b6a6b25b025e0f3bd6425647a2ef[m
+Merge: cf62179 40b71f7
+Author: Sam Poder <sam@hackclub.com>
+Date:   Sat Dec 10 08:40:34 2022 +0800
+
+    Merge pull request #91 from hackclub/dependabot/npm_and_yarn/prisma-4.7.1
+    
+    Bump prisma from 4.3.1 to 4.7.1
+
+[33mcommit 40b71f70bc4d2e24d381514a52ca92504cecdd16[m
+Merge: d1305a6 cf62179
+Author: Sam Poder <sam@hackclub.com>
+Date:   Sat Dec 10 08:40:22 2022 +0800
+
+    Merge branch 'main' into dependabot/npm_and_yarn/prisma-4.7.1
+
+[33mcommit cf6217945e89e60632455d46a1be55662f96620f[m
+Merge: bc958db b349c05
+Author: Sam Poder <sam@hackclub.com>
+Date:   Sat Dec 10 08:39:59 2022 +0800
+
+    Merge pull request #92 from hackclub/dependabot/npm_and_yarn/prisma/client-4.7.1
+    
+    Bump @prisma/client from 4.3.1 to 4.7.1
+
+[33mcommit bc958dbd5d9a148cd26e8d0753d444de0a5cfdf0[m
+Merge: d5c13ba c37c5cf
+Author: Ella <git@ella.cx>
+Date:   Fri Dec 9 13:02:42 2022 -0500
+
+    Merge pull request #86 from developedbytoby/main
+
+[33mcommit b349c059fde1990066f62d1d617a65a58c6ffd47[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Mon Dec 5 08:07:04 2022 +0000
+
+    Bump @prisma/client from 4.3.1 to 4.7.1
+    
+    Bumps [@prisma/client](https://github.com/prisma/prisma/tree/HEAD/packages/client) from 4.3.1 to 4.7.1.
+    - [Release notes](https://github.com/prisma/prisma/releases)
+    - [Commits](https://github.com/prisma/prisma/commits/4.7.1/packages/client)
+    
+    ---
+    updated-dependencies:
+    - dependency-name: "@prisma/client"
+      dependency-type: direct:production
+      update-type: version-update:semver-minor
+    ...
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit d1305a67499c255e5ca593242deac739bfdf1049[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Mon Dec 5 08:06:40 2022 +0000
+
+    Bump prisma from 4.3.1 to 4.7.1
+    
+    Bumps [prisma](https://github.com/prisma/prisma/tree/HEAD/packages/cli) from 4.3.1 to 4.7.1.
+    - [Release notes](https://github.com/prisma/prisma/releases)
+    - [Commits](https://github.com/prisma/prisma/commits/4.7.1/packages/cli)
+    
+    ---
+    updated-dependencies:
+    - dependency-name: prisma
+      dependency-type: direct:development
+      update-type: version-update:semver-minor
+    ...
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit c37c5cffe0b260ece301ea56fdd89be26013aae8[m
+Author: Toby <mrtobez08@gmail.com>
+Date:   Tue Nov 8 16:07:11 2022 +0000
+
+    toriel now asks about posting an intro in #welcome!
+
+[33mcommit d5c13bacff8c9378a68b4032984afb2cf4cac186[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Tue Nov 8 08:28:12 2022 -0500
+
+    Handle blank welcome message
+
+[33mcommit 9935c5b33446633574c6772424c4a28aaec7f584[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Tue Nov 8 08:20:26 2022 -0500
+
+    Add leaders channel to transcript
+
+[33mcommit 283b400bda20046be7df8f5a1db700a1001b9734[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Tue Nov 8 08:15:42 2022 -0500
+
+    Fix spelling of neighborhood channel
+
+[33mcommit ce29b2478865785cfbbd8fc201b4bb1849bf967b[m
+Author: Sam Poder <sam@hackclub.com>
+Date:   Fri Nov 4 20:44:08 2022 +0800
+
+    Update transcript.yml
+
+[33mcommit 576a87096059ace2f8ae8f8eec1b96f2708c649a[m
+Author: Sam Poder <sam@hackclub.com>
+Date:   Fri Nov 4 20:35:38 2022 +0800
+
+    Clear up Epoch message
+
+[33mcommit 7d4e6ae6ec2b64513952d74af1e3eadf81545672[m
+Author: Sam Poder <sam@hackclub.com>
+Date:   Fri Nov 4 20:29:00 2022 +0800
+
+    Reduce steps to sign up for Epoch
+
+[33mcommit 386587e04114bd448858fd78cc0236e7f49b77f5[m
+Author: Sam Poder <sam@hackclub.com>
+Date:   Thu Nov 3 17:18:47 2022 +0800
+
+    Use `.push` instead of `.concat`
+
+[33mcommit 95fedcd33ab7f60fd18b3b50dfba3656280c3d2a[m
+Author: Sam Poder <sam@hackclub.com>
+Date:   Thu Nov 3 17:17:38 2022 +0800
+
+    Remove Unfurl in Transcript for Epoch
+
+[33mcommit 78efb025c1f4a237e1cc40481d4a13c13243a042[m
+Author: Sam Poder <sam@hackclub.com>
+Date:   Thu Nov 3 17:13:00 2022 +0800
+
+    Reduce button text for Epoch
+
+[33mcommit 97ff6e8ad1f43f6fa0c4244fd46edd83d299cf92[m
+Author: Sam Poder <39828164+sampoder@users.noreply.github.com>
+Date:   Thu Nov 3 17:11:32 2022 +0800
+
+    Revert "Console Log Invite"
+    
+    This reverts commit 23f579fd1bd7ab5522c493566071c69e94c6fb05.
+
+[33mcommit 23f579fd1bd7ab5522c493566071c69e94c6fb05[m
+Author: Sam Poder <sam@hackclub.com>
+Date:   Thu Nov 3 17:08:05 2022 +0800
+
+    Console Log Invite
+
+[33mcommit e374087d2f79f1e546bba25f81ae2f6762d0a820[m
+Author: Sam Poder <sam@hackclub.com>
+Date:   Thu Nov 3 17:05:23 2022 +0800
+
+    Use `welcome_message`
+
+[33mcommit 3e2dbaa7dbc8d3c2ed91038911996411f5b0abdb[m
+Author: Sam Poder <39828164+sampoder@users.noreply.github.com>
+Date:   Thu Nov 3 17:01:07 2022 +0800
+
+    Squashed commit of the following:
+    
+    commit 27962a516b36fd57c0a9cb3d965593dad311ef22
+    Author: Sam Poder <39828164+sampoder@users.noreply.github.com>
+    Date:   Thu Nov 3 17:00:01 2022 +0800
+    
+        Update index.js
+    
+    commit 54217264b67bf359d822913a90981cb354b23c3c
+    Author: Sam Poder <sam@hackclub.com>
+    Date:   Thu Nov 3 16:59:07 2022 +0800
+    
+        Update transcript.yml
+    
+    commit b1a2cb6226f16668bce61f9ad7846fc57d8b6603
+    Author: Sam Poder <sam@hackclub.com>
+    Date:   Thu Nov 3 16:56:23 2022 +0800
+    
+        Update index.js
+    
+    commit 5a4537a066b8008efa9ef8c39aa678a1e854efa4
+    Author: Sam Poder <sam@hackclub.com>
+    Date:   Thu Nov 3 16:55:27 2022 +0800
+    
+        Begin work on Epoch Integration
+
+[33mcommit 7b911c29ec940f6fa44f3162ee819e2421addc65[m
+Author: kara <99233707+karamassie@users.noreply.github.com>
+Date:   Wed Oct 12 19:59:45 2022 -0400
+
+    Update default channels
+    
+    adding sprig and community to default channels
+    removed hack-night
+
+[33mcommit 3d48586ef9e59b3256efb69bf07e7c7b1fc4c3c9[m
+Author: celeste drummond <parafactual@gmail.com>
+Date:   Wed Oct 12 14:37:32 2022 -0400
+
+    Fix crash
+
+[33mcommit 9bb71e103376bf0f6f5a77dbfeba179e721b6186[m
+Author: celeste drummond <parafactual@gmail.com>
+Date:   Wed Oct 12 14:27:49 2022 -0400
+
+    Added rest of channels; various improvements
+
+[33mcommit e8dc4ccab11f693c8216d764a798f81ff5ac1689[m
+Author: celeste drummond <parafactual@gmail.com>
+Date:   Wed Oct 12 14:16:33 2022 -0400
+
+    Add channels to transcript and fix formatting
+
+[33mcommit d7ad385bba28f2bb4d01588b62b27e4e52cf2502[m
+Author: celeste drummond <parafactual@gmail.com>
+Date:   Wed Oct 12 14:09:54 2022 -0400
+
+    Fix transcript syntax errors
+
+[33mcommit 787e60152a6e5a4f6ac498530588767a9fc85565[m
+Author: celeste drummond <parafactual@gmail.com>
+Date:   Tue Oct 11 20:35:28 2022 -0400
+
+    Rewrite last message (rewriting flow)
+
+[33mcommit e14fb1d61e2cca2cca79adf7a433ac6c6e155360[m
+Author: celeste drummond <parafactual@gmail.com>
+Date:   Tue Oct 11 20:34:17 2022 -0400
+
+    Remove unneeded messages (rewriting flow)
+
+[33mcommit bd856c1d53a751659d66100f4e93b66a3b181df1[m
+Merge: 83ac74b 2e5f370
+Author: Max Wofford <max@maxwofford.com>
+Date:   Mon Sep 26 19:23:07 2022 -0400
+
+    Merge pull request #75 from hackclub/assemble-video
+
+[33mcommit 2e5f37004d6dcbe99a4463fbc6c44ac7bcc12481[m
+Author: celeste drummond <parafactual@gmail.com>
+Date:   Mon Sep 26 17:55:57 2022 -0400
+
+    Add sleep between final Toriel posts
+
+[33mcommit c4799d3738779dc45ceb41ee4436ca44d790c52b[m
+Author: celeste drummond <parafactual@gmail.com>
+Date:   Mon Sep 26 17:52:44 2022 -0400
+
+    Mention Assemble video at end
+
+[33mcommit 83ac74b8b54d370d1ca3b39cd93f75221ece7f0d[m
+Merge: 2364086 a518b43
+Author: Sam Poder <sam@hackclub.com>
+Date:   Mon Sep 5 22:58:56 2022 +0800
+
+    Merge pull request #65 from hackclub/dependabot/npm_and_yarn/slack/bolt-3.12.1
+    
+    Bump @slack/bolt from 3.11.0 to 3.12.1
+
+[33mcommit a518b43999a46d4baf78d2baea33810ad381e641[m
+Merge: bee6b48 2364086
+Author: Sam Poder <sam.r.poder@gmail.com>
+Date:   Mon Sep 5 22:58:47 2022 +0800
+
+    Merge branch 'main' into dependabot/npm_and_yarn/slack/bolt-3.12.1
+
+[33mcommit 236408638b1898284ce9d43852cd5071a52b60bd[m
+Merge: f6f13a1 fdc1b64
+Author: Sam Poder <sam.r.poder@gmail.com>
+Date:   Mon Sep 5 22:57:53 2022 +0800
+
+    Merge pull request #72 from hackclub/dependabot/npm_and_yarn/dotenv-16.0.2
+    
+    Bump dotenv from 8.2.0 to 16.0.2
+
+[33mcommit f6f13a1a54c61212b1455152674a2dd357398bb0[m
+Merge: 982970c 6c7e4c9
+Author: Sam Poder <sam.r.poder@gmail.com>
+Date:   Mon Sep 5 22:57:27 2022 +0800
+
+    Merge pull request #73 from hackclub/dependabot/npm_and_yarn/prisma/client-4.3.1
+    
+    Bump @prisma/client from 3.13.0 to 4.3.1
+
+[33mcommit 982970cd89655a3d7f556268194a23137ffc244d[m
+Merge: dcf2377 9476674
+Author: Sam Poder <sam.r.poder@gmail.com>
+Date:   Mon Sep 5 22:57:16 2022 +0800
+
+    Merge pull request #74 from hackclub/dependabot/npm_and_yarn/prisma-4.3.1
+    
+    Bump prisma from 3.13.0 to 4.3.1
+
+[33mcommit 94766741cac4060d7a0625581a3a1ec854adead6[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Mon Sep 5 14:51:04 2022 +0000
+
+    Bump prisma from 3.13.0 to 4.3.1
+    
+    Bumps [prisma](https://github.com/prisma/prisma/tree/HEAD/packages/cli) from 3.13.0 to 4.3.1.
+    - [Release notes](https://github.com/prisma/prisma/releases)
+    - [Commits](https://github.com/prisma/prisma/commits/4.3.1/packages/cli)
+    
+    ---
+    updated-dependencies:
+    - dependency-name: prisma
+      dependency-type: direct:development
+      update-type: version-update:semver-major
+    ...
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit 6c7e4c90a919ba40e5b1238c187cc86d462e84d7[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Mon Sep 5 14:50:44 2022 +0000
+
+    Bump @prisma/client from 3.13.0 to 4.3.1
+    
+    Bumps [@prisma/client](https://github.com/prisma/prisma/tree/HEAD/packages/client) from 3.13.0 to 4.3.1.
+    - [Release notes](https://github.com/prisma/prisma/releases)
+    - [Commits](https://github.com/prisma/prisma/commits/4.3.1/packages/client)
+    
+    ---
+    updated-dependencies:
+    - dependency-name: "@prisma/client"
+      dependency-type: direct:production
+      update-type: version-update:semver-major
+    ...
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit fdc1b64c680ed21377c3976e2436324657b845a8[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Mon Sep 5 14:50:25 2022 +0000
+
+    Bump dotenv from 8.2.0 to 16.0.2
+    
+    Bumps [dotenv](https://github.com/motdotla/dotenv) from 8.2.0 to 16.0.2.
+    - [Release notes](https://github.com/motdotla/dotenv/releases)
+    - [Changelog](https://github.com/motdotla/dotenv/blob/master/CHANGELOG.md)
+    - [Commits](https://github.com/motdotla/dotenv/compare/v8.2.0...v16.0.2)
+    
+    ---
+    updated-dependencies:
+    - dependency-name: dotenv
+      dependency-type: direct:production
+      update-type: version-update:semver-major
+    ...
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit dcf2377bf8483049e1896ff9fa7694f3b97bb82d[m
+Merge: 58c0eef 7a10299
+Author: Ella <git@ella.cx>
+Date:   Sat Aug 6 09:59:16 2022 -0700
+
+    Merge pull request #68 from hackclub/react
+
+[33mcommit 7a10299899fe53403dac281769acf2d6c094559a[m
+Author: Ella <git@ella.cx>
+Date:   Fri Aug 5 23:05:29 2022 -0700
+
+    React to this message to take ownership on reaching out.
+
+[33mcommit 58c0eefd319a368bfc54a44d47a94bb7789e72d1[m
+Author: celeste <80304394+cosmicoptima@users.noreply.github.com>
+Date:   Mon Aug 1 16:43:25 2022 -0400
+
+    Add zero-width space between # and present
+
+[33mcommit 33281a12a7a5e0aac771a5d6346593d65c3abc77[m
+Author: celeste drummond <parafactual@gmail.com>
+Date:   Mon Aug 1 12:30:55 2022 -0400
+
+    yarn fmt
+
+[33mcommit fe1083c689b5a30d3ae8478d500743bfca9c14eb[m
+Author: celeste drummond <parafactual@gmail.com>
+Date:   Mon Aug 1 10:53:24 2022 -0400
+
+    Various changes after playtest
+
+[33mcommit 672971b77ff2e46ad713348e2cbbb06ec68a767b[m
+Author: celeste drummond <parafactual@gmail.com>
+Date:   Fri Jul 29 16:13:09 2022 -0400
+
+    Fix TORIEL errors (transcript prsing, restrt dups)
+
+[33mcommit e8ae4331b3970c2fc15173a2fa086b8d59a8833f[m
+Author: celeste drummond <parafactual@gmail.com>
+Date:   Fri Jul 29 10:56:49 2022 -0400
+
+    Replace link to #present with inline code
+
+[33mcommit 92519047249c450dad05c3ae19938dd8741a9a9c[m
+Author: celeste drummond <parafactual@gmail.com>
+Date:   Fri Jul 29 10:56:36 2022 -0400
+
+    Upgrade user later in flow
+
+[33mcommit bee6b48766576372cec06072b2534ae36627248b[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Tue Jul 26 12:31:52 2022 +0000
+
+    Bump @slack/bolt from 3.11.0 to 3.12.1
+    
+    Bumps [@slack/bolt](https://github.com/slackapi/bolt) from 3.11.0 to 3.12.1.
+    - [Release notes](https://github.com/slackapi/bolt/releases)
+    - [Changelog](https://github.com/slackapi/bolt-js/blob/main/CHANGELOG.md)
+    - [Commits](https://github.com/slackapi/bolt/compare/@slack/bolt@3.11.0...@slack/bolt@3.12.1)
+    
+    ---
+    updated-dependencies:
+    - dependency-name: "@slack/bolt"
+      dependency-type: direct:production
+      update-type: version-update:semver-minor
+    ...
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit 9f0d6e153514c5a080b3b9b30aa2b1c5e4dbb7e5[m
+Author: celeste <80304394+cosmicoptima@users.noreply.github.com>
+Date:   Tue Jul 26 08:31:21 2022 -0400
+
+    Rewrite user flow (#64)
+
+[33mcommit 1e0c3b219ef9a12117c13dec2a376c826d4ae5c9[m
+Merge: 473aada 8fa1fc4
+Author: Max Wofford <max@maxwofford.com>
+Date:   Mon Jul 18 14:38:48 2022 -0400
+
+    Merge pull request #57 from hackclub/quackduck-patch-1
+
+[33mcommit 8fa1fc4a935a6aadbcd54d7bfa55f45d7ec60524[m
+Author: Ishan Goel <igoel.mail@gmail.com>
+Date:   Mon Jul 18 17:49:21 2022 +0000
+
+    yarn fmt
+
+[33mcommit d409c1a401d3da0e7b24a05782bbad86bbcb7edc[m
+Author: Ishan Goel <igoel.mail@gmail.com>
+Date:   Fri Jul 1 11:30:09 2022 -0700
+
+    tell people to actually interact lol
+
+[33mcommit 473aadafd89cf5c98fa29585bc5e6054021a8cde[m
+Author: Sam Poder <39828164+sampoder@users.noreply.github.com>
+Date:   Sat Jun 25 23:51:01 2022 +0800
+
+    Update index.js
+
+[33mcommit aa9d8e28abe2c853b083d5af0ebd7a1198de54f0[m
+Author: Sam Poder <39828164+sampoder@users.noreply.github.com>
+Date:   Sat Jun 25 23:49:09 2022 +0800
+
+    Update transcript.yml
+
+[33mcommit 0351aa6742346f352123c31fad6c1090e4a27948[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Thu Jun 16 17:41:54 2022 -0400
+
+    Revert "Suspend channel blocking"
+    
+    This reverts commit 6c3fc212aead1bf10bca42919c02c990338db807.
+
+[33mcommit 6c3fc212aead1bf10bca42919c02c990338db807[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Thu Jun 16 17:40:42 2022 -0400
+
+    Suspend channel blocking
+
+[33mcommit b8d905001acec2e3614bf2d11f7929f2722089ce[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Thu Jun 16 17:23:08 2022 -0400
+
+    Prettier
+
+[33mcommit fc0918ac395db04fdec41a41649d481e29b42b75[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Thu Jun 16 17:22:02 2022 -0400
+
+    Update protected channels list
+
+[33mcommit bd93c1f9889f9f6b1b2180be1ec2d31f74d6cc41[m
+Merge: 56167f9 07d876b
+Author: Max Wofford <max@maxwofford.com>
+Date:   Sat Jun 4 10:08:03 2022 -0400
+
+    Merge pull request #51 from bellesea/messages
+
+[33mcommit 07d876bd20a9edefcf3b0ca173e44bf5a2e7b548[m
+Author: Belle <bellesee1212@gmail.com>
+Date:   Sat Jun 4 21:51:38 2022 +0800
+
+    formatting
+
+[33mcommit 87af1e934e1c028e3910074ba3f39de3c14b5a12[m
+Author: Belle <bellesee1212@gmail.com>
+Date:   Sat Jun 4 21:49:19 2022 +0800
+
+    init
+
+[33mcommit 56167f9ee4e528c401147ad9d277f7056cf902d5[m
+Merge: b9d67cb 7e2f8be
+Author: Sam Poder <39828164+sampoder@users.noreply.github.com>
+Date:   Mon May 16 09:23:29 2022 +0800
+
+    Merge pull request #46 from aysha-codes/main
+    
+    Add additional call for Toriel
+
+[33mcommit 7e2f8be882066104c45977147586055ba4d43d1c[m
+Author: aysha-codes <aysha.springston@gmail.com>
+Date:   Sun May 15 15:21:28 2022 -0500
+
+    Add additional call for Toriel
+
+[33mcommit b9d67cb2a34c43e2895b716987175e0ba43a2ffa[m
+Merge: 405d429 b535633
+Author: Sam Poder <39828164+sampoder@users.noreply.github.com>
+Date:   Mon May 2 17:11:04 2022 +0800
+
+    Merge pull request #44 from hackclub/dependabot/npm_and_yarn/express-4.18.1
+    
+    Bump express from 4.17.3 to 4.18.1
+
+[33mcommit 405d429579ec3c17ff1a69e1bd61adc5b1ef849b[m
+Merge: a0e691c fa0a903
+Author: Sam Poder <39828164+sampoder@users.noreply.github.com>
+Date:   Mon May 2 17:10:38 2022 +0800
+
+    Merge pull request #43 from hackclub/dependabot/npm_and_yarn/axios-0.27.2
+    
+    Bump axios from 0.26.1 to 0.27.2
+
+[33mcommit fa0a90302e0754807b0691a6226d4dc86d060f52[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Mon May 2 09:10:30 2022 +0000
+
+    Bump axios from 0.26.1 to 0.27.2
+    
+    Bumps [axios](https://github.com/axios/axios) from 0.26.1 to 0.27.2.
+    - [Release notes](https://github.com/axios/axios/releases)
+    - [Changelog](https://github.com/axios/axios/blob/master/CHANGELOG.md)
+    - [Commits](https://github.com/axios/axios/compare/v0.26.1...v0.27.2)
+    
+    ---
+    updated-dependencies:
+    - dependency-name: axios
+      dependency-type: direct:production
+      update-type: version-update:semver-minor
+    ...
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit a0e691c9bbb7faed6f158664186a9311adf26b02[m
+Merge: 4188135 cd40b41
+Author: Sam Poder <39828164+sampoder@users.noreply.github.com>
+Date:   Mon May 2 17:09:50 2022 +0800
+
+    Merge pull request #42 from hackclub/dependabot/npm_and_yarn/prisma-3.13.0
+    
+    Bump prisma from 3.12.0 to 3.13.0
+
+[33mcommit 41881359187a15e68fbe92693ec912b32e72792a[m
+Merge: eec7185 5093a53
+Author: Sam Poder <39828164+sampoder@users.noreply.github.com>
+Date:   Mon May 2 17:09:32 2022 +0800
+
+    Merge pull request #41 from hackclub/dependabot/npm_and_yarn/prisma/client-3.13.0
+    
+    Bump @prisma/client from 3.12.0 to 3.13.0
+
+[33mcommit eec7185064b6a448ad4bbc713139353585f2c2fe[m
+Merge: f3550f4 3607500
+Author: Sam Poder <39828164+sampoder@users.noreply.github.com>
+Date:   Mon May 2 17:08:59 2022 +0800
+
+    Merge pull request #39 from exu3/patch-1
+    
+    Fix GitHub edit link in startup message
+
+[33mcommit f3550f43f6d2c3579f0d1c632021f743939541c7[m
+Merge: 90ee152 f087708
+Author: Sam Poder <39828164+sampoder@users.noreply.github.com>
+Date:   Mon May 2 17:08:21 2022 +0800
+
+    Merge pull request #38 from exu3/high-school
+    
+    Fix "high schooler" in welcome-committee message
+
+[33mcommit b5356333e5895f662cbb8401426039768825434b[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Mon May 2 08:20:52 2022 +0000
+
+    Bump express from 4.17.3 to 4.18.1
+    
+    Bumps [express](https://github.com/expressjs/express) from 4.17.3 to 4.18.1.
+    - [Release notes](https://github.com/expressjs/express/releases)
+    - [Changelog](https://github.com/expressjs/express/blob/master/History.md)
+    - [Commits](https://github.com/expressjs/express/compare/4.17.3...4.18.1)
+    
+    ---
+    updated-dependencies:
+    - dependency-name: express
+      dependency-type: direct:production
+      update-type: version-update:semver-minor
+    ...
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit cd40b41ce8b3547c42a487751ac6f332a26d5709[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Mon May 2 08:20:36 2022 +0000
+
+    Bump prisma from 3.12.0 to 3.13.0
+    
+    Bumps [prisma](https://github.com/prisma/prisma/tree/HEAD/packages/cli) from 3.12.0 to 3.13.0.
+    - [Release notes](https://github.com/prisma/prisma/releases)
+    - [Commits](https://github.com/prisma/prisma/commits/3.13.0/packages/cli)
+    
+    ---
+    updated-dependencies:
+    - dependency-name: prisma
+      dependency-type: direct:development
+      update-type: version-update:semver-minor
+    ...
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit 5093a53f0a1ec998db165e05bd9130680fc4fcc9[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Mon May 2 08:20:25 2022 +0000
+
+    Bump @prisma/client from 3.12.0 to 3.13.0
+    
+    Bumps [@prisma/client](https://github.com/prisma/prisma/tree/HEAD/packages/client) from 3.12.0 to 3.13.0.
+    - [Release notes](https://github.com/prisma/prisma/releases)
+    - [Commits](https://github.com/prisma/prisma/commits/3.13.0/packages/client)
+    
+    ---
+    updated-dependencies:
+    - dependency-name: "@prisma/client"
+      dependency-type: direct:production
+      update-type: version-update:semver-minor
+    ...
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit 90ee15221a900010ec066f2e837004c5c2161d0e[m
+Author: Sam Poder <39828164+sampoder@users.noreply.github.com>
+Date:   Sun Apr 24 17:16:43 2022 +0800
+
+    Fix Small Type
+
+[33mcommit 3607500d401fd546e4ab727d5d84f9e03ff3767e[m
+Author: Ella <git@ella.cx>
+Date:   Sat Apr 23 15:02:05 2022 -0700
+
+    Fix GH edit link
+
+[33mcommit f08770818017ad069dc1de3f1549ee5e2f1c7e98[m
+Author: Ella <git@ella.cx>
+Date:   Sat Apr 23 14:13:07 2022 -0700
+
+    Fix hs boolean
+
+[33mcommit 45a75b19eec035d828d41a3ba260b010c5927476[m
+Author: Ella <git@ella.cx>
+Date:   Sat Apr 23 14:12:17 2022 -0700
+
+    Fix welcome message
+
+[33mcommit 4f6869bb884019f2ec99fb27aad8fb613b5a3652[m
+Merge: b416949 25fec6c
+Author: jessicard <jessicard@mac.com>
+Date:   Wed Apr 20 11:01:05 2022 -0400
+
+    Merge pull request #37 from hackclub/add-scope
+    
+    Add scope needed for development
+
+[33mcommit 25fec6c53c717fc3596334e702674f43a82ddb6c[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Wed Apr 20 11:00:30 2022 -0400
+
+    Clarify comment on groups:history scope
+
+[33mcommit a54b347b0307d90941efa919f47b2ebf027cb07d[m
+Author: Jessica Card <jessicard@mac.com>
+Date:   Wed Apr 20 10:14:14 2022 -0400
+
+    Add back in other scope
+
+[33mcommit f1dc022f8a30c16e0d9a948a9ef453ab3c816436[m
+Author: Jessica Card <jessicard@mac.com>
+Date:   Wed Apr 20 10:13:43 2022 -0400
+
+    Try to add the real manifest again
+
+[33mcommit 0f81ff0688abbb7877826420f51b2eeed586a661[m
+Author: Jessica Card <jessicard@mac.com>
+Date:   Wed Apr 20 10:13:00 2022 -0400
+
+    Revert "Oops"
+    
+    This reverts commit 6ebb7d55d087408e485a9799c32c9f0bf243d8c7.
+
+[33mcommit 6ebb7d55d087408e485a9799c32c9f0bf243d8c7[m
+Author: Jessica Card <jessicard@mac.com>
+Date:   Wed Apr 20 10:12:28 2022 -0400
+
+    Oops
+
+[33mcommit 71e70e741942464ba7f902343923aeb8c0041a7d[m
+Author: Jessica Card <jessicard@mac.com>
+Date:   Wed Apr 20 10:11:42 2022 -0400
+
+    Add scope used in dev
+
+[33mcommit b41694933f4955bb9e78f3675b2d9db6f0c657e1[m
+Merge: 824f8d5 6d813f2
+Author: jessicard <jessicard@mac.com>
+Date:   Wed Apr 20 10:09:36 2022 -0400
+
+    Merge pull request #36 from hackclub/jessicard-patch-1
+    
+    Formatting/grammar edits for end of README instructions
+
+[33mcommit 824f8d5067730655d302da89e4409c2f241b216c[m
+Merge: 76c35a7 87637ab
+Author: jessicard <jessicard@mac.com>
+Date:   Tue Apr 19 15:08:35 2022 -0400
+
+    Merge pull request #33 from hackclub/jessicard-patch-2
+    
+    Link in README to manifest, and link lines to a commit hash
+
+[33mcommit 6d813f22a88f5cd53c46adf070a820a6f854cd98[m
+Author: jessicard <jessicard@mac.com>
+Date:   Tue Apr 19 14:41:02 2022 -0400
+
+    Formatting/grammar for end of README instructions
+
+[33mcommit 87637ab737fd144c07e882765b13afc5e456d11e[m
+Author: jessicard <jessicard@mac.com>
+Date:   Tue Apr 19 13:44:34 2022 -0400
+
+    Remove line numbers
+
+[33mcommit 76c35a7e442c50e3b411161f0190e39f1736f3ad[m
+Merge: c1e0047 79419ce
+Author: jessicard <jessicard@mac.com>
+Date:   Tue Apr 19 13:41:55 2022 -0400
+
+    Merge pull request #32 from hackclub/jessicard-patch-1
+    
+    Update @msw to @creds
+
+[33mcommit c1e0047682f279a6f2686aaa798656d56b2111ce[m
+Merge: b79cec0 042b807
+Author: jessicard <jessicard@mac.com>
+Date:   Tue Apr 19 13:41:41 2022 -0400
+
+    Merge pull request #35 from hackclub/jessicard-patch-4
+    
+    Add install to workspace as a step
+
+[33mcommit 042b80714e3d0ace02a1d3ee99f9ce6fddd20407[m
+Merge: 9212a32 b79cec0
+Author: jessicard <jessicard@mac.com>
+Date:   Tue Apr 19 13:41:17 2022 -0400
+
+    Merge branch 'main' into jessicard-patch-4
+
+[33mcommit b79cec098367e7f238a01164d18ecc2c2e31b266[m
+Merge: a84d60b a07955b
+Author: jessicard <jessicard@mac.com>
+Date:   Tue Apr 19 13:38:26 2022 -0400
+
+    Merge pull request #34 from hackclub/jessicard-patch-3
+    
+    Update instructions around manifest modal
+
+[33mcommit 9212a3283d5a51c7a84a64b92479bf5df6db80ad[m
+Author: jessicard <jessicard@mac.com>
+Date:   Tue Apr 19 13:32:12 2022 -0400
+
+    Add install to workspace as a step
+
+[33mcommit a84d60be5cdb775521e5daf35e2042ac1899d4a5[m
+Author: Jessica Card <jessicard@mac.com>
+Date:   Tue Apr 19 13:30:59 2022 -0400
+
+    Revert "Add install to workspace as a step"
+    
+    This reverts commit 472cd9720f6ba88ad9c677599caf87cd57623fd1.
+
+[33mcommit 472cd9720f6ba88ad9c677599caf87cd57623fd1[m
+Author: jessicard <jessicard@mac.com>
+Date:   Tue Apr 19 13:29:30 2022 -0400
+
+    Add install to workspace as a step
+
+[33mcommit a07955b8c91c519844012aef5f7167a42ce24bd0[m
+Author: jessicard <jessicard@mac.com>
+Date:   Tue Apr 19 13:22:37 2022 -0400
+
+    Update instructions around manifest modal
+
+[33mcommit ad71554fa486ab3a019963ac0666560d61a5d38f[m
+Author: jessicard <jessicard@mac.com>
+Date:   Tue Apr 19 13:12:12 2022 -0400
+
+    Link in README to manifest, and link lines to a commit hash
+
+[33mcommit 79419ceeba6ee06649eaa34d5adbbf4528ca26c6[m
+Author: jessicard <jessicard@mac.com>
+Date:   Tue Apr 19 13:03:53 2022 -0400
+
+    Update @msw to @creds
+
+[33mcommit 922eb46862a472bc36d90a45cdb804741ff60d2e[m
+Merge: 6551f56 796672a
+Author: Max Wofford <max@maxwofford.com>
+Date:   Mon Apr 18 11:30:22 2022 -0400
+
+    Merge pull request #31 from bellesea/main
+    
+    update readme
+
+[33mcommit 796672a950a8b898570c27bef53f41be52a8f636[m
+Author: Belle <bellesee1212@gmail.com>
+Date:   Mon Apr 18 23:16:12 2022 +0800
+
+    edit note about error messages
+
+[33mcommit 9658d28f3402a3d83f44ce717488244260a1e12b[m
+Author: Belle <bellesee1212@gmail.com>
+Date:   Mon Apr 18 22:56:06 2022 +0800
+
+    update readme
+
+[33mcommit 6551f5627565ea7d82f2f4bc44c3c0649e2da911[m
+Merge: 1adc3b5 fe11d34
+Author: jessicard <jessicard@mac.com>
+Date:   Fri Apr 15 10:34:07 2022 -0400
+
+    Merge pull request #30 from hackclub/clone-url
+    
+    Update clone URL
+
+[33mcommit 1adc3b5832d8546ed998608d856c1ce7741a4b33[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Fri Apr 15 10:21:03 2022 -0400
+
+    Remove working doc section of README
+
+[33mcommit 37478c6634e1bfe70dc5781a9ef86199d7f563b0[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Fri Apr 15 10:20:37 2022 -0400
+
+    Add dev instructions for avoiding namespace collisions to README
+
+[33mcommit fe11d34e677aa70be9441916ad36c3272b57a9a9[m
+Author: jessicard <jessicard@mac.com>
+Date:   Fri Apr 15 09:43:09 2022 -0400
+
+    Update clone URL
+
+[33mcommit b961157675eb7c9177ca262f4d0b77ead6b56960[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Thu Apr 14 14:46:26 2022 -0400
+
+    Add permissions to join channels
+
+[33mcommit c951b14a9b4b9fc83dba534e573df2a369483ee8[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Thu Apr 14 14:02:08 2022 -0400
+
+    Fix typo
+
+[33mcommit 148414793cb0ee19c09da23e8bf0e3cfe3903bb1[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Thu Apr 14 14:00:41 2022 -0400
+
+    Improve error log on invite channel
+
+[33mcommit ee28c248cd07382f0c6746c219ea12174f72b740[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Thu Apr 14 13:59:08 2022 -0400
+
+    npm run fmt
+
+[33mcommit ea8afe5fcea6c4bad3523539d4b2e777ac047c59[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Thu Apr 14 13:56:05 2022 -0400
+
+    Attempt to handle race-condition while upgrading user
+
+[33mcommit ada90102c6a6fd038178ad250798b52c492f67a6[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Thu Apr 14 13:09:08 2022 -0400
+
+    npm run fmt
+
+[33mcommit a4f2177c1638bd3b7c54983ad7f308edc3178264[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Thu Apr 14 13:06:55 2022 -0400
+
+    Fix mis-committed lines
+
+[33mcommit 1f76fac79e757b2a23e9aa2339332c4d52f0b496[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Thu Apr 14 12:51:43 2022 -0400
+
+    Remove outdated use of 'client' on slack-theme step
+
+[33mcommit 39c29da1d3290daed74ace7c319178a2990ee9aa[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Thu Apr 14 12:45:22 2022 -0400
+
+    Fix invite logic not handling default channels
+
+[33mcommit 337444dbf452a8a9df412d59b0deccacf1051f6b[m
+Merge: 72ca1c9 e2daf9a
+Author: Max Wofford <max@maxwofford.com>
+Date:   Thu Apr 14 03:07:22 2022 -0400
+
+    Merge pull request #29 from hackclub/apac-flow
+
+[33mcommit e2daf9a2d060cade10c18e11784ac8a563690096[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Thu Apr 14 02:42:39 2022 -0400
+
+    Add apac default channel ids
+
+[33mcommit ca5e38b3b8b734c34b5b96f41a34ed8560ff0d09[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Thu Apr 14 02:40:17 2022 -0400
+
+    Initial work on alternative apac flow
+
+[33mcommit 72ca1c9b12646e3e3d93f721722416ddb7b2dfef[m
+Author: jessicard <jessicard@mac.com>
+Date:   Wed Apr 13 10:51:22 2022 -0400
+
+    Update README to mention Slack group @creds
+
+[33mcommit a2c272bbf679aaa50ef4d6c4cd4bbf9f0133bcd0[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Mon Apr 11 11:38:54 2022 -0400
+
+    Fix missing import
+
+[33mcommit 5fd36f05ee42bff48cb44b8978b3147f85bc73f3[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Mon Apr 11 10:16:35 2022 -0400
+
+    Add command about orpheus bot using info endpoint
+
+[33mcommit f7445a8a064f0e2b93a27cb7087a166a4e7e2730[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Mon Apr 11 10:00:32 2022 -0400
+
+    Fix typo
+
+[33mcommit ed936514942f71a45b43fded254ff9c3e7a6a640[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Mon Apr 11 09:59:06 2022 -0400
+
+    Dependabot ignores major semvar bumps in node-fetch
+
+[33mcommit 0086ba48a2623af7136b9150eca4365ea1852f5a[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Mon Apr 11 09:55:37 2022 -0400
+
+    Downgrade node-fetch to support require() statements
+
+[33mcommit ab98f11d2096bd3382a175ed20a235cac7f75439[m
+Merge: 80ca5c4 b10c5a8
+Author: Sam Poder <39828164+sampoder@users.noreply.github.com>
+Date:   Mon Apr 11 17:01:51 2022 +0800
+
+    Merge pull request #22 from hackclub/dependabot/npm_and_yarn/express-4.17.3
+    
+    Bump express from 4.17.1 to 4.17.3
+
+[33mcommit b10c5a80afd17a50c89c0c2b5ac6f4a90a606569[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Mon Apr 11 08:35:44 2022 +0000
+
+    Bump express from 4.17.1 to 4.17.3
+    
+    Bumps [express](https://github.com/expressjs/express) from 4.17.1 to 4.17.3.
+    - [Release notes](https://github.com/expressjs/express/releases)
+    - [Changelog](https://github.com/expressjs/express/blob/master/History.md)
+    - [Commits](https://github.com/expressjs/express/compare/4.17.1...4.17.3)
+    
+    ---
+    updated-dependencies:
+    - dependency-name: express
+      dependency-type: direct:production
+      update-type: version-update:semver-patch
+    ...
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit 80ca5c42238b345bc14efd89d5ef7762888052ed[m
+Merge: c516089 4326d64
+Author: Sam Poder <39828164+sampoder@users.noreply.github.com>
+Date:   Mon Apr 11 16:34:57 2022 +0800
+
+    Merge pull request #21 from hackclub/dependabot/npm_and_yarn/axios-0.26.1
+    
+    Bump axios from 0.21.4 to 0.26.1
+
+[33mcommit c5160895886b587e44ef997b2674733dd129549f[m
+Merge: 3f1661b a069063
+Author: Sam Poder <39828164+sampoder@users.noreply.github.com>
+Date:   Mon Apr 11 16:34:40 2022 +0800
+
+    Merge pull request #23 from hackclub/dependabot/npm_and_yarn/form-data-4.0.0
+    
+    Bump form-data from 3.0.1 to 4.0.0
+
+[33mcommit 3f1661bd4e3a07aebeb3aa6ce0402173b4571f61[m
+Merge: d78fe54 80330b7
+Author: Sam Poder <39828164+sampoder@users.noreply.github.com>
+Date:   Mon Apr 11 16:34:25 2022 +0800
+
+    Merge pull request #24 from hackclub/dependabot/npm_and_yarn/node-fetch-3.2.3
+    
+    Bump node-fetch from 2.6.1 to 3.2.3
+
+[33mcommit 80330b7d7c1361f4ea32b0ef8948e20aed27e7ed[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Mon Apr 11 08:22:21 2022 +0000
+
+    Bump node-fetch from 2.6.1 to 3.2.3
+    
+    Bumps [node-fetch](https://github.com/node-fetch/node-fetch) from 2.6.1 to 3.2.3.
+    - [Release notes](https://github.com/node-fetch/node-fetch/releases)
+    - [Commits](https://github.com/node-fetch/node-fetch/compare/v2.6.1...v3.2.3)
+    
+    ---
+    updated-dependencies:
+    - dependency-name: node-fetch
+      dependency-type: direct:production
+      update-type: version-update:semver-major
+    ...
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit a0690637055acc8ffd615d3dd91c2ad38b4d0300[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Mon Apr 11 08:22:15 2022 +0000
+
+    Bump form-data from 3.0.1 to 4.0.0
+    
+    Bumps [form-data](https://github.com/form-data/form-data) from 3.0.1 to 4.0.0.
+    - [Release notes](https://github.com/form-data/form-data/releases)
+    - [Commits](https://github.com/form-data/form-data/compare/v3.0.1...v4.0.0)
+    
+    ---
+    updated-dependencies:
+    - dependency-name: form-data
+      dependency-type: direct:production
+      update-type: version-update:semver-major
+    ...
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit 4326d6483f99339b6ba0e0c986bba85367cb787c[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Mon Apr 11 08:21:59 2022 +0000
+
+    Bump axios from 0.21.4 to 0.26.1
+    
+    Bumps [axios](https://github.com/axios/axios) from 0.21.4 to 0.26.1.
+    - [Release notes](https://github.com/axios/axios/releases)
+    - [Changelog](https://github.com/axios/axios/blob/master/CHANGELOG.md)
+    - [Commits](https://github.com/axios/axios/compare/v0.21.4...v0.26.1)
+    
+    ---
+    updated-dependencies:
+    - dependency-name: axios
+      dependency-type: direct:production
+      update-type: version-update:semver-minor
+    ...
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit d78fe54ad4d189245c46a73edd1869377aed7b0e[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Fri Apr 8 09:56:50 2022 -0400
+
+    Abstract app and express into their own files
+
+[33mcommit 33f25a8f386f59d1006a9b812b7eea8f6906f06e[m
+Merge: d5d4f3c ed7a210
+Author: Max Wofford <max@maxwofford.com>
+Date:   Thu Apr 7 17:15:34 2022 -0400
+
+    Merge pull request #12 from exu3/exu/patch-1
+
+[33mcommit ed7a21066f7bec6f03f71dca42ed86b307d230a7[m
+Author: exu <git@ella.cx>
+Date:   Thu Apr 7 14:13:29 2022 -0700
+
+    Remove divider
+
+[33mcommit d5d4f3c6540a271421d29ad9c6978f084f12f77d[m
+Merge: ac6379a 011e112
+Author: Max Wofford <max@maxwofford.com>
+Date:   Thu Apr 7 14:00:52 2022 -0400
+
+    Merge pull request #7 from hackclub/revert-2-dependabot/npm_and_yarn/node-fetch-3.2.3
+
+[33mcommit 011e11233f35db83caa488059e1a185b920472b8[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Thu Apr 7 14:00:40 2022 -0400
+
+    Revert "Bump node-fetch from 2.6.1 to 3.2.3"
+
+[33mcommit ac6379a9d09d905439d93c6c6208505e2a306832[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Thu Apr 7 13:05:48 2022 -0400
+
+    Add redirect to repo
+
+[33mcommit de934cbd86c0773aed287145b705178097096a90[m
+Merge: 4256d82 ad612c7
+Author: Max Wofford <max@maxwofford.com>
+Date:   Thu Apr 7 13:03:04 2022 -0400
+
+    Merge pull request #2 from hackclub/dependabot/npm_and_yarn/node-fetch-3.2.3
+
+[33mcommit 4256d8273165ccc6814da4ba1ca5674eaee31ca1[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Thu Apr 7 12:59:16 2022 -0400
+
+    Hide working tasks section of README
+
+[33mcommit 0cdf732b8fc738c43186700cf2dbed5213013738[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Thu Apr 7 12:57:05 2022 -0400
+
+    Add note about Clippy in README
+
+[33mcommit ab65e213a0857700a2c0f24e205b0a11f1ceb505[m
+Merge: cce4259 2f33e8d
+Author: Max Wofford <max@maxwofford.com>
+Date:   Thu Apr 7 12:45:59 2022 -0400
+
+    Merge pull request #4 from hackclub/dependabot/npm_and_yarn/slack/bolt-3.11.0
+
+[33mcommit 2f33e8db6d4f219abcf0370cf5a7f7723ecc23f4[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Thu Apr 7 16:35:58 2022 +0000
+
+    Bump @slack/bolt from 3.10.0 to 3.11.0
+    
+    Bumps [@slack/bolt](https://github.com/slackapi/bolt) from 3.10.0 to 3.11.0.
+    - [Release notes](https://github.com/slackapi/bolt/releases)
+    - [Changelog](https://github.com/slackapi/bolt-js/blob/main/CHANGELOG.md)
+    - [Commits](https://github.com/slackapi/bolt/compare/@slack/bolt@3.10.0...@slack/bolt@3.11.0)
+    
+    ---
+    updated-dependencies:
+    - dependency-name: "@slack/bolt"
+      dependency-type: direct:production
+      update-type: version-update:semver-minor
+    ...
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit ad612c7a2e2c662e6193c55365fe2c814e114ff6[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Thu Apr 7 16:35:46 2022 +0000
+
+    Bump node-fetch from 2.6.1 to 3.2.3
+    
+    Bumps [node-fetch](https://github.com/node-fetch/node-fetch) from 2.6.1 to 3.2.3.
+    - [Release notes](https://github.com/node-fetch/node-fetch/releases)
+    - [Commits](https://github.com/node-fetch/node-fetch/compare/v2.6.1...v3.2.3)
+    
+    ---
+    updated-dependencies:
+    - dependency-name: node-fetch
+      dependency-type: direct:production
+      update-type: version-update:semver-major
+    ...
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit cce425973f6f401df3f2de78690a8328152119b5[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Thu Apr 7 12:34:53 2022 -0400
+
+    Remove clippy-only dependencies
+
+[33mcommit ee94be71036941beb6e2a9515a6e51465b4e8d94[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Thu Apr 7 12:24:33 2022 -0400
+
+    Fix typo in README
+
+[33mcommit bf715787857184d5790d5ff706c145e07312a01a[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Thu Apr 7 11:59:05 2022 -0400
+
+    npm run fmt
+
+[33mcommit 5e53e89238f237ccd4b7c139f9b6d8a428caf554[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Thu Apr 7 11:55:40 2022 -0400
+
+    Log in slack-tutorial
+
+[33mcommit 4e6ba281e4a69866d12a5fc6fb6f22f09c9d4d9e[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Thu Apr 7 11:43:12 2022 -0400
+
+    npm run fmt
+
+[33mcommit 9fb35e3f6046fa2b9f0fcd2fb57d352a08cbcf85[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Thu Apr 7 11:41:00 2022 -0400
+
+    Log on /slack-tutorial/:user
+
+[33mcommit bfe54e990982340bd110bdbbf4ab187dec16ba3f[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Thu Apr 7 11:36:40 2022 -0400
+
+    Add pie to startup messages
+
+[33mcommit d0e79852a0f200d8cae58bc3da6e1d0ae68ad946[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Thu Apr 7 11:29:24 2022 -0400
+
+    Add /slack-tutorial endpoint for clippy
+
+[33mcommit 722b8e62ee4024f02293e4e88acf30f67e11d297[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Thu Apr 7 11:14:03 2022 -0400
+
+    Wrap mirror message in try/catch
+
+[33mcommit ab4121df7edeb341e0c37bd2c6304f67cd71cb7f[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Thu Apr 7 11:12:29 2022 -0400
+
+    Add image to README
+
+[33mcommit 4a21305e4d1fbee9045cdc9a995813572cf5f286[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Thu Apr 7 10:41:23 2022 -0400
+
+    Wrap slack-invite endpoint in try/catch
+
+[33mcommit 69c04593d26a3a7c2bd03b510cbd504336541cd4[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Thu Apr 7 10:24:55 2022 -0400
+
+    Add default to user_agent
+
+[33mcommit 56735448c8e672d1e2f69f52cb7e0e342b4d990b[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Thu Apr 7 10:23:49 2022 -0400
+
+    Fix continent replace regex
+
+[33mcommit d36571470d0d692b2bf4d66d3811bdab6fcce676[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Thu Apr 7 10:20:39 2022 -0400
+
+    npm run fmt
+
+[33mcommit 32f3063af0dcf9f9a27156429fbc7b28b74a433f[m
+Author: Max Wofford <max@maxwofford.com>
+Date:   Thu Apr 7 10:20:17 2022 -0400
+
+    Remove outdated comment
