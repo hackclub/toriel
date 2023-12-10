@@ -118,7 +118,6 @@ app.event('message', async (args) => {
 })
 
 const addToChannels = async (user, event) => {
-
   await sleep(1000) // timeout to prevent race-condition during channel invites
   const invite = await getInvite({ user })
   let channelsToInvite = defaultChannels
@@ -340,7 +339,7 @@ app.start(process.env.PORT || 3001).then(async () => {
 
   /* DEVELOPMENT UTILITIES (uncomment to use) */
   const { setupCaveChannel } = require('./setup/cave-channel')
-   await setupCaveChannel(app)
+  await setupCaveChannel(app)
 })
 
 module.exports = { app }
