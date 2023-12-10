@@ -194,6 +194,7 @@ app.command(/.*?/, async (args) => {
     switch (command) {
       case '/toriel-restart':
         await require(`./commands/restart`)(args)
+        metrics.increment('events.restart', 1)
         break
 
       case '/toriel-call':
