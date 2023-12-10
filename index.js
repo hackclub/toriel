@@ -12,6 +12,7 @@ const { receiver } = require('./express-receiver')
 const { getInvite } = require('./util/get-invite')
 const { sleep } = require('./util/sleep')
 const { prisma } = require('./db')
+const { metrics } = require('./util/metrics')
 
 receiver.router.use(express.json())
 
