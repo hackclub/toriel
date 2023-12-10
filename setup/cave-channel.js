@@ -30,7 +30,7 @@ async function postMessage() {
     blocks: [
       transcript('block.text', { text: transcript('cave-intro') }),
       transcript('block.single-button', {
-        text: 'call for help',
+        text: 'Start',
         value: 'cave_start',
       }),
     ],
