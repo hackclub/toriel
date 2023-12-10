@@ -7,22 +7,18 @@ async function ensureChannels() {
   const testChannelIDs = [
     transcript('channels.toriels-diary'),
     transcript('channels.cave'),
-    transcript('channels.the-basement'),
     transcript('channels.bot-spam'),
     transcript('channels.toriel-dev'),
     // default channels:
     transcript('channels.lounge'),
     transcript('channels.code'),
     transcript('channels.hack-night'),
-    transcript('channels.question-of-the-day'),
-    transcript('channels.confessions'),
     transcript('channels.neighborhood'),
     transcript('channels.ship'),
     transcript('channels.scrapbook'),
     transcript('channels.counttoamillion'),
     transcript('channels.leaders'),
     transcript('channels.hq'),
-    transcript('channels.8-ball'),
   ]
 
   let missingChannels = []
