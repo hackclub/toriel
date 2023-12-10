@@ -319,7 +319,7 @@ app.action(/.*?/, async (args) => {
   }
 })
 
-app.start(process.env.PORT || 3000).then(async () => {
+app.start(process.env.PORT || 3001).then(async () => {
   console.log(transcript('startupLog'))
 
   const { ensureSlackChannels } = require('./interactions/ensure-channels')
@@ -338,6 +338,9 @@ app.start(process.env.PORT || 3000).then(async () => {
     await startupInteraction()
   }
 
-
+  /* DEVELOPMENT UTILITIES (uncomment to use) */
+  const { setupCaveChannel } = require('./setup/cave-channel')
+   await setupCaveChannel(app)
+})
 
 module.exports = { app }

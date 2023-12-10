@@ -53,7 +53,7 @@ async function inviteUser({
   const slackResponse = await fetch(url, { method: 'POST' }).then((r) =>
     r.json()
   )
-    return slackResponse
+  return slackResponse
 }
 
 module.exports = { inviteUser }
