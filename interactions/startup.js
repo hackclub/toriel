@@ -1,5 +1,6 @@
 const { client } = require('../app')
 const { transcript } = require('../util/transcript')
+const { metrics } = require('../util/metrics')
 
 async function startup() {
   metrics.increment('events.startup', 1)
