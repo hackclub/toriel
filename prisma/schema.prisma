@@ -35,6 +35,7 @@ model Invite {
   event           String?
   continent       Continent
   user_id         String?
+  welcomed?       Boolean?  @default(true)?
 }
 
 model User {
