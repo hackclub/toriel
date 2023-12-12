@@ -22,8 +22,8 @@ async function cleanupCaveChannel(dryRun = true) {
     console.log(
       `Found ${messagesToRemove.length} message(s) from other users in #cave channel, cleaning up...`
     )
+
     await Promise.all(
-      metrics.increment('events.cavedelete', 1)
       messagesToRemove.map((message) =>
         client.chat
           .delete({
