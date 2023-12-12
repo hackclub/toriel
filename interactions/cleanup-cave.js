@@ -1,5 +1,6 @@
 const { client } = require('../app')
 const { transcript } = require('../util/transcript')
+const { metrics } = require('../util/metrics')
 
 async function cleanupCaveChannel(dryRun = true) {
   const channel = transcript('channels.cave')
@@ -22,6 +23,7 @@ async function cleanupCaveChannel(dryRun = true) {
       `Found ${messagesToRemove.length} message(s) from other users in #cave channel, cleaning up...`
     )
     await Promise.all(
+      metrics.increment(events.cavedelete, 1)
       messagesToRemove.map((message) =>
         client.chat
           .delete({
