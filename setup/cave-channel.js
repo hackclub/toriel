@@ -36,9 +36,9 @@ async function postMessage() {
         text: 'Start',
         value: 'cave_start',
       }),
-          postWelcomeCommittee(user),
     ],
-  })
+     postWelcomeCommittee(user)
+       })
 }
 
 async function postAudio() {
