@@ -1,6 +1,9 @@
 const axios = require('axios')
 const { transcript } = require('../util/transcript')
 const { client } = require('../app')
+const {
+  postWelcomeCommittee,
+} = require('./interactions/post-welcome-committee')
 
 async function setupCaveChannel() {
   await postImage()
@@ -33,6 +36,7 @@ async function postMessage() {
         text: 'Start',
         value: 'cave_start',
       }),
+          postWelcomeCommittee(user),
     ],
   })
 }
