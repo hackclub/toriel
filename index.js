@@ -228,6 +228,7 @@ app.action(/.*?/, async (args) => {
     case 'cave_start':
       const { joinCaveInteraction } = require('./interactions/join-cave')
       await joinCaveInteraction({ ...args, payload: { user } })
+      postWelcomeCommittee(user)
       break
     case 'coc_complete':
       const slackuser = await client.users.info({ user })
