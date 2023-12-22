@@ -132,7 +132,6 @@ const addToChannels = async (user, event) => {
         inviteUserToChannel(user, transcript(`channels.${c}`))
       )
     ),
-    postWelcomeCommittee(user),
   ])
 
   const suggestion = getSuggestion()
