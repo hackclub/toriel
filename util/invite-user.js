@@ -30,6 +30,7 @@ async function inviteGuestToSlack({ email, channels, _customMessage }) {
         mode: 'manual',
       },
     ],
+    restricted: true,
     channels: channels.join(','),
   })
 
