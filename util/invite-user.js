@@ -1,8 +1,44 @@
 const fetch = require('node-fetch')
 const { prisma } = require('../db')
-const { transcript } = require('./transcript')
 const { defaultInvite } = require('./invite-types/default')
 const { onboardInvite } = require('./invite-types/onboard')
+
+async function inviteGuestToSlack({ email, channels, _customMessage }) {
+  // This is an undocumented API method found in https://github.com/ErikKalkoken/slackApiDoc/pull/70
+  // Unlike the documention in that PR, we're driving it not with a legacy token but a browser storage+cookie pair
+
+  // The SLACK_COOKIE is a xoxd-* token found in browser cookies under the key 'd'
+  // The SLACK_BROWSER_TOKEN is a xoxc-* token found in browser local storage using this script: https://gist.github.com/maxwofford/5779ea072a5485ae3b324f03bc5738e1
+
+  // I haven't yet found out how to add custom messages, so those are ignored for now
+  const cookieValue = `d=${process.env.SLACK_COOKIE}`
+
+  // Create a new Headers object
+  const headers = new Headers()
+
+  // Add the cookie to the headers
+  headers.append('Cookie', cookieValue)
+  headers.append('Content-Type', 'application/json')
+  headers.append('Authorization', `Bearer ${process.env.SLACK_BROWSER_TOKEN}`)
+
+  const data = JSON.stringify({
+    token: process.env.SLACK_BROWSER_TOKEN,
+    invites: [
+      {
+        email,
+        type: 'restricted',
+        mode: 'manual',
+      },
+    ],
+    channels: channels.join(','),
+  })
+
+  return fetch(`https://slack.com/api/users.admin.inviteBulk`, {
+    headers,
+    method: 'POST',
+    body: data,
+  }).then((r) => r.json())
+}
 
 async function inviteUser({
   email,
@@ -31,29 +67,7 @@ async function inviteUser({
   }
   const { channels, customMessage } = invite
 
-  // This is a private api method found in https://github.com/ErikKalkoken/slackApiDoc/blob/master/users.admin.invite.md
-  // I only got a successful response by putting all the args in URL params
-  // Giving JSON body DID NOT WORK when testing locally
-  // —@MaxWofford
-
-  // The SLACK_LEGACY_TOKEN is a `xoxp` deprecated legacy token, which can no
-  // longer be generated:
-  // https://api.slack.com/legacy/custom-integrations/legacy-tokens
-
-  const params = [
-    `email=${email}`,
-    `token=${process.env.SLACK_LEGACY_TOKEN}`,
-    // `real_name=${data.name}`,
-    'restricted=false',
-    `channels=${channels.join(',')}`,
-    `custom_message=${customMessage}`,
-    'resend=true',
-  ].join('&')
-  const url = `https://slack.com/api/users.admin.invite?${params}`
-  const slackResponse = await fetch(url, { method: 'POST' }).then((r) =>
-    r.json()
-  )
-  return slackResponse
+  return await inviteGuestToSlack({ email, channels, customMessage })
 }
 
 module.exports = { inviteUser }
