@@ -13,7 +13,7 @@ async function ensureChannels() {
     transcript('channels.lounge'),
     transcript('channels.code'),
     transcript('channels.hack-night'),
-    transcript('channels.neighborhood'),
+    transcript('channels.neighbourhood'),
     transcript('channels.ship'),
     transcript('channels.scrapbook'),
     transcript('channels.counttoamillion'),
