@@ -13,6 +13,7 @@ const { getInvite } = require('./util/get-invite')
 const { sleep } = require('./util/sleep')
 const { prisma } = require('./db')
 const { metrics } = require('./util/metrics')
+const { upgradeUser } = require('./util/upgrade-user.js')
 
 receiver.router.use(express.json())
 
@@ -119,6 +120,7 @@ app.event('message', async (args) => {
 })
 
 const addToChannels = async (user, event) => {
+  await upgradeUser(user)
   await sleep(1000) // timeout to prevent race-condition during channel invites
   const invite = await getInvite({ user })
   let channelsToInvite = defaultChannels
