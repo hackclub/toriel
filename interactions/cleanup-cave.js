@@ -1,6 +1,5 @@
 const { client } = require('../app')
 const { transcript } = require('../util/transcript')
-const { metrics } = require('../util/metrics')
 
 async function cleanupCaveChannel(dryRun = true) {
   const channel = transcript('channels.cave')
