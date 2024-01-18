@@ -89,6 +89,10 @@ app.event('message', async (args) => {
       })
   }
 
+  if (type == 'team_join') {
+    await pingUserInteraction({ user })
+  }
+
   defaultAddsId = defaultChannels.map((e) => {
     return transcript(`channels.${e}`)
   }) // map all default channels into ids as channel prop is given as id

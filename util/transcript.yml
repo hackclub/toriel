@@ -93,6 +93,9 @@ announcements-to-cave: hello wanderer! head to <#${this.t('channels.cave')}> to 
 cave-intro: |
   while wandering through the forest, you stumble down the entrance of a cave. it looks too high to climb back out.
 
+cave-ping: |
+  _you hear a faint :ping: from the darkness._
+
 cave-join: |
   oh hello... i don't think i recognize you; you must be new in town.
   you may call me <@${this.t('selfUserID')}>! i have tea and a fresh ${this.t('type-of-pie')} pie cooling off... please come over.

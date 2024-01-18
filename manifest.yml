@@ -42,6 +42,7 @@ settings:
       - app_mention
       - member_joined_channel
       - message.channels
+      - team_join
   interactivity:
     is_enabled: true
     request_url: https://toriel.hackclub.com/slack/events
