@@ -1,9 +1,9 @@
 const { StatsD } = require('node-statsd')
 
-const env = process.env.NODE_ENV
+const env = process.env.NODE_ENV || 'development'
 const graphite = process.env.GRAPHITE_HOST
 
-if (graphite == null) {
+if (env == 'production' && graphite == null) {
   throw new Error('Graphite is not working')
 }
 
