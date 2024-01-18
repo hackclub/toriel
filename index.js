@@ -245,26 +245,7 @@ app.action(/.*?/, async (args) => {
           data: { club_leader: false },
         })
         await addToChannels(user, event)
-        break
-      } else {
-        await client.chat.postMessage({
-          text: transcript('house.profile'),
-          blocks: [
-            transcript('block.text', { text: transcript('house.profile') }),
-            transcript('block.image', {
-              url: transcript('house.profile-image'),
-              altText: transcript('house.profile-alt-text'),
-            }),
-            transcript('block.single-button', {
-              text: "i've filled out my profile",
-              value: 'profile_complete',
-            }),
-          ],
-          channel: user,
-        })
       }
-      break
-    case 'profile_complete':
       await client.chat.postMessage({
         text: transcript('house.checkClubLeader'),
         blocks: [

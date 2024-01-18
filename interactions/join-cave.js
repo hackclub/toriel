@@ -36,7 +36,7 @@ async function joinCaveInteraction(args) {
           text: transcript('house.coc'),
         }),
         transcript('block.single-button', {
-          text: 'i agree',
+          text: 'i do',
           value: 'coc_complete',
         }),
       ],
