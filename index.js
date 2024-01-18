@@ -126,13 +126,11 @@ const addToChannels = async (user, event) => {
     channelsToInvite.push(event)
     defaultChannels.push(event)
   }
-  await Promise.all([
-    Promise.all(
-      channelsToInvite.map((c) =>
-        inviteUserToChannel(user, transcript(`channels.${c}`))
-      )
-    ),
-  ])
+  await Promise.all(
+    channelsToInvite.map((c) =>
+      inviteUserToChannel(user, transcript(`channels.${c}`))
+    )
+  )
 
   const suggestion = getSuggestion()
   await client.chat.postMessage({
