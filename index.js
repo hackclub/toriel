@@ -263,6 +263,7 @@ app.action(/.*?/, async (args) => {
         text: transcript('club-leader.text'),
         channel: transcript('club-leader.notifiee'),
       })
+      await inviteUserToChannel(user, transcript('channels.leaders'))
       await addToChannels(user)
       break
     case 'club_leader_no':
