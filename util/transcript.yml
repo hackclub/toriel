@@ -136,27 +136,19 @@ house:
 
     (it's ok if not — this is so i can direct you to the right channels)
   added-to-channels: |
-    i’ve now added you to some channels you might like; feel free to poke around. here’s an overview if you feel lost or overwhelmed:
+    And with that, you’re now a full fledged member of the Hack Club online community!
 
-    <#${this.t('channels.announcements')}> <#${this.t('channels.happenings')}> are the places where new activities and events are announced
+    _You hear the echoes of so many voices and you get a sense of a vast system of cave tunnels and channels and rooms that permeate the darkness. You feel your heart rate increase, just a little. Toriel smiles and refills your tea._
 
-    <#${this.t('channels.neighbourhood')}> is the place to find new channels to join!
+    Perhaps I can point out a few of my favorite places?
 
-    <#${this.t('channels.scrapbook')}> <#${this.t('channels.ship')}> are the places to see what hack clubbers are making and to showcase your own projects
+    <#${this.t('channels.announcements')}> to hear big news.
 
-    active hack club projects you can check out or help build:
-    • Keep updated with all the events & activtes happening inside the slack every week at <#${this.t('channels.happenings')}>
-    • we’re building <https://sinerider.com|sinerider>, a game about love and graphing, at <#${this.t('channels.gamedev')}>
-    • get funding to build a circuit board at <#${this.t('channels.onboard')}>
-    • <#${this.t('channels.sprig')}>: get a free game console by <https://sprig.hackclub.com|making a fun game>
+    <#${this.t('channels.happenings')}> to help guide your way
 
-    to see the channels people are currently talking in, send \`/bunny\` as a message in any channel
+    <#${this.t('channels.ship')}> to be amazed by people just like you
 
-    also, feel free to post an introduction in <#${this.t('channels.welcome')}> (don't worry, this is totally optional)!
-
-    if that’s still too much, perhaps you’ll find one of my suggestions useful:
-
-    > ${this.suggestion}
+    *Most importantly, you must introduce yourself in <#${this.t('channels.welcome')}>. There are so many intrepid travelers like yourself and they're so excited to meet you.*
   added-to-channels-epoch: |
     <https://hack.af/epoch-banner|welcome!> we're so excited to have you here for epoch; *to confirm your registration for epoch, head to <#${this.t('channels.epoch')}> and say hi!*
 
