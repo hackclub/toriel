@@ -38,8 +38,6 @@ const defaultChannels = [
   'scrapbook',
   'happenings',
   'ship',
-  'code',
-  'neighbourhood',
   'welcome',
 ]
 
