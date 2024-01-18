@@ -33,13 +33,7 @@ receiver.router.get(
 
 receiver.router.post('/slack-invite', require('./endpoints/slack-invite'))
 
-const defaultChannels = [
-  'lounge',
-  'scrapbook',
-  'happenings',
-  'ship',
-  'welcome',
-]
+const defaultChannels = ['lounge', 'scrapbook', 'happenings', 'ship', 'welcome']
 
 const getSuggestion = () => {
   const suggestions = [
@@ -138,7 +132,7 @@ const addToChannels = async (user, event) => {
     blocks: [
       transcript('block.text', {
         text: transcript('house.added-to-channels', { suggestion }),
-      })
+      }),
     ],
     channel: user,
   })
