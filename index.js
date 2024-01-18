@@ -259,8 +259,10 @@ app.action(/.*?/, async (args) => {
         text: transcript('club-leader.text'),
         channel: transcript('club-leader.notifiee'),
       })
+      await addToChannels(user, transcript('channels.leaders'))
+      // user upgrading from multi-channel to full user takes some time, so wait to prevent race conditions
+      await sleep(5000)
       await inviteUserToChannel(user, transcript('channels.leaders'))
-      await addToChannels(user)
       break
     case 'club_leader_no':
       await prisma.user.update({
