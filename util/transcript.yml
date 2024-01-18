@@ -93,7 +93,7 @@ announcements-to-cave: hello wanderer! head to <#${this.t('channels.cave')}> to 
 
 cave-intro: |
   while wandering through the forest, you've stumbled down the entrance of a cave. it looks too high to climb back out.
-  You also find a note asking you walk over to a <#${this.t('channels.shaded-spot-under-a-large-tree')} if you need help!
+  You spot a hand-drawn note pinned to a tree root: NEED HELP? GO TO THE <#${this.t('channels.shaded-spot-under-a-large-tree')} IF YOU NEED HELP!
 
 cave-join: |
   oh hello... i don't think i recognize you; you must be new in town.
