@@ -142,11 +142,7 @@ const addToChannels = async (user, event) => {
     blocks: [
       transcript('block.text', {
         text: transcript('house.added-to-channels', { suggestion }),
-      }),
-      transcript('block.single-button', {
-        text: !event ? 'reroll' : `I've introduced myself...`,
-        value: 'reroll',
-      }),
+      })
     ],
     channel: user,
   })
@@ -275,23 +271,6 @@ app.action(/.*?/, async (args) => {
         data: { club_leader: false },
       })
       await addToChannels(user)
-      break
-    case 'reroll':
-      const suggestion = getSuggestion()
-      await respond({
-        replace_original: true,
-        text: transcript('house.added-to-channels', { suggestion }),
-        blocks: [
-          transcript('block.text', {
-            text: transcript('house.added-to-channels', { suggestion }),
-          }),
-          transcript('block.single-button', {
-            text: 'reroll',
-            value: 'reroll',
-          }),
-        ],
-        unfurl_links: false,
-      })
       break
     default:
       await respond({
