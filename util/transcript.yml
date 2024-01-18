@@ -35,7 +35,6 @@ channels:
   leaders: C02PA5G01ND
   music: C0DCUUH7E
   neighbourhood: C01AS1YEM8A
-  waiting-room: C065BEE8NUA
   pasture: C01PF39CVAS
   poll-of-the-day: C01U8UCHZC1
   question-of-the-day: C013AGZKYCS
@@ -56,6 +55,7 @@ channels:
   outernet: C054FA87K8C
   onboard: C056AMWSFKJ
   happenings: C05B6DBN802
+  shaded-spot-under-a-large-tree: C065BEE8NUA
 
 block:
   text:
@@ -93,8 +93,7 @@ announcements-to-cave: hello wanderer! head to <#${this.t('channels.cave')}> to 
 
 cave-intro: |
   while wandering through the forest, you've stumbled down the entrance of a cave. it looks too high to climb back out.
-  You also find a note asking you to post in #waiting-room if you need help!
-
+  You spot a hand-drawn note pinned to a tree root: NEED HELP? GO TO THE <#${this.t('channels.shaded-spot-under-a-large-tree')} IF YOU NEED HELP!
 
 cave-join: |
   oh hello... i don't think i recognize you; you must be new in town.
