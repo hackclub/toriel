@@ -55,6 +55,7 @@ channels:
   outernet: C054FA87K8C
   onboard: C056AMWSFKJ
   happenings: C05B6DBN802
+  bakery: C01EZ2MNPTQ
 
 block:
   text:
@@ -224,6 +225,7 @@ startup:
     - knowing that one day you might <https://clb.li/conf|hear people TALK>
     - knowing that one day <#${this.t('channels.counttoamillion')}> might reach a million
     - smelling the ${this.t('type-of-pie')} pie coming out of the oven
+    - smelling the fresh baked bread in ${this.t('channels.bakery')}
 
 themes:
   array:
