@@ -14,7 +14,6 @@ const { sleep } = require('./util/sleep')
 const { prisma } = require('./db')
 const { metrics } = require('./util/metrics')
 const { upgradeUser } = require('./util/upgrade-user.js')
-const { pingUserInteraction } = require('./interactions/ping-user.js')
 
 receiver.router.use(express.json())
 
@@ -58,17 +57,6 @@ const getSuggestion = () => {
   return suggestions[Math.floor(Math.random() * suggestions.length)]
 }
 
-app.event('team_join', async (args) => {
-  const { body } = args
-  const { event } = body
-  const { user } = event
-  console.log(
-    'Oh dear, another user has found themselves fallen into the #cave, ',
-    { user }
-  )
-  await pingUserInteraction({ user: user.id })
-})
-
 app.event('message', async (args) => {
   // begin the firehose
   const { body, client } = args
@@ -104,15 +92,6 @@ app.event('message', async (args) => {
   defaultAddsId = defaultChannels.map((e) => {
     return transcript(`channels.${e}`)
   }) // map all default channels into ids as channel prop is given as id
-
-  if (subtype === 'channel_join' && channel === transcript('channels.cave')) {
-    // someone just joined the cave channel! let's send them a ping if they're a new user
-
-    const dbUser = await prisma.user.findFirst({ where: { user_id: user } })
-    if (!dbUser) {
-      await pingUserInteraction({ user })
-    }
-  }
 
   if (
     subtype === 'channel_join' &&
