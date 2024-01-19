@@ -3,9 +3,9 @@ const { transcript } = require('../util/transcript')
 
 async function reason(args) {
   const { payload, respond } = args
-  const { text, channel } = payload
+  const { text, channel_id } = payload
   // check that we're in the welcome committee channel
-  if (channel != transcript('channels.welcome-committee')) {
+  if (channel_id != transcript('channels.welcome-committee')) {
     await respond({ text: transcript('command.reason.wrong-channel') })
     return
   }
