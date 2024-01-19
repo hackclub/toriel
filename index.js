@@ -90,6 +90,8 @@ app.event('message', async (args) => {
       })
   }
 
+  console.log({ type, subtype, user, channel, ts, text })
+
   if (type == 'team_join') {
     await pingUserInteraction({ user })
   }
