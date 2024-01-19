@@ -102,6 +102,15 @@ app.event('message', async (args) => {
     return transcript(`channels.${e}`)
   }) // map all default channels into ids as channel prop is given as id
 
+  if (subtype === 'channel_join' && channel === transcript('channels.cave')) {
+    // someone just joined the cave channel! let's send them a ping if they're a new user
+
+    const dbUser = await prisma.user.findFirst({ where: { user_id: user } })
+    if (!dbUser) {
+      await pingUserInteraction({ user })
+    }
+  }
+
   if (
     subtype === 'channel_join' &&
     text === `<@${user}> has joined the channel` &&
