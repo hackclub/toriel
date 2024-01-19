@@ -245,7 +245,7 @@ app.action(/.*?/, async (args) => {
         await addToChannels(user, event)
       }
       await client.chat.postMessage({
-        text: transcript('house.checkClubLeader'),
+        text: transcript('house.club-leader'),
         blocks: [
           transcript('block.text', { text: transcript('house.club-leader') }),
           transcript('block.double-button', [
