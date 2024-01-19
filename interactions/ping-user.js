@@ -1,3 +1,6 @@
+const { client } = require("../app")
+const { transcript } = require("../util/transcript")
+
 // Sends an ephemeral message to a user in the #cave channel right after they join
 
 async function pingUserInteraction({ user }) {
