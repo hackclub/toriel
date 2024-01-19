@@ -215,6 +215,8 @@ app.action(/.*?/, async (args) => {
 
   await ack()
 
+  const slackuser = await client.users.info({ user })
+  const email = slackuser?.user?.profile?.email
   const invite = await prisma.invite.findFirst({ where: { email } })
 
   switch (payload.value) {
@@ -226,8 +228,6 @@ app.action(/.*?/, async (args) => {
       }
       break
     case 'coc_complete':
-      const slackuser = await client.users.info({ user })
-      const email = slackuser?.user?.profile?.email
       if (invite?.event) {
         const event = invite?.event
         await prisma.user.update({
