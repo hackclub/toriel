@@ -62,8 +62,11 @@ app.event('team_join', async (args) => {
   const { body } = args
   const { event } = body
   const { user } = event
-  console.log("Oh dear, another user has found themselves fallen into the #cave, ", {user})
-  await pingUserInteraction({ user })
+  console.log(
+    'Oh dear, another user has found themselves fallen into the #cave, ',
+    { user }
+  )
+  await pingUserInteraction({ user: user.id })
 })
 
 app.event('message', async (args) => {
