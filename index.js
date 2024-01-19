@@ -215,19 +215,19 @@ app.action(/.*?/, async (args) => {
 
   await ack()
 
+  const invite = await prisma.invite.findFirst({ where: { email } })
+
   switch (payload.value) {
     case 'cave_start':
       const { joinCaveInteraction } = require('./interactions/join-cave')
       await joinCaveInteraction({ ...args, payload: { user } })
-      postWelcomeCommittee(user)
+      if (!invite) {
+        await postWelcomeCommittee(user)
+      }
       break
     case 'coc_complete':
       const slackuser = await client.users.info({ user })
       const email = slackuser?.user?.profile?.email
-      const invite = await prisma.invite.findFirst({
-        where: { email },
-        orderBy: { createdAt: 'desc' },
-      })
       if (invite?.event) {
         const event = invite?.event
         await prisma.user.update({
