@@ -12,7 +12,7 @@ features:
   slash_commands:
     - command: /toriel-restart
       url: https://toriel.hackclub.com/slack/events
-      description: Restart the flow
+      description: Start toriel from scratch
       should_escape: true
     - command: /toriel-call
       url: https://toriel.hackclub.com/slack/events
