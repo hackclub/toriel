@@ -194,6 +194,11 @@ app.command(/.*?/, async (args) => {
         await require(`./commands/call`)(args)
         break
 
+
+      case '/toriel-reason':
+        await require(`./commands/reason`)(args)
+        break
+
       default:
         await require('./commands/not-found')(args)
         break

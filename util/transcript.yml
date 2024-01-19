@@ -147,6 +147,11 @@ welcome-committee: |
   React to this message to take ownership on reaching out.
 
 command:
+  reason:
+    wrong-channel: i'm sorry, my child. i can only do that in the welcome committee
+    no-reason: i'm sorry, my child. i don't know why they joined
+    no-user: i'm sorry, my child. i don't know who that is
+    success: i believe they joined because _'${this.reason}'_
   not-found: i'm not sure how to do that, my child. (slash command not found)
   cell:
     - |

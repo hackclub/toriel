@@ -18,6 +18,10 @@ features:
       url: https://toriel.hackclub.com/slack/events
       description: Chat with toriel
       should_escape: true
+    - command: /toriel-reason
+      url: https://toriel.hackclub.com/slack/events
+      description: Ask toriel the reason someone joined (welcome committee only)
+      should_escape: true
 oauth_config:
   scopes:
     bot:
