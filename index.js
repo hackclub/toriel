@@ -58,6 +58,14 @@ const getSuggestion = () => {
   return suggestions[Math.floor(Math.random() * suggestions.length)]
 }
 
+app.event('team_join', async (args) => {
+  const { body } = args
+  const { event } = body
+  const { user } = event
+  console.log("Oh dear, another user has found themselves fallen into the #cave, ", {user})
+  await pingUserInteraction({ user })
+})
+
 app.event('message', async (args) => {
   // begin the firehose
   const { body, client } = args
@@ -88,12 +96,6 @@ app.event('message', async (args) => {
       .catch((e) => {
         console.warn(e)
       })
-  }
-
-  console.log({ type, subtype, user, channel, ts, text })
-
-  if (type == 'team_join') {
-    await pingUserInteraction({ user })
   }
 
   defaultAddsId = defaultChannels.map((e) => {
