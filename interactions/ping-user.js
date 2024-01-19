@@ -8,3 +8,5 @@ async function pingUserInteraction({ user }) {
     icon_url: transcript('avatar.log'),
   })
 }
+
+module.exports = { pingUserInteraction }

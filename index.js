@@ -14,6 +14,7 @@ const { sleep } = require('./util/sleep')
 const { prisma } = require('./db')
 const { metrics } = require('./util/metrics')
 const { upgradeUser } = require('./util/upgrade-user.js')
+const { pingUserInteraction } = require('./interactions/ping-user.js')
 
 receiver.router.use(express.json())
 
