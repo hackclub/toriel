@@ -1,7 +1,7 @@
 const { prisma } = require('../db')
 const { transcript } = require('../util/transcript')
 
-async function reasonInteraction(args) {
+async function reason(args) {
   const { payload, respond } = args
   const { text, channel } = payload
   // check that we're in the welcome committee channel
@@ -30,4 +30,4 @@ async function reasonInteraction(args) {
   await respond({ text: transcript('command.reason.success', { reason }) })
 }
 
-module.exports = { reasonInteraction }
+module.exports = reason
