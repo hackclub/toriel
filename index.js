@@ -218,13 +218,14 @@ app.action(/.*?/, async (args) => {
 
   switch (payload.value) {
     case 'cave_start':
-      const { joinCaveInteraction } = require('./interactions/join-cave')
-      await joinCaveInteraction({ ...args, payload: { user } }
-       const dbUser = await prisma.user.findFirst({ where: { user_id: user } })
-      if (!dbUser) {
-        await postWelcomeCommittee(user)
-      }
-      break
+    const { joinCaveInteraction } = require('./interactions/join-cave');
+    await joinCaveInteraction({ ...args, payload: { user } }); // Added missing closing parenthesis
+    const dbUser = await prisma.user.findFirst({ where: { user_id: user } });
+    if (!dbUser) {
+      await postWelcomeCommittee(user);
+    }
+    break
+
     case 'coc_complete':
       const slackuser = await client.users.info({ user })
       const email = slackuser?.user?.profile?.email
