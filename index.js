@@ -216,72 +216,72 @@ app.action(/.*?/, async (args) => {
 
   await ack()
 
-  switch (payload.value) {
-    case 'cave_start':
-    const { joinCaveInteraction } = require('./interactions/join-cave');
-    await joinCaveInteraction({ ...args, payload: { user } }); // Added missing closing parenthesis
-    
-    break
+case 'cave_start':
+  const { joinCaveInteraction } = require('./interactions/join-cave');
+  const dbUser = await prisma.user.findFirst({ where: { user_id: user } })
+  await joinCaveInteraction({ ...args, payload: { user } })
 
-    case 'coc_complete':
-      const slackuser = await client.users.info({ user })
-      const email = slackuser?.user?.profile?.email
-      const invite = await prisma.invite.findFirst({ where: { email } })
-      const dbUser = await prisma.user.findFirst({ where: { user_id: user } });
-   
-      if (!dbUser) {
-      await postWelcomeCommittee(user);
-    }
-      
-      if (invite?.event) {
-        const event = invite?.event
-        await prisma.user.update({
-          where: { user_id: user },
-          data: { club_leader: false },
-        })
-        await addToChannels(user, event)
-      }
-      await client.chat.postMessage({
-        text: transcript('house.club-leader'),
-        blocks: [
-          transcript('block.text', { text: transcript('house.club-leader') }),
-          transcript('block.double-button', [
-            { text: 'yes', value: 'club_leader_yes' },
-            { text: 'no', value: 'club_leader_no' },
-          ]),
-        ],
-        channel: user,
-      })
-      break
-    case 'club_leader_yes':
-      await prisma.user.update({
-        where: { user_id: user },
-        data: { club_leader: true },
-      })
-      await client.chat.postMessage({
-        text: transcript('club-leader.text'),
-        channel: transcript('club-leader.notifiee'),
-      })
-      await addToChannels(user)
-      // user upgrading from multi-channel to full user takes some time, so wait to prevent race conditions
-      await sleep(5000)
-      await inviteUserToChannel(user, transcript('channels.leaders'))
-      break
-    case 'club_leader_no':
-      await prisma.user.update({
-        where: { user_id: user },
-        data: { club_leader: false },
-      })
-      await addToChannels(user)
-      break
-    default:
-      await respond({
-        replace_original: false,
-        text: transcript('errors.not-found'),
-      })
-      console.log({ args })
-      break
+  if (!dbUser) {
+    await postWelcomeCommittee(user)
   }
+
+  break
+
+case 'coc_complete':
+  const slackuser = await client.users.info({ user })
+  const email = slackuser?.user?.profile?.email
+  const invite = await prisma.invite.findFirst({ where: { email } })
+
+
+  if (invite?.event) {
+    const event = invite?.event
+    await prisma.user.update({
+      where: { user_id: user },
+      data: { club_leader: false },
+    })
+    await addToChannels(user, event)
+  }
+  await client.chat.postMessage({
+    text: transcript('house.club-leader'),
+    blocks: [
+      transcript('block.text', { text: transcript('house.club-leader') }),
+      transcript('block.double-button', [
+        { text: 'yes', value: 'club_leader_yes' },
+        { text: 'no', value: 'club_leader_no' },
+      ]),
+    ],
+    channel: user,
+  })
+  break
+case 'club_leader_yes':
+  await prisma.user.update({
+    where: { user_id: user },
+    data: { club_leader: true },
+  })
+  await client.chat.postMessage({
+    text: transcript('club-leader.text'),
+    channel: transcript('club-leader.notifiee'),
+  })
+  await addToChannels(user)
+  // user upgrading from multi-channel to full user takes some time, so wait to prevent race conditions
+  await sleep(5000)
+  await inviteUserToChannel(user, transcript('channels.leaders'))
+  break
+case 'club_leader_no':
+  await prisma.user.update({
+    where: { user_id: user },
+    data: { club_leader: false },
+  })
+  await addToChannels(user)
+  break
+default:
+  await respond({
+    replace_original: false,
+    text: transcript('errors.not-found'),
+  })
+  console.log({ args })
+  break
+}
 })
 
 app.start(process.env.PORT || 3001).then(async () => {
