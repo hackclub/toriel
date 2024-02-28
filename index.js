@@ -75,7 +75,9 @@ app.event('message', async (args) => {
     })
   }
 
-  const protectedChannels = [transcript('channels.cave')]
+  const protectedChannels = [
+    transcript('channels.super-duper-shubham-toriel-testing'),
+  ]
   if (type == 'message' && protectedChannels.includes(channel)) {
     console.log(`Attempting to remove ${subtype} message in #cave channel`)
     await client.chat
@@ -180,7 +182,7 @@ app.command(/.*?/, async (args) => {
     })
 
     switch (command) {
-      case '/toriel-restart':
+      case '/shubham-tortor-restart':
         await require(`./commands/restart`)(args)
         metrics.increment('events.restart', 1)
         break
@@ -188,7 +190,6 @@ app.command(/.*?/, async (args) => {
       case '/toriel-call':
         await require(`./commands/call`)(args)
         break
-
 
       case '/toriel-reason':
         await require(`./commands/reason`)(args)
@@ -216,71 +217,99 @@ app.action(/.*?/, async (args) => {
 
   await ack()
 
- switch (payload.value) {
-case 'cave_start':
-  const { joinCaveInteraction } = require('./interactions/join-cave');
-  const dbUser = await prisma.user.findFirst({ where: { user_id: user } })
-  await joinCaveInteraction({ ...args, payload: { user } })
+  switch (payload.value) {
+    case 'cave_start':
+      const { joinCaveInteraction } = require('./interactions/join-cave')
+      const dbUser = await prisma.user.findFirst({ where: { user_id: user } })
+      await joinCaveInteraction({ ...args, payload: { user } })
 
-  if (!dbUser) {
-    await postWelcomeCommittee(user)
+      if (!dbUser) {
+        await postWelcomeCommittee(user)
+      }
+      break
+
+    case 'coc_complete':
+      const slackuser = await client.users.info({ user })
+      const email = slackuser?.user?.profile?.email
+      const invite = await prisma.invite.findFirst({ where: { email } })
+
+      await prisma.user.update({
+        where: {
+          user_id: user,
+        },
+        data: {
+          toriel_stage: 'ACCEPTED_COC',
+        },
+      })
+
+      if (invite?.event) {
+        const event = invite?.event
+        await prisma.user.update({
+          where: { user_id: user },
+          data: { club_leader: false },
+        })
+        await addToChannels(user, event)
+      }
+      await client.chat.postMessage({
+        text: transcript('house.club-leader'),
+        blocks: [
+          transcript('block.text', { text: transcript('house.club-leader') }),
+          transcript('block.double-button', [
+            { text: 'yes', value: 'club_leader_yes' },
+            { text: 'no', value: 'club_leader_no' },
+          ]),
+        ],
+        channel: user,
+      })
+      break
+    case 'club_leader_yes':
+      await prisma.user.update({
+        where: { user_id: user },
+        data: { club_leader: true },
+      })
+      await client.chat.postMessage({
+        text: transcript('club-leader.text'),
+        channel: transcript('club-leader.notifiee'),
+      })
+      await addToChannels(user)
+      // user upgrading from multi-channel to full user takes some time, so wait to prevent race conditions
+      await sleep(5000)
+      await inviteUserToChannel(user, transcript('channels.leaders'))
+      await prisma.user.update({
+        where: {
+          user_id: user,
+        },
+        data: {
+          toriel_stage: 'FINISHED',
+        },
+      })
+
+      break
+    case 'club_leader_no':
+      await prisma.user.update({
+        where: { user_id: user },
+        data: { club_leader: false },
+      })
+      await addToChannels(user)
+
+      await prisma.user.update({
+        where: {
+          user_id: user,
+        },
+        data: {
+          toriel_stage: 'FINISHED',
+        },
+      })
+
+      break
+    default:
+      await respond({
+        replace_original: false,
+        text: transcript('errors.not-found'),
+      })
+      console.log({ args })
+      break
   }
-  break
-
-case 'coc_complete':
-  const slackuser = await client.users.info({ user })
-  const email = slackuser?.user?.profile?.email
-  const invite = await prisma.invite.findFirst({ where: { email } })
-
-  if (invite?.event) {
-    const event = invite?.event
-    await prisma.user.update({
-      where: { user_id: user },
-      data: { club_leader: false },
-    })
-    await addToChannels(user, event)
-  }
-  await client.chat.postMessage({
-    text: transcript('house.club-leader'),
-    blocks: [
-      transcript('block.text', { text: transcript('house.club-leader') }),
-      transcript('block.double-button', [
-        { text: 'yes', value: 'club_leader_yes' },
-        { text: 'no', value: 'club_leader_no' },
-      ]),
-    ],
-    channel: user,
-  })
-  break
-case 'club_leader_yes':
-  await prisma.user.update({
-    where: { user_id: user },
-    data: { club_leader: true },
-  })
-  await client.chat.postMessage({
-    text: transcript('club-leader.text'),
-    channel: transcript('club-leader.notifiee'),
-  })
-  await addToChannels(user)
-  // user upgrading from multi-channel to full user takes some time, so wait to prevent race conditions
-  await sleep(5000)
-  await inviteUserToChannel(user, transcript('channels.leaders'))
-  break
-case 'club_leader_no':
-  await prisma.user.update({
-    where: { user_id: user },
-    data: { club_leader: false },
-  })
-  await addToChannels(user)
-  break
-default:
-  await respond({
-    replace_original: false,
-    text: transcript('errors.not-found'),
-  })
-  console.log({ args })
-  break
-}
 })
 
 app.start(process.env.PORT || 3001).then(async () => {
