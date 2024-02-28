@@ -51,12 +51,11 @@ channels:
   whack-a-mole: C01TW2CAK55
   wordle: C02TWKX227J
   toriel-dev: C02B7CWDD0E
-  welcome-committee: C06LGUP9G6N
+  welcome-committee: GLFAEL1SL
   outernet: C054FA87K8C
   onboard: C056AMWSFKJ
   happenings: C05B6DBN802
   bakery: C01EZ2MNPTQ
-  super-duper-shubham-toriel-testing: C06LGUP9G6N
 
 block:
   text:
@@ -111,7 +110,7 @@ house:
     _they point to a page in a book in front of you._ “The Tenants of the Hack Club Slack (abridged 14th ed.), Orpheus et al.
 
     <https://hackclub.com/conduct/#hacker-values|README>
-
+    
 
     Handwritten in the margins, it says
     Be kind, thoughtful and no advertisements.
@@ -150,9 +149,6 @@ welcome-committee: |
   <@${this.user}> (${this.hs ? 'a high schooler' : 'an adult'} in ${this.continent.toLowerCase()}) just became a full user in the Slack ${this.event ?  `from the event *${this.event}*! ` : "!"} \n Here's why they joined:
   ${this.message.split('\n').map(line => '> '+line)}
   React to this message to take ownership on reaching out.
-
-notify-stage: |
-  <@${this.user}> has not completed step: "${this.step}" yet, and it's been more than 6 hours!
 
 command:
   reason:

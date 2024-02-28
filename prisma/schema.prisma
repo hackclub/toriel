@@ -35,18 +35,9 @@ model Invite {
   event           String?
   continent       Continent
   user_id         String?
-  schedule_stuck_message_id String?
 }
 
 model User {
   user_id     String   @id
   club_leader Boolean?
-  toriel_stage Stage @default(INITIALIZED)
-}
-
-enum Stage {
-  INITIALIZED
-  STARTED_FLOW
-  ACCEPTED_COC
-  FINISHED
 }

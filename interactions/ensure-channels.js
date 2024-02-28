@@ -6,7 +6,7 @@ async function ensureChannels() {
   const currentChannelIDs = data.channels.map((c) => c.id)
   const testChannelIDs = [
     transcript('channels.toriels-diary'),
-    transcript('channels.super-duper-shubham-toriel-testing'),
+    transcript('channels.cave'),
     transcript('channels.bot-spam'),
     transcript('channels.toriel-dev'),
     // default channels:
