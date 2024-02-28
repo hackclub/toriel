@@ -19,10 +19,19 @@ async function joinCaveInteraction(args) {
     data: { user_id: user },
   })
 
+  await prisma.user.update({
+    where: {
+      user_id: user,
+    },
+    data: {
+      toriel_stage: 'STARTED_FLOW',
+    },
+  })
+
   await Promise.all([
     client.chat.postEphemeral({
       text: transcript('cave-join', { user }),
-      channel: transcript('channels.cave'),
+      channel: transcript('channels.super-duper-shubham-toriel-testing'),
       user,
     }),
   ])
