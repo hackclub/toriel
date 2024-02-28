@@ -1,10 +1,7 @@
 const { transcript } = require('../transcript')
 
 const onboardInvite = {
-  channels: [
-    transcript('channels.onboard'),
-    transcript('channels.super-duper-shubham-toriel-testing'),
-  ],
+  channels: [transcript('channels.onboard'), transcript('channels.cave')],
   customMessage: 'Welcome onboard!',
 }
 

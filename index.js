@@ -14,6 +14,7 @@ const { sleep } = require('./util/sleep')
 const { prisma } = require('./db')
 const { metrics } = require('./util/metrics')
 const { upgradeUser } = require('./util/upgrade-user.js')
+const { destroyHelpMeMessage } = require('./util/notify-channel.js')
 
 receiver.router.use(express.json())
 
@@ -75,9 +76,7 @@ app.event('message', async (args) => {
     })
   }
 
-  const protectedChannels = [
-    transcript('channels.super-duper-shubham-toriel-testing'),
-  ]
+  const protectedChannels = [transcript('channels.cave')]
   if (type == 'message' && protectedChannels.includes(channel)) {
     console.log(`Attempting to remove ${subtype} message in #cave channel`)
     await client.chat
@@ -182,7 +181,7 @@ app.command(/.*?/, async (args) => {
     })
 
     switch (command) {
-      case '/shubham-tortor-restart':
+      case '/toriel-restart':
         await require(`./commands/restart`)(args)
         metrics.increment('events.restart', 1)
         break
@@ -284,6 +283,8 @@ app.action(/.*?/, async (args) => {
         },
       })
 
+      await destroyHelpMeMessage(client, user)
+
       break
     case 'club_leader_no':
       await prisma.user.update({
@@ -291,6 +292,8 @@ app.action(/.*?/, async (args) => {
         data: { club_leader: false },
       })
       await addToChannels(user)
+
+      await destroyHelpMeMessage(client, user)
 
       await prisma.user.update({
         where: {
