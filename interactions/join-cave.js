@@ -3,6 +3,7 @@ const { sleep } = require('../util/sleep')
 const { transcript } = require('../util/transcript')
 const { prisma } = require('../db')
 const { getEmailFromUser } = require('../util/get-invite')
+const { scheduleHelpMeMessage } = require('../util/notify-channel')
 
 async function joinCaveInteraction(args) {
   const { client, payload } = args
@@ -28,10 +29,12 @@ async function joinCaveInteraction(args) {
     },
   })
 
+  await scheduleHelpMeMessage(client, user)
+
   await Promise.all([
     client.chat.postEphemeral({
       text: transcript('cave-join', { user }),
-      channel: transcript('channels.super-duper-shubham-toriel-testing'),
+      channel: transcript('channels.cave'),
       user,
     }),
   ])

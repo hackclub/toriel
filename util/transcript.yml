@@ -51,12 +51,11 @@ channels:
   whack-a-mole: C01TW2CAK55
   wordle: C02TWKX227J
   toriel-dev: C02B7CWDD0E
-  welcome-committee: C06LGUP9G6N
+  welcome-committee: GLFAEL1SL
   outernet: C054FA87K8C
   onboard: C056AMWSFKJ
   happenings: C05B6DBN802
   bakery: C01EZ2MNPTQ
-  super-duper-shubham-toriel-testing: C06LGUP9G6N
 
 block:
   text:
@@ -152,7 +151,7 @@ welcome-committee: |
   React to this message to take ownership on reaching out.
 
 notify-stage: |
-  <@${this.user}> has not completed step: "${this.step}" yet, and it's been more than 6 hours!
+  [ALERT]: <@${this.user}> has been in onboarding for more than 6 hours!
 
 command:
   reason:

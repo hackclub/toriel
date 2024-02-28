@@ -1,25 +1,25 @@
 # This file is the Slack Manifest file
 # READMORE: https://api.slack.com/reference/manifests
 display_information:
-  name: SHUBHAMS-PERSONAL-TORIEL
+  name: TORIEL
   description: What a nice lady. She seems kinda lonely.
   background_color: '#160f1a'
   long_description: "Just a lil' greeter bot to direct new members in the Hack Club slack channel and collect some analytics data for that process.\r \r You think if you call her she might have something to say (/toriel-call). \r \r For staff: This is a WIP bot. Reach out to @msw with questions and comments."
 features:
   bot_user:
-    display_name: SHUBHAMS-PERSONAL-TORIEL
+    display_name: TORIEL
     always_online: true
   slash_commands:
-    - command: /shubham-tortor-restart
-      url: https://mint-becoming-pipefish.ngrok-free.app/slack/events
+    - command: /toriel-restart
+      url: https://toriel.hackclub.com/slack/events
       description: Start toriel from scratch
       should_escape: true
-    - command: /shubham-tortor-call
-      url: https://mint-becoming-pipefish.ngrok-free.app/slack/events
+    - command: /toriel-call
+      url: https://toriel.hackclub.com/slack/events
       description: Chat with toriel
       should_escape: true
-    - command: /shubham-tortor-reason
-      url: https://mint-becoming-pipefish.ngrok-free.app/slack/events
+    - command: /toriel-reason
+      url: https://toriel.hackclub.com/slack/events
       description: Ask toriel the reason someone joined (welcome committee only)
       should_escape: true
 oauth_config:
@@ -41,7 +41,7 @@ oauth_config:
       - users:read.email
 settings:
   event_subscriptions:
-    request_url: https://mint-becoming-pipefish.ngrok-free.app/slack/events
+    request_url: https://toriel.hackclub.com/slack/events
     bot_events:
       - app_mention
       - member_joined_channel
@@ -49,7 +49,7 @@ settings:
       - team_join
   interactivity:
     is_enabled: true
-    request_url: https://mint-becoming-pipefish.ngrok-free.app/slack/events
+    request_url: https://toriel.hackclub.com/slack/events
   org_deploy_enabled: false
   socket_mode_enabled: false
   token_rotation_enabled: false
