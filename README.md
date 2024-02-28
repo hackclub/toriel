@@ -73,8 +73,8 @@ In order to run Toriel locally, you'll need to [join the Hack Club Slack](https:
     - You can find the channel ID by opening the channel and clicking on the channel name in the top left. Scroll down the modal and you should see it in the bottom left corner
       ![Screenshot of channel ID](https://user-images.githubusercontent.com/621904/164070484-d3d4f57a-546f-4d60-b800-7c052a3bcbcf.png)
 
-14. Do a global find and replace in the codebase to update `channels.cave` to `channels.name-of-your-private-channel`
-    - As `{channels.cave}` refers to `#in-the-cave`, we need to replace it with the private channel (ex. `{channels.msw-test-cave}`) that you created for your bot
+14. Do a global find and replace in the codebase to update `channels.super-duper-shubham-toriel-testing` to `channels.name-of-your-private-channel`
+    - As `{channels.super-duper-shubham-toriel-testing}` refers to `#in-the-cave`, we need to replace it with the private channel (ex. `{channels.msw-test-cave}`) that you created for your bot
 15. Run `npm run dev` again and also reinstall your app to the workspace (under Basic Information)
     ![Screenshot of reinstall your app page](https://cloud-8uduk6deq-hack-club-bot.vercel.app/0screenshot_2022-04-18_at_9.38.48_pm.png)
 
