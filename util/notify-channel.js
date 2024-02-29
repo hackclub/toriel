@@ -3,8 +3,8 @@ const { transcript } = require('../util/transcript')
 
 async function scheduleHelpMeMessage(client, user_id) {
   const postDate = new Date()
-  //6 hours into the future
-  postDate.setTime(postDate.getTime() + 6 * 60 * 60 * 1000)
+  //10 min into the future
+  postDate.setTime(postDate.getTime() + 1 * 10 * 60 * 1000)
 
   const result = await client.chat.scheduleMessage({
     channel: transcript('channels.welcome-committee'),
