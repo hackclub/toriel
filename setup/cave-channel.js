@@ -43,7 +43,9 @@ async function postAudio() {
     url: transcript('files.cave-audio'),
     responseType: 'stream',
   })
-  console.log({ channel: transcript('channels.cave') })
+  console.log({
+    channel: transcript('channels.cave'),
+  })
   const response = await client.files.upload({
     channels: transcript('channels.cave'),
     file: file.data,

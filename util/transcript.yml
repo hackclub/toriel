@@ -110,7 +110,7 @@ house:
     _they point to a page in a book in front of you._ “The Tenants of the Hack Club Slack (abridged 14th ed.), Orpheus et al.
 
     <https://hackclub.com/conduct/#hacker-values|README>
-    
+
 
     Handwritten in the margins, it says
     Be kind, thoughtful and no advertisements.
@@ -149,6 +149,9 @@ welcome-committee: |
   <@${this.user}> (${this.hs ? 'a high schooler' : 'an adult'} in ${this.continent.toLowerCase()}) just became a full user in the Slack ${this.event ?  `from the event *${this.event}*! ` : "!"} \n Here's why they joined:
   ${this.message.split('\n').map(line => '> '+line)}
   React to this message to take ownership on reaching out.
+
+notify-stage: |
+  [ALERT]: <@${this.user}> has been in onboarding for more than 6 hours!
 
 command:
   reason:

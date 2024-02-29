@@ -3,6 +3,7 @@ const { sleep } = require('../util/sleep')
 const { transcript } = require('../util/transcript')
 const { prisma } = require('../db')
 const { getEmailFromUser } = require('../util/get-invite')
+const { scheduleHelpMeMessage } = require('../util/notify-channel')
 
 async function joinCaveInteraction(args) {
   const { client, payload } = args
@@ -18,6 +19,17 @@ async function joinCaveInteraction(args) {
     where: { email: await getEmailFromUser({ user }) },
     data: { user_id: user },
   })
+
+  await prisma.user.update({
+    where: {
+      user_id: user,
+    },
+    data: {
+      toriel_stage: 'STARTED_FLOW',
+    },
+  })
+
+  await scheduleHelpMeMessage(client, user)
 
   await Promise.all([
     client.chat.postEphemeral({

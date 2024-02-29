@@ -1,8 +1,8 @@
 # Toriel
+
 > Toriel is currently undergoing a new revamp! You can view the stuff being worked on [here](https://docs.google.com/document/d/13AYCps0_hWMG6lolBcIg3xGiTOch2rk5uViSghfRzZE/edit?usp=sharing), and take part in #toriel-dev, if you're on the slack
 
 _Just a lil' ol greeter bot to direct new members joining the Hack Club Slack. You wonder what she might say..._
-
 
 _Toriel is a fork of [Clippy](https://github.com/hackclub/clippy)._
 
