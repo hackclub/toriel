@@ -63,6 +63,11 @@ block:
     text:
       type: 'mrkdwn'
       text: ${this.text}
+  context:
+    type: context
+    elements:
+      type: 'mrkdwn'
+      text: ${this.text}
   image:
     type: image
     image_url: ${this.url}
