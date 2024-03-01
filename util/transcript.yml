@@ -237,6 +237,8 @@ startup:
     - knowing that one day <#${this.t('channels.counttoamillion')}> might reach a million
     - smelling the ${this.t('type-of-pie')} pie coming out of the oven
     - smelling the fresh baked bread in ${this.t('channels.bakery')}
+    - seeing the boards designed in <#${this.t('channels.onboard')}>
+    - seeing people play games and trying to get a high score in <#${this.t('channels.sprig')}>
 
 themes:
   array:
