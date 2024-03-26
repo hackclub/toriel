@@ -15,7 +15,7 @@ const { prisma } = require('./db')
 const { metrics } = require('./util/metrics')
 const { upgradeUser } = require('./util/upgrade-user.js')
 const { destroyHelpMeMessage } = require('./util/notify-channel.js')
-const { scheduleHelpMeMessage } = require('../util/notify-channel')
+const { scheduleHelpMeMessage } = require('./util/notify-channel')
 
 receiver.router.use(express.json())
 
