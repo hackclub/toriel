@@ -101,22 +101,30 @@ app.event('message', async (args) => {
     defaultAddsId.includes(channel)
   ) {
     console.log('Deleting "user has joined" message')
-    await client.chat
-      .delete({
-        token: process.env.SLACK_LEGACY_TOKEN, // sudo
+
+    const jobs = []
+    jobs.push(
+      client.chat
+        .delete({
+          token: process.env.SLACK_LEGACY_TOKEN, // sudo
+          channel,
+          ts,
+        })
+        .catch((e) => {
+          console.warn(e)
+        })
+    )
+    jobs.push(
+      mirrorMessage({
+        message: `<@${user}> has been dropped into cave`,
+        user,
         channel,
-        ts,
+        type,
       })
-      .catch((e) => {
-        console.warn(e)
-      })
-    mirrorMessage({
-      message: `<@${user}> has been dropped into cave`,
-      user,
-      channel,
-      type,
-    })
-    scheduleHelpMeMessage(client, user)
+    )
+    jobs.push(scheduleHelpMeMessage(client, user))
+
+    await Promise.all(jobs)
   } // delete "user has joined" message if it is sent in one of the default channels that TORIEL adds new members to
 })
 
