@@ -7,19 +7,19 @@ display_information:
   long_description: "Just a lil' greeter bot to direct new members in the Hack Club slack channel and collect some analytics data for that process.\r \r You think if you call her she might have something to say (/toriel-call). \r \r For staff: This is a WIP bot. Reach out to @msw with questions and comments."
 features:
   bot_user:
-    display_name: TORIEL
+    display_name: SHUBHAMS-PERSONAL-TORIEL
     always_online: true
   slash_commands:
-    - command: /toriel-restart
-      url: https://toriel.hackclub.com/slack/events
+    - command: /shubham-tortor-restart
+      url: https://mint-becoming-pipefish.ngrok-free.app/slack/events
       description: Start toriel from scratch
       should_escape: true
-    - command: /toriel-call
-      url: https://toriel.hackclub.com/slack/events
+    - command: /shubham-tortor-call
+      url: https://mint-becoming-pipefish.ngrok-free.app/slack/events
       description: Chat with toriel
       should_escape: true
-    - command: /toriel-reason
-      url: https://toriel.hackclub.com/slack/events
+    - command: /shubham-tortor-reason
+      url: https://mint-becoming-pipefish.ngrok-free.app/slack/events
       description: Ask toriel the reason someone joined (welcome committee only)
       should_escape: true
 oauth_config:

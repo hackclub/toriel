@@ -28,6 +28,11 @@ receiver.router.get(
   require('./endpoints/start-from-clippy')
 )
 
+// Spit out global metrics every 5s
+setInterval(() => {
+  metrics.increment('events.pulse', 1)
+}, 1000 * 5)
+
 receiver.router.get(
   '/slack-tutorial/:user',
   require('./endpoints/slack-tutorial')
@@ -77,7 +82,9 @@ app.event('message', async (args) => {
     })
   }
 
-  const protectedChannels = [transcript('channels.cave')]
+  const protectedChannels = [
+    transcript('channels.super-duper-shubham-toriel-testing'),
+  ]
   if (type == 'message' && protectedChannels.includes(channel)) {
     console.log(`Attempting to remove ${subtype} message in #cave channel`)
     await client.chat
@@ -197,7 +204,7 @@ app.command(/.*?/, async (args) => {
     })
 
     switch (command) {
-      case '/toriel-restart':
+      case '/shubham-tortor-restart':
         await require(`./commands/restart`)(args)
         metrics.increment('events.restart', 1)
         break
@@ -257,6 +264,8 @@ app.action(/.*?/, async (args) => {
         },
       })
 
+      metrics.increment('events.acceptcoc', 1)
+
       if (invite?.event) {
         const event = invite?.event
         await prisma.user.update({
@@ -299,6 +308,8 @@ app.action(/.*?/, async (args) => {
         },
       })
 
+      metrics.increment('events.flow.finish', 1)
+
       await destroyHelpMeMessage(client, user)
 
       break
@@ -319,6 +330,8 @@ app.action(/.*?/, async (args) => {
           toriel_stage: 'FINISHED',
         },
       })
+
+      metrics.increment('events.flow.finish', 1)
 
       break
     default:
