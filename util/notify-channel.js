@@ -37,6 +37,7 @@ async function destroyHelpMeMessage(client, user_id) {
     const userInvite = await prisma.invite.findFirst({
       where: { user_id: user_id },
     })
+    if (!userInvite || !userInvite.schedule_stuck_message_id) return
     await client.chat.deleteScheduledMessage({
       channel: transcript('channels.welcome-committee'),
       scheduled_message_id: userInvite.schedule_stuck_message_id,

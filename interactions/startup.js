@@ -19,7 +19,6 @@ function getVersion() {
 }
 
 async function startup() {
-  metrics.increment('events.startup', 1)
   await client.chat.postMessage({
     blocks: [
       transcript('block.text', { text: transcript('startup.message') }),
