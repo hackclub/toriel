@@ -26,6 +26,6 @@
     "node-statsd": "^0.1.1"
   },
   "devDependencies": {
-    "prisma": "^4.13.0"
+    "prisma": "^5.12.1"
   }
 }
