@@ -82,9 +82,7 @@ app.event('message', async (args) => {
     })
   }
 
-  const protectedChannels = [
-    transcript('channels.super-duper-shubham-toriel-testing'),
-  ]
+  const protectedChannels = [transcript('channels.cave')]
   if (type == 'message' && protectedChannels.includes(channel)) {
     console.log(`Attempting to remove ${subtype} message in #cave channel`)
     await client.chat
@@ -204,7 +202,7 @@ app.command(/.*?/, async (args) => {
     })
 
     switch (command) {
-      case '/shubham-tortor-restart':
+      case '/toriel-restart':
         await require(`./commands/restart`)(args)
         metrics.increment('events.restart', 1)
         break
