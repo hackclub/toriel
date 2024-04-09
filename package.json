@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "description": "Hack Club's welcomer bot. Welcomes new members to the community and keeps bad people out",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "dev": "tsx watch index.js",
+    "dev": "tsx watch index.ts",
     "fmt": "npx prettier --write '**/*.js'"
   },
   "authors": [
