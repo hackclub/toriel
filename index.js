@@ -93,6 +93,7 @@ app.event('message', async (args) => {
   const { event } = body
   const { type, subtype, user, channel, ts, text } = event
 
+  console.log({ type, subtype, user, channel, ts, text })
   if (text === 'RUMMAGE') {
     mirrorMessage({
       message: text,
