@@ -48,7 +48,7 @@ async function handleRummage(args) {
 
   await client.chat.postMessage({
     text: `<@${user}>: ${message}`,
-    channel: transcript('channels.announcements'),
+    channel: rummageChannel,
     thread_ts: rummageThread,
     username: `A ${transcript('rummage.raccoon-types')} racoon`.toUpperCase(),
     icon_url: transcript('rummage.avatar.raccoon'),
