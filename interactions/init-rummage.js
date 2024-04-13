@@ -34,7 +34,7 @@ async function initRummage(args) {
 
   await client.chat.postMessage({
     text: transcript('rummage.announcements.raccoon-init'),
-    channel: transcript('channels.announcements'),
+    channel: rummageChannel,
     thread_ts: process.env.RUMMAGE_THREAD,
     username: "A YAPPY RACCOON",
     icon_url: transcript('rummage.avatar.raccoon'),
@@ -47,7 +47,7 @@ async function initRummage(args) {
       transcript('block.text', { text: transcript('rummage.announcements.raccoon-rummage') }),
       transcript('block.context', { text: transcript('rummage.announcements.raccoon-join') }),
     ],
-    channel: transcript('channels.announcements'),
+    channel: rummageChannel,
     thread_ts: process.env.RUMMAGE_THREAD,
     username: "A LOUD RACCOON",
     icon_url: transcript('rummage.avatar.raccoon'),
