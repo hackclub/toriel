@@ -59,39 +59,59 @@ const getSuggestion = () => {
   return suggestions[Math.floor(Math.random() * suggestions.length)]
 }
 
-app.message('trigger rummage', async (args) => {
-  const { payload } = args
-  const { user, text, channel } = payload
+// app.message('trigger rummage', async (args) => {
+//   const { payload } = args
+//   const { user, text, channel } = payload
 
-  mirrorMessage({
-    message: text,
-    user,
-    channel,
-    type: "Rummage Init",
-  })
-  const { initRummageInteraction } = require('./interactions/init-rummage')
-  await initRummageInteraction(args)
-})
+//   mirrorMessage({
+//     message: text,
+//     user,
+//     channel,
+//     type: "Rummage Init",
+//   })
+//   const { initRummageInteraction } = require('./interactions/init-rummage')
+//   await initRummageInteraction(args)
+// })
 
-app.message('RUMMAGE', async (args) => {
-  const { payload } = args
-  const { user, text, channel } = payload
+// app.message('RUMMAGE', async (args) => {
+//   const { payload } = args
+//   const { user, text, channel } = payload
 
-  mirrorMessage({
-    message: text,
-    user,
-    channel,
-    type: "Rummage",
-  })
-  const { handleRummageInteraction } = require('./interactions/handle-rummage')
-  await handleRummageInteraction(args)
-})
+//   mirrorMessage({
+//     message: text,
+//     user,
+//     channel,
+//     type: "Rummage",
+//   })
+//   const { handleRummageInteraction } = require('./interactions/handle-rummage')
+//   await handleRummageInteraction(args)
+// })
 
 app.event('message', async (args) => {
   // begin the firehose
   const { body, client } = args
   const { event } = body
   const { type, subtype, user, channel, ts, text } = event
+
+  if (text === 'RUMMAGE') {
+    mirrorMessage({
+      message: text,
+      user,
+      channel,
+      type: "Rummage",
+    })
+    const { handleRummageInteraction } = require('./interactions/handle-rummage')
+    await handleRummageInteraction(args)
+  } else if (text == 'trigger rummage') {
+    mirrorMessage({
+      message: text,
+      user,
+      channel,
+      type: "Rummage Init",
+    })
+    const { initRummageInteraction } = require('./interactions/init-rummage')
+    await initRummageInteraction(args)
+  }
 
   if (
     text?.toLowerCase()?.includes('toriel') ||
