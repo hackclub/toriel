@@ -254,3 +254,119 @@ files:
   home-audio: https://cloud-hz3xqrwce-hack-club-bot.vercel.app/0output.m4a
   cave-image: https://cloud-45c5n1f77-hack-club.vercel.app/0ezgif.com-gif-maker.gif
   cave-audio: https://cloud-6qf4crf13-hack-club.vercel.app/3undertale_ost_-_001_-_once_upon_a_time-s7rrgf5ve_e.m4a
+
+rummage:
+  avatar:
+    raccoon: https://cloud-1lm9ktddf-hack-club-bot.vercel.app/0rac_yap__1_.gif
+    trashcan: https://cloud-6cd2dz2n2-hack-club-bot.vercel.app/0screenshot_2024-04-13_at_17.22.02.png
+  emoji:
+    pcb: ":pcb:"
+    yap: ":rac_yap:"
+  announcements:
+    init: 🗑️
+    raccoon-init: "${this.t('rummage.emoji.yap')} Woah, what's in there?"
+    raccoon-rummage: "The raccoon starts to RUMMAGE through the trashcan..."
+    raccoon-join: "Will you join them in?"
+  encouragement:
+    - "(you think it'd be nice if others start to RUMMAGE with you)"
+    - "(will others start to RUMMAGE with you?)"
+    - "" # intentionally left blank to give a slight chance of no encouragement
+  relationships:
+    - mom
+    - teacher
+    - dad
+    - sister
+    - brother
+    - elementary school bully
+    - best friend
+    - friend
+    - math teacher
+    - english teacher
+  groups:
+    - council of capacitors
+    - riot of resistors
+    - squad of soldering irons
+    - band of breadboards
+    - loaf of breadboards
+    - gaggle of guages
+    - pile of potentiometers
+    - stack of switches
+    - bundle of batteries
+    - cluster of capacitors
+  individuals:
+    - capacitor
+    - resistor
+    - LED
+    - screw
+    - screwdriver
+    - breadboard
+    - Raspberry Pi
+    - motion sensor
+    - servo motor
+    - temperature sensor
+    - humidity sensor (aka 'dank detector')
+    - battery
+  low-value:
+    - banana peel
+    - banana
+    - boot
+    - old sock
+    - empty can
+    - empty bottle
+    - empty box
+  medium-value:
+    - a reel of LEDs
+    - the other sock! now you have a pair!
+    - a small bag of screws
+    - a single ${this.t('rummage.individuals')}, all scared and alone
+    - a ${this.t('rummage.individuals')}
+    - a rusty ${this.t('rummage.individuals')}
+    - a few ${this.t('rummage.individuals')}s, bent out of shape
+  high-value:
+    - breadboard
+    - Raspberry Pi
+    - ${this.t('rummage.groups')}
+    - shiney new ${this.t('rummage.individuals')}
+  first-ten:
+    - ${this.t('rummage.first-hundred')} ${this.t('rummage.encouragement')}
+  first-hundred:
+    - "You find a piece of paper with the following written on it: don't throw away"
+    - "You find a ${this.t('rummage.low-value')}! It's not much, but it's something"
+    - "You peer into the trash. There's a slight shimmer inside it."
+    - "You find a pretty penny, but... is lincoln winking at you?"
+    - "You find a two-dollar coin, labeled 'CANADA'. Sounds fake."
+    - "You root around at the top of the pile and dig under a few things. You find a ${this.t('rummage.low-value')}!"
+    - "seems like someone threw out a ${this.t('rummage.low-value')}?"
+  second-hundred:
+    - "You find a ${this.t('rummage.medium-value')}!"
+    - "You find a ${this.t('rummage.medium-value')}. Keep this up and you'll have a collection"
+    - "You keep scrounging & suddenly in your hands is a ${this.t('rummage.medium-value')}"
+    - "You greedily dig away, searching for something valuable! You find a ${this.t('rummage.medium-value')}!"
+    - "You find a gold coin :hc_gold:! Eh, it's probably fake."
+    - "oh great, you found a ${this.t('rummage.low-value')}! /s"
+    - "You find a spare tetanus shot. Better keep that for later"
+    - "You find a pretty penny, but... is lincoln missing his hat?"
+    - "you find a get out of jail free card & stash it in your pocket"
+    - "oh great, you found a ${this.t('rummage.low-value')}! Give it to your ${this.t('rummage.relationships')}, maybe they'll be impressed"
+  third-hundred:
+    - "who throws out a ${this.t('rummage.high-value')}?"
+    - "You start to reach the bottom of the pile and find a ${this.t('rummage.high-value')}!"
+    - "you hear chittering. Is there something living down there??2?"
+    - "You find a pretty penny, but... is lincoln wearing a bandit mask?"
+    - "you grab something by the tail but it scurries away!"
+    - "you hear the faint sound of power tools down there. what's going on?"
+    - "you find a ${this.t('rummage.low-value')}! oh well..."
+    - "you find a ${this.t('rummage.low-value')}! you figure you can trade it for something nicer and throw it back in the trash where it belongs"
+    - "your fingers brush against a ${this.t('rummage.high-value')}!"
+  end:
+    - "You've reached the bottom of the trashcan..."
+  raccoon-types:
+    - raucous
+    - rocket
+    - rock'n
+    - rascal
+    - rambunctious
+    - rambling
+    - rabid
+    - rowdy
+    - ravenous

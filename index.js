@@ -59,6 +59,16 @@ const getSuggestion = () => {
   return suggestions[Math.floor(Math.random() * suggestions.length)]
 }
 
+app.message('trigger rummage', async (args) => {
+  const { initRummageInteraction } = require('./interactions/init-rummage')
+  await initRummageInteraction(args)
+})
+
+app.message('RUMMAGE', async (args) => {
+  const { handleRummageInteraction } = require('./interactions/handle-rummage')
+  await handleRummageInteraction(args)
+})
+
 app.event('message', async (args) => {
   // begin the firehose
   const { body, client } = args
