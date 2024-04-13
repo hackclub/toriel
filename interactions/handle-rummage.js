@@ -1,3 +1,5 @@
+const { transcript } = require("../util/transcript")
+
 function increaseRummageCount() {
   const rummageCount = parseInt(process.env.RUMMAGE_COUNT) || 0
   process.env.RUMMAGE_COUNT = rummageCount + 1
