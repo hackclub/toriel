@@ -266,7 +266,7 @@ rummage:
     init: 🗑️
     raccoon-init: "${this.t('rummage.emoji.yap')} Woah, what's in there?"
     raccoon-rummage: "The raccoon starts to RUMMAGE through the trashcan..."
-    raccoon-join: "Will you join them in?"
+    raccoon-join: "Will you join them and RUMMAGE too?"
   encouragement:
     - "(you think it'd be nice if others start to RUMMAGE with you)"
     - "(will others start to RUMMAGE with you?)"
