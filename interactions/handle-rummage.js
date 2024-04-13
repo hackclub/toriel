@@ -27,31 +27,29 @@ async function handleRummage(args) {
     return
   }
 
-  if (text === 'rummage') {
-    const messageCount = increaseRummageCount()
+  const messageCount = increaseRummageCount()
 
-    const message = ''
-    if (messageCount < 10) {
-      message = transcript('rummage.first-ten')
-    } else if (messageCount < 200) {
-      message = transcript('rummage.first-hundred')
-    } else if (messageCount < 400) {
-      message = transcript('rummage.second-hundred')
-    } else if (messageCount < 600) {
-      message = transcript('rummage.third-hundred')
-    } else {
-      message = transcript('rummage.end')
-    }
-
-
-    await client.chat.postMessage({
-      text: `<@${user}>: ${message}`,
-      channel: transcript('channels.announcements'),
-      thread_ts: rummageThread,
-      username: `A ${transcript('rummage.raccoon-types')} racoon`.toUpperCase(),
-      icon_url: transcript('rummage.avatar.raccoon'),
-    })
+  const message = ''
+  if (messageCount < 10) {
+    message = transcript('rummage.first-ten')
+  } else if (messageCount < 200) {
+    message = transcript('rummage.first-hundred')
+  } else if (messageCount < 400) {
+    message = transcript('rummage.second-hundred')
+  } else if (messageCount < 600) {
+    message = transcript('rummage.third-hundred')
+  } else {
+    message = transcript('rummage.end')
   }
+
+
+  await client.chat.postMessage({
+    text: `<@${user}>: ${message}`,
+    channel: transcript('channels.announcements'),
+    thread_ts: rummageThread,
+    username: `A ${transcript('rummage.raccoon-types')} racoon`.toUpperCase(),
+    icon_url: transcript('rummage.avatar.raccoon'),
+  })
 }
 
 module.exports = { handleRummageInteraction: handleRummage }
