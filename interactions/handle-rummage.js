@@ -18,6 +18,7 @@ async function handleRummage(args) {
   }
 
   const rummageThread = process.env.RUMMAGE_THREAD
+  console.log("saved rummage thread is ", rummageThread)
 
   if (!rummageThread) {
     console.log('no rummage thread')
