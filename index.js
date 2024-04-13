@@ -60,11 +60,29 @@ const getSuggestion = () => {
 }
 
 app.message('trigger rummage', async (args) => {
+  const { payload } = args
+  const { user, text, channel } = payload
+
+  mirrorMessage({
+    message: text,
+    user,
+    channel,
+    type: "Rummage Init",
+  })
   const { initRummageInteraction } = require('./interactions/init-rummage')
   await initRummageInteraction(args)
 })
 
 app.message('RUMMAGE', async (args) => {
+  const { payload } = args
+  const { user, text, channel } = payload
+
+  mirrorMessage({
+    message: text,
+    user,
+    channel,
+    type: "Rummage",
+  })
   const { handleRummageInteraction } = require('./interactions/handle-rummage')
   await handleRummageInteraction(args)
 })
