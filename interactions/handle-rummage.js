@@ -32,7 +32,7 @@ async function handleRummage(args) {
 
   const messageCount = increaseRummageCount()
 
-  const message = ''
+  let message = ''
   if (messageCount < 10) {
     message = transcript('rummage.first-ten')
   } else if (messageCount < 200) {
