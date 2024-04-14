@@ -17,7 +17,7 @@ async function handleRummage(args) {
     return
   }
 
-  const rummageThread = process.env.RUMMAGE_THREAD
+  const rummageThread = process.env.RUMMAGE_THREAD || '1713055476.037209'
   console.log("saved rummage thread is ", rummageThread)
 
   if (!rummageThread) {
