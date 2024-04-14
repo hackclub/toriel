@@ -45,6 +45,9 @@ async function handleRummage(args) {
     message = transcript('rummage.end')
   }
 
+  if ((messageCount > 1) && (messageCount % 50 == 0)) {
+    message += transcript('rummage.progress', { count: messageCount })
+  }
 
   await client.chat.postMessage({
     text: `<@${user}>: ${message}`,

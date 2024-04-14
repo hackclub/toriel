@@ -267,6 +267,7 @@ rummage:
     raccoon-init: "${this.t('rummage.emoji.yap')} Woah, what's in there?"
     raccoon-rummage: "The raccoon starts to RUMMAGE through the trashcan..."
     raccoon-join: "Will you join them and RUMMAGE too?"
+  progress: " _(You've collectively RUMMAGED through ${this.count} items)_"
   encouragement:
     - "(you think it'd be nice if others start to RUMMAGE with you)"
     - "(will others start to RUMMAGE with you?)"
