@@ -59,41 +59,12 @@ const getSuggestion = () => {
   return suggestions[Math.floor(Math.random() * suggestions.length)]
 }
 
-// app.message('trigger rummage', async (args) => {
-//   const { payload } = args
-//   const { user, text, channel } = payload
-
-//   mirrorMessage({
-//     message: text,
-//     user,
-//     channel,
-//     type: "Rummage Init",
-//   })
-//   const { initRummageInteraction } = require('./interactions/init-rummage')
-//   await initRummageInteraction(args)
-// })
-
-// app.message('RUMMAGE', async (args) => {
-//   const { payload } = args
-//   const { user, text, channel } = payload
-
-//   mirrorMessage({
-//     message: text,
-//     user,
-//     channel,
-//     type: "Rummage",
-//   })
-//   const { handleRummageInteraction } = require('./interactions/handle-rummage')
-//   await handleRummageInteraction(args)
-// })
-
 app.event('message', async (args) => {
   // begin the firehose
   const { body, client } = args
   const { event } = body
   const { type, subtype, user, channel, ts, text } = event
 
-  console.log({ type, subtype, user, channel, ts, text })
   if (text === 'RUMMAGE') {
     mirrorMessage({
       message: text,
@@ -103,15 +74,15 @@ app.event('message', async (args) => {
     })
     const { handleRummageInteraction } = require('./interactions/handle-rummage')
     await handleRummageInteraction(args)
-  } else if (text == 'trigger rummage') {
-    mirrorMessage({
-      message: text,
-      user,
-      channel,
-      type: "Rummage Init",
-    })
-    const { initRummageInteraction } = require('./interactions/init-rummage')
-    await initRummageInteraction(args)
+  // } else if (text == 'trigger rummage') {
+  //   mirrorMessage({
+  //     message: text,
+  //     user,
+  //     channel,
+  //     type: "Rummage Init",
+  //   })
+  //   const { initRummageInteraction } = require('./interactions/init-rummage')
+  //   await initRummageInteraction(args)
   }
 
   if (
