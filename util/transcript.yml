@@ -334,7 +334,6 @@ rummage:
     - ${this.t('rummage.first-hundred')} ${this.t('rummage.encouragement')}
   first-hundred:
     - "You find a piece of paper with the following written on it: don't throw away"
-    - "You feel a vague sense of shame as you reach into the trash without asking the bin's permission"
     - "You hear a faint 'yap' from the trash. Is there something living in there?"
     - "You find a ${this.t('rummage.low-value')}! It's not much, but it's something"
     - "You peer into the trash. There's a slight shimmer inside it."
@@ -345,6 +344,7 @@ rummage:
   second-hundred:
     - "You find a ${this.t('rummage.medium-value')}!"
     - "You find a ${this.t('rummage.medium-value')}. Keep this up and you'll have a collection"
+    - "You feel a vague sense of shame as you reach into the trash without asking the bin's permission"
     - "You hear a faint 'yip' from the trash. Is there something living in there?"
     - "You gaze down into the trash... and it gazes back up at you"
     - "As you reach your hands in you feel a slight tingle. Is there something magical in there? Or just poisonous?"
