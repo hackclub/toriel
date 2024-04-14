@@ -1,4 +1,4 @@
-const { transcript } = require("../util/transcript")
+const { transcript } = require('../util/transcript')
 
 function increaseRummageCount() {
   const rummageCount = parseInt(process.env.RUMMAGE_COUNT) || 0
@@ -6,7 +6,8 @@ function increaseRummageCount() {
   return rummageCount
 }
 
-const rummageChannel = process.env.RUMMAGE_CHANNEL || transcript('channels.announcements')
+const rummageChannel =
+  process.env.RUMMAGE_CHANNEL || transcript('channels.announcements')
 
 async function handleRummage(args) {
   const { client, payload } = args
@@ -18,7 +19,7 @@ async function handleRummage(args) {
   }
 
   const rummageThread = process.env.RUMMAGE_THREAD || '1713055476.037209'
-  console.log("saved rummage thread is ", rummageThread)
+  console.log('saved rummage thread is ', rummageThread)
 
   if (!rummageThread) {
     console.log('no rummage thread')
@@ -45,7 +46,7 @@ async function handleRummage(args) {
     message = transcript('rummage.end')
   }
 
-  if ((messageCount > 1) && (messageCount % 50 == 0)) {
+  if (messageCount > 1 && messageCount % 50 == 0) {
     message += transcript('rummage.progress', { count: messageCount })
   }
 

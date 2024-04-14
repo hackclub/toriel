@@ -70,19 +70,21 @@ app.event('message', async (args) => {
       message: text,
       user,
       channel,
-      type: "Rummage",
+      type: 'Rummage',
     })
-    const { handleRummageInteraction } = require('./interactions/handle-rummage')
+    const {
+      handleRummageInteraction,
+    } = require('./interactions/handle-rummage')
     await handleRummageInteraction(args)
-  // } else if (text == 'trigger rummage') {
-  //   mirrorMessage({
-  //     message: text,
-  //     user,
-  //     channel,
-  //     type: "Rummage Init",
-  //   })
-  //   const { initRummageInteraction } = require('./interactions/init-rummage')
-  //   await initRummageInteraction(args)
+    // } else if (text == 'trigger rummage') {
+    //   mirrorMessage({
+    //     message: text,
+    //     user,
+    //     channel,
+    //     type: "Rummage Init",
+    //   })
+    //   const { initRummageInteraction } = require('./interactions/init-rummage')
+    //   await initRummageInteraction(args)
   }
 
   if (

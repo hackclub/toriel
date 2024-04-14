@@ -1,7 +1,8 @@
-const { sleep } = require("../util/sleep")
-const { transcript } = require("../util/transcript")
+const { sleep } = require('../util/sleep')
+const { transcript } = require('../util/transcript')
 
-const rummageChannel = process.env.RUMMAGE_CHANNEL || transcript('channels.announcements')
+const rummageChannel =
+  process.env.RUMMAGE_CHANNEL || transcript('channels.announcements')
 
 async function initRummage(args) {
   const { client, payload } = args
@@ -9,7 +10,9 @@ async function initRummage(args) {
 
   // ensure only triggered by the right user
 
-  if (user !== 'U0C7B14Q3') { return }
+  if (user !== 'U0C7B14Q3') {
+    return
+  }
 
   const topLevelMessage = await client.chat.postMessage({
     text: transcript('rummage.announcements.init'),
@@ -21,7 +24,7 @@ async function initRummage(args) {
   const { ok, ts } = topLevelMessage
   if (!ok) {
     // oh no...
-    console.log({topLevelMessage})
+    console.log({ topLevelMessage })
     return
   }
 
@@ -36,7 +39,7 @@ async function initRummage(args) {
     text: transcript('rummage.announcements.raccoon-init'),
     channel: rummageChannel,
     thread_ts: process.env.RUMMAGE_THREAD,
-    username: "A YAPPY RACCOON",
+    username: 'A YAPPY RACCOON',
     icon_url: transcript('rummage.avatar.raccoon'),
   })
 
@@ -44,12 +47,16 @@ async function initRummage(args) {
 
   await client.chat.postMessage({
     blocks: [
-      transcript('block.text', { text: transcript('rummage.announcements.raccoon-rummage') }),
-      transcript('block.context', { text: transcript('rummage.announcements.raccoon-join') }),
+      transcript('block.text', {
+        text: transcript('rummage.announcements.raccoon-rummage'),
+      }),
+      transcript('block.context', {
+        text: transcript('rummage.announcements.raccoon-join'),
+      }),
     ],
     channel: rummageChannel,
     thread_ts: process.env.RUMMAGE_THREAD,
-    username: "A LOUD RACCOON",
+    username: 'A LOUD RACCOON',
     icon_url: transcript('rummage.avatar.raccoon'),
   })
 }
