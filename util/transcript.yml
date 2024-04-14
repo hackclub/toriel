@@ -380,7 +380,10 @@ rummage:
     - "you find a ${this.t('rummage.low-value')}! you figure you can trade it for something nicer and throw it back in the trash where it belongs"
     - "your fingers brush against a ${this.t('rummage.high-value')}!"
   end:
-    - "You've reached the bottom of the trashcan..."
+    # - "You've reached the bottom of the trashcan..."
+    - "${this.t('rummage.first-hundred')}"
+    - "${this.t('rummage.second-hundred')}"
+    - "${this.t('rummage.third-hundred')}"
   raccoon-types:
     - raucous
     - rocket
