@@ -30,7 +30,7 @@ async function initRummage(args) {
   process.env.RUMMAGE_THREAD = threadID
   console.log('RUMMAGE_THREAD', process.env.RUMMAGE_THREAD)
 
-  await sleep(1000)
+  await sleep(10000)
 
   await client.chat.postMessage({
     text: transcript('rummage.announcements.raccoon-init'),
@@ -40,7 +40,7 @@ async function initRummage(args) {
     icon_url: transcript('rummage.avatar.raccoon'),
   })
 
-  await sleep(1000)
+  await sleep(10000)
 
   await client.chat.postMessage({
     blocks: [
