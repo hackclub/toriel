@@ -1,7 +1,7 @@
 const { sleep } = require("../util/sleep")
 const { transcript } = require("../util/transcript")
 
-const rummageChannel = process.env.RUMMAGE_CHANNEL
+const rummageChannel = process.env.RUMMAGE_CHANNEL || transcript('channels.announcements')
 
 async function initRummage(args) {
   const { client, payload } = args

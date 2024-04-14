@@ -6,7 +6,7 @@ function increaseRummageCount() {
   return rummageCount
 }
 
-const rummageChannel = process.env.RUMMAGE_CHANNEL
+const rummageChannel = process.env.RUMMAGE_CHANNEL || transcript('channels.announcements')
 
 async function handleRummage(args) {
   const { client, payload } = args
