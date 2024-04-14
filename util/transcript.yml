@@ -366,11 +366,13 @@ rummage:
   third-hundred:
     - "who throws out a ${this.t('rummage.high-value')}?"
     - "you see a hand poking out of the trash... holding a soldering iron?!"
+    - "you feel like you're spelunking OwO"
     - "you're getting close to the bottom of the trashcan & have a strong urge to GET MORE PEOPLEEE"
     - "You start to reach the bottom of the pile and find a ${this.t('rummage.high-value')}!"
     - "you hear chittering. Is there something living down there??2?"
     - "the hole you dig widens... someone can be seen inside... owo"
     - "You find a pretty penny, but... is lincoln wearing a bandit mask?"
+    - "You find a pretty penny, but... is lincoln OwOing?"
     - "you grab something by the tail but it scurries away!"
     - "as you dig only one thought pops up in your mind– GET MORE PEOPLEEEEEEEE"
     - "you hear the faint sound of power tools down there. what's going on?"
@@ -384,6 +386,7 @@ rummage:
     - rocket
     - rock'n
     - rascal
+    - rapid
     - rambunctious
     - rambling
     - rabid
