@@ -328,10 +328,14 @@ rummage:
     - Raspberry Pi
     - ${this.t('rummage.groups')}
     - shiney new ${this.t('rummage.individuals')}
+    - Golly Jee! it's a ${this.t('rummage.groups')}
+    - Gee wizz! it's a ${this.t('rummage.groups')}
   first-ten:
     - ${this.t('rummage.first-hundred')} ${this.t('rummage.encouragement')}
   first-hundred:
     - "You find a piece of paper with the following written on it: don't throw away"
+    - "You feel a vague sense of shame as you reach into the trash without asking the bin's permission"
+    - "You hear a faint 'yap' from the trash. Is there something living in there?"
     - "You find a ${this.t('rummage.low-value')}! It's not much, but it's something"
     - "You peer into the trash. There's a slight shimmer inside it."
     - "You find a pretty penny, but... is lincoln winking at you?"
@@ -341,8 +345,18 @@ rummage:
   second-hundred:
     - "You find a ${this.t('rummage.medium-value')}!"
     - "You find a ${this.t('rummage.medium-value')}. Keep this up and you'll have a collection"
+    - "You hear a faint 'yip' from the trash. Is there something living in there?"
+    - "You gaze down into the trash... and it gazes back up at you"
+    - "As you reach your hands in you feel a slight tingle. Is there something magical in there? Or just poisonous?"
+    - "You reach in and grab a warning label that says 'do not touch'"
+    - "You read a label that says 'prop 65: this product contains chemicals known to the state of california to cause cancer'"
+    - "You take out a piece of paper that says 'the fitness gram pacer test is a multi-stage aerobic capacity test that progressively gets more difficult as it continues'"
+    - "you see fingers poking out of the trash... keep digging!"
+    - "as you dig only one thought pops up in your mind– GET MORE PEOPLEEEEEEEE"
+    - "you find the shreded parts of a piñata"
     - "You keep scrounging & suddenly in your hands is a ${this.t('rummage.medium-value')}"
     - "You greedily dig away, searching for something valuable! You find a ${this.t('rummage.medium-value')}!"
+    - "As you claw your way down, you can only think about finding MORE PEOPEL!!!!1!"
     - "You find a gold coin :hc_gold:! Eh, it's probably fake."
     - "oh great, you found a ${this.t('rummage.low-value')}! /s"
     - "You find a spare tetanus shot. Better keep that for later"
@@ -351,10 +365,14 @@ rummage:
     - "oh great, you found a ${this.t('rummage.low-value')}! Give it to your ${this.t('rummage.relationships')}, maybe they'll be impressed"
   third-hundred:
     - "who throws out a ${this.t('rummage.high-value')}?"
+    - "you see a hand poking out of the trash... holding a soldering iron?!"
+    - "you're getting close to the bottom of the trashcan & have a strong urge to GET MORE PEOPLEEE"
     - "You start to reach the bottom of the pile and find a ${this.t('rummage.high-value')}!"
     - "you hear chittering. Is there something living down there??2?"
+    - "the hole you dig widens... someone can be seen inside... owo"
     - "You find a pretty penny, but... is lincoln wearing a bandit mask?"
     - "you grab something by the tail but it scurries away!"
+    - "as you dig only one thought pops up in your mind– GET MORE PEOPLEEEEEEEE"
     - "you hear the faint sound of power tools down there. what's going on?"
     - "you find a ${this.t('rummage.low-value')}! oh well..."
     - "you find a ${this.t('rummage.low-value')}! you figure you can trade it for something nicer and throw it back in the trash where it belongs"
