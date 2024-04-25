@@ -231,9 +231,8 @@ startup:
     - knowing that despite everything, it's still you
     - seeing the fish go "wahoo"
     - seeing the squid go "hooray"
-    - knowing that one day bank might be open sourced
+    - knowing that one day hcb might be open sourced
     - knowing that one day you might <https://github.com/hackclub/toriel/edit/main/util/transcript.yml|add your own tutoriel-bot startup message>
-    - knowing that one day you might <https://clb.li/conf|hear people TALK>
     - knowing that one day <#${this.t('channels.counttoamillion')}> might reach a million
     - smelling the ${this.t('type-of-pie')} pie coming out of the oven
     - smelling the fresh baked bread in ${this.t('channels.bakery')}
