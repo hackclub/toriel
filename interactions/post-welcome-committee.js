@@ -33,7 +33,7 @@ async function postWelcomeCommittee(user) {
     })
 
   const profBloomHeaders = {
-    "auth": ${process.env.AUTH_TOKEN}
+    "auth": `${process.env.AUTH_TOKEN}`
   }
     
   const profBloomBody = {
