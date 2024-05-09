@@ -26,7 +26,7 @@ async function cleanupCaveChannel(dryRun = true) {
       messagesToRemove.map((message) =>
         client.chat
           .delete({
-            token: process.env.SLACK_LEGACY_TOKEN, // sudo
+            token: process.env.SLACK_USER_TOKEN, // sudo
             channel,
             ts: message?.ts,
             thread_ts: message?.thread_ts,
