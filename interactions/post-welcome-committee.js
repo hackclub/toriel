@@ -18,7 +18,6 @@ async function postWelcomeCommittee(user) {
     const hs = invite ? invite.high_school : true
     const event = invite ? invite.event : null
 
-    // Can we add some error handling here so if the post request fails it dms me (@Jasper)? 
     
     // This will go away once professor bloom is fully done
     await client.chat.postMessage({
@@ -41,7 +40,7 @@ async function postWelcomeCommittee(user) {
     "continent": continent,
     "joinReason": message
   }
-    
+   // Can we add some error handling here so if the post request fails it dms me (@Jasper)? 
    await fetch(
     `https://professorbloom.hackclub.com/toriel/newUser`,
     {
