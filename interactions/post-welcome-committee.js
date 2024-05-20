@@ -1,5 +1,3 @@
-const fetch = require('node-fetch')
-
 const { prisma } = require('../db')
 const { transcript } = require('../util/transcript')
 const { client } = require('../app')
