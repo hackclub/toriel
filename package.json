@@ -15,7 +15,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@prisma/client": "^4.13.0",
+    "@prisma/client": "^5.14.0",
     "@slack/bolt": "^3.12.2",
     "axios": "^1.2.6",
     "dotenv": "^16.3.1",
@@ -26,6 +26,6 @@
     "node-statsd": "^0.1.1"
   },
   "devDependencies": {
-    "prisma": "^4.13.0"
+    "prisma": "^5.14.0"
   }
 }
