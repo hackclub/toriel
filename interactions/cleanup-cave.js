@@ -23,17 +23,22 @@ async function cleanupCaveChannel(dryRun = true) {
     )
 
     await Promise.all(
-      messagesToRemove.map((message) =>
-        client.chat
-          .delete({
-            token: process.env.SLACK_LEGACY_TOKEN, // sudo
-            channel,
-            ts: message?.ts,
-            thread_ts: message?.thread_ts,
-          })
-          .catch((e) => {
-            console.warn(e)
-          })
+      messagesToRemove.map((message) => {
+        // Note from David: It appears tombstone messages belong to Data Loss Prevention
+        // Which, it appears it can't delete (message_not_found)
+        // https://slack.com/help/articles/12914005852819-Slack-data-loss-prevention
+        if (message.subtype == "tombstone") return 
+          client.chat
+            .delete({
+              token: process.env.SLACK_LEGACY_TOKEN, // sudo
+              channel,
+              ts: message?.ts,
+              thread_ts: message?.thread_ts,
+            })
+            .catch((e) => {
+              console.warn(e)
+            })
+      }
       )
     )
   }
