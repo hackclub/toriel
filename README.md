@@ -57,7 +57,7 @@ In order to run Toriel locally, you'll need to [join the Hack Club Slack](https:
     ![Screenshot of where the token is](https://cloud-twxncowk1-hack-club-bot.vercel.app/0screenshot_2022-04-18_at_7.00.44_pm.png)
 12. [Create a private channel](https://slack.com/help/articles/201402297-Create-a-channel) where your app can run the welcome flow. Similar to the role that #in-the-cave plays for Toriel (run `toriel-restart` in slack to see what this means).
     - Invite your bot to that channel (you can @mention it to add)
-13. Edit [transcript.yml](/util/transcript.yml)
+13. Edit [transcript.yml](/util/transcript.yml). If you want to make your own local transcript.yml with your own channels for testing, call it `transcript.dev.yaml`, and it will load from that instead, however, it won't be synced to production.
 
     - The key:value pairs under `channels:` represent `channel-name:channel-id` and these are referred to elsewhere in the codebase with `{channels.channel-name}`
 
