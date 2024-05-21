@@ -17,7 +17,7 @@ async function postImage() {
   const response = await client.files.uploadV2({
     channels: transcript('channels.cave'),
     file: file.data,
-    filename: 'you fall into a cave...'
+    filename: 'you fall into a cave...',
   })
 }
 
@@ -48,7 +48,7 @@ async function postAudio() {
   const response = await client.files.uploadV2({
     channels: transcript('channels.cave'),
     file: file.data,
-    filename: 'play me'
+    filename: 'play me',
   })
 }
 

@@ -1,41 +1,41 @@
-# ---
-# name: CI
+---
+name: CI
 
-# on:
-#   pull_request:
-#   push:
-#     branches:
-#       - main
+on:
+  pull_request:
+  push:
+    branches:
+      - main
 
-# jobs:
-#   # yamllint:
-#   #   name: YAML Lint
-#   #   runs-on: ubuntu-latest
-#   #   steps:
-#   #     - name: Check out code
-#   #       uses: actions/checkout@v2
-#   #     - name: Run yamllint
-#   #       uses: actionshub/yamllint@main
+jobs:
+  # yamllint:
+  #   name: YAML Lint
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Check out code
+  #       uses: actions/checkout@v2
+  #     - name: Run yamllint
+  #       uses: actionshub/yamllint@main
 
-#   # mdl:
-#   #   name: Markdown Lint
-#   #   runs-on: ubuntu-latest
-#   #   steps:
-#   #     - name: Check out code
-#   #       uses: actions/checkout@v2
-#   #     - name: Run Markdown Lint
-#   #       uses: actionshub/markdownlint@main
-#   #       with:
-#   #         filesToIgnoreRegex: '((old|node_modules)\/.*)'
+  # mdl:
+  #   name: Markdown Lint
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Check out code
+  #       uses: actions/checkout@v2
+  #     - name: Run Markdown Lint
+  #       uses: actionshub/markdownlint@main
+  #       with:
+  #         filesToIgnoreRegex: '((old|node_modules)\/.*)'
 
-#   prettier:
-#     name: Prettier
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v2
-#       - name: Run prettier
-#         uses: actionsx/prettier@v2
-#         with:
-#           # Prettier CLI arguments
-#           args: --check "**/*.js"
+  prettier:
+    name: Prettier
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Run prettier
+        uses: actionsx/prettier@v2
+        with:
+          # Prettier CLI arguments
+          args: --check "**/*.js"
