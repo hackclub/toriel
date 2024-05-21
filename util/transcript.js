@@ -8,10 +8,9 @@ const sample = (arr) => {
 const loadTranscript = () => {
   try {
     var transcriptPath = path.resolve(__dirname, './transcript.yml')
-    if (fs.existsSync(path.resolve(__dirname, './transcript.dev.yml'))) transcriptPath = path.resolve(__dirname, './transcript.dev.yml')
-    const doc = yaml.load(
-      fs.readFileSync(transcriptPath, 'utf8')
-    )
+    if (fs.existsSync(path.resolve(__dirname, './transcript.dev.yml')))
+      transcriptPath = path.resolve(__dirname, './transcript.dev.yml')
+    const doc = yaml.load(fs.readFileSync(transcriptPath, 'utf8'))
     return doc
   } catch (e) {
     console.error(e)
