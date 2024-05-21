@@ -14,11 +14,10 @@ async function postImage() {
     url: transcript('files.cave-image'),
     responseType: 'stream',
   })
-  const response = await client.files.upload({
+  const response = await client.files.uploadV2({
     channels: transcript('channels.cave'),
     file: file.data,
     filename: 'you fall into a cave...',
-    filetype: 'png',
   })
 }
 
@@ -46,11 +45,10 @@ async function postAudio() {
   console.log({
     channel: transcript('channels.cave'),
   })
-  const response = await client.files.upload({
+  const response = await client.files.uploadV2({
     channels: transcript('channels.cave'),
     file: file.data,
     filename: 'play me',
-    filetype: 'm4a',
   })
 }
 
