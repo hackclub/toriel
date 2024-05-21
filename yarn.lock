@@ -43,7 +43,7 @@
   dependencies:
     "@prisma/debug" "5.14.0"
 
-"@slack/bolt@^3.12.2":
+"@slack/bolt@^3.18.0":
   version "3.18.0"
   resolved "https://registry.yarnpkg.com/@slack/bolt/-/bolt-3.18.0.tgz#e19dcee8cc5917569bf0806db8dc0c54c98680bd"
   integrity sha512-A7bDi5kY50fS6/nsmURkQdO3iMxD8aX/rA+m1UXEM2ue2z4KijeQtx2sOZ4YkJQ/h7BsgTQM0CYh3qqmo+m5sQ==
@@ -304,7 +304,7 @@ available-typed-arrays@^1.0.7:
   dependencies:
     possible-typed-array-names "^1.0.0"
 
-axios@^1.2.6, axios@^1.6.0, axios@^1.6.5:
+axios@^1.6.0, axios@^1.6.5, axios@^1.7.1:
   version "1.7.1"
   resolved "https://registry.yarnpkg.com/axios/-/axios-1.7.1.tgz#522145622a09dfaf49359837db9649ff245a35b9"
   integrity sha512-+LV37nQcd1EpFalkXksWNBiA17NZ5m5/WspmHGmZmdx1qBOg/VNq/c4eRJiA9VQQHBOs+N0ZhhdU10h2TyNK7Q==
