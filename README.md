@@ -24,8 +24,7 @@ In order to run Toriel locally, you'll need to [join the Hack Club Slack](https:
    - Send a message mentioning `@creds` in [Hack Club's Slack](https://hackclub.com/slack/) asking for the `.env` file
 5. Start server
    `npm run dev`
-6. Forward your local server to ngrok
-   `ngrok http 3000`
+6. Forward your local server to [underpass](https://github.com/cjdenio/underpass), an open source alternative made by a Hack Club team member.
 7. Update the settings in the [manifest.yml](https://github.com/hackclub/toriel/blob/main/manifest.yml)
    - Change the slash command and event endpoints by replacing `https://toriel.hackclub.com` with your ngrok URL
      - You can find your ngrok URL in the terminal where you ran `ngrok http 3000`. It would look similar to this (your ngrok URL will be different):
@@ -58,7 +57,7 @@ In order to run Toriel locally, you'll need to [join the Hack Club Slack](https:
     ![Screenshot of where the token is](https://cloud-twxncowk1-hack-club-bot.vercel.app/0screenshot_2022-04-18_at_7.00.44_pm.png)
 12. [Create a private channel](https://slack.com/help/articles/201402297-Create-a-channel) where your app can run the welcome flow. Similar to the role that #in-the-cave plays for Toriel (run `toriel-restart` in slack to see what this means).
     - Invite your bot to that channel (you can @mention it to add)
-13. Edit [transcript.yml](/util/transcript.yml)
+13. Edit [transcript.yml](/util/transcript.yml). If you want to make your own local transcript.yml with your own channels for testing, call it `transcript.dev.yaml`, and it will load from that instead, however, it won't be synced to production.
 
     - The key:value pairs under `channels:` represent `channel-name:channel-id` and these are referred to elsewhere in the codebase with `{channels.channel-name}`
 
@@ -82,6 +81,6 @@ In order to run Toriel locally, you'll need to [join the Hack Club Slack](https:
 
 If you run into an error where the message reads `Toriel is not invited to these channels` or `channel_not_found`, just invite your bot to that channel (you can check the channel with its ID by referring back to [transcript.yml](/util/transcript.yml). If the channel is private, you can create a new private channel as its substitute, but remember to update the references in the code. Ex. `#toriels-diary` is a private channel, so you can create `#msw-toriels-diary`, add it to [transcript.yml](/util/transcript.yml), and change all `{channels.toriels-diary}` to `{channels.msw-toriels-diary}`.
 
-_Note: you have to re-update the ngrok URL on the Slack app manifest and verify the URL each time to restart the server, since the ngrok URL changes_
+_Note: you have to re-update the Underpass tunnel URL on the Slack app manifest and verify the URL each time to restart the server, since the tunnel URL changes_
 
 **Formatting** is important, please run `npm run fmt` on contribution.

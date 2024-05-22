@@ -1,4 +1,3 @@
-const fetch = require('node-fetch')
 const { client } = require('../app')
 
 async function upgradeUser(user) {
