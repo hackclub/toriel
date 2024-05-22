@@ -28,6 +28,11 @@ receiver.router.get(
   require('./endpoints/start-from-clippy')
 )
 
+// Spit out global metrics every 5s
+setInterval(() => {
+  metrics.increment('events.pulse', 1)
+}, 1000 * 5)
+
 receiver.router.get(
   '/slack-tutorial/:user',
   require('./endpoints/slack-tutorial')
@@ -279,6 +284,8 @@ app.action(/.*?/, async (args) => {
         },
       })
 
+      metrics.increment('events.acceptcoc', 1)
+
       if (invite?.event) {
         const event = invite?.event
         await prisma.user.update({
@@ -321,6 +328,8 @@ app.action(/.*?/, async (args) => {
         },
       })
 
+      metrics.increment('events.flow.finish', 1)
+
       await destroyHelpMeMessage(client, user)
 
       break
@@ -331,8 +340,6 @@ app.action(/.*?/, async (args) => {
       })
       await addToChannels(user)
 
-      await destroyHelpMeMessage(client, user)
-
       await prisma.user.update({
         where: {
           user_id: user,
@@ -341,6 +348,10 @@ app.action(/.*?/, async (args) => {
           toriel_stage: 'FINISHED',
         },
       })
+
+      metrics.increment('events.flow.finish', 1)
+
+      await destroyHelpMeMessage(client, user)
 
       break
     default:
@@ -361,6 +372,8 @@ app.start(process.env.PORT || 3001).then(async () => {
 
   const { cleanupCaveChannel } = require('./interactions/cleanup-cave')
   await cleanupCaveChannel()
+
+  metrics.increment('events.startup', 1)
 
   const {
     cleanupHappeningsChannel,
