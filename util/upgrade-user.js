@@ -1,4 +1,5 @@
 const { client } = require('../app')
+const { metrics } = require('./metrics')
 
 async function upgradeUser(user) {
   const userProfile = await client.users.info({ user })
@@ -45,8 +46,14 @@ async function upgradeUser(user) {
       body: form,
     }
   )
-    .then((r) => r.json())
-    .catch((e) => console.log(e))
+    .then((r) => {
+      r.json()
+      metrics.increment("events.flow.userUpgrade", 1)
+    })
+    .catch((e) => {
+      metrics.increment("events.flow.error.userUpgradeFailure", 1)
+      console.error()
+    })
 }
 
 module.exports = { upgradeUser }
