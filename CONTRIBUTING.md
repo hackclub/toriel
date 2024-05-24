@@ -17,6 +17,7 @@ Before submitting a report, please make sure you checked and have done the follo
 
 ### Using it in Slack
 - Included screenshots/screen recordings of the bug.
+- Explain what you were doing right before the bug occured
 
 ### Self-Hosting 
 - Checked your Node.js version
@@ -25,7 +26,7 @@ Before submitting a report, please make sure you checked and have done the follo
 - Included logs given by the bot.
 
 ## Security Issues
-Please **do not submit security issues via GitHub issues**. Please notify the Toriel development team privately at <\insert email here\>  
+Please **do not submit security issues via GitHub issues**. This is because Toriel has access to very sensitive data, such as IP addresses, E-mails, and other personally identifiable information (PII). Please notify the Toriel development team privately at toriel@hackclub.com. Read more in our [security policy](https://github.com/hackclub/toriel/blob/main/.github/SECURITY.md)
 
 ## Setting up a development environment
 There are [instructions in the README.md](https://github.com/hackclub/toriel#running-locally) on how to set it up.
