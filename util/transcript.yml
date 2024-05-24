@@ -57,6 +57,11 @@ channels:
   happenings: C05B6DBN802
   bakery: C01EZ2MNPTQ
   apocalyse: C06SGG2AGHJ
+  boreal: C073Y3EURP0
+  the-wishing-wall: C07443MC9UP
+  hack-hour: C06SBHMQU8G
+  days-of-service: C05T8E9GY64
+  build-programming-languages: C06T22ZFQGP
 
 block:
   text:
@@ -235,10 +240,15 @@ startup:
     - knowing that one day hcb might be open sourced
     - knowing that one day you might <https://github.com/hackclub/toriel/edit/main/util/transcript.yml|add your own tutoriel-bot startup message>
     - knowing that one day <#${this.t('channels.counttoamillion')}> might reach a million
+    - knowing more girls will have more opportunities in tech
     - smelling the ${this.t('type-of-pie')} pie coming out of the oven
     - smelling the fresh baked bread in <#${this.t('channels.bakery')}>
     - seeing the boards designed in <#${this.t('channels.onboard')}>
     - seeing people play games and trying to get a high score in <#${this.t('channels.sprig')}>
+    - seeing people show what they want to do this summer in <#${this.t('channels.the-wishing-wall')}>
+    - seeing people focus on their projects in <#${this.t('channels.hack-hour')}>
+    - seeing people build their own programming languages in <#${this.t('channels.build-programming-languages')}>
+
 
 themes:
   array:

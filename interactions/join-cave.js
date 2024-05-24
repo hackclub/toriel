@@ -3,6 +3,7 @@ const { sleep } = require('../util/sleep')
 const { transcript } = require('../util/transcript')
 const { prisma } = require('../db')
 const { getEmailFromUser } = require('../util/get-invite')
+const { metrics } = require('../util/metrics')
 
 async function joinCaveInteraction(args) {
   const { client, payload } = args
@@ -27,6 +28,8 @@ async function joinCaveInteraction(args) {
       toriel_stage: 'STARTED_FLOW',
     },
   })
+
+  metrics.increment('events.flow.cavestart', 1)
 
   await Promise.all([
     client.chat.postEphemeral({
