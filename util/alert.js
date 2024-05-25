@@ -11,7 +11,7 @@ module.exports = {
    * @param {string} options.detailed - The detailed information of the alert.
    */
   sendInfo: function ({ summary, detailed }) {
-    detailed = "```" + detailed.replaceAll("`","ˋ") + "```"
+    detailed = '```' + detailed.replaceAll('`', 'ˋ') + '```'
     fetch(process.env.SLACK_WEBHOOK_INFO, {
       method: 'POST',
       body: JSON.stringify({
@@ -26,7 +26,7 @@ module.exports = {
    * @param {string} options.detailed - The detailed information of the alert.
    */
   sendUrgent: function ({ summary, detailed }) {
-    detailed = "```" + detailed.replaceAll("`","ˋ") + "```"
+    detailed = '```' + detailed.replaceAll('`', 'ˋ') + '```'
     fetch(process.env.SLACK_WEBHOOK_ERROR, {
       method: 'POST',
       body: JSON.stringify({

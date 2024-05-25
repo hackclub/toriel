@@ -1,6 +1,8 @@
 const yaml = require('js-yaml')
 const fs = require('fs')
 const path = require('path')
+const { metrics } = require('./metrics')
+const { sendUrgent } = require('./alert')
 
 const sample = (arr) => {
   return arr[Math.floor(Math.random() * arr.length)]
@@ -21,6 +23,8 @@ const recurseTranscript = (searchArr, transcriptObj) => {
   const targetObj = transcriptObj[searchCursor]
 
   if (!targetObj) {
+    metrics.increment("events.transcript.load.failure", 1)
+    sendUrgent({ summary: "Failed to load transcript.yml", detailed: "There was a failure loading the transcript.yml, which is breaking the app.\n\n" + transcript('errors.transcript') })
     throw new Error(transcript('errors.transcript'))
   }
   if (searchArr.length > 0) {

@@ -16,7 +16,7 @@ const { metrics } = require('./util/metrics')
 const { upgradeUser } = require('./util/upgrade-user.js')
 const { destroyHelpMeMessage } = require('./util/notify-channel.js')
 const { scheduleHelpMeMessage } = require('./util/notify-channel')
-const { sendInfo } = require("./util/alert")
+const { sendInfo } = require('./util/alert')
 receiver.router.use(express.json())
 
 receiver.router.get('/', require('./endpoints/index'))
@@ -390,12 +390,12 @@ app.start(process.env.PORT || 3001).then(async () => {
   const { setupCaveChannel } = require('./setup/cave-channel')
   //  await setupCaveChannel(app)
 })
-process.on("unhandledRejection", (error) => {
+process.on('unhandledRejection', (error) => {
   sendInfo({
-    summary: "An unhandled rejection was captured just now",
-    detailed: error?.stack
+    summary: 'An unhandled rejection was captured just now',
+    detailed: error?.stack,
   })
-  console.error(error);
-});
+  console.error(error)
+})
 
 module.exports = { app }
