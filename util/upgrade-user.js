@@ -1,6 +1,6 @@
 const { client } = require('../app')
 const { metrics } = require('./metrics')
-
+const { sendUrgent } = require("./alert")
 async function upgradeUser(user) {
   const userProfile = await client.users.info({ user })
   const { team_id } = userProfile.user
@@ -51,6 +51,7 @@ async function upgradeUser(user) {
       metrics.increment('events.flow.userUpgrade', 1)
     })
     .catch((e) => {
+      sendUrgent({ summary: `A user upgrade failed!`, detailed: `Upgrading <@${user}> from a multi channel user to a regular user has failed.` })
       metrics.increment('events.flow.error.userUpgradeFailure', 1)
       console.error()
     })
