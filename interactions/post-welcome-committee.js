@@ -28,20 +28,19 @@ async function postWelcomeCommittee(user) {
       }),
     })
 
-    const profBloomHeaders = {
-      auth: `${process.env.AUTH_TOKEN}`,
-    }
-
-    const profBloomBody = {
-      user: user,
-      continent: continent,
-      joinReason: message,
-    }
     // Can we add some error handling here so if the post request fails it dms me (@Jasper)?
     await fetch(`https://professorbloom.hackclub.com/toriel/newUser`, {
-      profBloomHeaders,
+      headers: {
+        'Content-Type': 'application/json',
+        'Auth': `${process.env.AUTH_TOKEN}`,
+
+      },
       method: 'POST',
-      body: profBloomBody,
+      body: JSON.stringify({
+        user: user,
+        continent: continent,
+        joinReason: message,
+      }),
     })
   } catch (e) {
     console.log(e)
