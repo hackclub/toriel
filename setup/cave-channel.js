@@ -8,7 +8,9 @@ async function setupCaveChannel() {
 }
 
 async function postImage() {
-  const file = Buffer.from((await (await fetch(transcript('files.cave-image'))).arrayBuffer()))
+  const file = Buffer.from(
+    await (await fetch(transcript('files.cave-image'))).arrayBuffer()
+  )
   const response = await client.files.uploadV2({
     channels: transcript('channels.cave'),
     file: file,
@@ -32,7 +34,9 @@ async function postMessage() {
 }
 
 async function postAudio() {
-  const file = Buffer.from((await (await fetch(transcript('files.cave-audio'))).arrayBuffer()))
+  const file = Buffer.from(
+    await (await fetch(transcript('files.cave-audio'))).arrayBuffer()
+  )
   console.log({
     channel: transcript('channels.cave'),
   })
