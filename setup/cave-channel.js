@@ -1,4 +1,3 @@
-const axios = require('axios')
 const { transcript } = require('../util/transcript')
 const { client } = require('../app')
 
@@ -9,14 +8,10 @@ async function setupCaveChannel() {
 }
 
 async function postImage() {
-  const file = await axios({
-    method: 'get',
-    url: transcript('files.cave-image'),
-    responseType: 'stream',
-  })
+  const file = Buffer.from((await (await fetch(transcript('files.cave-image'))).arrayBuffer()))
   const response = await client.files.uploadV2({
     channels: transcript('channels.cave'),
-    file: file.data,
+    file: file,
     filename: 'you fall into a cave...',
   })
 }
@@ -37,11 +32,7 @@ async function postMessage() {
 }
 
 async function postAudio() {
-  const file = await axios({
-    method: 'get',
-    url: transcript('files.cave-audio'),
-    responseType: 'stream',
-  })
+  const file = Buffer.from((await (await fetch(transcript('files.cave-audio'))).arrayBuffer()))
   console.log({
     channel: transcript('channels.cave'),
   })
