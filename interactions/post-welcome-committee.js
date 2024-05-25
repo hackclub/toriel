@@ -32,8 +32,7 @@ async function postWelcomeCommittee(user) {
     await fetch(`https://professorbloom.hackclub.com/toriel/newUser`, {
       headers: {
         'Content-Type': 'application/json',
-        'Auth': process.env.AUTH_TOKEN,
-
+        Auth: process.env.AUTH_TOKEN,
       },
       method: 'POST',
       body: JSON.stringify({
