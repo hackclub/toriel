@@ -62,6 +62,9 @@ channels:
   hack-hour: C06SBHMQU8G
   days-of-service: C05T8E9GY64
   build-programming-languages: C06T22ZFQGP
+  cider: C073DTGENJ2
+  hamradio: C01G6UJT2RM
+  the-boreal-express: C073Y3EURP0
 
 block:
   text:
@@ -145,6 +148,13 @@ house:
     <#${this.t('channels.happenings')}> to help guide your way
 
     <#${this.t('channels.ship')}> to be amazed by people just like you
+
+    Here are some active projects/events you can lurk around in or help with:
+    - <#${this.t('channels.cider')}> is a new program where you build an iOS app and you get $100 to publish it on the app store
+    - <#${this.t('channels.build-programming-languages')}> is a place you can build your own program and get mailed fudge to your doorstep
+    - <#${this.t('channels.the-boreal-express')}> is a 8-day event ran by Hack Club which you can sign up for where we'll take a train across Canada to learn new things. Invites are selective, and you must register your intrest before June 10th.
+    - <#${this.t('channels.hamradio')}> is a program where you can get your own ham radio for free by getting a <https://simple.wikipedia.org/wiki/Amateur_radio|ham radio license>.
+
 
     *Most importantly, you must introduce yourself in <#${this.t('channels.welcome')}>. There are so many intrepid travelers like yourself and they're so excited to meet you.*
   added-to-channels-epoch: |
