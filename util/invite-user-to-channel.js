@@ -27,7 +27,7 @@ async function inviteUserToChannel(
         console.log(`${user} is already in ${channel}—skipping this step...`)
       }
       if (!notInChannel && err.data.error === 'not_in_channel') {
-        metrics.increment("events.flow.addtochannel", 1)
+        metrics.increment('events.flow.addtochannel', 1)
         return inviteUserToChannel(user, channel, doAsAdmin, true)
       }
       console.log(err.data.error, 'while inviting', user, 'to', channel)

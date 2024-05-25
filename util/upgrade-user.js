@@ -48,10 +48,10 @@ async function upgradeUser(user) {
   )
     .then((r) => {
       r.json()
-      metrics.increment("events.flow.userUpgrade", 1)
+      metrics.increment('events.flow.userUpgrade', 1)
     })
     .catch((e) => {
-      metrics.increment("events.flow.error.userUpgradeFailure", 1)
+      metrics.increment('events.flow.error.userUpgradeFailure', 1)
       console.error()
     })
 }

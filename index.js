@@ -107,7 +107,7 @@ app.event('message', async (args) => {
   const protectedChannels = [transcript('channels.cave')]
   if (type == 'message' && protectedChannels.includes(channel)) {
     console.log(`Attempting to remove ${subtype} message in #cave channel`)
-    metrics.increment("events.protectedChannel.deletions", 1)
+    metrics.increment('events.protectedChannel.deletions', 1)
     await client.chat
       .delete({
         token: process.env.SLACK_LEGACY_TOKEN, // sudo
