@@ -39,7 +39,7 @@ async function postWelcomeCommittee(user) {
     }
     // Can we add some error handling here so if the post request fails it dms me (@Jasper)?
     await fetch(`https://professorbloom.hackclub.com/toriel/newUser`, {
-      headers,
+      profBloomHeaders,
       method: 'POST',
       body: profBloomBody,
     })
