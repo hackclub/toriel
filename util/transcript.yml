@@ -249,6 +249,7 @@ startup:
     - seeing people show what they want to do this summer in <#${this.t('channels.the-wishing-wall')}>
     - seeing people focus on their projects in <#${this.t('channels.hack-hour')}>
     - seeing people build their own programming languages in <#${this.t('channels.build-programming-languages')}>
+    - knowing that toby fox has made games other than undertale
 
 
 themes:
