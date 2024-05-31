@@ -12,7 +12,7 @@ async function upgradeUser(user) {
     console.log(`User ${user} is already a full user– skipping`)
     return null
   }
-
+  const startPerf = Date.now()
   console.log(`Attempting to upgrade user ${user}`)
 
   // @msw: This endpoint is undocumented. It's usage and token were taken from
@@ -48,7 +48,7 @@ async function upgradeUser(user) {
   )
     .then((r) => {
       r.json()
-      metrics.increment('events.flow.userUpgrade', 1)
+      metrics.increment('events.flow.user_upgrade', 1)
     })
     .catch((e) => {
       sendUrgent({
@@ -57,6 +57,11 @@ async function upgradeUser(user) {
       })
       metrics.increment('events.flow.error.userUpgradeFailure', 1)
       console.error()
+    })
+    .finally((e) => {
+      // send this value to client pls
+      const time = Date.now() - startPerf
+      client.timing('events.flow.user_upgrade.time', time)
     })
 }
 

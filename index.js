@@ -390,6 +390,32 @@ app.start(process.env.PORT || 3001).then(async () => {
   const { setupCaveChannel } = require('./setup/cave-channel')
   //  await setupCaveChannel(app)
 })
+
+setInterval(async function () {
+  const noId = (
+    await prisma.invite.findMany({
+      where: {
+        user_id: null,
+      },
+    })
+  ).length
+  metrics.gauge('flow.users.no_account', noId)
+
+  const invitesThisWeek = (
+    await prisma.invite.findMany({
+      where: {
+        createdAt: {
+          lte: new Date(),
+          gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
+        },
+      },
+    })
+  ).length
+
+  console.log(invitesThisWeek)
+  metrics.gauge('flow.users.invites.this_week', invitesThisWeek)
+}, 1000 * 10)
+
 process.on('unhandledRejection', (error) => {
   sendInfo({
     summary: 'An unhandled rejection was captured just now',
