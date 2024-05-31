@@ -401,20 +401,36 @@ setInterval(async function () {
   ).length
   metrics.gauge('flow.users.no_account', noId)
 
-  const invitesThisWeek = (
+  const totalInvitesThisWeek = (
+    await prisma.invite.findMany({
+      where: {
+        createdAt: {
+          lte: new Date(),
+          gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
+        }
+      },
+    })
+  ).length
+
+
+  const totalUsersThisWeek = (
     await prisma.invite.findMany({
       where: {
         createdAt: {
           lte: new Date(),
           gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
         },
+        user_id: {
+          not: null
+        }
       },
     })
   ).length
 
-  console.log(invitesThisWeek)
-  metrics.gauge('flow.users.invites.this_week', invitesThisWeek)
-}, 1000 * 10)
+  metrics.gauge('flow.users.invites.this_week', totalInvitesThisWeek)
+  metrics.gauge('flow.users.joins.this_week', totalUsersThisWeek)
+
+}, 1000 * 10) // update to a longer span in not testing
 
 process.on('unhandledRejection', (error) => {
   sendInfo({
