@@ -150,9 +150,12 @@ house:
     <#${this.t('channels.ship')}> to be amazed by people just like you
 
     Here are some active projects/events you can lurk around in or help with:
-    - <#${this.t('channels.electronics')}> is a program where you can make a PCB and get $100 to print it out.
-    - <#${this.t('channels.build-programming-languages')}> is a place you can build your own programming language and get mailed fudge to your doorstep.
     - <#${this.t('channels.the-boreal-express')}> is a 8-day event ran by Hack Club which you can sign up for where we'll take a train across Canada to learn new things. Invites are selective, and you must register your intrest before June 10th.
+    
+    You Ship, We Ship (YSWS) are series a projects is where you make a project related to a theme, and we "ship" (send) you something, i.e. making a game and getting a game console. Here are some you can try out:
+    - <#${this.t('channels.electronics')}> (OnBoard) is a program where you can make a PCB and get $100 to print it out.
+    - <#${this.t('channels.build-programming-languages')}> is a place you can build your own programming language and get mailed fudge for free to your doorstep.
+    - <#${this.t('channels.sprig')}> is a game console designed by Hack Clubbers where you can make a game in JavaScript and get a free game console mailed to your doorstep.
 
 
     *Most importantly, you must introduce yourself in <#${this.t('channels.welcome')}>. There are so many intrepid travelers like yourself and they're so excited to meet you.*
