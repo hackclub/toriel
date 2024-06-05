@@ -16,6 +16,7 @@ const { metrics } = require('./util/metrics')
 const { upgradeUser } = require('./util/upgrade-user.js')
 const { destroyHelpMeMessage } = require('./util/notify-channel.js')
 const { scheduleHelpMeMessage } = require('./util/notify-channel')
+const { inviteUser } = require('./util/invite-user')
 
 receiver.router.use(express.json())
 
@@ -237,6 +238,10 @@ app.command(/.*?/, async (args) => {
         await require(`./commands/reason`)(args)
         break
 
+      case '/toriel-invite':
+        await require(`./commands/invite`)(args)
+        break
+
       default:
         await require('./commands/not-found')(args)
         break
@@ -245,7 +250,32 @@ app.command(/.*?/, async (args) => {
     console.error(e)
   }
 })
+app.view('admin_invite_user', async ({ view, ack, body}) => {
+  const submittedValues = view.state.values
+  console.log(submittedValues)
+  let email, reason, continent;
 
+  for (let key in submittedValues) {
+    if (submittedValues[key]['email']) email = submittedValues[key]['email'].value
+    if (submittedValues[key]['reason']) reason = submittedValues[key]['reason'].value
+    if (submittedValues[key]['continent']) continent = submittedValues[key]['continent'].selected_option.value
+  }
+
+  if (!/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) return await ack({
+    "response_action": "errors",
+    errors: {
+      "email": "This isn’t a valid email"
+    }
+  });
+  await ack()
+  await inviteUser({
+    email, reason, continent, ip: "0.0.0.0", userAgent: "ManualInvite/0.0.0", teen: true
+  })
+  await client.chat.postMessage({
+    channel: body.user.id,
+    text: `Successfully invited ${email} to the Slack.`
+  });
+})
 app.action(/.*?/, async (args) => {
   const { ack, respond, payload, client, body } = args
   const user = body.user.id
