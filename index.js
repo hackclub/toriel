@@ -250,31 +250,44 @@ app.command(/.*?/, async (args) => {
     console.error(e)
   }
 })
-app.view('admin_invite_user', async ({ view, ack, body}) => {
+app.view('admin_invite_user', async ({ view, ack, body }) => {
   const submittedValues = view.state.values
   console.log(submittedValues)
-  let email, reason, continent;
+  let email, reason, continent
 
   for (let key in submittedValues) {
-    if (submittedValues[key]['email']) email = submittedValues[key]['email'].value
-    if (submittedValues[key]['reason']) reason = submittedValues[key]['reason'].value
-    if (submittedValues[key]['continent']) continent = submittedValues[key]['continent'].selected_option.value
+    if (submittedValues[key]['email'])
+      email = submittedValues[key]['email'].value
+    if (submittedValues[key]['reason'])
+      reason = submittedValues[key]['reason'].value
+    if (submittedValues[key]['continent'])
+      continent = submittedValues[key]['continent'].selected_option.value
   }
 
-  if (!/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) return await ack({
-    "response_action": "errors",
-    errors: {
-      "email": "This isn’t a valid email"
-    }
-  });
+  if (
+    !/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+      email
+    )
+  )
+    return await ack({
+      response_action: 'errors',
+      errors: {
+        email: 'This isn’t a valid email',
+      },
+    })
   await ack()
   await inviteUser({
-    email, reason, continent, ip: "0.0.0.0", userAgent: "ManualInvite/0.0.0", teen: true
+    email,
+    reason,
+    continent,
+    ip: '0.0.0.0',
+    userAgent: 'ManualInvite/0.0.0',
+    teen: true,
   })
   await client.chat.postMessage({
     channel: body.user.id,
-    text: `Successfully invited ${email} to the Slack.`
-  });
+    text: `Successfully invited ${email} to the Slack.`,
+  })
 })
 app.action(/.*?/, async (args) => {
   const { ack, respond, payload, client, body } = args
