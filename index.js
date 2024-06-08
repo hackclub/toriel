@@ -257,8 +257,7 @@ app.view('admin_invite_user', async ({ view, ack, body }) => {
   let email, reason, continent, name
 
   for (let key in submittedValues) {
-    if (submittedValues[key]['name'])
-      name = submittedValues[key]['name'].value
+    if (submittedValues[key]['name']) name = submittedValues[key]['name'].value
     if (submittedValues[key]['email'])
       email = submittedValues[key]['email'].value
     if (submittedValues[key]['reason'])
@@ -288,7 +287,14 @@ app.view('admin_invite_user', async ({ view, ack, body }) => {
 
   await ack()
   createInviteRecord({
-    email, name, reason, reason, continent, ip: "0.0.0.0", teen: true, invitee: body.user.id
+    email,
+    name,
+    reason,
+    reason,
+    continent,
+    ip: '0.0.0.0',
+    teen: true,
+    invitee: body.user.id,
   })
   await inviteUser({
     email,

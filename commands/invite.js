@@ -34,16 +34,16 @@ async function invite(args) {
           },
         },
         {
-          "type": "input",
-          "element": {
-            "type": "plain_text_input",
-            "action_id": "name"
+          type: 'input',
+          element: {
+            type: 'plain_text_input',
+            action_id: 'name',
           },
-          "label": {
-            "type": "plain_text",
-            "text": "Full name",
-            "emoji": true
-          }
+          label: {
+            type: 'plain_text',
+            text: 'Full name',
+            emoji: true,
+          },
         },
         {
           type: 'input',
