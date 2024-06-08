@@ -407,11 +407,10 @@ setInterval(async function () {
         createdAt: {
           lte: new Date(),
           gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
-        }
+        },
       },
     })
   ).length
-
 
   const totalUsersThisWeek = (
     await prisma.invite.findMany({
@@ -421,15 +420,14 @@ setInterval(async function () {
           gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
         },
         user_id: {
-          not: null
-        }
+          not: null,
+        },
       },
     })
   ).length
 
   metrics.gauge('flow.users.invites.this_week', totalInvitesThisWeek)
   metrics.gauge('flow.users.joins.this_week', totalUsersThisWeek)
-
 }, 1000 * 10) // update to a longer span in not testing
 
 process.on('unhandledRejection', (error) => {
