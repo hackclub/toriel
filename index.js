@@ -17,6 +17,7 @@ const { upgradeUser } = require('./util/upgrade-user.js')
 const { destroyHelpMeMessage } = require('./util/notify-channel.js')
 const { scheduleHelpMeMessage } = require('./util/notify-channel')
 const { inviteUser } = require('./util/invite-user')
+const { createInviteRecord } = require('./util/create-airtable-record')
 
 receiver.router.use(express.json())
 
@@ -238,7 +239,7 @@ app.command(/.*?/, async (args) => {
         await require(`./commands/reason`)(args)
         break
 
-      case '/toriel-invite':
+      case '/dm-toriel-invite':
         await require(`./commands/invite`)(args)
         break
 
@@ -253,9 +254,11 @@ app.command(/.*?/, async (args) => {
 app.view('admin_invite_user', async ({ view, ack, body }) => {
   const submittedValues = view.state.values
   console.log(submittedValues)
-  let email, reason, continent
+  let email, reason, continent, name
 
   for (let key in submittedValues) {
+    if (submittedValues[key]['name'])
+      name = submittedValues[key]['name'].value
     if (submittedValues[key]['email'])
       email = submittedValues[key]['email'].value
     if (submittedValues[key]['reason'])
@@ -275,7 +278,18 @@ app.view('admin_invite_user', async ({ view, ack, body }) => {
         email: 'This isn’t a valid email',
       },
     })
+  else if (!name || !email || !reason || !continent)
+    return await ack({
+      response_action: 'errors',
+      errors: {
+        email: 'This isn’t a valid email',
+      },
+    })
+
   await ack()
+  createInviteRecord({
+    email, name, reason, reason, continent, ip: "0.0.0.0", teen: true, invitee: body.user.id
+  })
   await inviteUser({
     email,
     reason,
