@@ -151,6 +151,7 @@ house:
 
     Here are some active projects/events you can lurk around in or help with:
     - <#${this.t('channels.the-boreal-express')}> is a 8-day event ran by Hack Club which you can sign up for where we'll take a train across Canada to learn new things. Invites are selective, and you must register your intrest before June 10th.
+   
     
     You Ship, We Ship (YSWS) are series a projects is where you make a project related to a theme, and we "ship" (send) you something, i.e. making a game and getting a game console. Here are some you can try out:
     - <#${this.t('channels.electronics')}> (OnBoard) is a program where you can make a PCB and get $100 to print it out.
