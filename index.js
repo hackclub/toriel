@@ -241,6 +241,7 @@ app.command(/.*?/, async (args) => {
 
       case '/toriel-invite':
         await require(`./commands/invite`)(args)
+        metrics.increment('events.invite', 1)
         break
 
       default:
