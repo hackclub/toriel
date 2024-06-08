@@ -239,7 +239,7 @@ app.command(/.*?/, async (args) => {
         await require(`./commands/reason`)(args)
         break
 
-      case '/dm-toriel-invite':
+      case '/toriel-invite':
         await require(`./commands/invite`)(args)
         break
 
