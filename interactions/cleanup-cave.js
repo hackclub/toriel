@@ -1,5 +1,6 @@
 const { client } = require('../app')
 const { transcript } = require('../util/transcript')
+const alert = require('../util/alert')
 
 async function cleanupCaveChannel(dryRun = true) {
   const channel = transcript('channels.cave')
@@ -14,10 +15,20 @@ async function cleanupCaveChannel(dryRun = true) {
   })
 
   if (dryRun) {
+    if (messagesToRemove.length != 0)
+      await alert.sendInfo({
+        summary: `(dry) Removing ${messagesToRemove.length} message(s) in cave channel`,
+        detailed: `(dry) Removing ${messagesToRemove.length} message(s) in cave channel`,
+      })
     console.log(
       `[DRY RUN] Found ${messagesToRemove.length} message(s) from other users in #cave channel, run with dryRun=false to remove`
     )
   } else {
+    if (messagesToRemove.length != 0)
+      await alert.sendInfo({
+        summary: `Removing ${messagesToRemove.length} message(s) in cave channel`,
+        detailed: `Removing ${messagesToRemove.length} message(s) in cave channel`,
+      })
     console.log(
       `Found ${messagesToRemove.length} message(s) from other users in #cave channel, cleaning up...`
     )

@@ -1,6 +1,7 @@
 const { prisma } = require('../db')
 const { defaultInvite } = require('./invite-types/default')
 const { onboardInvite } = require('./invite-types/onboard')
+const { metrics } = require('./metrics')
 
 async function inviteGuestToSlack({ email, channels, _customMessage }) {
   // This is an undocumented API method found in https://github.com/ErikKalkoken/slackApiDoc/pull/70
@@ -37,7 +38,10 @@ async function inviteGuestToSlack({ email, channels, _customMessage }) {
     headers,
     method: 'POST',
     body: data,
-  }).then((r) => r.json())
+  }).then((r) => {
+    metrics.increment('events.flow.invitetoslack', 1)
+    r.json()
+  })
 }
 
 async function inviteUser({

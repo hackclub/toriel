@@ -16,7 +16,7 @@ const { metrics } = require('./util/metrics')
 const { upgradeUser } = require('./util/upgrade-user.js')
 const { destroyHelpMeMessage } = require('./util/notify-channel.js')
 const { scheduleHelpMeMessage } = require('./util/notify-channel')
-
+const { sendInfo } = require('./util/alert')
 receiver.router.use(express.json())
 
 receiver.router.get('/', require('./endpoints/index'))
@@ -107,6 +107,7 @@ app.event('message', async (args) => {
   const protectedChannels = [transcript('channels.cave')]
   if (type == 'message' && protectedChannels.includes(channel)) {
     console.log(`Attempting to remove ${subtype} message in #cave channel`)
+    metrics.increment('events.protectedChannel.deletions', 1)
     await client.chat
       .delete({
         token: process.env.SLACK_LEGACY_TOKEN, // sudo
@@ -388,6 +389,53 @@ app.start(process.env.PORT || 3001).then(async () => {
   /* DEVELOPMENT UTILITIES (uncomment to use) */
   const { setupCaveChannel } = require('./setup/cave-channel')
   //  await setupCaveChannel(app)
+})
+
+setInterval(async function () {
+  const noId = (
+    await prisma.invite.findMany({
+      where: {
+        user_id: null,
+      },
+    })
+  ).length
+  metrics.gauge('flow.users.no_account', noId)
+
+  const totalInvitesThisWeek = (
+    await prisma.invite.findMany({
+      where: {
+        createdAt: {
+          lte: new Date(),
+          gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
+        },
+      },
+    })
+  ).length
+
+  const totalUsersThisWeek = (
+    await prisma.invite.findMany({
+      where: {
+        createdAt: {
+          lte: new Date(),
+          gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
+        },
+        user_id: {
+          not: null,
+        },
+      },
+    })
+  ).length
+
+  metrics.gauge('flow.users.invites.this_week', totalInvitesThisWeek)
+  metrics.gauge('flow.users.joins.this_week', totalUsersThisWeek)
+}, 1000 * 10) // update to a longer span in not testing
+
+process.on('unhandledRejection', (error) => {
+  sendInfo({
+    summary: 'An unhandled rejection was captured just now',
+    detailed: error?.stack,
+  })
+  console.error(error)
 })
 
 module.exports = { app }

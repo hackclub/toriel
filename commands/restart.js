@@ -1,7 +1,10 @@
 const { joinCaveInteraction } = require('../interactions/join-cave')
 const { transcript } = require('../util/transcript')
+const { metrics } = require('../util/metrics')
 
 async function restart(args) {
+  metrics.increment('events.commands.run.restart', 1)
+
   const { payload, client, respond } = args
   const { user_id, text } = payload
 

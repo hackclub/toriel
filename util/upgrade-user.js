@@ -1,5 +1,6 @@
 const { client } = require('../app')
-
+const { metrics } = require('./metrics')
+const { sendUrgent } = require('./alert')
 async function upgradeUser(user) {
   const userProfile = await client.users.info({ user })
   const { team_id } = userProfile.user
@@ -11,7 +12,7 @@ async function upgradeUser(user) {
     console.log(`User ${user} is already a full user– skipping`)
     return null
   }
-
+  const startPerf = Date.now()
   console.log(`Attempting to upgrade user ${user}`)
 
   // @msw: This endpoint is undocumented. It's usage and token were taken from
@@ -45,8 +46,23 @@ async function upgradeUser(user) {
       body: form,
     }
   )
-    .then((r) => r.json())
-    .catch((e) => console.log(e))
+    .then((r) => {
+      r.json()
+      metrics.increment('events.flow.user_upgrade', 1)
+    })
+    .catch((e) => {
+      sendUrgent({
+        summary: `A user upgrade failed!`,
+        detailed: `Upgrading <@${user}> from a multi channel user to a regular user has failed.`,
+      })
+      metrics.increment('events.flow.error.userUpgradeFailure', 1)
+      console.error()
+    })
+    .finally((e) => {
+      // send this value to client pls
+      const time = Date.now() - startPerf
+      client.timing('events.flow.user_upgrade.time', time)
+    })
 }
 
 module.exports = { upgradeUser }
