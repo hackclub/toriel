@@ -159,7 +159,7 @@ house:
     - <#${this.t('channels.sprig')}> is a game console designed by Hack Clubbers where you can make a game in JavaScript and get a free game console mailed to your doorstep.
 
 
-    *Most importantly, you must introduce yourself in <#${this.t('channels.welcome')}>. There are so many intrepid travelers like yourself and they're so excited to meet you.*
+    *Most importantly, you should introduce yourself in <#${this.t('channels.welcome')}>. There are so many intrepid travelers like yourself and they're so excited to meet you.*
   added-to-channels-epoch: |
     <https://hack.af/epoch-banner|welcome!> we're so excited to have you here for epoch; *to confirm your registration for epoch, head to <#${this.t('channels.epoch')}> and say hi!*
 
