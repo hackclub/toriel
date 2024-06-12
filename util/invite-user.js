@@ -34,13 +34,15 @@ async function inviteGuestToSlack({ email, channels, _customMessage }) {
     channels: channels.join(','),
   })
 
-  return fetch(`https://slack.com/api/users.admin.inviteBulk`, {
+  fetch(`https://slack.com/api/users.admin.inviteBulk`, {
     headers,
     method: 'POST',
     body: data,
   }).then((r) => {
+    if (r.status > 300) return metrics.increment('events.flow.invitetoslackfail', 1)
     metrics.increment('events.flow.invitetoslack', 1)
-    r.json()
+  }).catch((r) => {
+    metrics.increment('events.flow.invitetoslackfail', 1)
   })
 }
 
