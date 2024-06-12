@@ -2,6 +2,7 @@ const { prisma } = require('../db')
 const { defaultInvite } = require('./invite-types/default')
 const { onboardInvite } = require('./invite-types/onboard')
 const { metrics } = require('./metrics')
+const { sendUrgent } = require('./alert')
 
 async function inviteGuestToSlack({ email, channels, _customMessage }) {
   // This is an undocumented API method found in https://github.com/ErikKalkoken/slackApiDoc/pull/70
@@ -39,7 +40,13 @@ async function inviteGuestToSlack({ email, channels, _customMessage }) {
     method: 'POST',
     body: data,
   }).then((r) => {
-    if (r.status > 300) return metrics.increment('events.flow.invitetoslackfail', 1)
+    if (r.status > 300) {
+      sendUrgent({
+        summary: "Invites are failing (<!subteam^S077BTHUV55>)",
+        detailed: "Invites are failing (<!subteam^S077BTHUV55>)"
+      })
+      return metrics.increment('events.flow.invitetoslackfail', 1)
+    }
     metrics.increment('events.flow.invitetoslack', 1)
   }).catch((r) => {
     metrics.increment('events.flow.invitetoslackfail', 1)
