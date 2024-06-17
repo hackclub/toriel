@@ -60,8 +60,9 @@ async function upgradeUser(user) {
     })
     .finally((e) => {
       // send this value to client pls
+      /*
       const time = Date.now() - startPerf
-      client.timing('events.flow.user_upgrade.time', time)
+      client.timing('events.flow.user_upgrade.time', time)*/
     })
 }
 
