@@ -2,9 +2,9 @@ require('dotenv').config()
 const { inviteUserToChannel } = require('./util/invite-user-to-channel')
 const { mirrorMessage } = require('./util/mirror-message')
 const { transcript } = require('./util/transcript')
-const {
+/*const {
   postWelcomeCommittee,
-} = require('./interactions/post-welcome-committee')
+} = require('./interactions/post-welcome-committee')*/
 const express = require('express')
 
 const { app, client } = require('./app.js')
