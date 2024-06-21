@@ -54,7 +54,6 @@ channels:
   welcome-committee: GLFAEL1SL
   outernet: C054FA87K8C
   onboard: C056AMWSFKJ
-  happenings: C05B6DBN802
   bakery: C01EZ2MNPTQ
   apocalyse: C06SGG2AGHJ
   boreal: C073Y3EURP0
@@ -142,8 +141,6 @@ house:
     Perhaps I can point out a few of my favorite places?
 
     <#${this.t('channels.announcements')}> to hear big news.
-
-    <#${this.t('channels.happenings')}> to help guide your way
 
     <#${this.t('channels.ship')}> to be amazed by people just like you
 
