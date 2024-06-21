@@ -10,7 +10,9 @@ async function inviteUserToChannel(
   console.log('inviting', user, 'to', channel)
 
   if (notInChannel) {
-    await client.conversations.join({ channel })
+    try {
+      await client.conversations.join({ channel })
+    } catch (e) {}
   }
 
   const token = doAsAdmin
