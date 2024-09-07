@@ -52,11 +52,8 @@ channels:
   wordle: C02TWKX227J
   toriel-dev: C02B7CWDD0E
   welcome-committee: GLFAEL1SL
-  outernet: C054FA87K8C
   onboard: C056AMWSFKJ
   bakery: C01EZ2MNPTQ
-  apocalyse: C06SGG2AGHJ
-  boreal: C073Y3EURP0
   the-wishing-wall: C07443MC9UP
   hack-hour: C06SBHMQU8G
   days-of-service: C05T8E9GY64
@@ -142,6 +139,8 @@ house:
     Perhaps I can point out a few of my favorite places?
 
     <#${this.t('channels.announcements')}> to hear big news.
+
+    <#${this.t('channels.library')}> to see all the cool channels & actvity around the slack.
 
     <#${this.t('channels.ship')}> to be amazed by people just like you
 
