@@ -39,10 +39,12 @@ async function inviteGuestToSlack({ email, channels, _customMessage }) {
     method: 'POST',
     body: data,
   }).then((r) => {
+    console.log(r)
     metrics.increment('events.flow.invitetoslack', 1)
     r.json()
   })
 }
+
 
 async function inviteUser({
   email,
