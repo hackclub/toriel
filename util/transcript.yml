@@ -144,7 +144,7 @@ house:
 
     <#${this.t('channels.ship')}> to be amazed by people just like you
 
-    *Most importantly, you must introduce yourself in <#${this.t('channels.welcome')}>. There are so many intrepid travelers like yourself and they're so excited to meet you. You should tell them about yourself - who you are, what you enjoy doing and anything else interesting.*
+    *Most importantly, you must introduce yourself in <#${this.t('channels.welcome')}>. There are so many intrepid travelers like yourself and they're so excited to meet you. You should tell them about yourself - who you are, what you enjoy doing and anything else you think is interesting.*
   added-to-channels-epoch: |
     <https://hack.af/epoch-banner|welcome!> we're so excited to have you here for epoch; *to confirm your registration for epoch, head to <#${this.t('channels.epoch')}> and say hi!*
 
