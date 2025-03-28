@@ -56,7 +56,6 @@ module.exports = async function slackInvite(req, res) {
             caveChannelName: caveChannelName,
             caveChannelUrl: `https://hackclub.slack.com/archives/${transcript('channels.cave')}`,
           }
-          console.log(dataVariables)
           transactionalId = process.env.LOOPS_MCG_TRANSACTIONAL_ID
         } else if (isScg) {
           // We shouldn't really have any of these and if we do, we likely don't want to promote them
@@ -69,7 +68,6 @@ module.exports = async function slackInvite(req, res) {
           transactionalId = process.env.LOOPS_FULL_USER_TRANSACTIONAL_ID
         }
 
-        console.log('Sending email to user via Loops')
         const lres = await fetch('https://app.loops.so/api/v1/transactional', {
           method: 'POST',
           headers: {
