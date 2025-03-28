@@ -59,7 +59,12 @@ module.exports = async function slackInvite(req, res) {
           transactionalId = process.env.LOOPS_MCG_TRANSACTIONAL_ID
         } else if (isScg) {
           // We shouldn't really have any of these and if we do, we likely don't want to promote them
-          return res.status(500).json({ ok: false, error: 'User is already in Slack but is an SCG' })
+          return res
+            .status(500)
+            .json({
+              ok: false,
+              error: 'User is already in Slack but is an SCG',
+            })
         } else {
           // Full user, don't invite to chanel - just set the full user template
           dataVariables = {
