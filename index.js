@@ -40,13 +40,7 @@ receiver.router.get(
 
 receiver.router.post('/slack-invite', require('./endpoints/slack-invite'))
 
-const defaultChannels = [
-  'lounge', 
-  'scrapbook',
-  'ship',
-  'welcome',
-  'library'
-]
+const defaultChannels = ['lounge', 'scrapbook', 'ship', 'welcome', 'library']
 
 const getSuggestion = () => {
   const suggestions = [
@@ -389,7 +383,7 @@ app.start(process.env.PORT || 3001).then(async () => {
 
   /* DEVELOPMENT UTILITIES (uncomment to use) */
   const { setupCaveChannel } = require('./setup/cave-channel')
-   // await setupCaveChannel(app)
+  // await setupCaveChannel(app)
 })
 
 setInterval(async function () {
