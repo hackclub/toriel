@@ -40,7 +40,14 @@ receiver.router.get(
 
 receiver.router.post('/slack-invite', require('./endpoints/slack-invite'))
 
-const defaultChannels = ['lounge', 'scrapbook', 'ship', 'welcome', 'library']
+const defaultChannels = [
+  'lounge', 
+  'scrapbook',
+  'ship',
+  'welcome',
+  'library',
+  'happenings'
+]
 
 const getSuggestion = () => {
   const suggestions = [
