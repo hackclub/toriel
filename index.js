@@ -45,7 +45,8 @@ const defaultChannels = [
   'scrapbook',
   'ship',
   'welcome',
-  'library'
+  'library',
+  'happenings'
 ]
 
 const getSuggestion = () => {
