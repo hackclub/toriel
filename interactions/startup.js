@@ -6,12 +6,9 @@ function getEnv() {
   return process.env.NODE_ENV === 'production' ? 'prod' : 'dev'
 }
 
-
 async function startup() {
   await client.chat.postMessage({
-    blocks: [
-      transcript('block.text', { text: transcript('startup.message') }),
-    ],
+    blocks: [transcript('block.text', { text: transcript('startup.message') })],
     channel: transcript('channels.bot-spam'),
     username: 'TUTORIEL',
     icon_url: transcript('startup.avatar'),
