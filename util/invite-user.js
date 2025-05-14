@@ -34,15 +34,14 @@ async function inviteGuestToSlack({ email, channels, _customMessage }) {
     channels: channels.join(','),
   })
 
-  return fetch(`https://slack.com/api/users.admin.inviteBulk`, {
+
+  const res = await fetch(`https://slack.com/api/users.admin.inviteBulk`, {
     headers,
     method: 'POST',
     body: data,
-  }).then((r) => {
-    console.log(r)
-    metrics.increment('events.flow.invitetoslack', 1)
-    r.json()
   })
+  metrics.increment('events.flow.invitetoslack', 1)
+  return await res.json()
 }
 
 
