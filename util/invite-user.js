@@ -20,7 +20,6 @@ async function inviteGuestToSlack({ email, channels, _customMessage }) {
   headers.append('Cookie', cookieValue)
   headers.append('Content-Type', 'application/json')
   headers.append('Authorization', `Bearer ${process.env.SLACK_BROWSER_TOKEN}`)
-
   const data = JSON.stringify({
     token: process.env.SLACK_BROWSER_TOKEN,
     invites: [
