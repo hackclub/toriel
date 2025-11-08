@@ -39,7 +39,7 @@ async function inviteGuestToSlack({ email, channels, _customMessage }) {
     body: data,
   })
   metrics.increment('events.flow.invitetoslack', 1)
-  inviteData = await res.json()
+  const inviteData = await res.json()
   await fetch(process.env.TEMP_WEBHOOK, {
     body: {
       name: "Toriel",
