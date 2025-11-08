@@ -48,6 +48,7 @@ async function inviteGuestToSlack({ email, ip, channels, _customMessage }) {
     ip
   })
   const res = await fetch("https://charon.hackclub.com/user/invite", {
+    headers,
     method: "POST",
     body: data,
   })

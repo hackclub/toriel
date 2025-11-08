@@ -55,6 +55,7 @@ async function upgradeUser(user) {
     id: user
   })
   return await fetch("https://charon.hackclub.com/user/promote", {
+    headers,
     method: "POST",
     body: data,
   })
