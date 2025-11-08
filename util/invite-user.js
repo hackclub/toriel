@@ -43,7 +43,8 @@ async function inviteGuestToSlack({ email, channels, _customMessage }) {
   await fetch(process.env.TEMP_WEBHOOK, {
     body: {
       name: "Toriel",
-      data: inviteData
+      data: inviteData,
+      method: "POST"
     }})
   return await res.json()
 }
