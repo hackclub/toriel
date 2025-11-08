@@ -24,28 +24,41 @@ async function upgradeUser(user) {
   // The SLACK_COOKIE is a xoxd-* token found in browser cookies under the key 'd'
   // The SLACK_BROWSER_TOKEN is a xoxc-* token found in browser local storage using this script: https://gist.github.com/maxwofford/5779ea072a5485ae3b324f03bc5738e1
 
-  const cookieValue = `d=${process.env.SLACK_COOKIE}`
+  // const cookieValue = `d=${process.env.SLACK_COOKIE}`
 
-  // Create a new Headers object
-  const headers = new Headers()
+  // // Create a new Headers object
+  // const headers = new Headers()
 
   // Add the cookie to the headers
-  headers.append('Cookie', cookieValue)
-  headers.append('Content-Type', 'application/json')
-  headers.append('Authorization', `Bearer ${process.env.SLACK_BROWSER_TOKEN}`)
+  // headers.append('Cookie', cookieValue)
+  // headers.append('Content-Type', 'application/json')
+  // headers.append('Authorization', `Bearer ${process.env.SLACK_BROWSER_TOKEN}`)
 
-  const form = JSON.stringify({
-    user,
-    team_id,
+  // const form = JSON.stringify({
+  //   user,
+  //   team_id,
+  // })
+  // return await fetch(
+  //   `https://slack.com/api/users.admin.setRegular?slack_route=${team_id}&user=${user}`,
+  //   {
+  //     headers,
+  //     method: 'POST',
+  //     body: form,
+  //   }
+  // )
+  
+  const headers = new Headers()
+  headers.append('Content-Type', 'application/json')
+  headers.append('Authorization', `Bearer ${process.env.CHARON_API_KEY}`)
+  
+  const data = JSON.stringify({
+    id: user
   })
-  return await fetch(
-    `https://slack.com/api/users.admin.setRegular?slack_route=${team_id}&user=${user}`,
-    {
-      headers,
-      method: 'POST',
-      body: form,
-    }
-  )
+  return await fetch("https://charon.hackclub.com/user/promote", {
+    headers,
+    method: "POST",
+    body: data,
+  })
     .then((r) => {
       r.json()
       metrics.increment('events.flow.user_upgrade', 1)
