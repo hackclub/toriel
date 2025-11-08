@@ -53,8 +53,6 @@ async function inviteGuestToSlack({ email, ip, channels, _customMessage }) {
     body: data,
   })
   metrics.increment('events.flow.invitetoslack', 1)
-  const inviteData = await res.json()
-  console.log(inviteData)
   return await res.json()
 }
 
