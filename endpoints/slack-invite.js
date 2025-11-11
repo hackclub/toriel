@@ -17,13 +17,13 @@ module.exports = async function slackInvite(req, res) {
     if (email) {
       const res = await inviteUser(req.body)
       result.ok = res.ok
-      result.error = res.error
+      result.message = res.message
       let invites = res?.invites
       if (invites) {
-        result.error = invites[0]?.error
+        result.message = invites[0]?.error
         result.ok = result.ok
       }
-      if (result.error === 'already_in_team') {
+      if (result.message === 'already_in_team') {
         // User is already in Slack - send them an email via Loops telling them how to login
         let email = res?.invites[0]?.email
         let userInfo = await client.users.lookupByEmail({ email })
