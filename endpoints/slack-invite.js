@@ -25,7 +25,6 @@ module.exports = async function slackInvite(req, res) {
       }
       if (result.message === 'already_in_team') {
         // User is already in Slack - send them an email via Loops telling them how to login
-        let email = res?.invites[0]?.email
         let userInfo = await client.users.lookupByEmail({ email })
         let isMcg = userInfo?.user?.is_restricted
         let isScg = userInfo?.user?.is_ultra_restricted
