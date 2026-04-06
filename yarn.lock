@@ -2,10 +2,17 @@
 # yarn lockfile v1
 
 
-"@prisma/client@^5.14.0":
-  version "5.14.0"
-  resolved "https://registry.yarnpkg.com/@prisma/client/-/client-5.14.0.tgz#dadca5bb1137ddcebb454bbdaf89423823d3363f"
-  integrity sha512-akMSuyvLKeoU4LeyBAUdThP/uhVP3GuLygFE3MlYzaCb3/J8SfsYBE5PkaFuLuVpLyA6sFoW+16z/aPhNAESqg==
+"@prisma/client-runtime-utils@7.6.0":
+  version "7.6.0"
+  resolved "https://registry.yarnpkg.com/@prisma/client-runtime-utils/-/client-runtime-utils-7.6.0.tgz#e19e700643ffc899f0da79dfc4fc92dd998ee3f7"
+  integrity sha512-fD7jlqubsZvVODKvsp9lOpXVecx2aWGxC2l35Ioz2t+teUJ5CfR0SAMsi7UkU1VvaZmmm+DS6BdujF622nY7tQ==
+
+"@prisma/client@^7.6.0":
+  version "7.6.0"
+  resolved "https://registry.yarnpkg.com/@prisma/client/-/client-7.6.0.tgz#39c0be43413f59bbad8242db2de7cc024c5ea6ca"
+  integrity sha512-7Pe/1ayh3GgWPEg4mmT4ax77LJ1wC+XlnIFvQ94bLP2DsUnOpnruQQR3Jw7r+Frthk94QqDNxo3FjSg8h9PXeQ==
+  dependencies:
+    "@prisma/client-runtime-utils" "7.6.0"
 
 "@prisma/debug@5.14.0":
   version "5.14.0"
